@@ -1,0 +1,20 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">CONTROLES</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="CerrarModal()"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xl-12">
+            <div class="d-grid gap-2"> 
+                <button class="btn btn-green-custom" type="button" (click)="AbrirNotaEnfermera()">NOTAS DE ENFERMERA</button>
+                <button class="btn btn-green-custom" type="button" (click)="AbrirActividadTecnica()">ACTIVIDAD DEL PERSONAL TÉCNICO</button>
+                <button class="btn btn-green-custom" type="button" (click)="AbrirEpicrisis()">EPICRISIS</button>
+              </div>					
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
+</div>

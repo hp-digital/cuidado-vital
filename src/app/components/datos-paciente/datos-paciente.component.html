@@ -1,0 +1,106 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">DATOS GENERALES</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="CerrarModal()"></button>
+    </div>
+    <div class="modal-body" autocomplete="off" novalidate="novalidate">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-label mb-3" for="">Fecha de nacimiento: </label>
+                    <input type="date" class="form-control">
+                    <!-- <p-calendar 
+                    [(ngModel)]="date1" 
+                    [showIcon]="true" 
+                    [showOnFocus]="false" 
+                    inputId="buttondisplay" /> -->
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-label mb-3" for="">Estado civil: </label>
+                    <select name="estado" id="" class="form-select">
+                        <option value="S">Soltero</option>
+                        <option value="C">Casado</option>
+                    </select>
+                    <!-- <p-treeSelect 
+                        class="md:w-20rem w-full" 
+                        containerStyleClass="w-full" 
+                        [(ngModel)]="selectedNodes" 
+                        variant="filled"
+                        [options]="nodes" 
+                        placeholder="Select Item" /> -->
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group mb-3">
+                    <label class="form-label mb-3" for="">Teléfono / Celular *</label>
+                    <input type="number" class="form-control">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="form-label mb-3" for="">Ocupación: </label>
+                    <select name="" id="" class="form-select">
+                        <option value="">Ing</option>
+                        <option value="">Medico</option>
+                    </select>
+                    <!-- <p-treeSelect 
+                        class="md:w-20rem w-full" 
+                        containerStyleClass="w-full" 
+                        [(ngModel)]="selectedNodes" 
+                        variant="filled"
+                        [options]="nodeOcupacion" 
+                        placeholder="Select Item" /> -->
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">País de origen *</label>
+                            <select name="" id="" class="form-select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Departamento *</label>
+                            <select name="" id="" class="form-select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Provincia *</label>
+                            <select name="" id="" class="form-select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Distrito *</label>
+                            <select name="" id="" class="form-select">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <label class="form-label mb-3" for="">Dirección: </label>
+                    <input type="text" class="form-control" id=""/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
+  </div>

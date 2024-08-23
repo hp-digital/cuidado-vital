@@ -1,0 +1,24 @@
+<div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">ESTADO ATENCION</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="CerrarModal()"></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xl-12">
+            <div class="form-group mb-3">
+                <label class="form-label mb-3" for="">Cambiar estado de la cita</label>
+                <select class="form-select" id="">
+                    <option>Pendiente</option>
+                    <option>En Atención</option>
+                    <option>Atendido</option>                            
+                </select>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-green-custom" data-bs-dismiss="modal"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt" ></i>Salir</button>
+    </div>
+</div>

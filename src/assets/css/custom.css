@@ -1,0 +1,486 @@
+body {
+    margin: 0;
+    font-family: var(--bs-font-sans-serif);
+    font-size: .8rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212837;
+    background-color: #ebeef4;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+fieldset {
+    border: 1px solid #cdcdcd;
+    padding: 10px 0px 15px 20px;
+    border-radius: 6px;
+}
+legend {
+    float: none;
+    width: auto;
+    font-size: 18px;    
+}
+.row {
+    --bs-gutter-x: 16px;
+}
+
+.btn-green-custom {
+    color: #fff;
+    background-color: #01A39A;
+    border-color: #01A39A;
+}
+
+.btn-green-custom:hover {
+    color: #fff;
+    background-color: #01A39A;
+    border-color: #01A39A;
+}
+.btn-green-light-custom {
+    color: #fff;
+    background-color: #07BA4C;
+    border-color: #07BA4C;
+}
+
+.btn-green-light-custom:hover {
+    color: #fff;
+    background-color: #07BA4C;
+    border-color: #07BA4C;
+}
+
+.btn-warning-custom {
+    color: #fff;
+    background-color: #ffa526;
+    border-color: #ffa01a;
+}
+
+.btn-warning-custom:hover {
+    color: #fff;
+    background-color: #ffa526;
+    border-color: #ffa01a;
+}
+
+.form-control[readonly] {
+    background-color: #ECECEC;
+    opacity: 1;
+}
+.form-check-input {
+    width: 1.4em;
+    height: 1.4em; 
+}
+.form-check-input:checked {
+    background-color: #01a39a;
+    border-color: #01a39a;
+}
+.form-control {
+    border-radius: 3px;
+    height: 40px;
+    font-size: .875rem;
+    color: #3c4e71
+}
+textarea.form-control {    
+    height: auto !important;
+}
+.form-select {
+    border-radius: 3px;
+    height: 40px;
+    font-size: .875rem;
+    color: #3c4e71;
+    border: 1px solid #c9d2e3;
+}
+.form-check-label{
+    margin-top: 3px;
+    margin-left: 3px;
+}
+.form-schedule{
+    width: 70px;
+    text-align: center;
+    display: inline-block;
+    margin: 0 0 10px 10px;
+}
+.width-100{
+    width: 100%;
+}
+.accordion-button.collapsed::after {
+    background-image: none;
+ }
+ .accordion-button:not(.collapsed)::after {
+    background-image: none;
+}
+.center-element{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ececec;
+    margin: 0;
+    padding: 0;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+}
+.no-padding{
+    padding: 0;
+}
+.bg-green-custom {
+    font-size: 15px;
+    background: #01A39A;
+    color: white;
+    height: 35px;
+    padding: 6px 0px 0px 10px;
+    border-radius: 5px 5px 0 0;
+    text-transform: uppercase;
+}
+
+.bg-green-accordion {
+    font-size: 15px;
+    background: #01A39A;
+    color: white;    
+    border-radius: 5px 5px 0 0;
+}
+.bg-green-accordion:not(.collapsed) {
+    color: white;
+    background-color: #01A39A;    
+}
+.accordion-item {
+    background-color: white;
+}
+.accordion-body {
+    padding: 7px 0px 7px 0px;
+}
+.hidden-element{
+    display: none !important;
+}
+.cie10{
+    background-color: #ECECEC;
+    width: 150px;
+    padding: 0 0 0 20px;
+    border-radius: 3px;
+}
+.center-label{
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+}
+.text-right{
+    text-align: right;
+}
+.box-shadow{
+    border: 1px solid #ced4da;
+    padding: 10px;
+    box-shadow: 2px 2px 4px 0px #d1cfcf;
+}
+.box-color{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.btn-sm-custom {
+    padding: 5px;
+    font-size: 10px;
+    border-radius: 0.2rem;
+}
+.div-btn-sm-custom{
+    text-align: center;
+    width: 51px;
+    font-weight: bold;
+    display: inline-block;
+}
+.div-btn-sm-custom-34{
+    text-align: center;
+    width: 35px;
+    font-weight: bold;
+    display: inline-block;
+}
+.modal-xl-custom{
+    max-width: 1300px;
+}
+.form-switch .form-check-input {
+    width: 60px;
+    height: 25px;
+}
+.form-check{
+    /*margin-top: 15px;*/
+    margin-top: 8px;
+}
+.small-font-size {
+    font-size: 10px;    
+}
+.mt-35{
+    margin-top: 35px;
+}
+/*START CARD DATATABLE*/
+.header-card-table{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 20px;
+}
+.background-cuadrilla{
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 0px 15px 15px 15px;
+    margin: 10px;
+}
+/*END CARD DATATABLE*/
+/*START CANVAS*/
+
+.colors {
+    /*background-color: #ece8e8;*/
+    text-align: center;
+    padding-bottom: 5px;
+    padding-top: 10px;
+  }
+  
+  .colors button {
+    display: inline-block;
+    border: 1px solid #00000026;
+    border-radius: 0;
+    outline: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px
+  }
+  
+  .colors button:nth-of-type(1) {
+    background-color: red;
+  }
+  
+  .colors button:nth-of-type(2) {
+    background-color: yellow;
+  }
+  
+  .colors button:nth-of-type(3) {
+    background-color: blue;
+  }
+  
+  .colors button:nth-of-type(4) {
+    background-color: orange;
+  }
+  
+  .colors button:nth-of-type(5) {
+    background-color: violet;
+  }
+  
+  .colors button:nth-of-type(6) {
+    background-color: green;
+  }
+
+  .colors button:nth-of-type(7) {
+    background-color: brown;
+  }
+
+  .colors button:nth-of-type(8) {
+    background-color: darkviolet;
+  }
+
+  .colors button:nth-of-type(9) {
+    background-color: black;
+  }
+  
+  .colors button {
+      width: 50px;
+      height: 50px;
+      border-radius: 50px;
+      margin: 8px;
+  }
+  
+  .buttons {
+    height: 80px;
+    padding-top: 10px;
+  }
+  
+  #paint-canvas {
+    cursor:crosshair;
+    border:1px solid;
+  }
+  .position-relative{
+      position: relative;
+      z-index: 99;
+  }
+  .width-250{
+      width: 250px;
+  }
+  .div-color{
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+  }
+/*END CANVAS*/
+
+/* --- Start progress bar paul --- */
+
+.process-wrapper {
+	margin:auto;
+}
+
+#progress-bar-container {
+	position:relative;
+	
+	margin:auto;
+	height:100px;
+	margin-top:30px;
+}
+
+#progress-bar-container ul {
+	padding:0;
+	margin:0;
+	z-index:9999;
+	position:absolute;
+	width:120%;
+}
+
+
+#progress-bar-container li.active:before, #progress-bar-container li:hover:before {
+	border:solid 2px #fff;
+       	 
+	background: linear-gradient(to right, #E91E63 0%,#fff 100%); 
+}
+
+#progress-bar-container li {
+	list-style:none;
+	float:left;
+	width:100px;
+	text-align:center;
+	color:#aaa;
+	text-transform:uppercase;
+	font-size:7px;
+	cursor:pointer;
+	font-weight:700;
+	transition:all ease 0.2s;
+	vertical-align:bottom;
+	height:32px;
+	position:relative;
+}
+
+#progress-bar-container li span {
+	position:absolute;
+    font-size: 10px;
+    transform: translate(-56%, 47%);
+}
+
+#progress-bar-container li .step-inner {
+	position:absolute;
+	width:100%;
+	bottom:0;
+    font-size: 14px;
+}
+
+#progress-bar-container li.active, #progress-bar-container li:hover {
+	color:#444;
+}
+
+#progress-bar-container li:after {
+    content: "|";
+    background: #777;
+    margin: auto;
+    box-shadow: 0 2px 13px -1px rgb(0 0 0 / 30%);
+    transition: all ease 0.2s;
+}
+
+#progress-bar-container li:hover:after {
+	background:#555;
+}
+
+#progress-bar-container li.active:after {
+	background:#207893;
+}
+
+#progress-bar-container #line {
+	width:100%;
+	margin:auto;
+	background: #eee;
+	height:6px;
+	position:sticky;
+	left:0%;
+	top:57px;
+	z-index:1;
+	border-radius:50px;
+	transition:all ease 0.9s;
+}
+
+#progress-bar-container #line-progress {
+	content:" ";
+	width:5%;
+	height:100%;
+	background: #207893;	 
+	background: linear-gradient(to right, #207893 0%,#2ea3b7 100%); 
+	position:absolute;
+	z-index:2;
+	border-radius:60px;
+	transition:all ease 0.9s;
+}
+
+#progress-content-section {
+	width:90%;
+	margin: auto;
+	background: #f3f3f3;
+	border-radius: 4px;
+}
+
+#progress-content-section .section-content {
+	padding:30px 40px;
+	text-align:center;
+}
+
+#progress-content-section .section-content h2 {
+	font-size:17px;
+	text-transform:uppercase;
+	color:#333;
+	letter-spacing:1px;
+}
+
+#progress-content-section .section-content p {
+	font-size:16px;
+	line-height:1.8em;
+	color:#777;
+}
+
+#progress-content-section .section-content {
+	display:none;
+	animation: FadeInUp 700ms ease 1;
+	animation-fill-mode:forwards;
+	transform:translateY(15px);
+	opacity:0;
+}
+
+#progress-content-section .section-content.active {
+	display:block;
+}
+
+@keyframes FadeInUp {
+	0% {
+		transform:translateY(15px);
+		opacity:0;
+	}
+	
+	100% {
+		transform:translateY(0px);
+		opacity:1;
+	}
+}
+th{
+    BORDER: SOLID #c0c1c2;
+}
+
+
+/* ---- personalizacion de posiciones comprobante para aseguradores paul */
+.left {
+
+    float: left;
+    position: relative;
+    width: 75%;
+
+}
+
+.right {
+
+    position: relative;
+    float: left;
+    width: 25%;
+}
+
+
+
+
+
+

@@ -1,0 +1,291 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">PACIENTE</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
+    </div>
+    <div class="modal-body">							
+        <form>
+            <div class="row">
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3" for="">Buscar por:</label>
+                        <select class="form-select" id="">
+                            <option>DNI</option>
+                            <option>CE</option>												
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-5">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3" for="">&nbsp;</label>																						
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="" placeholder="Buscar paciente" />
+                            <button type="button" class="input-group-text btn-green-custom">
+                                <i class="fas fa-lg fa-search"></i>
+                            </button>
+                          </div>
+                    </div>
+                </div>
+                <div class="col-xl-2">&nbsp;</div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3" for="">Fecha de ingreso</label>
+                        <input type="text" class="form-control" id="" placeholder="dd/mm/aaaa" readonly/>
+                    </div>
+                </div>
+            </div>
+
+            <div id="seccion-datos-principales">								
+                <div class="row mb-3 bg-green-custom">DATOS PRINCIPALES</div>									
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Tipo documento</label>
+                                    <select class="form-select" id="">
+                                        <option>DNI</option>
+                                        <option>CE</option>												
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Nro. documento *</label>
+                                    <input type="text" class="form-control" id=""/>														
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Apellido paterno *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Apellido materno *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Nombres *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Fecha nacimiento *</label>
+                                    <input type="text" class="form-control" id="" placeholder="dd/mm/aaaa"/>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Edad</label>
+                                    <input type="text" class="form-control" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Sexo *</label><br/>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">Masculino</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option2" checked="">
+                                <label class="form-check-label" for="">Femenino</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Teléfono / Celular *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Nro. Whatsapp *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>								
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Correo electrónico *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Estado civil *</label>
+                                    <select class="form-select" id="">
+                                        <option>Soltero</option>
+                                        <option>Casado</option>												
+                                        <option>Viudo</option>
+                                        <option>Divorciado</option>
+                                    </select>
+                                </div>
+                            </div>												
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3 hidden-element">
+                            <label class="form-label mb-3" for="">Grado de instrucción *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group mb-3 hidden-element">
+                            <label class="form-label mb-3" for="">Ocupación *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-7">
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">País de origen *</label>
+                                    <select class="form-select" id="">
+                                        <option>Seleccionar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Departamento *</label>
+                                    <select class="form-select" id="">
+                                        <option>Seleccionar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Provincia *</label>
+                                    <select class="form-select" id="">
+                                        <option>Seleccionar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Distrito *</label>
+                                    <select class="form-select" id="">
+                                        <option>Seleccionar</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Domicilio actual *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>									
+                </div>														
+            </div>
+                                                                    
+            <div id="seccion-persona-acompana">								
+                <div class="row mb-3 bg-green-custom">FAMILIAR ENCARGADO</div>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">&nbsp;</label>	
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="" placeholder="Buscar paciente por DNI" />
+                                <button type="button" class="input-group-text btn-green-custom" for="">
+                                    <i class="fas fa-lg fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">									
+                    <div class="col-xl-3">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Tipo documento</label>
+                                    <select class="form-select" id="">
+                                        <option>DNI</option>
+                                        <option>CE</option>												
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Nro. documento *</label>
+                                    <input type="text" class="form-control" id=""/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Nombre completo *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Fecha nacimiento *</label>
+                                    <input type="text" class="form-control" id="" placeholder="dd/mm/aaaa"/>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Edad</label>
+                                    <input type="text" class="form-control" readonly/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Sexo *</label><br/>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">Masculino</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option2" checked="">
+                                <label class="form-check-label" for="">Femenino</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Teléfono / Celular *</label>
+                            <input type="text" class="form-control" id=""/>
+                        </div>
+                    </div>
+                </div>								
+            </div>						
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <button type="button" class="btn btn-green-custom" id="btnGuardarPaciente"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCerrarPaciente" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
+</div>

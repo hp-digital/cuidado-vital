@@ -1,0 +1,341 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">RECETAS</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <form>
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>Maritza Córdova Juarez</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>75488545</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha : </label> <span>22/03/2022</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Hora : </label> <span>08:30 am</span>
+                        </div>
+                    </div>																
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Estado civil : </label> <span>Soltero</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Edad : </label> <span>28 años</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Sexo : </label> <span>Femenino</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Tipo paciente : </label> <span>Particular</span>
+                        </div>
+                    </div>																
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>Ana Mendoza Arce</span>
+                        </div>
+                    </div>																										
+                </div>
+            </div>
+            <hr/>		
+            <div class="row mb-3 bg-green-custom">DIAGNÓSTICO PRESUNTIVO</div>												
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Diagnóstico predeterminado</label><br/>
+                        <div class="btn-group width-100">
+                            <div class="cie10">
+                                <div class="col-xl-2">
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" value="" name="chk0" id="chk0">
+                                        <label class="form-check-label" for="defaultCheck1">CIE10</label>
+                                    </div>
+                                </div>
+                            </div>												
+                            <select class="form-select form-control" id="">
+                                <option>Seleccionar</option>												
+                            </select>
+                        </div>											
+                    </div>										
+                </div>
+                <div class="col-xl-6">
+                    <div class="row">
+                        <div class="col-xl-10">
+                            <div class="form-group mb-3">
+                                <label class="form-label mb-3">Escriba su diagnóstico</label>
+                                <input type="text" class="form-control" id=""/>
+                            </div>
+                        </div>
+                        <div class="col-xl-2">
+                            <div class="form-group mb-3 mt-4 pt-1">													
+                                <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row box-shadow">
+                <div class="col-xl-12 fw-bold">Diagnóstico</div>
+                <div class="col-xl-10">A00 - CÓLERA</div>
+                <div class="col-xl-2 text-right">
+                    <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="form-group mb-3">											
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="radsex" type="radio" id="raddieta" value="D">
+                            <label class="form-check-label" for="">Dieta</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="radsex" type="radio" id="radmedicacion" value="M" checked>
+                            <label class="form-check-label" for="">Medicación</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="seccion-medicacion" class="">
+                <div class="row mb-3 bg-green-custom">Medicación</div>	
+                <div class="row">										
+                    <div class="col-xl-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Buscar medicamento (frecuentes por especialidad)</label>
+                            <select class="form-select" id="">
+                                <option>Seleccionar</option>													
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Nombre genérico</label>
+                            <input type="text" class="form-control" id="" value="" />
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Presentación</label>
+                            <input type="text" class="form-control" id="" value="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Dosis</label>
+                                    <input type="text" class="form-control" id="" value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Frecuencia</label>
+                            <select class="form-select" id="">
+                                <option>Seleccionar</option>													
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">Duración</label><br/>
+                            <div class="btn-group width-100">
+                                <div class="col-xl-7">
+                                    <input type="text" class="form-control" id="" value="" />	
+                                </div>
+                                <div class="col-xl-5">
+                                    <select class="form-select form-control" id="">
+                                        <option>Horas</option>												
+                                    </select>
+                                </div>													
+                            </div>											
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Vía</label>
+                            <select class="form-select" id="">
+                                <option>Seleccionar</option>													
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Toma de medicamento</label>
+                        </div>
+                        <div id="horario-medicacion"></div>										
+                    </div>																		
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Indicaciones</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 text-right">
+                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Agregar medicamento</button>
+                    </div>
+                </div>
+                <div class="box-shadow mt-3">
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <h6>Nombre genérico</h6>
+                            <p>Maca negra</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>Nombre comercial</h6>
+                            <p>Maca negra</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>Presentación</h6>
+                            <p>Ampolla</p>
+                        </div>
+                        <div class="col-xl-3 text-right">
+                            <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                        </div>											
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <h6>Dosis</h6>
+                            <p>dosis</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>Frecuencia</h6>
+                            <p>12 horas</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>Duración</h6>
+                            <p>2 meses</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>Vía</h6>
+                            <p>2 Oral</p>
+                        </div>											
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h6>Indicaciones</h6>
+                            <p>indicaciones</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="seccion-dieta" class="hidden-element">									
+                <div class="row mb-3 bg-green-custom">Dieta</div>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Tipo</label>
+                            <select class="form-select" id="">
+                                <option>Seleccionar</option>													
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Alimento</label>
+                            <input type="text" class="form-control" id="" value="" />
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">Duración</label><br/>
+                            <div class="btn-group width-100">
+                                <div class="col-xl-7">
+                                    <input type="text" class="form-control" id="" value="" />	
+                                </div>
+                                <div class="col-xl-5">
+                                    <select class="form-select form-control" id="">
+                                        <option>Horas</option>												
+                                    </select>
+                                </div>													
+                            </div>											
+                        </div>
+                    </div>
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Indicaciones</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Horas de dieta</label>
+                        </div>
+                        <div id="horario-dieta"></div>										
+                    </div>																		
+                </div>									
+                <div class="row">
+                    <div class="col-xl-12 text-right">
+                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Agregar dieta</button>
+                    </div>
+                </div>
+                <div class="box-shadow mt-3">
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <h6>Tipo de dieta</h6>
+                            <p>Semilíquida</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>Alimento</h6>
+                            <p>Agua</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>Duración</h6>
+                            <p>10 horas</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="row">
+                                <div class="col-xl-9">
+                                    <h6>Indicaciones</h6>
+                                    <p>Prueba</p>
+                                </div>
+                                <div class="col-xl-3 text-right">
+                                    <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                                </div>
+                            </div>
+                        </div>																						
+                    </div>
+                </div>
+            </div>			
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" data-bs-dismiss="modal"><i class="fas fa-lg fa-fw me-2 fa-file-alt" ></i>Generar receta</button>
+        <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button>
+        <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+      </div>
+</div>

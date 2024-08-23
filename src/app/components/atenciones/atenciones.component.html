@@ -1,0 +1,278 @@
+<div id="content">			
+			
+    <div class="card">
+      <div class="card-header">
+          <div class="header-card-table">ATENCIONES</div>
+      </div>
+      <div class="card-body">					
+          <div class="row">
+              <div class="col-xl-10">
+                  <div class="row">
+                      <div class="col-xl-3">
+                          <div class="form-group mb-3">
+                              <label class="form-label mb-3" for="">Fecha inicio</label>
+                              <input type="date" class="form-control" id=""/>
+                          </div>
+                      </div>
+                      <div class="col-xl-3">
+                          <div class="form-group mb-3">
+                              <label class="form-label mb-3" for="">Fecha fin</label>
+                              <input type="date" class="form-control" id=""/>
+                          </div>
+                      </div>
+                      <div class="col-xl-4">
+                          <div class="form-group mb-3">
+                              <label class="form-label mb-3" for="">Paciente</label>
+                              <select class="form-select" id="">
+                                  <option>Seleccionar</option>										
+                              </select>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-2">
+                  <div class="mt-4 pt-1">
+                      <button type="button" class="btn btn-green-custom me-2">
+                          <i class="fas fa-lg fa-search"></i>
+                      </button>
+                      <button type="button" class="btn btn-green-custom me-2">
+                          <i class="fas fa-lg fa-eraser"></i>
+                      </button>
+                  </div>						
+              </div>
+          </div>
+          <hr/>
+          <div class="row" id="ver-cuadrilla">	
+                <div class="col-xl-3 background-cuadrilla">
+                    <div class="row mb-3 mt-3">
+                        <div class="col-xl-10">
+                            <p><strong>FECHA: </strong> 2024-03-10 08:00</p>
+                        </div>
+                        <div class="col-xl-2 text-end">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>PACIENTE: </strong> Ángela María del Valle</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>VALORACION FUNCIONAL: </strong>Dependiente</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>EDAD: </strong> 32 Años</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>PERSONA DE CONTACTO: </strong> Anaís Dávila Cáceres</p>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm">Resultados de examenes</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar()">Examenes auxiliares</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Estados</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="showDialog()">Historial de atención</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirRecetas()">Recetas</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControles()">Datos monitoreo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 text-center mt-3">
+                            <button type="button" class="btn btn-warning-custom btn-sm" data-class="btnReprogramar" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Reprogramar cita" aria-label="Reprogramar cita"><i class="fas fa-lg fa-clock"></i></button>&nbsp;&nbsp;
+                        </div>
+
+                    </div>
+                </div>
+            
+                <div class="col-xl-3 background-cuadrilla">
+                    <div class="row mb-3 mt-3">
+                        <div class="col-xl-10">
+                            <p><strong>FECHA: </strong> 2022-03-09 13:00</p>
+                        </div>
+                        <div class="col-xl-2 text-end">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>ESPECIALIDAD: </strong>Fertilidad</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>MEDIO DE ATENCIÓN: </strong> Virtual</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>PACIENTE: </strong> Anaís Dávila Cáceres</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>TIPO DE ATENCIÓN: </strong> Consulta</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm">Resultados de examenes</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Examenes auxiliares</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Estados</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm">Historial de atención</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Recetas</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Datos monitoreo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 text-center mt-3">
+                            <button type="button" class="btn btn-warning-custom btn-sm" data-class="btnReprogramar" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Reprogramar cita" aria-label="Reprogramar cita"><i class="fas fa-lg fa-clock"></i></button>&nbsp;&nbsp;
+                        </div>
+
+                    </div>
+                </div>
+            
+                <div class="col-xl-3 background-cuadrilla">
+                    <div class="row mb-3 mt-3">
+                        <div class="col-xl-10">
+                            <p><strong>FECHA: </strong> 2022-03-08 09:30</p>
+                        </div>
+                        <div class="col-xl-2 text-end">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>ESPECIALIDAD: </strong>Pediatría</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>MEDIO DE ATENCIÓN: </strong> Presencial</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>PACIENTE: </strong> Carlos Martín López Arce</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>TIPO DE ATENCIÓN: </strong> Consulta</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm">Resultados de examenes</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Examenes auxiliares</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Estados</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm">Historial de atención</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Recetas</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Datos monitoreo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 text-center mt-3">
+                            <button type="button" class="btn btn-warning-custom btn-sm" data-class="btnReprogramar" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Reprogramar cita" aria-label="Reprogramar cita"><i class="fas fa-lg fa-clock"></i></button>&nbsp;&nbsp;
+                        </div>
+
+                    </div>
+                </div>
+            
+                <div class="col-xl-3 background-cuadrilla">
+                    <div class="row mb-3 mt-3">
+                        <div class="col-xl-10">
+                            <p><strong>FECHA: </strong> 2022-03-07 10:30</p>
+                        </div>
+                        <div class="col-xl-2 text-end">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>ESPECIALIDAD: </strong>Cirugía</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>MEDIO DE ATENCIÓN: </strong> Presencial</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>PACIENTE: </strong> Mary Carmen del Solar</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>TIPO DE ATENCIÓN: </strong> Consulta</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm">Resultados de examenes</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Examenes auxiliares</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Estados</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm" (onClick)="showDialog()">Historial de atención</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Recetas</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Datos monitoreo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 text-center mt-3">
+                            <button type="button" class="btn btn-warning-custom btn-sm" data-class="btnReprogramar" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Reprogramar cita" aria-label="Reprogramar cita"><i class="fas fa-lg fa-clock"></i></button>&nbsp;&nbsp;
+                        </div>
+
+                    </div>
+                </div>
+            
+                <div class="col-xl-3 background-cuadrilla">
+                    <div class="row mb-3 mt-3">
+                        <div class="col-xl-10">
+                            <p><strong>FECHA: </strong> 2022-03-06 16:00</p>
+                        </div>
+                        <div class="col-xl-2 text-end">
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>ESPECIALIDAD: </strong>Medicina interna</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>MEDIO DE ATENCIÓN: </strong> Virtual</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>PACIENTE: </strong> Andres Tapia Rivera</p>
+                        </div>
+                        <div class="col-xl-12">
+                            <p><strong>TIPO DE ATENCIÓN: </strong> Consulta</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm">Resultados de examenes</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Examenes auxiliares</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Estados</button>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="d-grid gap-2">
+                                <button type="button" class="btn btn-green-custom btn-sm">Historial de atención</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Recetas</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Datos monitoreo</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 text-center mt-3">
+                            <button type="button" class="btn btn-warning-custom btn-sm" data-class="btnReprogramar" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Reprogramar cita" aria-label="Reprogramar cita"><i class="fas fa-lg fa-clock"></i></button>&nbsp;&nbsp;
+                        </div>
+
+                    </div>
+                </div>
+            </div>			  
+      </div>
+    </div>						
+  </div>
+  <!-- END #content -->
+  <!-- BEGIN btn-scroll-top -->
+  <a href="#" data-click="scroll-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+  <!-- END btn-scroll-top -->
