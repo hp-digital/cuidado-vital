@@ -9,6 +9,7 @@ import { HistoriaClinicaComponent } from '../historia-clinica/historia-clinica.c
 import  CuadroControlesComponent  from '../cuadro-controles/cuadro-controles.component';
 import { RecetaComponent } from '../receta/receta.component';
 import { ExamenAuxiliarComponent } from '../examen-auxiliar/examen-auxiliar.component';
+import { ConsultaExternaComponent } from '../historia-clinica/consulta-externa/consulta-externa.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -25,7 +26,8 @@ export default class AtencionesComponent implements OnInit{
     private modalService: BsModalService,
     private modalControles: BsModalService,
     private modalReceta: BsModalService,
-    private modalExamenAuxiliar: BsModalService
+    private modalExamenAuxiliar: BsModalService,
+    private modalControlSeguimiento: BsModalService
   ){
     
   }
@@ -50,5 +52,9 @@ export default class AtencionesComponent implements OnInit{
 
   AbrirExamenAuxiliar(){
     this.modalRef = this.modalExamenAuxiliar.show(ExamenAuxiliarComponent, { backdrop: 'static', class: 'modal-xl' })
+  }
+
+  AbrirControlSeguimiento(){
+    this.modalRef = this.modalControlSeguimiento.show(ConsultaExternaComponent, { backdrop: 'static', class: 'modal-xl' })
   }
 }
