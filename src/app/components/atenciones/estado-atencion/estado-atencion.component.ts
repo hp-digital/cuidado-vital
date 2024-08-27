@@ -26,6 +26,5 @@ export default class EstadoAtencionComponent implements OnInit {
     this.modalEstadoAtencion.hide();
     //this.onGuardar();
   }
-
   
 }

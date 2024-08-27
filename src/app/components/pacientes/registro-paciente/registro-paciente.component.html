@@ -4,14 +4,15 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">							
-        <form>
+        <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
             <div class="row">
                 <div class="col-xl-2">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3" for="">Buscar por:</label>
-                        <select class="form-select" id="">
-                            <option>DNI</option>
-                            <option>CE</option>												
+                        <select class="form-select" formControlName="selectBuscarPorTipoDocumento">
+                            <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
+                                {{combo.nombre}}
+                            </option>											
                         </select>
                     </div>
                 </div>
@@ -43,9 +44,10 @@
                             <div class="col-xl-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Tipo documento</label>
-                                    <select class="form-select" id="">
-                                        <option>DNI</option>
-                                        <option>CE</option>												
+                                    <select class="form-select" formControlName="selectRegistrarPorTipoDocumento">
+                                        <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
+                                            {{combo.nombre}}
+                                        </option>										
                                     </select>
                                 </div>
                             </div>

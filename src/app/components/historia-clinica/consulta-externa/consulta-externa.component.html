@@ -1,1 +1,420 @@
-<p>consulta-externa works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">CONTROL DE ATENCIÓN</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
+    </div>
+    <div class="modal-body">							
+        <form>
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>Ana Mendoza Arce</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>Maritza Córdova Juarez</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>75488545</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha atención : </label> <span>22/03/2022</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Hora atención: </label> <span>08:30 am</span>
+                        </div>
+                    </div>																
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xl-2">
+                    <h6>Datos generales</h6>
+                </div>
+                <div class="col-xl-3">
+                    <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirModalEditarPaciente()"><i class="fas fa-lg fa-fw me-2 fa-pencil-alt"></i>Editar</button>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Edad : </label> <span>28 años</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Celular : </label> <span>+Whatsapp</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Estado civil : </label> <span>Soltero</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Procedencia : </label> <span>Huancayo</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Ocupación : </label> <span>Asistente de TIC</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. documento : </label> <span>75488545</span>
+                        </div>
+                    </div>											
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Tipo paciente : </label> <span>Particular</span>
+                        </div>
+                    </div>																
+                </div>								
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="fw-bold">Dirección : </label> <span>Av. San Martín S/N</span>
+                    </div>
+                </div>	
+            </div>								
+            <hr/>						
+            <label class="fw-bold">Prioridad de atención</label>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="form-group text-center">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                            <label class="form-check-label" for="">I</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                            <label class="form-check-label" for="">II</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                            <label class="form-check-label" for="">III</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                            <label class="form-check-label" for="">VI</label>
+                        </div>
+                    </div>
+                </div>
+            </div>						
+            <hr/>			
+            <div class="mb-3 bg-green-custom">I. ANAMNESIS</div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Tiempo de enfermedad *</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Motivo de consulta *</label>
+                        <textarea class="form-control" rows="3"></textarea>
+
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Curso de la enfermedad *</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Signos y Síntomas *</label>
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <br>
+            <div class="mb-3 bg-green-custom">VI. EXAMEN FÍSICO</div>
+            <label class="fw-bold">Signos vitales del paciente</label>
+            <div class="col-xl-12 mb-3">
+                <div class="row">
+                    <div class="col-xl-3  mb-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">T (°C)</label>
+                            <input type="number" class="form-control" id="" min="35" max="40">
+                        </div>
+                    </div>
+                    <div class="col-xl-3  mb-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">FC (min)</label>
+                            <input type="number" class="form-control" id="" min="50" max="140" >
+                        </div>
+                    </div>
+                    <div class="col-xl-3  mb-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">PA (sistólica / distólica)
+                                (mmHg)</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" id="" min="80" max="180" >
+                                <input type="number" class="form-control" id="" placeholder="/" readonly style="text-align: center;">
+                                <input type="number" class="form-control" id="" min="50" max="140" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3  mb-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">Sat. O<sub>2</sub> (%)</label>
+                            <input type="number" class="form-control" id="" min="60" max="100" >
+                        </div>
+                    </div>
+                    <div class="col-xl-3 mb-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">FR (x
+                                min)</label>
+                            <input type="number" class="form-control" id="" min="20" max="30" >
+                        </div>
+                    </div>
+                    <div class="col-xl-3 mb-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">Talla (m)</label>
+                            <input type="number" class="form-control" id="" >
+                        </div>
+                    </div>
+                    <div class="col-xl-2 mb-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">Peso (kg)</label>
+                            <input type="number" class="form-control" id="" >
+                        </div>
+                    </div>
+                    <div class="col-xl-2 mb-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">IMC</label>
+                            <input type="number" class="form-control" id="" readonly>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 mb-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">Peso Hab. (kg)</label>
+                            <input type="number" class="form-control" id="">
+                        </div>
+                    </div>
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Examen General</label>
+                            <textarea type="text" class="form-control" id="" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <div class="mb-3 bg-green-custom">VII.  DIAGNÓSTICO DEFINITIVO - PRESUNTIVO - REPETITIVO</div>						
+            <div class="row mb-3">
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3" for="">Diagnóstico predeterminado</label>
+                        <div style="display: flex">
+                            <div style="width: 90px; padding: 6px 12px; background-color: #eee; border-radius: 4px;">
+                                <div class="checkbox mt-0 mb-0">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" id=""> CIE10
+                                    </label>
+                                </div>
+                            </div>
+                            <div style="width: calc(100% - 90px)">
+                                <select class="form-select" id="">
+                                    <option value="">Seleccione</option>
+                                    <option value="4">A00.0 - CÓLERA DEBIDO A VIBRIO CHOLERAE 01, BIOTIPO CHOLERAE</option>
+                                    <option value="3">A00.1 - CÓLERA DEBIDO A VIBRIO CHOLERAE 01, BIOTIPO EL TOR</option>
+                                    <option value="2">A00.9 - CÓLERA, NO ESPECIFICADO</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-5">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3" for="">Escriba su diagnóstico</label>
+                        <textarea class="form-control" id="" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-xl-1 pt-4 mt-2">
+                    <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modal-diagnosticos"><i class="fa fa-plus"></i></button>
+                </div>
+                <div class="col-xl-12">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Diagnóstico (definitivo)</div>
+                        <div class="col-xl-10">A00 - CÓLERA</div>
+                        <div class="col-xl-2 text-right">
+                            <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Diagnóstico (presuntivo)</div>
+                        <div class="col-xl-10">A00 - CÓLERA</div>
+                        <div class="col-xl-2 text-right">
+                            <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                        </div>
+                    </div>
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Diagnóstico (repetitivo)</div>
+                        <div class="col-xl-10">A00 - CÓLERA</div>
+                        <div class="col-xl-2 text-right">
+                            <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modal-diagnosticos" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Tipo diagnósico</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Diagnóstico definitivo
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Diagnóstico presuntivo
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Diagnóstico repetitivo
+                            </label>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-green-custom" onclick="salirTipodiagnostico()" ><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+                        <button type="button" class="btn btn-danger" onclick="salirTipodiagnostico()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="mb-3 bg-green-custom">VIII. TRATAMIENTO</div>
+            <div class="col-xl-2 mb-3">
+                <button type="button" class="btn btn-green-custom"  (click)="AbrirReceta()"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Nuevo</button>
+            </div>
+            <div class="mb-3 bg-green-custom">IX. EXAMEN AUXILIAR</div>
+            <div class="col-xl-2 mb-3">
+                <button type="button" class="btn btn-green-custom"  (click)="AbrirOrden()"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Nuevo</button>
+            </div>
+            <div class="mb-3 bg-green-custom">X. INTERCONSULTAS</div>
+            <div class="col-xl-2 mb-3">
+                <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Nuevo</button>
+            </div>							
+            <div class="mb-3 bg-green-custom">XI. RESUMEN / PLAN DE TRABAJO</div>
+            <div>
+                <p><strong>EXAMEN AUXILIAR:</strong>  INSULINA | INDICACIÓN: AYUNAS &nbsp;&nbsp; <button type="button" class="btn btn-green-custom btn-sm"><i class="fas fa-pencil-alt"></i></button></p> 
+                <p><strong>EXAMEN AUXILIAR:</strong> PROLACTINA | INDICACIÓN: AYUNAS &nbsp;&nbsp;<button type="button" class="btn btn-green-custom btn-sm"><i class="fas fa-pencil-alt"></i></button></p>
+                <p><strong>EXAMEN AUXILIAR:</strong> LABORATORIO/BIOQUÍMICA | INDICACIÓN: - &nbsp;&nbsp; <button type="button" class="btn btn-green-custom btn-sm"><i class="fas fa-pencil-alt"></i></button> </p>
+            </div>
+            <div class="row">
+                <div class="col-xl-11">
+                    <div class="form-group mb-3">
+                        <textarea type="text" class="form-control" id="" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-xl-1">
+                    <button type="button" class="btn btn-green-custom" id=""><i class="fa fa-plus"></i></button>
+                </div>
+            </div>
+
+            <div class="mb-3 mt-3 bg-green-custom">XII. DESTINO</div>
+            <div class="row">
+                
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radObservacion" value="" class="form-check-input" data-bs-dismiss="modal"> Quedó en observación
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radSOP" value="" class="form-check-input"  data-bs-dismiss="modal"> Solicitud sala de operación - SOP
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radConsultaExterna" class="form-check-input"  data-bs-trigger="focus" data-bs-toggle="popover" title="Control de consulta externo" data-bs-content="Separar consulta por ambulatorio o atención al cliente"> Control de consulta externo
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radAltaVoluntaria" value="" class="form-check-input"  data-bs-dismiss="modal"> Consentimiento de alta voluntaria
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radLlegoCadaver" value="" class="form-check-input"  data-bs-trigger="focus" data-bs-toggle="popover" title="Paciente llego cadáver" data-bs-content="Comunicarce con el aréa de vigilancia"> Paciente llego cadáver
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Cuidados intensivos y de cuidados intermedios - UCI/UCIN
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radHospitalizado" value="" class="form-check-input" data-bs-dismiss="modal"> Fue hospitalizado
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Se envió a su domicilio
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radReferencia" value="" class="form-check-input" data-bs-dismiss="modal"> Referencia institucional
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radFugado" value="" class="form-check-input" data-bs-trigger="focus" data-bs-toggle="popover" title="Fugado" data-bs-content="Comunicarce con el aréa de vigilancia para que genere su informe"> Fugado
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label class="form-check-label mt-2 mb-2 ">
+                                <input type="radio" name="destino" id="radFugado" value="" class="form-check-input" data-bs-trigger="focus" data-bs-toggle="popover" title="Paciente fallece" data-bs-content="Comunicarce con el aréa de vigilancia para que se comuniqué con la morge"> Paciente fallece
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>							
+            <hr/>
+            <div class="col-xl-3">
+                <div class="form-group mb-3" data-provide="datepicker">
+                    <label class="form-label mb-3" for="">Fecha proxima cita</label>
+                    <input type="text" class="form-control" id="" placeholder="dd/mm/aaaa" />
+                </div>
+            </div>
+            
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"  (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
+</div>

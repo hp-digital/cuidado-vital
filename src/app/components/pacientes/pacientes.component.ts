@@ -6,7 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { AvatarModule } from 'primeng/avatar';
 import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { HistoriaClinicaComponent } from '../historia-clinica/historia-clinica.component';
-import RegistroPacienteComponent from './registro-paciente/registro-paciente.component';
+import {RegistroPacienteComponent} from './registro-paciente/registro-paciente.component';
 import EstadoAtencionComponent from '../atenciones/estado-atencion/estado-atencion.component';
 import PagoAtencionComponent from '../atenciones/pago-atencion/pago-atencion.component';
 import MotivoAtencionComponent from '../atenciones/motivo-atencion/motivo-atencion.component';
