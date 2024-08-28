@@ -18,6 +18,10 @@ export const routes: Routes = [
                 loadComponent:() => import('./components/atenciones/atenciones.component'),
             },
             {
+                path:'medicos',
+                loadComponent:() => import('./components/medicos/medicos.component'),
+            },
+            {
                 path:'',
                 redirectTo:'dashboard',
                 pathMatch:'full',
