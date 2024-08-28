@@ -31,7 +31,7 @@
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3" for="">Fecha de ingreso</label>
-                        <input type="text" class="form-control" id="" placeholder="dd/mm/aaaa" readonly/>
+                        <input type="date" class="form-control" formControlName="inputFechaIngreso" readonly/>
                     </div>
                 </div>
             </div>
@@ -134,10 +134,9 @@
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Estado civil *</label>
                                     <select class="form-select" id="">
-                                        <option>Soltero</option>
-                                        <option>Casado</option>												
-                                        <option>Viudo</option>
-                                        <option>Divorciado</option>
+                                        <option *ngFor="let combo of comboEstadoCivil" [value]="combo.id">
+                                            {{combo.nombre}}
+                                        </option>	
                                     </select>
                                 </div>
                             </div>												

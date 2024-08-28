@@ -19,6 +19,7 @@ export class RegistroPacienteComponent implements OnInit {
   
   dataFormGroup: FormGroup;
   comboTipoDocumento: ComboDTO[] = [];
+  comboEstadoCivil : ComboDTO[] = [];
 
   verSpinner: boolean = false;
 
@@ -30,7 +31,7 @@ export class RegistroPacienteComponent implements OnInit {
     this.dataFormGroup = new FormGroup({
       selectBuscarPorTipoDocumento: new FormControl(),
       selectRegistrarPorTipoDocumento: new FormControl(),
-
+      inputFechaIngreso: new FormControl()
     });
   }
 
@@ -42,10 +43,12 @@ export class RegistroPacienteComponent implements OnInit {
     this.verSpinner = true;
     forkJoin([
       this.pacienteService.ObtenerTipoDocumento(),
+      this.pacienteService.ObtenerEstadoCivil(),
     ])
     .subscribe(
       data =>{
         this.comboTipoDocumento = data[0];
+        this.comboEstadoCivil = data[1];
         console.log(data);
       },
       

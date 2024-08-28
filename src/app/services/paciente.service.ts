@@ -32,4 +32,8 @@ export class PacienteService {
   ObtenerTipoDocumento(): Observable<ComboDTO[]>{
     return this.http.get<ComboDTO[]>(`${API_URL}TipoDocumento/ObtenerCombo`)
   }
+
+  ObtenerEstadoCivil(): Observable<ComboDTO[]>{
+    return this.http.get<ComboDTO[]>(`${API_URL}EstadoCivil/ObtenerListado`)
+  }
 }
