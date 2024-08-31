@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import {provideHttpClient} from '@angular/common/http';
 import { routes } from './app.routes';
+import { provideAnimations } from '@angular/platform-browser/animations'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -10,6 +11,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     importProvidersFrom(ModalModule.forRoot()),
     provideHttpClient(),
-    
+    provideAnimations(),    
   ]
 };
