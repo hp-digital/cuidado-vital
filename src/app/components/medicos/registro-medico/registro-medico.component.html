@@ -11,29 +11,35 @@
                 <div class="row">
                     <div class="col-xl-2 p-2 text-center rounded">
                         <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" width="80%">
-                        <p-fileUpload mode="basic" chooseLabel="Choose" chooseIcon="pi pi-upload" name="demo[]"
-                            url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*" maxFileSize="1000000"
-                            (onUpload)="onUpload($event)" />
+                        <div class="flex justify-content-center mt-2">
+                            <p-toast />
+                            <p-fileUpload mode="basic" chooseLabel="Subir" chooseIcon="pi pi-upload" name="demo[]"
+                                url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                                maxFileSize="1000000" styleClass="btn-green-custom h-2rem max-w-12rem text-center" />
+                        </div>
                     </div>
-                    
+
                     <div class="col-xl-10">
                         <div class="row">
-                            <div class="col-xl-3">
+                            <div class="col-xl-4">
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label mb-3" for="">Tipo documento</label>
-                                            <select class="form-select" formControlName="selectRegistrarPorTipoDocumento">
-                                                <!--  <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
+                                            <!-- <select class="form-select"
+                                                formControlName="selectRegistrarPorTipoDocumento">
+                                                 <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
                                                     {{combo.nombre}}
-                                                </option> -->
-                                            </select>
+                                                </option>
+                                            </select> -->
+                                            <p-dropdown formControlName="selectRegistrarPorTipoDocumento" [options]="comboTipoDocumento"
+                                                optionLabel="nombre" optionValue="id" [showClear]="true" styleClass="w-full" placeholder="Selecciona"/>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label mb-3" for="">Nro. documento *</label>
-                                            <input type="text" class="form-control" id="" />
+                                            <input type="number" class="form-control" id="" />
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +56,7 @@
                                     <input type="text" class="form-control" id="" />
                                 </div>
                             </div>
-                            <div class="col-xl-3">
+                            <div class="col-xl-2">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Nombres *</label>
                                     <input type="text" class="form-control" id="" />
@@ -58,12 +64,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xl-3">
+                            <div class="col-xl-4">
                                 <div class="row">
                                     <div class="col-xl-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label mb-3" for="">Fecha nacimiento *</label>
-                                            <input type="text" class="form-control" id="" placeholder="dd/mm/aaaa" />
+                                            <p-calendar placeholder="dd/mm/aaaa" formControlName="date2"
+                                                [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
@@ -77,14 +84,15 @@
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Celular *</label>
-                                    <input type="text" class="form-control" id="" />
+                                    <input type="number" class="form-control" id="" />
                                 </div>
                             </div>
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Sexo *</label><br />
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                        <input class="form-check-input" name="radsex" type="radio" id=""
+                                            value="option1">
                                         <label class="form-check-label" for="">Masculino</label>
                                     </div>
                                     <div class="form-check form-check-inline">
@@ -94,27 +102,29 @@
                                     </div>
                                 </div>
                             </div>
-        
+
                         </div>
                     </div>
                 </div>
 
-                
+
                 <div class="row">
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Correo electrónico *</label>
-                            <input type="text" class="form-control" id="" />
+                            <input type="email" class="form-control" id="" />
                         </div>
                     </div>
                     <div class="col-xl-4">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Especialidad *</label>
-                            <select class="form-select" formControlName="selectRegistrarPorTipoDocumento">
-                                <!--  <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
+                            <!-- <select class="form-select" formControlName="selectRegistrarPorTipoDocumento">
+                                 <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
                                     {{combo.nombre}}
-                                </option> -->
-                            </select>
+                                </option>
+                            </select> -->
+                            <p-autoComplete formControlName="autocompleteEspecialidadMedica" [suggestions]="comboEspecialidades"
+                                (completeMethod)="search($event)" styleClass="block w-full" inputStyleClass="w-full" field="nombre" />
                         </div>
                     </div>
                     <div class="col-xl-2">
@@ -172,6 +182,19 @@
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Domicilio actual *</label>
                             <input type="text" class="form-control" id="" />
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row justify-content-center">
+                    <div class="col-xl-3 text-center">
+                        <img src="https://azaharaletras.com/wp-content/uploads/2023/03/firma-m-gonzalez-4.jpg" alt=""
+                            width="80%">
+                        <div class="flex justify-content-center mt-2">
+                            <p-toast />
+                            <p-fileUpload mode="basic" chooseLabel="Subir Firma" chooseIcon="pi pi-upload" name="demo[]"
+                                url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                                maxFileSize="1000000" styleClass="btn-green-custom h-2rem max-w-12rem text-center" />
                         </div>
                     </div>
                 </div>
