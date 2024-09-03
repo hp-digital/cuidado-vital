@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MessageService } from 'primeng/api';
 import { FileUploadModule } from 'primeng/fileupload';
@@ -9,6 +9,10 @@ import { CalendarModule } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { ComboDTO } from '@models/ComboDTO';
+import { DepartamentoDTO } from '@models/DepartamentoDTO';
+import { ProvinciaDTO} from '@models/ProvinciaDTO';
+import { DistritoDTO} from '@models/DistritoDTO';
+import { ValoresDefectoCamposEnum } from '@enum/ValoresDefectoCamposEnum';
 import { PacienteService } from '@services/paciente.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { forkJoin } from 'rxjs';
@@ -40,13 +44,19 @@ interface AutoCompleteCompleteEvent {
     DropdownModule,
   ],
   styles: [`
-     :host ::ng-deep ul{
-        padding-left:0 !important;
-      }
-     :host ::ng-deep th{
+      :host ::ng-deep ul{
+          padding-left:0 !important;
+          margin-bottom: 0;
+          padding-bottom: 0;
+        }
+      :host ::ng-deep th{
         border: none;
       }
+      :host ::ng-deep .p-autocomplete-multiple-container{
+        width:100% 
+      }
   `],
+  encapsulation: ViewEncapsulation.Emulated
 })
 
 export class RegistroMedicoComponent implements OnInit {
@@ -59,21 +69,14 @@ export class RegistroMedicoComponent implements OnInit {
   dataFormGroup: FormGroup;
   comboTipoDocumento: ComboDTO[] = [];
   comboEspecialidades: ComboDTO[]=[];
-  verSpinner: boolean = false;
-
-  search(event: AutoCompleteCompleteEvent) {
-    let filtered: any[] = [];
-        let query = event.query;
-
-        for (let i = 0; i < (this.comboEspecialidades as any[]).length; i++) {
-            let e = (this.comboEspecialidades as any[])[i];
-            if (e.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
-                filtered.push(e);
-            }
-        }
-
-        this.filteredEspecialidad = filtered;
-  }
+  comboPais: ComboDTO[] = [];
+  comboDepartamento: ComboDTO[] = [];
+  comboProvincia: ComboDTO[] = [];
+  comboDistrito: ComboDTO[] = [];
+  listaDepartamento: DepartamentoDTO[] = [];
+  listaProvincia: ProvinciaDTO[] = [];
+  listaDistrito: DistritoDTO[] = [];
+  verSpinner: boolean = false;  
 
   constructor(
     private bsModalRegistroMedico: BsModalRef,
@@ -85,12 +88,20 @@ export class RegistroMedicoComponent implements OnInit {
       selectRegistrarPorTipoDocumento: new FormControl(),
       inputFechaIngreso: new FormControl(), 
       date2: new FormControl(),
-      autocompleteEspecialidadMedica: new FormControl()
+      autocompleteEspecialidadMedica: new FormControl(),
+      selectPaisDireccion: new FormControl('', [Validators.required]),
+      selectDepartamentoDireccion: new FormControl('', [Validators.required]),
+      selectProvinciaDireccion: new FormControl('', [Validators.required]),
+      selectDistritoDireccion: new FormControl('', [Validators.required])
     });
   };
 
   ngOnInit(): void {
     this.CargarDataInicio();
+    this.comboPais = JSON.parse(localStorage.getItem('Paises')!);
+    this.listaDepartamento = JSON.parse(localStorage.getItem('Departamento')!);
+    this.listaProvincia = JSON.parse(localStorage.getItem('Provincia')!);
+    this.listaDistrito = JSON.parse(localStorage.getItem('Distrito')!);
   }
 
   CargarDataInicio() {
@@ -122,6 +133,20 @@ export class RegistroMedicoComponent implements OnInit {
     this.messageService.add({ severity: 'info', summary: 'Success', detail: 'Se subió el archivo con éxito' });
   }
 
+  search(event: AutoCompleteCompleteEvent) {
+    let filtered: any[] = [];
+        let query = event.query;
+
+        for (let i = 0; i < (this.comboEspecialidades as any[]).length; i++) {
+            let e = (this.comboEspecialidades as any[])[i];
+            if (e.nombre.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+                filtered.push(e);
+            }
+        }
+
+        this.filteredEspecialidad = filtered;
+  }
+  
   MostrarNotificacionError(mensaje: string, titulo: string) {
     Swal.fire({
       icon: 'error',
@@ -129,4 +154,40 @@ export class RegistroMedicoComponent implements OnInit {
       html: `<div class="message-text-error">${mensaje} </div>`,
     });
   }
+
+  listarDepartamentos(e: any) {
+    console.log('Id país: ',e.value);
+    this.comboDepartamento = [];
+    this.comboProvincia = [];
+    this.comboDistrito = [];
+    let idPais = e.value;
+    if(idPais == ValoresDefectoCamposEnum.Pais){
+      this.comboDepartamento = this.pacienteService.ObtenerDepartamentos(e.value);
+      this.ActivarValidacionesUbigeo();
+      this.disabledUbigeo = false;
+    }
+    else{
+      this.disabledUbigeo = true;
+      this.DesactivarValidacionesUbigeo();
+    }
+
+    this.dataFormGroup.controls['selectDepartamentoDireccion'].setValue('');
+    this.dataFormGroup.controls['selectProvinciaDireccion'].setValue('');
+    this.dataFormGroup.controls['selectDistritoDireccion'].setValue('');
+  }
+
+  listarProvincias(e: any) {
+    this.comboProvincia = [];
+    this.comboDistrito = [];
+    this.comboProvincia = this.pacienteService.ObtenerProvincias(e.value);
+    this.dataFormGroup.controls['selectProvinciaDireccion'].setValue('');
+    this.dataFormGroup.controls['selectDistritoDireccion'].setValue('');
+  }
+
+  listarDistritos(e: any) {
+    this.comboDistrito = [];
+    this.comboDistrito = this.pacienteService.ObtenerDistritos(e.value);
+    this.dataFormGroup.controls['selectDistritoDireccion'].setValue('');
+  }
+
 }

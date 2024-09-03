@@ -115,18 +115,6 @@
                             <input type="email" class="form-control" id="" />
                         </div>
                     </div>
-                    <div class="col-xl-4">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3" for="">Especialidad *</label>
-                            <!-- <select class="form-select" formControlName="selectRegistrarPorTipoDocumento">
-                                 <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
-                                    {{combo.nombre}}
-                                </option>
-                            </select> -->
-                            <p-autoComplete formControlName="autocompleteEspecialidadMedica" [suggestions]="comboEspecialidades"
-                                (completeMethod)="search($event)" styleClass="block w-full" inputStyleClass="w-full" field="nombre" />
-                        </div>
-                    </div>
                     <div class="col-xl-2">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">CMP *</label>
@@ -139,6 +127,22 @@
                             <input type="text" class="form-control" id="" />
                         </div>
                     </div>
+                    <div class="col-xl-10">
+                        <div class="form-group mb-3">
+                            <label class=" mb-3" for="">Especialidad *</label>
+                            <!-- <select class="form-select" formControlName="selectRegistrarPorTipoDocumento">
+                                 <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
+                                    {{combo.nombre}}
+                                </option>
+                            </select> -->
+                            <p-autoComplete formControlName="autocompleteEspecialidadMedica" styleClass="w-full" inputStyleClass="w-full" field="nombre"
+                                [suggestions]="filteredEspecialidad" 
+                                [dropdown]="true"
+                                [multiple]="true" 
+                                (completeMethod)="search($event)"/>                                                 
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-xl-7">
@@ -146,9 +150,19 @@
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">País de origen *</label>
-                                    <select class="form-select" id="">
-                                        <option>Seleccionar</option>
-                                    </select>
+
+                                    <p-dropdown 
+                                        formControlName="selectPaisDireccion"
+                                        [options]="comboPais"
+                                        optionLabel="nombre"
+                                        optionValue="id"
+                                        styleClass="form-control"
+                                        placeholder="Seleccione"
+                                        onchange="listarDepartamentos($event)" />
+
+                            <!-- <div *ngIf="Controls['selectPaisDireccion'].invalid && (Controls['selectPaisDireccion'].dirty || Controls['selectPaisDireccion'].touched)" class="text-error">
+                                <div>Campo obligatorio.</div>
+                            </div>   -->
                                 </div>
                             </div>
                             <div class="col-xl-3">

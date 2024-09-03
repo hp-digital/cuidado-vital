@@ -26,7 +26,8 @@
     "baseUrl": "./",
     "paths": { //Rutas absolutas
       "@models/*": ["src/app/models/*"],
-      "@services/*":["src/app/services/*"] 
+      "@services/*":["src/app/services/*"],
+      "@enum/*":["src/app/enum/*"] 
     }
   },
   "angularCompilerOptions": {
