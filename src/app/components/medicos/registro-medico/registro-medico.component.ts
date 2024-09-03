@@ -56,7 +56,6 @@ interface AutoCompleteCompleteEvent {
         width:100% 
       }
   `],
-  encapsulation: ViewEncapsulation.Emulated
 })
 
 export class RegistroMedicoComponent implements OnInit {
@@ -77,6 +76,7 @@ export class RegistroMedicoComponent implements OnInit {
   listaProvincia: ProvinciaDTO[] = [];
   listaDistrito: DistritoDTO[] = [];
   verSpinner: boolean = false;  
+  disabledUbigeo:boolean=false;
 
   constructor(
     private bsModalRegistroMedico: BsModalRef,
@@ -164,30 +164,67 @@ export class RegistroMedicoComponent implements OnInit {
     if(idPais == ValoresDefectoCamposEnum.Pais){
       this.comboDepartamento = this.pacienteService.ObtenerDepartamentos(e.value);
       this.ActivarValidacionesUbigeo();
-      this.disabledUbigeo = false;
+      this.disabledUbigeo = false;      
     }
     else{
       this.disabledUbigeo = true;
       this.DesactivarValidacionesUbigeo();
-    }
+    }   
 
     this.dataFormGroup.controls['selectDepartamentoDireccion'].setValue('');
     this.dataFormGroup.controls['selectProvinciaDireccion'].setValue('');
     this.dataFormGroup.controls['selectDistritoDireccion'].setValue('');
+    this.ListarDepartamentos();
   }
-
   listarProvincias(e: any) {
     this.comboProvincia = [];
     this.comboDistrito = [];
     this.comboProvincia = this.pacienteService.ObtenerProvincias(e.value);
     this.dataFormGroup.controls['selectProvinciaDireccion'].setValue('');
     this.dataFormGroup.controls['selectDistritoDireccion'].setValue('');
+    this.ListarProvincias();
   }
-
   listarDistritos(e: any) {
     this.comboDistrito = [];
     this.comboDistrito = this.pacienteService.ObtenerDistritos(e.value);
     this.dataFormGroup.controls['selectDistritoDireccion'].setValue('');
+    this.ListarDistritos();
   }
+  ActivarValidacionesUbigeo() {
+    this.dataFormGroup.get('selectDepartamentoDireccion')?.setValidators([Validators.required]);
+    this.dataFormGroup.get('selectDepartamentoDireccion')?.updateValueAndValidity();
+    this.dataFormGroup.get('selectProvinciaDireccion')?.setValidators([Validators.required]);
+    this.dataFormGroup.get('selectProvinciaDireccion')?.updateValueAndValidity();
+    this.dataFormGroup.get('selectDistritoDireccion')?.setValidators([Validators.required]);
+    this.dataFormGroup.get('selectDistritoDireccion')?.updateValueAndValidity();
+  }
+  DesactivarValidacionesUbigeo() {
+    this.dataFormGroup.get('selectDepartamentoDireccion')?.clearValidators();
+    this.dataFormGroup.get('selectDepartamentoDireccion')?.updateValueAndValidity();
+    this.dataFormGroup.get('selectProvinciaDireccion')?.clearValidators();
+    this.dataFormGroup.get('selectProvinciaDireccion')?.updateValueAndValidity();
+    this.dataFormGroup.get('selectDistritoDireccion')?.clearValidators();
+    this.dataFormGroup.get('selectDistritoDireccion')?.updateValueAndValidity();
+  }
+  ListarDepartamentos() {
+    this.comboDepartamento = [];
+    this.comboProvincia = [];
+    this.comboDistrito = [];
+    let idPais = this.dataFormGroup.controls['selectPaisDireccion'].value;
+    this.comboDepartamento = this.pacienteService.ObtenerDepartamentos(idPais);
+    console.log('dptos: ', this.comboDepartamento);
+  }
+  ListarProvincias() {
+    this.comboProvincia = [];
+    this.comboDistrito = [];
+    let idDepartamento = this.dataFormGroup.controls['selectDepartamentoDireccion'].value;
+    this.comboProvincia = this.pacienteService.ObtenerProvincias(idDepartamento);
+  }
+  ListarDistritos() {
+    this.comboDistrito = [];
+    let idProvincia = this.dataFormGroup.controls['selectProvinciaDireccion'].value;
+    this.comboDistrito = this.pacienteService.ObtenerDistritos(idProvincia);
+  }
+
 
 }

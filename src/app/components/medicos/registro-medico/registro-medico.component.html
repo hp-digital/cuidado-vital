@@ -156,9 +156,10 @@
                                         [options]="comboPais"
                                         optionLabel="nombre"
                                         optionValue="id"
-                                        styleClass="form-control"
+                                        styleClass="w-full"
                                         placeholder="Seleccione"
-                                        onchange="listarDepartamentos($event)" />
+                                        [showClear]="true"
+                                        (onChange)="listarDepartamentos($event)" />
 
                             <!-- <div *ngIf="Controls['selectPaisDireccion'].invalid && (Controls['selectPaisDireccion'].dirty || Controls['selectPaisDireccion'].touched)" class="text-error">
                                 <div>Campo obligatorio.</div>
@@ -168,25 +169,42 @@
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Departamento *</label>
-                                    <select class="form-select" id="">
-                                        <option>Seleccionar</option>
-                                    </select>
+                                    <p-dropdown 
+                                        formControlName="selectDepartamentoDireccion"
+                                        [options]="comboDepartamento"
+                                        optionLabel="nombre"
+                                        optionValue="id"
+                                        styleClass="w-full"
+                                        placeholder="Seleccione"
+                                        [showClear]="true"
+                                        (onChange)="listarProvincias($event)" />
                                 </div>
                             </div>
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Provincia *</label>
-                                    <select class="form-select" id="">
-                                        <option>Seleccionar</option>
-                                    </select>
+                                    <p-dropdown 
+                                        formControlName="selectProvinciaDireccion"
+                                        [options]="comboProvincia"
+                                        optionLabel="nombre"
+                                        optionValue="id"
+                                        styleClass="w-full"
+                                        placeholder="Seleccione"
+                                        [showClear]="true"
+                                        (onChange)="listarDistritos($event)" />
                                 </div>
                             </div>
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Distrito *</label>
-                                    <select class="form-select" id="">
-                                        <option>Seleccionar</option>
-                                    </select>
+                                    <p-dropdown 
+                                        formControlName="selectDistritoDireccion"
+                                        [options]="comboDistrito"
+                                        optionLabel="nombre"
+                                        optionValue="id"
+                                        styleClass="w-full"
+                                        placeholder="Seleccione"
+                                        [showClear]="true" />
                                 </div>
                             </div>
 

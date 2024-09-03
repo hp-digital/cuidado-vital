@@ -4,10 +4,11 @@ import {PacienteService} from '@services/paciente.service';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit {
+export default class DashboardComponent implements OnInit {
 
   constructor(private PacienteService: PacienteService){
     
