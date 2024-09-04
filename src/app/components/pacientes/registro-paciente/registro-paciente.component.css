@@ -1,0 +1,11 @@
+:host ::ng-deep ul{
+    padding-left:0 !important;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+:host ::ng-deep th{
+  border: none;
+}
+:host ::ng-deep .p-autocomplete-multiple-container{
+  width:100% 
+}

@@ -54,7 +54,7 @@
                             <div class="col-xl-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Nro. documento *</label>
-                                    <input type="text" class="form-control" id=""/>														
+                                    <input type="text" class="form-control" formControlName="inputNumeroDocumento"/>														
                                 </div>
                             </div>
                         </div>
@@ -62,19 +62,19 @@
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Apellido paterno *</label>
-                            <input type="text" class="form-control" id=""/>
+                            <input type="text" class="form-control" formControlName="inputApellidoPaternoPaciente"/>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Apellido materno *</label>
-                            <input type="text" class="form-control" id=""/>
+                            <input type="text" class="form-control" formControlName="inputApellidoMaternoPaciente"/>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Nombres *</label>
-                            <input type="text" class="form-control" id=""/>
+                            <input type="text" class="form-control" formControlName="inputNombrePaciente"/>
                         </div>
                     </div>
                 </div>
@@ -84,48 +84,39 @@
                             <div class="col-xl-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Fecha nacimiento *</label>
-                                    <input type="text" class="form-control" id="" placeholder="dd/mm/aaaa"/>
+                                    <input type="date" class="form-control" formControlName="inputFechaNacimientoPaciente"/>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Edad</label>
-                                    <input type="text" class="form-control" readonly/>
+                                    <input type="number" class="form-control" formControlName="inputEdadPaciente" readonly/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="form-label mb-3" for="">Sexo *</label><br/>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
-                                <label class="form-check-label" for="">Masculino</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="radsex" type="radio" id="" value="option2" checked="">
-                                <label class="form-check-label" for="">Femenino</label>
+                            <label class="form-label mb-3" >Sexo *</label><br/>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboSexo">
+                                <input class="form-check-input" type="radio" formControlName="inputSexoPaciente" [value]="combo.id">
+                                <label class="form-check-label" > {{combo.nombre}}</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="form-label mb-3" for="">Teléfono / Celular *</label>
-                            <input type="text" class="form-control" id=""/>
+                            <label class="form-label mb-3">Teléfono / Celular *</label>
+                            <input type="text" class="form-control" formControlName="inputTelefonoPaciente"/>
                         </div>
                     </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3" for="">Nro. Whatsapp *</label>
-                            <input type="text" class="form-control" id=""/>
-                        </div>
-                    </div>								
+                    							
                 </div>
                 <div class="row">
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Correo electrónico *</label>
-                            <input type="text" class="form-control" id=""/>
+                            <input type="text" class="form-control" formControlName="inputCorreoPaciente"/>
                         </div>
                     </div>
                     <div class="col-xl-3">
@@ -133,7 +124,7 @@
                             <div class="col-xl-12">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Estado civil *</label>
-                                    <select class="form-select" id="">
+                                    <select class="form-select" formControlName="selectEstadoCivilPaciente">
                                         <option *ngFor="let combo of comboEstadoCivil" [value]="combo.id">
                                             {{combo.nombre}}
                                         </option>	
@@ -142,31 +133,23 @@
                             </div>												
                         </div>
                     </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3 hidden-element">
-                            <label class="form-label mb-3" for="">Grado de instrucción *</label>
-                            <input type="text" class="form-control" id=""/>
-                        </div>
-                    </div>
-                    <div class="col-xl-6">
-                        <div class="form-group mb-3 hidden-element">
-                            <label class="form-label mb-3" for="">Ocupación *</label>
-                            <input type="text" class="form-control" id=""/>
-                        </div>
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-xl-7">
                         <div class="row">
-                            <div class="col-xl-3">
+                            <div class="col-xl-4">
                                 <div class="form-group mb-3">
-                                    <label class="form-label mb-3" for="">País de origen *</label>
-                                    <select class="form-select" id="">
-                                        <option>Seleccionar</option>
-                                    </select>
+                                    <label class="form-label mb-3" for="">País *</label>
+                                    <p-autoComplete 
+                                    [(ngModel)]="paisId" 
+                                    [dropdown]="true" 
+                                    [suggestions]="comboPais" 
+                                    formControlName="selectPaisDireccion"
+                                    (onValueChanged)="listarDepartamentos($event)" 
+                                    field="nombre" />
                                 </div>
                             </div>
-                            <div class="col-xl-3">
+                            <div class="col-xl-4">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Departamento *</label>
                                     <select class="form-select" id="">
@@ -174,7 +157,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-xl-3">
+                            <div class="col-xl-4">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Provincia *</label>
                                     <select class="form-select" id="">
@@ -182,7 +165,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-xl-3">
+                            <div class="col-xl-4">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Distrito *</label>
                                     <select class="form-select" id="">
@@ -196,7 +179,7 @@
                     <div class="col-xl-5">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Domicilio actual *</label>
-                            <input type="text" class="form-control" id=""/>
+                            <input type="text" class="form-control" form="inputDomicilioActual"/>
                         </div>
                     </div>									
                 </div>														
@@ -209,7 +192,7 @@
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">&nbsp;</label>	
                             <div class="input-group">
-                                <input type="text" class="form-control" id="" placeholder="Buscar paciente por DNI" />
+                                <input type="text" class="form-control" id="" placeholder="Buscar paciente por DNI" formControlName="buscarDniFamiliar"/>
                                 <button type="button" class="input-group-text btn-green-custom" for="">
                                     <i class="fas fa-lg fa-search"></i>
                                 </button>
@@ -223,24 +206,37 @@
                             <div class="col-xl-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Tipo documento</label>
-                                    <select class="form-select" id="">
-                                        <option>DNI</option>
-                                        <option>CE</option>												
+                                    <select class="form-select" formControlName="selectTipoDocumentoFamiliar">
+                                        <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
+                                            {{combo.nombre}}
+                                        </option>										
                                     </select>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Nro. documento *</label>
-                                    <input type="text" class="form-control" id=""/>
+                                    <input type="text" class="form-control" formControlName="inputNumeroDocumentoFamiliar"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-9">
+                    <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="form-label mb-3" for="">Nombre completo *</label>
-                            <input type="text" class="form-control" id=""/>
+                            <label class="form-label mb-3" for="">Apellido paterno</label>
+                            <input type="text" class="form-control" formControlName="inputApellidoPaternoFamiliar"/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Apellido materno</label>
+                            <input type="text" class="form-control" formControlName="inputApellidoMaternoFamiliar"/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Nombres</label>
+                            <input type="text" class="form-control" formControlName="inputNombreFamiliar"/>
                         </div>
                     </div>
                     
@@ -251,13 +247,13 @@
                             <div class="col-xl-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Fecha nacimiento *</label>
-                                    <input type="text" class="form-control" id="" placeholder="dd/mm/aaaa"/>
+                                    <input type="date" class="form-control" formControlName="inputFechaNacimientoFamiliar"/>
                                 </div>
                             </div>
                             <div class="col-xl-6">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Edad</label>
-                                    <input type="text" class="form-control" readonly/>
+                                    <input type="number" class="form-control" formControlName="inputEdadFamiliar" readonly/>
                                 </div>
                             </div>
                         </div>
@@ -265,22 +261,24 @@
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Sexo *</label><br/>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
-                                <label class="form-check-label" for="">Masculino</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="radsex" type="radio" id="" value="option2" checked="">
-                                <label class="form-check-label" for="">Femenino</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboSexo">
+                                <input class="form-check-input" type="radio" formControlName="inputSexoFamiliar" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="form-label mb-3" for="">Teléfono / Celular *</label>
-                            <input type="text" class="form-control" id=""/>
+                            <label class="form-label mb-3" for="">Teléfono / Celular  </label>
+                            <input type="text" class="form-control" formControlName="inputTelefonoFamiliar"/>
                         </div>
                     </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Nro. Whatsapp  </label>
+                            <input type="text" class="form-control" formControlName="inputWhatsappFamiliar"/>
+                        </div>
+                    </div>	
                 </div>								
             </div>						
         </form>

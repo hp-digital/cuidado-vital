@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { ComboDTO } from '../models/ComboDTO';
 import { environment } from '../../environments/environment';
+import { DepartamentoDTO } from '../models/DepartamentoDTO';
+import { ProvinciaDTO } from '../models/ProvinciaDTO';
+import { DistritoDTO } from '../models/Distrito';
 
 
 const API_URL = environment.apiUrl;
@@ -35,5 +38,68 @@ export class PacienteService {
 
   ObtenerEstadoCivil(): Observable<ComboDTO[]>{
     return this.http.get<ComboDTO[]>(`${API_URL}EstadoCivil/ObtenerListado`)
+  }
+
+  ObtenerSexo(): Observable<ComboDTO[]>{
+    return this.http.get<ComboDTO[]>(`${API_URL}Sexo/ObtenerCombo`)
+  }
+
+  ObtenerPais() {
+    return this.http.get<ComboDTO[]>(`${API_URL}Pais/ObtenerCombo`);
+  }
+
+  ObtenerDepartamento() {
+    return this.http.get<DepartamentoDTO[]>(`${API_URL}Departamento/ObtenerCombo`);
+  }
+
+  ObtenerProvincia() {
+    return this.http.get<ProvinciaDTO[]>(`${API_URL}Provincia/ObtenerCombo`);
+  }
+
+  ObtenerDistrito() {
+    return this.http.get<DistritoDTO[]>(`${API_URL}Distrito/ObtenerCombo`);
+  }
+
+
+  ObtenerDepartamentos(id: number): ComboDTO[] {
+    let listaDepartamento: DepartamentoDTO[] = JSON.parse(localStorage.getItem('Departamento')!);
+    let comboDepartamento: ComboDTO[] = [];
+    listaDepartamento.forEach(element => {
+      let departamento = new ComboDTO();
+      if (element.idPais == id) {
+        departamento.id = element.id;
+        departamento.nombre = element.nombre;
+        comboDepartamento.push(departamento);
+      }
+    });
+    return comboDepartamento;
+  }
+
+  ObtenerProvincias(id: number): ComboDTO[] {
+    let listaProvincias: ProvinciaDTO[] = JSON.parse(localStorage.getItem('Provincia')!);
+    let comboProvincia: ComboDTO[] = [];
+    listaProvincias.forEach(element => {
+      let provincia = new ComboDTO();
+      if (element.idDepartamento == id) {
+        provincia.id = element.id;
+        provincia.nombre = element.nombre;
+        comboProvincia.push(provincia);
+      }
+    });
+    return comboProvincia;
+  }
+
+  ObtenerDistritos(id: number): ComboDTO[] {
+    let listaDistritos: DistritoDTO[] = JSON.parse(localStorage.getItem('Distrito')!);
+    let comboDistrito: ComboDTO[] = [];
+    listaDistritos.forEach(element => {
+      let distrito = new ComboDTO();
+      if (element.idProvincia == id) {
+        distrito.id = element.id;
+        distrito.nombre = element.nombre;
+        comboDistrito.push(distrito);
+      }
+    });
+    return comboDistrito;
   }
 }
