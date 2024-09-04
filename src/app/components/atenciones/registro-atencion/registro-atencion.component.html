@@ -78,7 +78,9 @@
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Médico *</label>
                             <select class="form-select" id="">
-                                <option>Seleccionar</option>
+                                <option *ngFor="let combo of comboListadoMedico" [value]="combo.id">
+                                    {{combo.medico}}
+                                </option>	
                             </select>
                         </div>
                     </div>

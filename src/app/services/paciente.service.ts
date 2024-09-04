@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { DepartamentoDTO } from '../models/DepartamentoDTO';
 import { ProvinciaDTO } from '../models/ProvinciaDTO';
 import { DistritoDTO } from '../models/Distrito';
+import { ListadoBusquedaPacienteDTO } from '../models/ListadoBusquedaPacienteDTO';
 
 
 const API_URL = environment.apiUrl;
@@ -58,6 +59,13 @@ export class PacienteService {
 
   ObtenerDistrito() {
     return this.http.get<DistritoDTO[]>(`${API_URL}Distrito/ObtenerCombo`);
+  }
+  ObtenerPacienteCombo() {
+    return this.http.get<ComboDTO[]>(`${API_URL}Paciente/ObtenerComboPaciente`);
+  }
+
+  ObtenerPacienteConsulta(criterioBusqueda: string) {
+    return this.http.get<ListadoBusquedaPacienteDTO[]>(`${API_URL}Servicio/ObtenerPorMultipleConsulta?${criterioBusqueda}`);
   }
 
 

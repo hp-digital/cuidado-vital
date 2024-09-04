@@ -7,6 +7,9 @@ import { ComboDTO } from '../../../models/ComboDTO';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import { ServicioServiceService } from '../../../services/servicio.service.service';
+import { PacienteService } from '../../../services/paciente.service';
+import { PersonalService } from '../../../services/personal.service';
+import { ListadoMedicoDTO } from '../../../models/ListadoMedicoDTO';
 
 @Component({
   selector: 'app-registro-atencion',
@@ -20,6 +23,8 @@ export default class RegistroAtencionComponent implements OnInit{
   dataFormGroup: FormGroup;
   comboEspecialidad: ComboDTO[] = [];
   comboTipoAtencion: ComboDTO[] = [];
+  comboListadoMedico: ListadoMedicoDTO[]=[];
+
   listaServiciosAgregados: listaServiciosAgregadoDTO[] = [];
 
 
@@ -29,7 +34,8 @@ export default class RegistroAtencionComponent implements OnInit{
   constructor(
     private modalRegistroAtencion: BsModalRef,
     private modalService: BsModalService,
-    private servicioService: ServicioServiceService
+    private servicioService: ServicioServiceService,
+    private personalService: PersonalService
   ){
     this.dataFormGroup = new FormGroup({
       inputMotivoAtencion: new FormControl(),
@@ -46,11 +52,13 @@ export default class RegistroAtencionComponent implements OnInit{
     forkJoin([
       this.servicioService.ObtenerEspecialidad(),
       this.servicioService.ObtenerTipoAtencion(),
+      this.personalService.ObtenerListadoMedico(),
     ])
     .subscribe(
       data =>{
         this.comboEspecialidad = data[0];
         this.comboTipoAtencion = data[1];
+        this.comboListadoMedico = data[2];
       },
 
       err => {
