@@ -103,4 +103,8 @@ export class PacienteService {
     });
     return comboDistrito;
   }
+
+  ObtenerSexo() {
+    return this.http.get<ComboDTO[]>(`${API_URL}Sexo/ObtenerCombo`);
+  }
 }

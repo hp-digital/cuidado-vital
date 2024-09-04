@@ -69,14 +69,14 @@
                                     <div class="col-xl-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label mb-3" for="">Fecha nacimiento *</label>
-                                            <p-calendar placeholder="dd/mm/aaaa" formControlName="date2"
-                                                [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" />
+                                            <p-calendar placeholder="dd/mm/aaaa" formControlName="inputFechaNacimientoPersona" styleClass="w-full block" inputStyleClass="w-full"
+                                                [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" (onSelect)="EdadPaciente($event)" (onInput)="EdadPaciente($event)"/>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label mb-3" for="">Edad</label>
-                                            <input type="text" class="form-control" readonly />
+                                            <input type="text" class="form-control" formControlName="inputEdadPersona" readonly/>
                                         </div>
                                     </div>
                                 </div>
@@ -84,21 +84,15 @@
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Celular *</label>
-                                    <input type="number" class="form-control" id="" />
+                                    <input type="number" class="form-control" formControlName="inputTelefonoCelular" id="inputTelefonoCelular" />
                                 </div>
                             </div>
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Sexo *</label><br />
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="radsex" type="radio" id=""
-                                            value="option1">
-                                        <label class="form-check-label" for="">Masculino</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" name="radsex" type="radio" id="" value="option2"
-                                            checked="">
-                                        <label class="form-check-label" for="">Femenino</label>
+                                    <div class="form-check form-check-inline" *ngFor="let combo of comboSexo">
+                                        <input class="form-check-input" name="inputSexoPersona" id="inputSexoPersona" type="radio" formControlName="inputSexoPersona" [value]="combo.id">
+                                        <label class="form-check-label" for=""> {{combo.nombre}}</label>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +121,7 @@
                             <input type="text" class="form-control" id="" />
                         </div>
                     </div>
-                    <div class="col-xl-10">
+                    <div class="col-xl-12">
                         <div class="form-group mb-3">
                             <label class=" mb-3" for="">Especialidad *</label>
                             <!-- <select class="form-select" formControlName="selectRegistrarPorTipoDocumento">
@@ -234,9 +228,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-green-custom" id="btnGuardarPaciente"><i
-                class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnCerrarPaciente"
-            (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+        <button type="submit" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+    <button type="button" class="btn btn-danger" (click)="CerrarModal()" ><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
     </div>
 </div>
