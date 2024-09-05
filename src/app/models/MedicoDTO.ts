@@ -8,7 +8,7 @@ export class MedicoDTO {
     Email?: string;
     Direccion?: string;
     Celular?: string;
-    FechaNacimiento!: Date;
+    FechaNacimiento!: string;
     ImagenPerfil?: string;
     ImagenFirma?: string;
     Estado!: boolean;
@@ -21,8 +21,9 @@ export class MedicoDTO {
     IdDepartamento?: number;
     IdPais?: number;
     IdRol?: number;
+    IdProfesion?: number;   
     UsuarioCreacion!: string;
     UsuarioModificacion!: string;
-    FechaCreacion!: Date;
-    FechaModificacion!: Date;
+    FechaCreacion?: Date;
+    FechaModificacion?: Date;
 }

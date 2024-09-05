@@ -12,9 +12,10 @@ import { ComboDTO } from '@models/ComboDTO';
 import { DepartamentoDTO } from '@models/DepartamentoDTO';
 import { ProvinciaDTO } from '@models/ProvinciaDTO';
 import { DistritoDTO } from '@models/DistritoDTO';
-import { MedicoDTO} from '@models/MedicoDTO';
+import { MedicoDTO } from '@models/MedicoDTO';
 import { ValoresDefectoCamposEnum } from '@enum/ValoresDefectoCamposEnum';
 import { PacienteService } from '@services/paciente.service';
+import { PersonalService } from '@services/personal.service';
 import { DropdownModule } from 'primeng/dropdown';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -62,8 +63,7 @@ interface AutoCompleteCompleteEvent {
 
 export class RegistroMedicoComponent implements OnInit {
 
-  inputFechaNacimientoPersona: Date | undefined;
-
+  inputFechaNacimiento: Date | undefined;
   items: any[] | undefined;
   autocompleteEspecialidadMedica: any;
   filteredEspecialidad: any[] = [];
@@ -81,24 +81,43 @@ export class RegistroMedicoComponent implements OnInit {
   verSpinner: boolean = false;
   disabledUbigeo: boolean = false;
   idMedico: number = 0;
-  objMedico= new MedicoDTO();
+  idProfesion: number = 1;
+  idRol: number = 1;
+  objMedico = new MedicoDTO();
+  usuario: string = "";
+  usuarioCreacion: string = "";
+  fechaCreacion: Date | undefined;
 
   constructor(
     private bsModalRegistroMedico: BsModalRef,
+    private bsModalRef: BsModalRef,
     private messageService: MessageService,
-    private pacienteService: PacienteService
+    private pacienteService: PacienteService,
+    private personalService: PersonalService
+
   ) {
     this.dataFormGroup = new FormGroup({
-      selectBuscarPorTipoDocumento: new FormControl(),
-      selectRegistrarPorTipoDocumento: new FormControl(),
-      inputFechaNacimientoPersona: new FormControl(),
+      selectTipoDocumento: new FormControl('', [Validators.required]),
+      inputNroDocumento: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      inputApellidoPaterno: new FormControl('', [Validators.required]),
+      inputApellidoMaterno: new FormControl('', [Validators.required]),
+      inputNombres: new FormControl('', [Validators.required]),
+      inputFechaNacimiento: new FormControl('', [Validators.required]),
+      inputEdadPersona: new FormControl(''),
+      inputTelefonoCelular: new FormControl('', [Validators.required, Validators.minLength(9), Validators.maxLength(15)]),
+      inputSexo: new FormControl('', [Validators.required]),
+      inputDireccion: new FormControl('', [Validators.required]),
+      inputCorreoElectronico: new FormControl(),
+      inputCMP: new FormControl(''),
+      inputRNE: new FormControl(''),
       autocompleteEspecialidadMedica: new FormControl(),
       selectPaisDireccion: new FormControl('', [Validators.required]),
       selectDepartamentoDireccion: new FormControl('', [Validators.required]),
       selectProvinciaDireccion: new FormControl('', [Validators.required]),
       selectDistritoDireccion: new FormControl('', [Validators.required]),
-      inputEdadPersona: new FormControl(''),
-      inputSexoPersona: new FormControl(),
+      // fileImagenPerfil: new FormControl(''),
+      // fileImagenFirma: new FormControl(''),
+
     });
   };
 
@@ -163,6 +182,48 @@ export class RegistroMedicoComponent implements OnInit {
       html: `<div class="message-text-error">${mensaje} </div>`,
     });
   }
+
+
+  MostrarNotificacionSuccessModal(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'success',
+      title: titulo,
+      text: mensaje
+    });
+  }
+
+  // MostrarNotificacionSuccess(mensaje: string, titulo: string) {
+  //   Swal.fire({
+  //     icon: 'success',
+  //     title: titulo,
+  //     text: mensaje,
+  //     showDenyButton: false,
+  //     showCancelButton: false,
+  //     confirmButtonText: 'Ok',
+  //   }).then((result) => {
+  //     if (result.isConfirmed) {
+  //       Object.keys(this.dataFormGroup.controls).forEach(control => {
+  //         this.dataFormGroup.controls[control].markAsPristine();
+  //       });
+  //       this.contador = this.contadorInicial;
+  //       this.verBotonesExtras = true;
+  //       this.bsModalRef.hide();
+  //       /* modificaco por paul suarez*/
+  //       this.bsModalRef = this.modalService.show(ConsultaCitaComponent, { backdrop: 'static', class: 'modal-xl' });
+  //       this.bsModalRef.content.AsignarIdPaciente(
+  //         this.idPaciente,
+  //         this.objPaciente.NumeroDocumento,
+  //         this.objPaciente.ApellidoPaterno,
+  //         this.objPaciente.ApellidoMaterno,
+  //         this.objPaciente.Nombres,
+  //       );
+  //       this.bsModalRef.content.AsignarParametrosInterconsulta(this.fechaInterconsulta, this.medicoInterconsulta, this.especialidadInterconsulta);
+  //       this.bsModalRef.content.onGuardar = () => { };
+  //       /*Fin de la modificacion*/
+
+  //     }
+  //   })
+  // }
 
   listarDepartamentos(e: any) {
     console.log('Id país: ', e.value);
@@ -237,7 +298,7 @@ export class RegistroMedicoComponent implements OnInit {
 
   EdadPaciente(e: any) {
     let fecha = "";
-    fecha = this.dataFormGroup.controls['inputFechaNacimientoPersona'].value;
+    fecha = this.dataFormGroup.controls['inputFechaNacimiento'].value;
     this.CalcularEdadPaciente(new Date(fecha).toISOString());
     console.log('fecha: ', fecha);
   }
@@ -250,42 +311,42 @@ export class RegistroMedicoComponent implements OnInit {
     anios = hoy.diff(nacimiento, "years");
     this.dataFormGroup.controls['inputEdadPersona'].setValue(anios);
   }
-  
+
   buscarControlesInvalidos() {
     const invalid = [];
     const controls = this.dataFormGroup.controls;
     for (const name in controls) {
-        if (controls[name].invalid) {
-            invalid.push(name);
-            let element:any = document.querySelector('[formcontrolname="' + name + '"]');
-            element.scrollIntoView();
-            break;
-        }
+      if (controls[name].invalid) {
+        invalid.push(name);
+        let element: any = document.querySelector('[formcontrolname="' + name + '"]');
+        element.scrollIntoView();
+        break;
+      }
     }
     return invalid;
   }
 
-  Guardar(){
-    let idPais = this.dataFormGroup.controls['selectPaisDireccion'].value;    
-    if(idPais == ValoresDefectoCamposEnum.Pais){
+  Guardar() {
+    let idPais = this.dataFormGroup.controls['selectPaisDireccion'].value;
+    if (idPais == ValoresDefectoCamposEnum.Pais) {
       this.ActivarValidacionesUbigeo();
     }
-    else{
+    else {
       this.DesactivarValidacionesUbigeo();
     }
     for (let c in this.dataFormGroup.controls) {
       this.dataFormGroup.controls[c].markAsTouched();
     }
-
+    console.log('form: ', this.dataFormGroup);
     if (this.dataFormGroup.valid) {
       this.AsignarValoresAObjeto();
       if (this.idMedico != 0) {
-        // this.Modificar();s
+        this.Modificar();
       }
       else {
-        // this.Insertar();s
+        this.Insertar();
       }
-    }else {
+    } else {
       this.buscarControlesInvalidos();
       this.MostrarNotificacionError('Falta validar campos.', '¡ERROR EN EL PROCESO!');
     }
@@ -293,21 +354,50 @@ export class RegistroMedicoComponent implements OnInit {
 
   AsignarValoresAObjeto() {
     let today = new Date();
-    let numeroCelular="";
-    if(this.dataFormGroup.controls['inputTelefonoCelular'].value!=null){
-      numeroCelular = this.dataFormGroup.controls['inputTelefonoCelular'].value['number'];
+    let numeroCelular = "";
+    if (this.dataFormGroup.controls['inputTelefonoCelular'].value != null) {
+      numeroCelular = this.dataFormGroup.controls['inputTelefonoCelular'].value;
     }
     this.objMedico = new MedicoDTO();
     this.objMedico.Id = this.idMedico;
     this.objMedico.NumeroDocumento = this.dataFormGroup.controls['inputNroDocumento'].value;
-    this.objMedico.ApellidoPaterno = (this.dataFormGroup.controls['inputApellidoPaterno'].value!=''?this.dataFormGroup.controls['inputApellidoPaterno'].value:ValoresDefectoCamposEnum.ApellidoPaterno);
+    this.objMedico.ApellidoPaterno = (this.dataFormGroup.controls['inputApellidoPaterno'].value != '' ? this.dataFormGroup.controls['inputApellidoPaterno'].value : ValoresDefectoCamposEnum.ApellidoPaterno);
     this.objMedico.ApellidoMaterno = this.dataFormGroup.controls['inputApellidoMaterno'].value;
-    this.objMedico.Nombres = (this.dataFormGroup.controls['inputNombres'].value!=''?this.dataFormGroup.controls['inputNombres'].value:ValoresDefectoCamposEnum.Nombres);
-  
+    this.objMedico.Nombres = (this.dataFormGroup.controls['inputNombres'].value != '' ? this.dataFormGroup.controls['inputNombres'].value : ValoresDefectoCamposEnum.Nombres);
+    this.objMedico.FechaNacimiento = (this.dataFormGroup.controls['inputFechaNacimiento'].value != '' ? new Date(this.dataFormGroup.controls['inputFechaNacimiento'].value).toISOString() : new Date(ValoresDefectoCamposEnum.FechaNacimiento).toISOString());
+    this.objMedico.Celular = numeroCelular;
+    this.objMedico.Email = (this.dataFormGroup.controls['inputCorreoElectronico'].value != '' ? this.dataFormGroup.controls['inputCorreoElectronico'].value : ValoresDefectoCamposEnum.Email);
+    this.objMedico.Direccion = this.dataFormGroup.controls['inputDireccion'].value;
+    this.objMedico.NroColegiatura = this.dataFormGroup.controls['inputDireccion'].value;
+    this.objMedico.Rne = this.dataFormGroup.controls['inputDireccion'].value;
+    this.objMedico.Estado = true;
+
+    if (this.idMedico == 0) {
+      this.objMedico.UsuarioCreacion = this.usuario;
+      this.objMedico.UsuarioModificacion = this.usuario;
+      this.objMedico.FechaCreacion = today;
+      this.objMedico.FechaModificacion = today;
+    }
+    else {
+      this.objMedico.UsuarioCreacion = this.usuarioCreacion;
+      this.objMedico.UsuarioModificacion = this.usuario;
+      this.objMedico.FechaCreacion = this.fechaCreacion;
+      this.objMedico.FechaModificacion = today;
+    }
+    this.objMedico.IdTipoDocumento = this.dataFormGroup.controls['selectTipoDocumento'].value;
+    this.objMedico.IdSexo = (this.dataFormGroup.controls['inputSexo'].value != '' ? this.dataFormGroup.controls['inputSexo'].value : ValoresDefectoCamposEnum.Sexo);
+    this.objMedico.IdPais = (this.dataFormGroup.controls['selectPaisDireccion'].value != '' ? this.dataFormGroup.controls['selectPaisDireccion'].value : ValoresDefectoCamposEnum.Pais);
+    this.objMedico.IdDepartamento = (this.dataFormGroup.controls['selectDepartamentoDireccion'].value != '' ? this.dataFormGroup.controls['selectDepartamentoDireccion'].value : ValoresDefectoCamposEnum.Departamento);
+    this.objMedico.IdProvincia = (this.dataFormGroup.controls['selectProvinciaDireccion'].value != '' ? this.dataFormGroup.controls['selectProvinciaDireccion'].value : ValoresDefectoCamposEnum.Provincia);
+    this.objMedico.IdDistrito = (this.dataFormGroup.controls['selectDistritoDireccion'].value != '' ? this.dataFormGroup.controls['selectDistritoDireccion'].value : ValoresDefectoCamposEnum.Distrito);
+    this.objMedico.IdRol = this.idRol;
+    this.objMedico.IdProfesion = this.idProfesion;
+    console.log(this.objMedico);
+
   }
 
- /*  Modificar() {
-    this.verSpinner = true;
+  Modificar() {
+    /* this.verSpinner = true;
     this.pacienteService.Modificar(this.objPaciente)
       .subscribe({
         next: (data: any) => {
@@ -327,29 +417,25 @@ export class RegistroMedicoComponent implements OnInit {
           this.manejadorMensajeErroresGuardar(e);
         },
         complete: () => { this.verSpinner = false; }
-      });
+      }); */
   }
 
   Insertar() {
     this.verSpinner = true;
-    this.pacienteService.Insertar(this.objPaciente)
+    this.personalService.Insertar(this.objMedico)
       .subscribe({
         next: (data: any) => {
-          if(data!=false){
+          if (data != false) {
             let id: any = data;
-            this.idPaciente = id;
-            if(this.esSoloLecturaNroDocumento){
-              this.BuscarNumeroDocumentoPacientePorID(this.idPaciente);
-            }
-            else{
-              this.MostrarNotificacionSuccess('El proceso se realizó con éxito.', '');
-              this.bsModalRef.content.onGuardar = () => { };
-            }           
-          } 
-          else{            
-            this.sinAperturaCaja  = true;
-            this.MostrarNotificacionError('Debe aperturar una caja para continuar.','¡Apertura de caja no valida!');
-          }         
+            this.idMedico = id;
+            this.MostrarNotificacionSuccessModal('El proceso se realizó con éxito.', '');
+            this.bsModalRef.content.onGuardar = () => { };
+
+          }
+          // else {
+          //   this.sinAperturaCaja = true;
+          //   this.MostrarNotificacionError('Debe aperturar una caja para continuar.', '¡Apertura de caja no valida!');
+          // }
         },
         error: (e) => {
           this.verSpinner = false;
@@ -357,6 +443,29 @@ export class RegistroMedicoComponent implements OnInit {
         },
         complete: () => { this.verSpinner = false; }
       });
-  } */
+  }
+
+  manejadorMensajeErroresGuardar(e: any) {
+    if (typeof e != "string") {
+      let error = e;
+      let arrayErrores: any[] = [];
+      let errorValidacion = Object.keys(e);
+      if (Array.isArray(errorValidacion)) {
+        errorValidacion.forEach((propiedadConError: any) => {
+          error[propiedadConError].forEach((mensajeError: any) => {
+            if (!arrayErrores.includes(mensajeError['mensaje'])) {
+              arrayErrores.push(mensajeError['mensaje']);
+            }
+          });
+        });
+        this.MostrarNotificacionError(arrayErrores.join("<br/>"), '¡ERROR EN EL PROCESO!')
+      } else {
+        this.MostrarNotificacionError("", '¡ERROR EN EL PROCESO!')
+      }
+    }
+    else {
+      this.MostrarNotificacionError(e, '¡ERROR EN EL PROCESO!');
+    }
+  }
 
 }

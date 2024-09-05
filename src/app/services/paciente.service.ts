@@ -9,7 +9,7 @@ import { DistritoDTO} from '@models/DistritoDTO';
 
 
 
-const API_URL = environment.apiUrl;
+const API_URL = environment.apiUrl; 
 
 @Injectable({
   providedIn: 'root'

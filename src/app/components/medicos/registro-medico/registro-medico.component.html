@@ -15,7 +15,7 @@
                             <p-toast />
                             <p-fileUpload mode="basic" chooseLabel="Subir" chooseIcon="pi pi-upload" name="demo[]"
                                 url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
-                                maxFileSize="1000000" styleClass="btn-green-custom h-2rem max-w-12rem text-center" />
+                                maxFileSize="1000000" styleClass="btn-green-custom h-2rem max-w-12rem text-center"  />
                         </div>
                     </div>
 
@@ -32,14 +32,14 @@
                                                     {{combo.nombre}}
                                                 </option>
                                             </select> -->
-                                            <p-dropdown formControlName="selectRegistrarPorTipoDocumento" [options]="comboTipoDocumento"
+                                            <p-dropdown formControlName="selectTipoDocumento" [options]="comboTipoDocumento"
                                                 optionLabel="nombre" optionValue="id" [showClear]="true" styleClass="w-full" placeholder="Selecciona"/>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label mb-3" for="">Nro. documento *</label>
-                                            <input type="number" class="form-control" id="" />
+                                            <input type="number" class="form-control" id="" formControlName="inputNroDocumento"/>
                                         </div>
                                     </div>
                                 </div>
@@ -47,19 +47,19 @@
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Apellido paterno *</label>
-                                    <input type="text" class="form-control" id="" />
+                                    <input type="text" class="form-control" id="" formControlName="inputApellidoPaterno" />
                                 </div>
                             </div>
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Apellido materno *</label>
-                                    <input type="text" class="form-control" id="" />
+                                    <input type="text" class="form-control" id="" formControlName="inputApellidoMaterno" />
                                 </div>
                             </div>
                             <div class="col-xl-2">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Nombres *</label>
-                                    <input type="text" class="form-control" id="" />
+                                    <input type="text" class="form-control" id="" formControlName="inputNombres"/>
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                     <div class="col-xl-6">
                                         <div class="form-group mb-3">
                                             <label class="form-label mb-3" for="">Fecha nacimiento *</label>
-                                            <p-calendar placeholder="dd/mm/aaaa" formControlName="inputFechaNacimientoPersona" styleClass="w-full block" inputStyleClass="w-full"
+                                            <p-calendar placeholder="dd/mm/aaaa" formControlName="inputFechaNacimiento" styleClass="w-full block" inputStyleClass="w-full"
                                                 [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay" (onSelect)="EdadPaciente($event)" (onInput)="EdadPaciente($event)"/>
                                         </div>
                                     </div>
@@ -84,14 +84,14 @@
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Celular *</label>
-                                    <input type="number" class="form-control" formControlName="inputTelefonoCelular" id="inputTelefonoCelular" />
+                                    <input type="number" class="form-control" formControlName="inputTelefonoCelular"/>
                                 </div>
                             </div>
                             <div class="col-xl-3">
                                 <div class="form-group mb-3">
                                     <label class="form-label mb-3" for="">Sexo *</label><br />
                                     <div class="form-check form-check-inline" *ngFor="let combo of comboSexo">
-                                        <input class="form-check-input" name="inputSexoPersona" id="inputSexoPersona" type="radio" formControlName="inputSexoPersona" [value]="combo.id">
+                                        <input class="form-check-input" name="inputSexo" id="inputSexo" type="radio" formControlName="inputSexo" [value]="combo.id">
                                         <label class="form-check-label" for=""> {{combo.nombre}}</label>
                                     </div>
                                 </div>
@@ -106,19 +106,19 @@
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Correo electrónico *</label>
-                            <input type="email" class="form-control" id="" />
+                            <input type="email" class="form-control" id="" formControlName="inputCorreoElectronico"/>
                         </div>
                     </div>
                     <div class="col-xl-2">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">CMP *</label>
-                            <input type="text" class="form-control" id="" />
+                            <input type="text" class="form-control" id="" formControlName="inputCMP"/>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">RNE *</label>
-                            <input type="text" class="form-control" id="" />
+                            <input type="text" class="form-control" id="" formControlName="inputRNE"/>
                         </div>
                     </div>
                     <div class="col-xl-12">
@@ -207,7 +207,7 @@
                     <div class="col-xl-5">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Domicilio actual *</label>
-                            <input type="text" class="form-control" id="" />
+                            <input type="text" class="form-control" id="" formControlName="inputDireccion" />
                         </div>
                     </div>
                 </div>
