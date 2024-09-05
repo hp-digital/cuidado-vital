@@ -14,6 +14,10 @@ export const routes: Routes = [
                 loadComponent:() => import('./components/pacientes/pacientes.component'),
             },
             {
+                path:'servicios',
+                loadComponent:() => import('./components/atenciones/servicios/servicios.component'),
+            },
+            {
                 path:'atenciones',
                 loadComponent:() => import('./components/atenciones/atenciones.component'),
             },

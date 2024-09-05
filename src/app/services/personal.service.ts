@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { MedicoDTO } from '@models/MedicoDTO';
+import { ListadoMedicoDTO } from '../models/ListadoMedicoDTO';
 import { catchError, retry,timeout } from 'rxjs/operators';
 
 const API_URL = environment.apiUrl;
@@ -37,5 +38,9 @@ export class PersonalService {
       retry(this.nRetry), 
       catchError(this.handleError) 
     );
+  }
+  ObtenerListadoMedico(): Observable<ListadoMedicoDTO[]>{
+    return this.http.get<ListadoMedicoDTO[]>(`${API_URL}Medico/ObtenerListado`)
+
   }
 }
