@@ -479,7 +479,10 @@ th{
     width: 25%;
 }
 
-
+.text-error{
+    color: red;
+    font-size: 12px;
+}
 
 
 
