@@ -108,8 +108,8 @@ export class RegistroMedicoComponent implements OnInit {
       inputSexo: new FormControl('', [Validators.required]),
       inputDireccion: new FormControl('', [Validators.required]),
       inputCorreoElectronico: new FormControl(),
-      inputCMP: new FormControl(''),
-      inputRNE: new FormControl(''),
+      inputCMP: new FormControl('',[Validators.required]),
+      inputRNE: new FormControl('', [Validators.required]),
       autocompleteEspecialidadMedica: new FormControl(),
       selectPaisDireccion: new FormControl('', [Validators.required]),
       selectDepartamentoDireccion: new FormControl('', [Validators.required]),
@@ -323,6 +323,8 @@ export class RegistroMedicoComponent implements OnInit {
         break;
       }
     }
+    console.log('invalid: ', invalid);
+    
     return invalid;
   }
 
@@ -466,6 +468,10 @@ export class RegistroMedicoComponent implements OnInit {
     else {
       this.MostrarNotificacionError(e, '¡ERROR EN EL PROCESO!');
     }
+  }
+
+  get Controls() {
+    return this.dataFormGroup.controls;
   }
 
 }

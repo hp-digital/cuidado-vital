@@ -39,8 +39,9 @@ export class PersonalService {
       catchError(this.handleError) 
     );
   }
+
   ObtenerListadoMedico(): Observable<ListadoMedicoDTO[]>{
     return this.http.get<ListadoMedicoDTO[]>(`${API_URL}Medico/ObtenerListado`)
-
   }
+  
 }
