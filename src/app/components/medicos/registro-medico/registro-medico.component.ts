@@ -64,7 +64,6 @@ interface AutoCompleteCompleteEvent {
 export class RegistroMedicoComponent implements OnInit {
 
   inputFechaNacimiento: Date | undefined;
-  items: any[] | undefined;
   autocompleteEspecialidadMedica: any;
   filteredEspecialidad: any[] = [];
   dataFormGroup: FormGroup;
@@ -143,6 +142,7 @@ export class RegistroMedicoComponent implements OnInit {
           this.listaDepartamento = JSON.parse(localStorage.getItem('Departamento')!);
           this.listaProvincia = JSON.parse(localStorage.getItem('Provincia')!);
           this.listaDistrito = JSON.parse(localStorage.getItem('Distrito')!);
+          
         },
         err => {
           console.log(err);
@@ -400,7 +400,7 @@ export class RegistroMedicoComponent implements OnInit {
 
   Modificar() {
     /* this.verSpinner = true;
-    this.pacienteService.Modificar(this.objPaciente)
+    this.personalService.Modificar(this.objMedico)
       .subscribe({
         next: (data: any) => {
           if(data!=false){
@@ -413,7 +413,7 @@ export class RegistroMedicoComponent implements OnInit {
             this.sinAperturaCaja  = true;
             this.MostrarNotificacionError('Debe aperturar una caja para continuar.','¡Apertura de caja no valida!');
           } 
-        },
+          },
         error: (e: any) => {
           this.verSpinner = false;
           this.manejadorMensajeErroresGuardar(e);
@@ -473,5 +473,45 @@ export class RegistroMedicoComponent implements OnInit {
   get Controls() {
     return this.dataFormGroup.controls;
   }
+
+  AsignarIdMedico(id:number){
+    this.idMedico=id;
+    this.CargarDataInicio();
+  }
+
+  /* ObtenerConfiguracion(){
+    this.verSpinner = true;
+    forkJoin([
+      this.comboTipoDocumento = data[0];
+          this.comboEspecialidades = data[1];
+          this.comboSexo = data[2];
+          this.comboPais = JSON.parse(localStorage.getItem('Paises')!);
+          this.listaDepartamento = JSON.parse(localStorage.getItem('Departamento')!);
+          this.listaProvincia = JSON.parse(localStorage.getItem('Provincia')!);
+          this.listaDistrito = JSON.parse(localStorage.getItem('Distrito')!);
+    ]
+    )
+      .subscribe(
+        data => {
+          this.comboEspecialidad = data[0];
+          this.comboModaldidad = data[1]
+          this.comboSede = data[2];
+          this.comboTipoAtencion = data[3];
+          this.comboTipoPaciente = data[4];
+          this.comboMedico = data[5];
+          this.comboCatalogoServicio = data[6];
+          this.comboCatalogoServicio.forEach(element => {
+            this.listaCatalogoServicio.push(element.nombre);
+          });
+
+          this.listaMedicos = data[5];
+          this.verSpinner = false;
+          this.ObtenerDatos();
+        },
+        err => {
+          this.verSpinner = false;
+        }
+      );
+  } */
 
 }

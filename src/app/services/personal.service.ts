@@ -40,6 +40,15 @@ export class PersonalService {
     );
   }
 
+  public Modificar(data: MedicoDTO){
+    const url = `${API_URL}Paciente/Modificar`;
+    return  this.http.put(url, data, { headers: this.headers }).pipe(
+      timeout(this.nTimeout),
+      retry(this.nRetry), 
+      catchError(this.handleError) 
+    );
+  }
+
   ObtenerListadoMedico(): Observable<ListadoMedicoDTO[]>{
     return this.http.get<ListadoMedicoDTO[]>(`${API_URL}Medico/ObtenerListado`)
   }

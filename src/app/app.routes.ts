@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import MedicosComponent from './components/medicos/medicos.component';
 
 export const routes: Routes = [
     {
@@ -22,8 +23,7 @@ export const routes: Routes = [
                 loadComponent:() => import('./components/atenciones/atenciones.component'),
             },
             {
-                path:'medicos',
-                loadComponent:() => import('./components/medicos/medicos.component'),
+                path:'medicos',component: MedicosComponent
             },
             {
                 path:'',
