@@ -9,13 +9,13 @@
                 <div class="col-xl-2">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3" for="">DNI</label>
-                        <input type="text" class="form-control" id="" placeholder="74880797" readonly/>
+                        <input type="text" class="form-control" formControlName="inputDniPaciente" readonly/>
                     </div>
                 </div>
                 <div class="col-xl-5">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3" for="">Paciente</label>
-                        <input type="text" class="form-control" id="" placeholder="Ángela María del Valle" readonly/>
+                        <input type="text" class="form-control" id="" formControlName="inputNombrePaciente" readonly/>
                     </div>
                 </div>									
             </div>
@@ -67,7 +67,7 @@
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Especialidad *</label>
-                            <select class="form-select" id="">
+                            <select class="form-select" formControlName="selectEspecialidad">
                                 <option *ngFor="let combo of comboEspecialidad" [value]="combo.id">
                                     {{combo.nombre}}
                                 </option>	
@@ -77,7 +77,7 @@
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Médico *</label>
-                            <select class="form-select" id="">
+                            <select class="form-select" formControlName="selectMedico">
                                 <option *ngFor="let combo of comboListadoMedico" [value]="combo.id">
                                     {{combo.medico}}
                                 </option>	
@@ -87,7 +87,7 @@
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Fecha inicio atención *</label>
-                            <input type="date" class="form-control" id=""/>
+                            <input type="date" class="form-control" formControlName="inputFechaInicio"/>
                         </div>
                     </div>	
                 </div>
@@ -98,7 +98,7 @@
                     <div class="col-xl-4">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Tipo de atención *</label>
-                            <select class="form-select" id="">
+                            <select class="form-select" formControlName="selectTipoAtencion">
                                 <option *ngFor="let combo of comboTipoAtencion" [value]="combo.id">
                                     {{combo.nombre}}
                                 </option>	
@@ -108,7 +108,7 @@
                     <div class="col-xl-8">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Indicaciones</label>
-                            <input type="text" class="form-control" id=""/>
+                            <input type="text" class="form-control" formControlName="inputIndicaciones"/>
                         </div>
                     </div>									
                 </div>                      								
@@ -117,7 +117,7 @@
         </form>
     </div>
     <div class="modal-footer">	
-        <button type="button" class=" btn btn-green-custom" id="btnGuardarServicios"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class=" btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
         <button type="button" class="btn btn-danger" id="btnCerrarServicios" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
     </div>
 </div>

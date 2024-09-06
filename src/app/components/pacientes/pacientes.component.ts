@@ -165,8 +165,11 @@ export default class PacientesComponent implements OnInit {
     this.modalRef = this.modalMotivoAtencion.show(MotivoAtencionComponent, { backdrop: 'static', class: 'modal-xg' });
   }
 
-  registroAtencion(){
+  registroAtencion(idPaciente:number, paciente:string, documento:string){
     this.modalRef = this.modalRegistroAtencion.show(RegistroAtencionComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.modalRef.content.AsignarIdPaciente(idPaciente, paciente, documento);
+    this.modalRef.content.onCancelar = () => { };
+    this.modalRef.content.onGuardar = () => { };
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
