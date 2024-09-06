@@ -1,8 +1,11 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { catchError, retry, timeout } from 'rxjs/operators';
 import { ComboDTO } from '../models/ComboDTO';
 import { environment } from '../../environments/environment';
+import { ServicioDTO } from '../models/ServicioDTO';
+import { ListadoBusquedaServicioDTO } from '../models/ListadoBusquedaServicioDTO';
 
 const API_URL = environment.apiUrl;
 
@@ -37,5 +40,18 @@ export class ServicioServiceService {
   }
   ObtenerMedicoCombo(): Observable<ComboDTO[]>{
     return this.http.get<ComboDTO[]>(`${API_URL}TipoDocumento/ObtenerCombo`)
+  }
+
+  public Registrar(data: ServicioDTO) {
+    const url = `${API_URL}Servicio/Registrar`;
+    return this.http.post(url, data, { headers: this.headers }).pipe(
+      timeout(this.nTimeout),
+      retry(this.nRetry),
+      catchError(this.handleError)
+    );
+  }
+
+  ObtenerServicioConsulta(criterioBusqueda: string) {
+    return this.http.get<ListadoBusquedaServicioDTO[]>(`${API_URL}Servicio/ObtenerListadoServicioBusqueda?${criterioBusqueda}`);
   }
 }

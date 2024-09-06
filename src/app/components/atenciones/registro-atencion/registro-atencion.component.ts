@@ -10,6 +10,11 @@ import { ServicioServiceService } from '../../../services/servicio.service.servi
 import { PacienteService } from '../../../services/paciente.service';
 import { PersonalService } from '../../../services/personal.service';
 import { ListadoMedicoDTO } from '../../../models/ListadoMedicoDTO';
+import { ServicioDTO } from '../../../models/ServicioDTO';
+import moment from 'moment';
+import { EstadoPacienteEnum } from '../../../enum/estadoPacienteEnum';
+import { ModalidadPagoEnum } from '../../../enum/modalidadPagoEnum';
+import { EstadoPagoEnum } from '../../../enum/estadoPagoEnum';
 
 @Component({
   selector: 'app-registro-atencion',
@@ -26,8 +31,9 @@ export default class RegistroAtencionComponent implements OnInit{
   comboListadoMedico: ListadoMedicoDTO[]=[];
 
   listaServiciosAgregados: listaServiciosAgregadoDTO[] = [];
+  objServicio = new ServicioDTO();
 
-
+  idPaciente:number=0;
 
   verSpinner: boolean = false;
 
@@ -39,6 +45,13 @@ export default class RegistroAtencionComponent implements OnInit{
   ){
     this.dataFormGroup = new FormGroup({
       inputMotivoAtencion: new FormControl(),
+      inputDniPaciente: new FormControl(),
+      inputNombrePaciente: new FormControl(),
+      selectEspecialidad: new FormControl(),
+      selectMedico: new FormControl(),
+      inputFechaInicio: new FormControl(),
+      selectTipoAtencion: new FormControl(),
+      inputIndicaciones: new FormControl(),
     });
   }
 
@@ -68,6 +81,14 @@ export default class RegistroAtencionComponent implements OnInit{
       }
     )
   }
+  AsignarIdPaciente(id: number, paciente: string,documento: string) {
+ 
+    this.dataFormGroup.controls['inputNombrePaciente'].setValue(paciente);
+    this.dataFormGroup.controls['inputDniPaciente'].setValue(documento);
+    this.idPaciente = id;
+
+    this.ObtenerDataInicio();
+  }
   CerrarModal() {
     this.modalRegistroAtencion.hide();
     //this.onGuardar();
@@ -82,6 +103,49 @@ export default class RegistroAtencionComponent implements OnInit{
   Eliminar(id:number){
 
   }
+
+  Guardar(){
+    this.AsignarObjeto();
+    this.verSpinner = true;
+    console.log("obj guardar",this.objServicio)
+
+    this.servicioService.Registrar(this.objServicio)
+    .subscribe({
+      next: (data) => {
+        this.MostrarNotificacionSuccessModal('Se registró el servicio correctamente.', 'Éxito ');
+        this.listaServiciosAgregados = [];
+        let datos: any = data;
+        console.log("data al registrar", datos);
+      },
+      error: (e) => {
+        console.log(e);
+        this.verSpinner = false;
+        this.manejadorMensajeErroresGuardar(e);
+      },
+      complete: () => { this.verSpinner = false; }
+    });
+  }
+
+  AsignarObjeto(){
+    this.objServicio.idPaciente = this.idPaciente;
+    this.objServicio.motivoAtencion = this.dataFormGroup.controls['inputMotivoAtencion'].value;
+    this.objServicio.precio = 0;
+    this.objServicio.idEspecialidad=this.dataFormGroup.controls['selectEspecialidad'].value;
+    this.objServicio.idMedico= this.dataFormGroup.controls['selectMedico'].value;
+    this.objServicio.fechaInicioAtencion = this.dataFormGroup.controls['inputFechaInicio'].value;
+    //this.objServicio.fechaFinAtencion = '';
+    this.objServicio.idEstadoPacienteServicio = EstadoPacienteEnum.EnAtencion;
+    this.objServicio.indicaciones = this.dataFormGroup.controls['inputIndicaciones'].value;
+    this.objServicio.idModalidadPago = ModalidadPagoEnum.Efectivo;
+    this.objServicio.idEstadoPago = EstadoPagoEnum.Pendiente;
+    this.objServicio.idTipoAtencion = this.dataFormGroup.controls['selectTipoAtencion'].value;
+    this.objServicio.estado =true;
+    this.objServicio.usuarioCreacion = 'admin';
+    this.objServicio.usuarioModificacion = 'admin';
+    this.objServicio.fechaCreacion = moment().toDate();
+    this.objServicio.fechaModificacion=moment().toDate();
+  }
+
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
   {
     Swal.fire({
@@ -112,5 +176,27 @@ export default class RegistroAtencionComponent implements OnInit{
       title: titulo,
       text: mensaje
     });
+  }
+  manejadorMensajeErroresGuardar(e: any) {
+    if (typeof e != "string") {
+      let error = e;
+      let arrayErrores: any[] = [];
+      let errorValidacion = Object.keys(e);
+      if (Array.isArray(errorValidacion)) {
+        errorValidacion.forEach((propiedadConError: any) => {
+          error[propiedadConError].forEach((mensajeError: any) => {
+            if (!arrayErrores.includes(mensajeError['mensaje'])) {
+              arrayErrores.push(mensajeError['mensaje']);
+            }
+          });
+        });
+        this.MostrarNotificacionError(arrayErrores.join("<br/>"), '¡ERROR EN EL PROCESO!')
+      } else {
+        this.MostrarNotificacionError("", '¡ERROR EN EL PROCESO!')
+      }
+    }
+    else {
+      this.MostrarNotificacionError(e, '¡ERROR EN EL PROCESO!');
+    }
   }
 }

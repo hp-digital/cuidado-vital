@@ -66,8 +66,8 @@
                         <th>Acciones</th>
                     </thead>
                     <tbody id="table-body">
-                        <tr *ngFor="let lista of listadoPacienteBusqueda">
-                            <td></td>
+                        <tr *ngFor="let lista of listadoPacienteBusqueda;index as s">
+                            <td>{{s + 1 }}</td>
                             <td>{{lista.fechaCreacion  | date: 'dd/MM/yyyy'}}</td>
                             <td>{{lista.numeroDocumento}}</td>
                             <td>{{lista.paciente}}</td>
@@ -78,7 +78,7 @@
                             <td>{{lista.parentesco}}</td>
                             <td>
                                 <button type="button" class="btn btn-green-custom btn-sm" data-class="btnEdit" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Modificar cita" aria-label="Modificar cita" (click)="nuevoPaciente()"><i class="fas fa-lg fa-pencil-alt"></i></button>
-                                <button type="button" class="btn btn-warning-custom btn-sm" data-class="btnServicio" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Registrar Servicio" aria-label="Registrar Servicio" (click)="registroAtencion()"><i class="fas fa-lg fa-money-bill-alt"></i></button>
+                                <button type="button" class="btn btn-warning-custom btn-sm" data-class="btnServicio" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Registrar Servicio" aria-label="Registrar Servicio" (click)="registroAtencion(lista.id, lista.paciente, lista.numeroDocumento)"><i class="fas fa-lg fa-money-bill-alt"></i></button>
                                 <button type="button" class="btn btn-danger btn-sm" data-class="btnCancelar" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Cancelar cita" aria-label="Cancelar cita"><i class="fas fa-lg fa-times"></i></button>
                             </td>
                         </tr>

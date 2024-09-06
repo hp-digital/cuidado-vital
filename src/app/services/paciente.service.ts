@@ -68,7 +68,7 @@ export class PacienteService {
   }
 
   ObtenerPacienteConsulta(criterioBusqueda: string) {
-    return this.http.get<ListadoBusquedaPacienteDTO[]>(`${API_URL}Servicio/ObtenerPorMultipleConsulta?${criterioBusqueda}`);
+    return this.http.get<ListadoBusquedaPacienteDTO[]>(`${API_URL}Paciente/ObtenerListadoPacienteBusqueda?${criterioBusqueda}`);
   }
 
   ObtenerDepartamentos(id: number): ComboDTO[] {
