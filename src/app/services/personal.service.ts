@@ -5,14 +5,15 @@ import { environment } from '../../environments/environment';
 import { MedicoDTO } from '@models/MedicoDTO';
 import { ListadoMedicoDTO } from '../models/ListadoMedicoDTO';
 import { catchError, retry,timeout } from 'rxjs/operators';
+import { ListadoBusquedaMedicoDTO } from '@models/ListadoBusquedaMedicoDTO';
 
 const API_URL = environment.apiUrl;
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonalService {
-
+export class PersonalService {  
+  
   public nTimeout: number = 20000;
   public nRetry: number = 0;
 
@@ -32,7 +33,7 @@ export class PersonalService {
   constructor(private http: HttpClient) { }
 
   public Insertar(data: MedicoDTO){
-    const url = `${API_URL}Personal/Insertar`;
+    const url = `${API_URL}Personal/Registrar`;
     return  this.http.post(url, data, { headers: this.headers }).pipe(
       timeout(this.nTimeout),
       retry(this.nRetry), 
@@ -41,7 +42,7 @@ export class PersonalService {
   }
 
   public Modificar(data: MedicoDTO){
-    const url = `${API_URL}Paciente/Modificar`;
+    const url = `${API_URL}Personal/Modificar`;
     return  this.http.put(url, data, { headers: this.headers }).pipe(
       timeout(this.nTimeout),
       retry(this.nRetry), 
@@ -53,4 +54,13 @@ export class PersonalService {
     return this.http.get<ListadoMedicoDTO[]>(`${API_URL}Medico/ObtenerListado`)
   }
   
+  ObtenerDatosPersonalById(id: number) {
+    return this.http.get<MedicoDTO>(`${API_URL}Personal/ObtenerDatosPersonalById?idPersonal=${id}`);
+  }
+
+  ObtenerMedicosPorCriterio(criterioBusqueda: string) {
+    return this.http.get<ListadoBusquedaMedicoDTO[]>(`${API_URL}Personal/ObtenerListadoMedicoBusqueda?${criterioBusqueda}`);
+  }
+
+
 }

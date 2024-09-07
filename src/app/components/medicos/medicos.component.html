@@ -14,10 +14,10 @@
               <div class="col-xl-3">
                   <div class="form-group mb-3">
                       <label class="form-label mb-3" for="">Nro. documento</label>
-                      <input type="text" class="form-control" id=""/>
+                      <input type="text" class="form-control" id="" formControlName="inputNroDocumento"/>
                   </div>
               </div>
-              <div class="col-xl-3">
+              <div class="col-xl-4">
                   <div class="form-group mb-3">
                       <label class="form-label mb-3" for="">Apelllidos y Nombres</label>
                       <p-autoComplete
@@ -31,55 +31,55 @@
                   </div>
               </div>
               <div class="col-xl-3">
-                  <div class="form-group mb-3">
-                      <label class="form-label mb-3" for="">Fecha inicio</label>
-                      <p-calendar
-                        placeholder="dd/mm/aaaa"
-                        formControlName="inputFechaInicio"
-                        styleClass="w-full block"
-                        inputStyleClass="w-full"
-                        [iconDisplay]="'input'"
-                        [showIcon]="true"
-                        inputId="icondisplay" />
-                  </div>
-              </div>
-              <div class="col-xl-3">
-                  <div class="form-group mb-3">
-                      <label class="form-label mb-3" for="">Fecha fin</label>
-                      <p-calendar
-                        placeholder="dd/mm/aaaa"
-                        formControlName="inputFechaFin"
-                        styleClass="w-full block"
-                        inputStyleClass="w-full"
-                        [iconDisplay]="'input'"
-                        [showIcon]="true"
-                        inputId="icondisplay" />
-                  </div>
-              </div>
-          </div>
+                <div class="form-group mb-3">
+                    <label class="form-label mb-3" for="">Especialidad</label>
+                    <p-autoComplete
+                      formControlName="autocompleteEspecialidadMedica"
+                      styleClass="w-full"
+                      inputStyleClass="w-full"
+                      field="nombre"
+                      showClear="true"
+                      [suggestions]="filteredEspecialidad"
+                      (completeMethod)="searchEspecialidad($event)" />
+                </div>
+            </div>
+            <div class="col-xl-2">
+              <div class="mt-4 pt-3">
+                  <button type="button" class="btn btn-green-custom me-2" (click)="BuscarMedicosPorCriterio()">
+                      <i class="fas fa-lg fa-search"></i>
+                  </button>
+                  <button type="button" class="btn btn-green-custom me-2" (click)="LimpiarCriterios()">
+                      <i class="fas fa-lg fa-eraser"></i>
+                  </button>
+              </div>	
+            </div>              
+          </div>            
           <div class="row">
-              <div class="col-xl-3">
-                  <div class="form-group mb-3">
-                      <label class="form-label mb-3" for="">Especialidad</label>
-                      <p-autoComplete
-                        formControlName="autocompleteEspecialidadMedica"
-                        styleClass="w-full"
-                        inputStyleClass="w-full"
-                        field="nombre"
-                        showClear="true"
-                        [suggestions]="filteredEspecialidad"
-                        (completeMethod)="searchEspecialidad($event)" />
-                  </div>
-              </div>
-              <div class="col-xl-3">
-                <div class="mt-4 pt-3">
-                    <button type="button" class="btn btn-green-custom me-2" (click)="BuscarMedicosPorCriterio()">
-                        <i class="fas fa-lg fa-search"></i>
-                    </button>
-                    <button type="button" class="btn btn-green-custom me-2" (click)="LimpiarCriterios()">
-                        <i class="fas fa-lg fa-eraser"></i>
-                    </button>
-                </div>						
+            <div class="col-xl-3">
+                <div class="form-group mb-3">
+                    <label class="form-label mb-3" for="">Fecha inicio</label>
+                    <p-calendar
+                      placeholder="dd/mm/aaaa"
+                      formControlName="inputFechaInicio"
+                      styleClass="w-full block"
+                      inputStyleClass="w-full"
+                      [iconDisplay]="'input'"
+                      [showIcon]="true"
+                      inputId="icondisplay" />
+                </div>
+            </div>
+            <div class="col-xl-3">
+                <div class="form-group mb-3">
+                    <label class="form-label mb-3" for="">Fecha fin</label>
+                    <p-calendar
+                      placeholder="dd/mm/aaaa"
+                      formControlName="inputFechaFin"
+                      styleClass="w-full block"
+                      inputStyleClass="w-full"
+                      [iconDisplay]="'input'"
+                      [showIcon]="true"
+                      inputId="icondisplay" />
+                </div>
             </div>
           </div>
           <hr/>
@@ -96,7 +96,7 @@
                         <th>Acciones</th>
                     </thead>
                     <tbody id="table-body">
-                        <tr *ngFor="let lista of listaMedicos">
+                        <tr *ngFor="let lista of listadoMedicoBusqueda">
                             <td>{{lista.medico}}</td>
                             <td>{{lista.numeroDocumento}}</td>
                             <td>{{lista.celular}}</td>
@@ -107,7 +107,7 @@
                                 <td></td>
                                 <td>
                                     <button type="button" class="btn btn-green-custom btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Modificar" (click)="modificarMedico(lista.id)"><i class="fas fa-lg fa-pencil-alt"></i></button>&nbsp;&nbsp;
-                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Dar de baja" (click)="darBajaMedico(lista.id)"><i class="fas fa-lg fa-clock"></i></button>&nbsp;&nbsp;                            
+                                    <!-- <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Dar de baja" (click)="darBajaMedico(lista.id)"><i class="fas fa-lg fa-clock"></i></button>&nbsp;&nbsp;                             -->
                                 </td>
                             </ng-container>
                         </tr>

@@ -10,6 +10,10 @@ import { ComboDTO } from '@models/ComboDTO';
 import { MedicoDTO } from '@models/MedicoDTO';
 import { ListadoMedicoDTO } from '@models/ListadoMedicoDTO';
 import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
+import Swal from 'sweetalert2';
+import { CriterioBusquedaMedicoDTO } from '@models/CriterioBusquedaMedicoDTO';
+import moment from 'moment';
+import { ListadoBusquedaMedicoDTO } from '@models/ListadoBusquedaMedicoDTO';
 
 @Component({
   selector: 'app-medicos',
@@ -20,6 +24,7 @@ import { AutoCompleteCompleteEvent } from 'primeng/autocomplete';
 export default class MedicosComponent implements OnInit {
 
   listaMedicos: ListadoMedicoDTO[] = [];
+  listadoMedicoBusqueda: ListadoBusquedaMedicoDTO[]=[];
   autocompleteEspecialidadMedica: any;
   filteredEspecialidad: any[] = [];
   dataFormGroup: FormGroup;
@@ -28,6 +33,8 @@ export default class MedicosComponent implements OnInit {
   comboEspecialidades: ComboDTO[] = [];
   comboPersonalMedico: ListadoMedicoDTO[] = [];
   filteredMedico: any[] = [];
+  criterioBusqueda = new CriterioBusquedaMedicoDTO();
+  textoCriterioBusqueda: string = "";
 
   constructor(
     private modalRef: BsModalRef,
@@ -66,7 +73,7 @@ export default class MedicosComponent implements OnInit {
 
           this.comboPersonalMedico.forEach(element => {
             this.listaMedicos.push(element);
-            console.log('medicos: ', this.listaMedicos);
+            // console.log('medicos: ', this.listaMedicos);
           });
 
           this.verSpinner = false;
@@ -83,11 +90,66 @@ export default class MedicosComponent implements OnInit {
   }
 
   LimpiarCriterios() {
-    throw new Error('Method not implemented.');
+    this.dataFormGroup.reset();
   }
+
   BuscarMedicosPorCriterio() {
-    throw new Error('Method not implemented.');
+    this.criterioBusqueda = new CriterioBusquedaMedicoDTO();
+    this.textoCriterioBusqueda = "";
+
+    let numeroDocumento = this.dataFormGroup.controls['inputNroDocumento'].value;
+    let idPersonal = this.dataFormGroup.controls['autocompleteNombreMedico'].value;
+    let idEspecialidadMedica = this.dataFormGroup.controls['autocompleteEspecialidadMedica'].value;
+    let fechaInicio = this.dataFormGroup.controls['inputFechaInicio'].value;
+    let fechaFin = this.dataFormGroup.controls['inputFechaFin'].value;
+
+    if (numeroDocumento != '' && numeroDocumento != null) {
+      this.criterioBusqueda.numeroDocumento = numeroDocumento;
+    }
+    if (idPersonal != '' && idPersonal != null) {
+      this.criterioBusqueda.idPersonal = idPersonal;
+    }
+    if (idEspecialidadMedica != '' && idEspecialidadMedica != null) {
+      this.criterioBusqueda.idEspecialidadMedica = idEspecialidadMedica;
+    }
+    if (fechaInicio != '' && fechaInicio != null)
+      this.criterioBusqueda.fechaInicio = moment(fechaInicio).format('YYYY-MM-DD');
+
+    if (fechaFin != '' && fechaFin != null)
+      this.criterioBusqueda.fechaFin = moment(fechaFin).format('YYYY-MM-DD');
+
+    new Map(Object.entries(this.criterioBusqueda)).forEach((value, key, map) => {
+      this.textoCriterioBusqueda += `${key}=${value}&`
+    });
+
+    this.textoCriterioBusqueda = this.textoCriterioBusqueda.substring(0, this.textoCriterioBusqueda.length - 1);
+  
+    if (this.textoCriterioBusqueda != "" && this.dataFormGroup.valid) {
+      this.verSpinner = true;
+      this.personalService.ObtenerMedicosPorCriterio(this.textoCriterioBusqueda)
+        .subscribe({
+          next: (data) => {
+            if (data.length > 0) {
+              this.listadoMedicoBusqueda = data;
+              console.log('Listado medicos busqueda:', data);
+              
+            }
+            else {
+              this.MostrarNotificacionWarning('Intente con otros criterios de búsqueda.', '¡No se encontró información!');
+            }
+          },
+          error: (e) => {
+            this.MostrarNotificacionError('Por favor intente de nuevo.', '¡Hubo un error en la búsqueda!');
+            this.verSpinner = false;
+          },
+          complete: () => { this.verSpinner = false; }
+        });
+    }
+    else {
+      this.MostrarNotificacionError('Debe ingresar por lo menos 1 criterio de búsqueda.', '¡Error en la búsqueda!');
+    }
   }
+
   darBajaMedico(arg0: any) {
     throw new Error('Method not implemented.');
   }
@@ -111,9 +173,9 @@ export default class MedicosComponent implements OnInit {
         filtered.push(e);
       }
     }
-
     this.filteredEspecialidad = filtered;
   }
+
   searchMedicoxNombre(event: AutoCompleteCompleteEvent) {
     let filtered: any[] = [];
     let query = event.query;
@@ -124,6 +186,28 @@ export default class MedicosComponent implements OnInit {
       }
     }
     this.filteredMedico = filtered;
+  }
+
+  MostrarNotificacionError(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'error',
+      title: titulo,
+      html: `<div class="message-text-error">${mensaje} </div>`,
+    });
+  }
+  MostrarNotificacionInfo(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'info',
+      title: titulo,
+      text: mensaje
+    });
+  }
+  MostrarNotificacionWarning(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'warning',
+      title: titulo,
+      text: mensaje
+    });
   }
 
 

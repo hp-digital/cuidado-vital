@@ -63,6 +63,7 @@ interface AutoCompleteCompleteEvent {
 
 export class RegistroMedicoComponent implements OnInit {
 
+  public onGuardar: any;
   inputFechaNacimiento: Date | undefined;
   autocompleteEspecialidadMedica: any;
   filteredEspecialidad: any[] = [];
@@ -107,7 +108,7 @@ export class RegistroMedicoComponent implements OnInit {
       inputSexo: new FormControl('', [Validators.required]),
       inputDireccion: new FormControl('', [Validators.required]),
       inputCorreoElectronico: new FormControl(),
-      inputCMP: new FormControl('',[Validators.required]),
+      inputCMP: new FormControl('', [Validators.required]),
       inputRNE: new FormControl('', [Validators.required]),
       autocompleteEspecialidadMedica: new FormControl(),
       selectPaisDireccion: new FormControl('', [Validators.required]),
@@ -142,7 +143,7 @@ export class RegistroMedicoComponent implements OnInit {
           this.listaDepartamento = JSON.parse(localStorage.getItem('Departamento')!);
           this.listaProvincia = JSON.parse(localStorage.getItem('Provincia')!);
           this.listaDistrito = JSON.parse(localStorage.getItem('Distrito')!);
-          
+          this.ObtenerDatos();
         },
         err => {
           console.log(err);
@@ -282,7 +283,6 @@ export class RegistroMedicoComponent implements OnInit {
     this.comboDistrito = [];
     let idPais = this.dataFormGroup.controls['selectPaisDireccion'].value;
     this.comboDepartamento = this.pacienteService.ObtenerDepartamentos(idPais);
-    console.log('dptos: ', this.comboDepartamento);
   }
   ListarProvincias() {
     this.comboProvincia = [];
@@ -300,7 +300,6 @@ export class RegistroMedicoComponent implements OnInit {
     let fecha = "";
     fecha = this.dataFormGroup.controls['inputFechaNacimiento'].value;
     this.CalcularEdadPaciente(new Date(fecha).toISOString());
-    console.log('fecha: ', fecha);
   }
 
   CalcularEdadPaciente(fechaNacimiento: string) {
@@ -323,8 +322,6 @@ export class RegistroMedicoComponent implements OnInit {
         break;
       }
     }
-    console.log('invalid: ', invalid);
-    
     return invalid;
   }
 
@@ -339,7 +336,6 @@ export class RegistroMedicoComponent implements OnInit {
     for (let c in this.dataFormGroup.controls) {
       this.dataFormGroup.controls[c].markAsTouched();
     }
-    console.log('form: ', this.dataFormGroup);
     if (this.dataFormGroup.valid) {
       this.AsignarValoresAObjeto();
       if (this.idMedico != 0) {
@@ -370,8 +366,8 @@ export class RegistroMedicoComponent implements OnInit {
     this.objMedico.Celular = numeroCelular;
     this.objMedico.Email = (this.dataFormGroup.controls['inputCorreoElectronico'].value != '' ? this.dataFormGroup.controls['inputCorreoElectronico'].value : ValoresDefectoCamposEnum.Email);
     this.objMedico.Direccion = this.dataFormGroup.controls['inputDireccion'].value;
-    this.objMedico.NroColegiatura = this.dataFormGroup.controls['inputDireccion'].value;
-    this.objMedico.Rne = this.dataFormGroup.controls['inputDireccion'].value;
+    this.objMedico.NroColegiatura = this.dataFormGroup.controls['inputCMP'].value;
+    this.objMedico.Rne = this.dataFormGroup.controls['inputRNE'].value;
     this.objMedico.Estado = true;
 
     if (this.idMedico == 0) {
@@ -399,27 +395,23 @@ export class RegistroMedicoComponent implements OnInit {
   }
 
   Modificar() {
-    /* this.verSpinner = true;
+    this.verSpinner = true;
     this.personalService.Modificar(this.objMedico)
       .subscribe({
         next: (data: any) => {
-          if(data!=false){
+          if (data != false) {
             let id: any = data;
-            this.idPaciente = id;
-            this.MostrarNotificacionSuccess('El proceso se realizó con éxito.', '');
-            this.bsModalRef.content.onGuardar = () => { };            
+            this.idMedico = id;
+            this.MostrarNotificacionSuccessModal('El proceso se realizó con éxito.', '');
+            this.bsModalRef.content.onGuardar = () => { };
           }
-          else{            
-            this.sinAperturaCaja  = true;
-            this.MostrarNotificacionError('Debe aperturar una caja para continuar.','¡Apertura de caja no valida!');
-          } 
-          },
+        },
         error: (e: any) => {
           this.verSpinner = false;
           this.manejadorMensajeErroresGuardar(e);
         },
         complete: () => { this.verSpinner = false; }
-      }); */
+      });
   }
 
   Insertar() {
@@ -434,10 +426,6 @@ export class RegistroMedicoComponent implements OnInit {
             this.bsModalRef.content.onGuardar = () => { };
 
           }
-          // else {
-          //   this.sinAperturaCaja = true;
-          //   this.MostrarNotificacionError('Debe aperturar una caja para continuar.', '¡Apertura de caja no valida!');
-          // }
         },
         error: (e) => {
           this.verSpinner = false;
@@ -474,9 +462,51 @@ export class RegistroMedicoComponent implements OnInit {
     return this.dataFormGroup.controls;
   }
 
-  AsignarIdMedico(id:number){
-    this.idMedico=id;
+  AsignarIdMedico(id: number) {
+    this.idMedico = id;
     this.CargarDataInicio();
+    // this.dataFormGroup.controls['selectEstadoCita'].setValue(idEstadoCita);    
+
+  }
+
+  ObtenerDatos() {
+    this.personalService.ObtenerDatosPersonalById(this.idMedico).subscribe({
+      next: (data) => {
+        console.log('data: ', data);
+        let personal: any = data;
+
+        if (data != null || data != undefined) {
+          this.dataFormGroup.controls['selectTipoDocumento'].setValue(personal.idTipoDocumento);
+          this.dataFormGroup.controls['inputNroDocumento'].setValue(personal.numeroDocumento);
+          this.dataFormGroup.controls['inputApellidoPaterno'].setValue(personal.apellidoPaterno);
+          this.dataFormGroup.controls['inputApellidoMaterno'].setValue(personal.apellidoMaterno);
+          this.dataFormGroup.controls['inputNombres'].setValue(personal.nombres);
+          this.dataFormGroup.controls['inputSexo'].setValue(personal.idSexo);
+          this.dataFormGroup.controls['inputTelefonoCelular'].setValue(personal.celular);
+          this.dataFormGroup.controls['inputDireccion'].setValue(personal.direccion);
+          this.dataFormGroup.controls['inputCorreoElectronico'].setValue(personal.email);
+          this.dataFormGroup.controls['inputCMP'].setValue(personal.nroColegiatura);
+          this.dataFormGroup.controls['inputRNE'].setValue(personal.rne);
+
+          this.dataFormGroup.controls['inputFechaNacimiento'].setValue(new Date(personal.fechaNacimiento));
+          this.CalcularEdadPaciente(personal.fechaNacimiento);
+          this.dataFormGroup.controls['selectPaisDireccion'].setValue(personal.idPais);
+          this.ListarDepartamentos();
+          this.dataFormGroup.controls['selectDepartamentoDireccion'].setValue(personal.idDepartamento);
+          this.ListarProvincias();
+          this.dataFormGroup.controls['selectProvinciaDireccion'].setValue(personal.idProvincia);
+          this.ListarDistritos();
+          this.dataFormGroup.controls['selectDistritoDireccion'].setValue(personal.idDistrito);
+          this.fechaCreacion=personal.fechaCreacion;
+        } else {
+          return;
+        }
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => { }
+    });
   }
 
   /* ObtenerConfiguracion(){
