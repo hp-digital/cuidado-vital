@@ -1,1 +1,110 @@
-<p>dashboard works!</p>
+<form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
+    <div class="row">    <!--DASHBOARD PACIENTE-->
+        <div class="col-xl-3">
+                <!-- BEGIN card -->
+                <div class="card mb-3">
+                    <!-- BEGIN card-body -->
+                    <div class="card-body">
+                        <div class="d-flex mb-3">
+                            <div class="flex-grow-1">
+                                <div class="row">
+                                </div>
+                            </div>                        
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <h2>Saturación de Oxígeno</h2>
+                            </div>
+                            <hr/>
+                            <div class="col-xl-12 text-center">
+                                <div>
+                                    <img src="./assets/img/pulmones.gif" class="img-fit"/>
+                                  <!--   <button (click)="login()">Iniciar sesión con Google</button>
+                                    <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button> -->
+                                    
+                                    <div *ngIf="oxygenSaturation">
+                                        <h1> {{ oxygenSaturation }}</h1>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END card-body -->
+                </div>
+                <!-- END card --> 
+        </div> 
+        <div class="col-xl-3">
+            <!-- BEGIN card -->
+            <div class="card mb-3">
+                <!-- BEGIN card-body -->
+                <div class="card-body">
+                    <div class="d-flex mb-3">
+                        <div class="flex-grow-1">
+                            <div class="row">
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h2>Frecuencia Cardíaca</h2>
+                        </div>
+                        <hr/>
+                        <div class="col-xl-12 text-center">
+                            <div>
+                                <img src="./assets/img/hearth.gif" class="img-fit"/>
+                                <button (click)="login()">Iniciar sesión con Google</button>
+                                <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button>
+                                
+                                <div *ngIf="heartRate">
+                                    <h1> {{ heartRate }} bpm</h1>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END card-body -->
+            </div>
+            <!-- END card --> 
+        </div>   
+        <div class="col-xl-3">
+            <!-- BEGIN card -->
+            <div class="card mb-3">
+                <!-- BEGIN card-body -->
+                <div class="card-body">
+                    <div class="d-flex mb-3">
+                        <div class="flex-grow-1">
+                            <div class="row">
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h2>Presión Arterial</h2>
+                        </div>
+                        <hr/>
+                        <div class="col-xl-12 text-center">
+                            <div>
+                                <img src="./assets/img/presion-arterial.gif" class="img-fit"/>
+                                <!-- <button (click)="login()">Iniciar sesión con Google</button>
+                                <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button> -->
+                                
+                                <div *ngIf="systolic">
+                                    <h1> Sistólica {{ systolic }} </h1>
+                                    <h1> Diastólica {{diastolic}} </h1>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END card-body -->
+            </div>
+            <!-- END card --> 
+    </div> 
+    </div>
+    <div class="row">    <!--DASHBOARD MEDICO-->
+            
+    </div>
+    <div class="row">    <!--DASHBOARD ADMIN-->
+           
+    </div>
+    </form>
