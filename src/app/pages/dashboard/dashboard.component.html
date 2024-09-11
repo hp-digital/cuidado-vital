@@ -1,49 +1,6 @@
 <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
     <div class="row">    <!--DASHBOARD PACIENTE-->
         <div class="col-xl-3">
-            <!-- BEGIN card -->
-            <div class="card mb-3">
-                <!-- BEGIN card-body -->
-                <div class="card-body">
-                    <div class="d-flex mb-3">
-                        <!-- <div class="flex-grow-1">
-                            <div class="row">
-                                <div class="col-xl-6">
-                                    <div class="form-group mb-3">                                        
-                                        <input type="date" formControlName="inputFechasEstadoCitas">
-                                    </div>
-                                </div>
-                                <div class="col-xl-6">
-                                    <div class="form-group mb-3 mt-1">
-                                        <button type="button" class="btn btn-green-light-custom me-2"  data-bs-toggle="tooltip" data-bs-placement="top" title="Hoy">
-                                            <i class="fas fa-lg fa-calendar"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-green-light-custom me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Mes actual">
-                                            <i class="fas fa-lg fa-calendar-check"></i>
-                                        </button>
-                                        <button type="button" class="btn btn-green-light-custom me-2"  data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar fechas">
-                                            <i class="fas fa-lg fa-eraser"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>    -->                                    
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div style="text-align:center">
-                                <h1>Google Fit Data</h1>
-                                <button (click)="login()">Login with Google</button>
-                                <div *ngIf="heartRate">Frecuencia Cardíaca: {{ heartRate }} bpm</div>
-                              </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- END card-body -->
-            </div>
-            <!-- END card --> 
-        </div>
-        <div class="col-xl-3">
                 <!-- BEGIN card -->
                 <div class="card mb-3">
                     <!-- BEGIN card-body -->
@@ -51,40 +8,22 @@
                         <div class="d-flex mb-3">
                             <div class="flex-grow-1">
                                 <div class="row">
-                                    <!-- <div class="col-xl-6">
-                                        <div class="form-group mb-3">                                        
-                                            <input type="date" formControlName="inputFechasTipoSeguro">
-                                        </div>
-                                    </div>
-                                    <div class="col-xl-6">
-                                        <div class="form-group mb-3 mt-1">
-                                            <button type="button" class="btn btn-green-light-custom me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Hoy">
-                                                <i class="fas fa-lg fa-calendar"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-green-light-custom me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Mes actual">
-                                                <i class="fas fa-lg fa-calendar-check"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-green-light-custom me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Limpiar fechas" >
-                                                <i class="fas fa-lg fa-eraser"></i>
-                                            </button>
-                                        </div>
-                                    </div> -->
                                 </div>
                             </div>                        
                         </div>
                         <div class="row">
                             <div class="col-xl-12">
-                                <h2>Frecuencia Cardíaca</h2>
+                                <h2>Saturación de Oxígeno</h2>
                             </div>
                             <hr/>
                             <div class="col-xl-12 text-center">
                                 <div>
-                                    <img src="./assets/img/hearth.gif" class="img-fit"/>
-                                    <button (click)="login()">Iniciar sesión con Google</button>
-                                    <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button>
+                                    <img src="./assets/pulmones.gif" class="img-fit"/>
+                                  <!--   <button (click)="login()">Iniciar sesión con Google</button>
+                                    <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button> -->
                                     
-                                    <div *ngIf="heartRate">
-                                        <h1> {{ heartRate }} bpm</h1>
+                                    <div *ngIf="oxygenSaturation">
+                                        <h1> {{ oxygenSaturation }}</h1>
                                     </div>
                                   </div>
                             </div>
@@ -93,6 +32,79 @@
                     <!-- END card-body -->
                 </div>
                 <!-- END card --> 
-        </div>    
+        </div> 
+        <div class="col-xl-3">
+            <!-- BEGIN card -->
+            <div class="card mb-3">
+                <!-- BEGIN card-body -->
+                <div class="card-body">
+                    <div class="d-flex mb-3">
+                        <div class="flex-grow-1">
+                            <div class="row">
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h2>Frecuencia Cardíaca</h2>
+                        </div>
+                        <hr/>
+                        <div class="col-xl-12 text-center">
+                            <div>
+                                <img src="./assets/img/hearth.gif" class="img-fit"/>
+                                <button (click)="login()">Iniciar sesión con Google</button>
+                                <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button>
+                                
+                                <div *ngIf="heartRate">
+                                    <h1> {{ heartRate }} bpm</h1>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END card-body -->
+            </div>
+            <!-- END card --> 
+        </div>   
+        <div class="col-xl-3">
+            <!-- BEGIN card -->
+            <div class="card mb-3">
+                <!-- BEGIN card-body -->
+                <div class="card-body">
+                    <div class="d-flex mb-3">
+                        <div class="flex-grow-1">
+                            <div class="row">
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h2>Presión Arterial</h2>
+                        </div>
+                        <hr/>
+                        <div class="col-xl-12 text-center">
+                            <div>
+                                <img src="./assets/img/presion-arterial.gif" class="img-fit"/>
+                                <!-- <button (click)="login()">Iniciar sesión con Google</button>
+                                <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button> -->
+                                
+                                <div *ngIf="systolic">
+                                    <h1> Sistólica {{ systolic }} </h1>
+                                    <h1> Diastólica {{diastolic}} </h1>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- END card-body -->
+            </div>
+            <!-- END card --> 
+    </div> 
+    </div>
+    <div class="row">    <!--DASHBOARD PACIENTE-->
+            
+    </div>
+    <div class="row">    <!--DASHBOARD PACIENTE-->
+           
     </div>
     </form>
