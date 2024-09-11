@@ -1,0 +1,503 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">CONTROL DE GLUCOSA</h4>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> -->
+    </div>
+    <div class="modal-body">
+        <form>
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nombre Paciente : </label> <span>Paciente Prueba Validaciones</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Tipo de Diabetes*</label>
+                            <input type="text" class="form-control" id="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Fecha de diagnostico*</label>
+                            <input type="date" class="form-control" id="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div id="seccion-complicaciones">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Complicaciones*</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Grado</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">Leve</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">Moderada</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">Perdida de Conocimiento</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Retinopatìa</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Nefropatìa</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Amputacìon</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Diàlisis</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Ceguera</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Vaculopatìa P.</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Transplante Renal</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Hipertrofia Vent.</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Insuf. Cardìaca</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h6>Medidas Antropométricas*</h6>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <!-- <label class="cform-label">Medidas Antropométricas*</label> -->
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="cform-label">Peso (kg)</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                                <div class="col-4">
+                                    <label class="cform-label">Talla</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                                <div class="col-4">
+                                    <label class="cform-label">IMC</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                                <div class="col-6">
+                                    <label class="cform-label">Perimetro Abdomial (cm)</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                                <div class="col-6">
+                                    <label class="cform-label">Presiòn Artetial</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h6>Valores de Examenes</h6>
+                <div class="row">
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-xl-3">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="cform-label">T(Cº)</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="form-group mb-3">
+                                    <label class="cform-label">FC(min)</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">PA (Sistólica/diastólica) (mmHg)</label>
+                            <div class="btn-group">
+                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" id="" readonly="" placeholder="/"
+                                    style="width: 33px;">
+                                <input type="text" class="form-control" id="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Sat. O2(%)</label>
+                            <input type="text" class="form-control" id="">
+                        </div>
+                    </div>
+
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">FR (x min)</label>
+                            <input type="text" class="form-control" id="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="seccion-soapie">
+                <div class="row mb-3 bg-green-custom" a="">2. SOAPIE</div>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="form-group mb-3">
+                            <label class="cform-label" for="">Subjetivos</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="form-group mb-3">
+                            <label class="cform-label" for="">Objetivos</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <h6>INTERVENCIONES</h6>
+                <div class="row">
+                    <div class="col-xl-11">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Medicación</label>
+                            <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                        </div>
+                    </div>
+                    <div class="col-xl-1">
+                        <div class="form-group mb-3 mt-4 pt-1">
+                            <button type="button" class="btn btn-green-custom"><i
+                                    class="fas fa-lg fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">Medicamento 001</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <br>
+                <hr />
+                <div class="row">
+                    <div class="col-xl-11">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Procedimiento</label>
+                            <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                        </div>
+                    </div>
+                    <div class="col-xl-1">
+                        <div class="form-group mb-3 mt-4 pt-1">
+                            <button type="button" class="btn btn-green-custom"><i
+                                    class="fas fa-lg fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">Procedimiento 001</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <br>
+                <hr />
+                <div class="row">
+                    <div class="col-xl-4 mt-1">
+                        <h6> DIAGNÓSTICO DE ENFERMERIA</h6>
+                    </div>
+                    <div class="col-xl-8 text-right">
+                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                    </div>
+                </div>
+                <br>
+                <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">DIAGNÓSTICO DE ENFERMERIA 001</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <br>
+                <hr />
+                <div class="row">
+                    <div class="col-xl-4 mt-1">
+                        <h6>PLANTEAMIENTO</h6>
+                    </div>
+                    <div class="col-xl-8 text-right">
+                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                    </div>
+                </div>
+                <br>
+                <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">PLANTEAMIENTO 001</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <hr />
+                <h6>OCURRENCIAS</h6>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Hora</label>
+                            <input type="text" class="form-control" id="">
+                        </div>
+                    </div>
+                    <div class="col-xl-7">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Descripción</label>
+                            <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                        </div>
+                    </div>
+                    <div class="col-xl-1">
+                        <div class="form-group mb-3 mt-4 pt-1">
+                            <button type="button" class="btn btn-green-custom"><i
+                                    class="fas fa-lg fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">OCURRENCIAS 001</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <br>
+                <hr />
+                <h6>PENDIENTES</h6>
+                <div class="row">
+                    <div class="col-xl-11">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">&nbsp;</label>
+                            <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                        </div>
+                    </div>
+                    <div class="col-xl-1">
+                        <div class="form-group mb-3 mt-4 pt-1">
+                            <button type="button" class="btn btn-green-custom"><i
+                                    class="fas fa-lg fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">PENDIENTES 001</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <br>
+                <hr />
+                <h6>EVALUACIÓN</h6>
+                <div class="row">
+                    <div class="col-xl-11">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">&nbsp;</label>
+                            <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                        </div>
+                    </div>
+                    <div class="col-xl-1">
+                        <div class="form-group mb-3 mt-4 pt-1">
+                            <button type="button" class="btn btn-green-custom"><i
+                                    class="fas fa-lg fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">EVALUACIÓN 001</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <br>
+                <hr />
+                <h6>EGRESOS</h6>
+                <div class="row">
+                    <div class="col-xl-11">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Diuresis</label>
+                            <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                        </div>
+                    </div>
+                    <div class="col-xl-1">
+                        <div class="form-group mb-3 mt-4 pt-1">
+                            <button type="button" class="btn btn-green-custom"><i
+                                    class="fas fa-lg fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">diuresis 001</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <br>
+                <hr />
+                <div class="row">
+                    <div class="col-xl-11">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Deposición</label>
+                            <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                        </div>
+                    </div>
+                    <div class="col-xl-1">
+                        <div class="form-group mb-3 mt-4 pt-1">
+                            <button type="button" class="btn btn-green-custom"><i
+                                    class="fas fa-lg fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">Deposición 001</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <br>
+                <div class="row box-shadow">
+                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
+                    <div class="col-xl-10">Deposición 002</div>
+                    <div class="col-xl-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal"><i
+                class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button>
+        <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button> -->
+    </div>
+</div>
