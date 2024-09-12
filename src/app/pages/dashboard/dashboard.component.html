@@ -1,5 +1,5 @@
 <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
-    <div class="row">    <!--DASHBOARD PACIENTE-->
+    <div class="row" *ngIf="idRol==3">    <!--DASHBOARD PACIENTE-->
         <div class="col-xl-3">
                 <!-- BEGIN card -->
                 <div class="card mb-3">
@@ -101,10 +101,10 @@
             <!-- END card --> 
     </div> 
     </div>
-    <div class="row">    <!--DASHBOARD MEDICO-->
-            
+    <div class="row" *ngIf="idRol==1">    <!--DASHBOARD MEDICO-->
+            <h2>DASHBOARD MEDICO</h2>
     </div>
-    <div class="row">    <!--DASHBOARD ADMIN-->
-           
+    <div class="row" *ngIf="idRol==4">    <!--DASHBOARD ADMIN-->
+           <h2>DASHBOARD ADMIN</h2>
     </div>
     </form>

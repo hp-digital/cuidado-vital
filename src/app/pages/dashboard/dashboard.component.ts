@@ -7,6 +7,7 @@ import { PacienteService } from '../../services/paciente.service';
 import { CommonModule } from '@angular/common';
 import { BluetoothService } from '../../services/bluetooth.service';
 import { authConfig } from '../../auth/auth-config';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export default class DashboardComponent implements OnInit {
 
   dataFormGroup: FormGroup;
   verSpinner:boolean = false;
-
+  idRol: number=0;
   heartRate: number | null = null;
   oxygenSaturation: number | null = null;
   systolic: number | null = null; // Presión sistólica
@@ -31,7 +32,8 @@ export default class DashboardComponent implements OnInit {
     private pacienteService:PacienteService,
     private bluetoothService: BluetoothService,
     private oauthService: OAuthService, 
-    private http: HttpClient
+    private http: HttpClient,
+    private settings: SettingsService
   ){
     this.dataFormGroup = new FormGroup({
       inputFechasEstadoCitas: new FormControl(''),
@@ -43,7 +45,7 @@ export default class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.ObtenerConfiguracion();
     this.configure();
-    
+    this.idRol=this.settings.getUserSetting('idRol');
   }
   ObtenerConfiguracion(){                     
       forkJoin([        
