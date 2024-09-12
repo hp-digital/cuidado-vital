@@ -1,1 +1,108 @@
-<p>control-epoc works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">CONTROL DE EPOC</h4>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> -->
+    </div>
+    <div class="modal-body">
+        <form>
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nombre Paciente : </label> <span> Paciente Prueba Validaciones</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div id="content-section">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="cform-label">Tipo de EPOC*</label>
+                            <select name="" id="" class="form-control">
+                                <option value="" selected disabled>SELECCIONA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label class="cform-label">Fase de EPOC* </label>
+                            <select name="" id="" class="form-control">
+                                <option value="" selected disabled>SELECCIONA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Fecha de diagnostico*</label>
+                            <input type="date" class="form-control" id="">
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-4">
+                                <label class="cform-label">Alcohol</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="" selected disabled>SELECCIONA</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label class="cform-label">Drogas</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="" selected disabled>SELECCIONA</option>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label class="cform-label">Tabaco</label>
+                                <select name="" id="" class="form-control">
+                                    <option value="" selected disabled>SELECCIONA</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Sintomas Respiratorios*</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="rad-dependencia" type="radio" id=""
+                                    value="option1" checked>
+                                <label class="form-check-label" for="">Normal</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="rad-dependencia" type="radio" id=""
+                                    value="option1">
+                                <label class="form-check-label" for="">Alterado</label>
+                            </div>
+                        </div>
+                        <textarea name="" id="" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <h6>Evaluacion Funcional</h6>
+                        <textarea name="" id="" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mt-3">
+                        <h6>Plan de Trabajo</h6>
+                        <textarea name="" id="" class="form-control"></textarea>
+                    </div>
+                </div>
+                
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal"><i
+                class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button> -->
+        <!-- <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button> -->
+    </div>
+</div>
