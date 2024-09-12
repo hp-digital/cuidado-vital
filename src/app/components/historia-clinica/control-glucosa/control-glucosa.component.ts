@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-control-glucosa',
@@ -7,6 +8,19 @@ import { Component } from '@angular/core';
   templateUrl: './control-glucosa.component.html',
   styleUrl: './control-glucosa.component.css'
 })
-export class ControlGlucosaComponent {
+export class ControlGlucosaComponent implements OnInit {
+  constructor(
+    private bsModalControlGlucosa: BsModalRef
+  ) {
+  }
+
+  ngOnInit(): void {
+    
+  }
+
+  CerrarModal() {
+    this.bsModalControlGlucosa.hide();
+    //this.onGuardar();
+  }
 
 }

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-control-general',
@@ -7,6 +8,18 @@ import { Component } from '@angular/core';
   templateUrl: './control-general.component.html',
   styleUrl: './control-general.component.css'
 })
-export class ControlGeneralComponent {
+export class ControlGeneralComponent implements OnInit {
+  constructor(
+    private bsModalControlGeneral: BsModalRef
+  ) {
+  }
 
+  ngOnInit(): void {
+    
+  }
+
+  CerrarModal() {
+    this.bsModalControlGeneral.hide();
+    //this.onGuardar();
+  }
 }
