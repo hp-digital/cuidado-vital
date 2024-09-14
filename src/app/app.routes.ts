@@ -28,6 +28,11 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path:'convenio',
+                loadComponent:() => import('./components/convenio/convenio.component'),
+                canActivate: [AuthGuard]
+            },
+            {
                 path:'',
                 redirectTo:'dashboard',
                 pathMatch:'full',
