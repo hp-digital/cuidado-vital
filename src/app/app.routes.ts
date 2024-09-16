@@ -29,7 +29,13 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
-                path:'medicos',component: MedicosComponent
+                path:'medicos',component: MedicosComponent,
+                canActivate: [AuthGuard]
+            },
+            {
+                path:'convenio',
+                loadComponent:() => import('./components/convenio/convenio.component'),
+                canActivate: [AuthGuard]
             },
             {
                 path:'',
