@@ -6,7 +6,19 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
   standalone: true,
   imports: [],
   templateUrl: './control-general.component.html',
-  styleUrl: './control-general.component.css'
+  styles: [`
+    :host ::ng-deep ul{
+        padding-left:0 !important;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    :host ::ng-deep th{
+      border: none;
+    }
+    :host ::ng-deep .p-autocomplete-multiple-container{
+      width:100% 
+    }
+`],
 })
 export class ControlGeneralComponent implements OnInit {
   constructor(
