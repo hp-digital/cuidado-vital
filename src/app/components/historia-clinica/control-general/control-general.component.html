@@ -4,22 +4,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
-        <form>
+        <form [formGroup]="dataFormGroup">
             <div id="header-component">
                 <div class="row">
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Nombre Paciente : </label> <span> Paciente Prueba Validaciones</span>
+                            <label class="fw-bold">Nombre Paciente : </label> <span> {{paciente}}</span>
                         </div>
                     </div>
                     <div class="col-xl-3 col-6">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Edad:</label><span> 22 años</span>
+                            <label class="fw-bold">Nro HCL: </label><span> {{nroHcl}}</span>
                         </div>
                     </div>
                     <div class="col-xl-3 col-6">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Sexo:</label><span> Femenino</span>
+                            <label class="fw-bold">Medico: </label><span>{{medico}}</span>
                         </div>
                     </div>
                 </div>
@@ -31,7 +31,7 @@
                     <div class="col-12">
                         <div class="form-group mb-3">
                             <label class="cform-label">Alergias</label>
-                        <input type="text" class="form-control mt-2" style="background-color: rgba(239, 177, 177, 1); border-radius: 15px; box-shadow: inset 0 4px 8px 1px rgb(0, 0,0, 0.5);">
+                        <input type="text" class="form-control mt-2" formControlName="inputAlergias" style="background-color: rgba(239, 177, 177, 1); border-radius: 15px; box-shadow: inset 0 4px 8px 1px rgb(0, 0,0, 0.5);">
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                         <h6>Escala de Katz*</h6>
                         
                         
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEscalaKatz"></textarea>
                     </div>
                 </div>
 
@@ -51,35 +51,35 @@
                         <div class="row">
                             <div class="col-4">
                                 <label class="cform-label">T (Cº)</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" formControlName="inputTemperatura">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">FC (min)</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" formControlName="inputFrecuenciaCardiaca">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">FR (x min)</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" formControlName="inputFrecuenciaRespiratoria">
                             </div>
                             <div class="col-8">
                                 <label class="cform-label">PA (Sistolica/diastolica) (mmHg)</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" formControlName="inputPresionSistolicaDiastolica">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Sat. O2%</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" formControlName="inputSaturacion">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Peso (kg)</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" formControlName="inputPeso">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Talla</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" formControlName="inputTalla">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">IMC</label>
-                                <input type="text" class="form-control" id="">
+                                <input type="text" class="form-control" formControlName="inputImc">
                             </div>
                         </div>
                     </div>
@@ -100,7 +100,7 @@
                                 <label class="form-check-label" for="">Alterado</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoMentalDetalle"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
@@ -116,7 +116,7 @@
                                 <label class="form-check-label" for="">Alterado</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoNutricionalDetalle"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
@@ -132,7 +132,7 @@
                                 <label class="form-check-label" for="">Alterado</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoPsicosocialDetalle"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
@@ -148,7 +148,7 @@
                                 <label class="form-check-label" for="">Alterado</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoVisionDetalle"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
@@ -164,7 +164,7 @@
                                 <label class="form-check-label" for="">Alterado</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoAudicion"></textarea>
                     </div>
                 </div>
 
@@ -173,14 +173,14 @@
                 <div class="row">
                     <div class="col-12 mt-3">
                         <h6>Plan de Trabajo</h6>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputPlanTrabajo"></textarea>
                     </div>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal"><i
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal" (click)="Guardar()"><i
                 class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
         <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button> -->
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
