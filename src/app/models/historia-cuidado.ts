@@ -9,6 +9,7 @@ export class HistoriaCuidadoDTO{
     IdMedico!: number;
     FechaInicioAtencion!:Date;
     FechaFinAtencion?:Date;
+    IdHistoriaEstado?: number;
     Estado!:boolean;
     UsuarioCreacion!:string;
     UsuarioModificacion!:string;
