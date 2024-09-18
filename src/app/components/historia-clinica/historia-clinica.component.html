@@ -9,29 +9,29 @@
                 <div class="row">
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Médico : </label> <span>Ana Mendoza Arce</span>
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
                         </div>
                     </div>				
                 </div>
                 <div class="row">
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Paciente : </label> <span>Maritza Córdova Juarez</span>
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Nro. HCL : </label> <span>75488545</span>
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Fecha atención : </label> <span>22/03/2022</span>
+                            <label class="fw-bold">Fecha atención : </label> <span>{{fechaHistoria | date: 'yyyy-MM-dd'}}</span>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Hora atención: </label> <span>08:30 am</span>
+                            
                         </div>
                     </div>																
                 </div>
@@ -41,233 +41,166 @@
                 <div class="col-xl-2">
                     <h6>Datos generales</h6>
                 </div>
-                <div class="col-xl-3">
+               <!--  <div class="col-xl-3">
                     <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirModalEditarPaciente()"><i class="fas fa-lg fa-fw me-2 fa-pencil-alt"></i>Editar</button>
-                </div>
+                </div> -->
             </div>
             <div class="row mt-3">
                 <div class="row">
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Edad : </label> <span>28 años</span>
+                            <label class="fw-bold">Fecha nacimiento : </label> <span>{{fechaNacimientoPaciente}}</span>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Celular : </label> <span>+Whatsapp</span>
+                            <label class="fw-bold">Celular : </label> <span>{{celularPaciente}}</span>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Estado civil : </label> <span>Soltero</span>
+                            <label class="fw-bold">Email : </label> <span>{{emailPaciente}}</span>
                         </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="fw-bold">Procedencia : </label> <span>Huancayo</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="fw-bold">Ocupación : </label> <span>Asistente de TIC</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="fw-bold">Nro. documento : </label> <span>75488545</span>
-                        </div>
-                    </div>											
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="fw-bold">Tipo paciente : </label> <span>Particular</span>
-                        </div>
-                    </div>																
+                    </div>															
                 </div>								
                 <div class="col-xl-6">
                     <div class="form-group mb-3">
-                        <label class="fw-bold">Dirección : </label> <span>Av. San Martín S/N</span>
+                        <label class="fw-bold">Dirección : </label> <span>{{direccionPaciente}}</span>
+                    </div>
+                </div>	
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="fw-bold">Procedencia : </label> <span>{{procedencia}}</span>
                     </div>
                 </div>	
             </div>								
-            <hr/>						
-            <label class="fw-bold">Prioridad de atención</label>
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="form-group text-center">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
-                            <label class="form-check-label" for="">I</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
-                            <label class="form-check-label" for="">II</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
-                            <label class="form-check-label" for="">III</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" name="radsex" type="radio" id="" value="option1">
-                            <label class="form-check-label" for="">VI</label>
-                        </div>
-                    </div>
-                </div>
-            </div>						
-            <hr/>			
+            <hr/>								
             <div class="mb-3 bg-green-custom">I. ANAMNESIS</div>
             <div class="row">
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Tiempo de enfermedad *</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                <div class="col-xl-6" *ngIf="objAnamnesis.TiempoEnfermedad != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Tiempo de enfermedad</div>
+                        <div class="col-xl-10">{{objAnamnesis.TiempoEnfermedad}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Motivo de consulta *</label>
-                        <textarea class="form-control" rows="3"></textarea>
-
+                <div class="col-xl-6" *ngIf="objAnamnesis.MotivoConsulta != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Motivo de consulta</div>
+                        <div class="col-xl-10">{{objAnamnesis.MotivoConsulta}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Curso de la enfermedad *</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                <div class="col-xl-6" *ngIf="objAnamnesis.CursoEnfermedad != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Curso de la enfermedad</div>
+                        <div class="col-xl-10">{{objAnamnesis.CursoEnfermedad}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Signos y Síntomas *</label>
-                        <textarea class="form-control" rows="3"></textarea>
+                <div class="col-xl-6" *ngIf="objAnamnesis.SignosSintomas != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Signos y Síntoma</div>
+                        <div class="col-xl-10">{{objAnamnesis.SignosSintomas}} </div>
                     </div>
                 </div>
             </div>
             <hr/>
             <label class="fw-bold">Antecedentes</label>
             <div class="row">
-                <div class="col-xl-12">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for="">Tratamientos de uso frecuente</label>
-                        <textarea type="text" class="form-control" id="" rows="3"></textarea>
+                <div class="col-xl-12" *ngIf="objAnamnesis.Antecedentes?.TratamientoUsoFrecuente != null" >
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Tratamientos de uso frecuente</div>
+                        <div class="col-xl-10">{{objAnamnesis.Antecedentes?.TratamientoUsoFrecuente}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Médicos </label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <br>
+                <div class="col-xl-6" *ngIf="objAnamnesis.Antecedentes?.Medicos != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Medicos</div>
+                        <div class="col-xl-10" *ngFor="let lista of objAnamnesis.Antecedentes?.Medicos">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6 ">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Quirúrgico</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objAnamnesis.Antecedentes?.Quirurgicos != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Quirurgicos</div>
+                        <div class="col-xl-10" *ngFor="let lista of objAnamnesis.Antecedentes?.Quirurgicos">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Familiares</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objAnamnesis.Antecedentes?.Familiares != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Familiares</div>
+                        <div class="col-xl-10" *ngFor="let lista of objAnamnesis.Antecedentes?.Familiares">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Patológicos</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objAnamnesis.Antecedentes?.Patologicos != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Patologicos</div>
+                        <div class="col-xl-10" *ngFor="let lista of objAnamnesis.Antecedentes?.Patologicos">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Alergias</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objAnamnesis.Antecedentes?.Alergias != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Alergias</div>
+                        <div class="col-xl-10" *ngFor="let lista of objAnamnesis.Antecedentes?.Alergias">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Reacción adversa a medicamentos</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objAnamnesis.Antecedentes?.ReaccionAdversa != null">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">ReaccionAdversa</div>
+                        <div class="col-xl-10" *ngFor="let lista of objAnamnesis.Antecedentes?.ReaccionAdversa">- {{lista}} </div>
                     </div>
                 </div>
             </div>
             <div class="mb-3 bg-green-custom">II. FUNCIONES BIOLÓGICAS</div>
             <div class="row">
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Apetito </label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objFuncionBiologica.Apetito?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Apetito</div>
+                        <div class="col-xl-10" *ngFor="let lista of objFuncionBiologica.Apetito">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6 ">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Orina</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objFuncionBiologica.Orina?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Orina</div>
+                        <div class="col-xl-10" *ngFor="let lista of objFuncionBiologica.Orina">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Sed</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objFuncionBiologica.Sed?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Sed</div>
+                        <div class="col-xl-10" *ngFor="let lista of objFuncionBiologica.Sed">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Deposiciones</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objFuncionBiologica.Deposiciones?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Deposiciones</div>
+                        <div class="col-xl-10" *ngFor="let lista of objFuncionBiologica.Deposiciones">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Sueño</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objFuncionBiologica.Suenno?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Sueño</div>
+                        <div class="col-xl-10" *ngFor="let lista of objFuncionBiologica.Suenno">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Estado Ponderal</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objFuncionBiologica.EstadoPonderal?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Estado Ponderal</div>
+                        <div class="col-xl-10" *ngFor="let lista of objFuncionBiologica.EstadoPonderal">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Sudor</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objFuncionBiologica.Sudor?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Sudor</div>
+                        <div class="col-xl-10" *ngFor="let lista of objFuncionBiologica.Sudor">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Estado de ánimo</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6" *ngIf="objFuncionBiologica.EstadoAnimo?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Estado Animo</div>
+                        <div class="col-xl-10" *ngFor="let lista of objFuncionBiologica.EstadoAnimo">- {{lista}} </div>
                     </div>
                 </div>
             </div>
-            <div class="mb-3 bg-green-custom">III. VALORACIÓN FUNCIONAL (ABVD)</div>
+           <!--  <div class="mb-3 bg-green-custom">III. VALORACIÓN FUNCIONAL (ABVD)</div>
             <div class="row">
                 <div class="col-xl-2">
 
@@ -328,9 +261,9 @@
                         </tr>
                     </table>
                 </div>
-            </div>
+            </div> -->
             <br>
-            <div class="mb-3 bg-green-custom">IV. VALORACIÓN MENTAL</div>
+            <!-- <div class="mb-3 bg-green-custom">IV. VALORACIÓN MENTAL</div>
             <div class="row">
                 <div class="col-xl-2">
 
@@ -409,9 +342,9 @@
                         </tr>
                     </table>
                 </div>
-            </div>
+            </div> -->
             <br>
-            <div class="mb-3 bg-green-custom">V. ESTADO AFECTIVO (Esacla abreviada de Yesevage)</div>
+            <!-- <div class="mb-3 bg-green-custom">V. ESTADO AFECTIVO (Esacla abreviada de Yesevage)</div>
             <div class="row">
                 <div class="col-xl-2">
 
@@ -459,362 +392,122 @@
                         </tr>
                     </table>
                 </div>
-            </div>
+            </div> -->
             <br>
-            <div class="mb-3 bg-green-custom">VI. EXAMEN FÍSICO</div>
+            <div class="mb-3 bg-green-custom">III. EXAMEN FÍSICO</div>
             <label class="fw-bold">Signos vitales del paciente</label>
             <div class="col-xl-12 mb-3">
-                <div class="row">
-                    <div class="col-xl-3  mb-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">T (°C)</label>
-                            <input type="number" class="form-control" id="" min="35" max="40">
+                <ng-container>
+                    <div class="box-shadow mt-3">
+                        <div class="row">
+                            <div class="col-xl-3 mt-2 "><strong>Temperatura: </strong>{{objFuncionVital.Temperatura}} °C</div>
+                            <div class="col-xl-3 mt-2"><strong>Frecuencia cardiaca: </strong>{{objFuncionVital.FrecuenciaCardiaca}} x
+                                min.</div>
+                            <div class="col-xl-3 mt-2"><strong>Presión arterial:
+                                </strong>{{objFuncionVital.PresionArterialSistolica}}/{{objFuncionVital.PresionArterialDistolica}}
+                                mmhg</div>
+                            <div class="col-xl-3 mt-2"><strong>Saturación de oxígeno : </strong>{{objFuncionVital.SaturacionOxigeno}}
+                                %</div>
+                            <div class="col-xl-3 mt-2"><strong>Frecuencia respiratoria:
+                                </strong>{{objFuncionVital.FrecuenciaRespiratoria}} x
+                                min.</div>
+                            <div class="col-xl-3 mt-2"><strong>Talla: </strong>{{objFuncionVital.Talla}} m</div>
+                            <div class="col-xl-3 mt-2"><strong>Peso: </strong>{{objFuncionVital.Peso}} kg</div>
+                            <div class="col-xl-3 mt-2"><strong>Indice masa corporal: </strong>{{objFuncionVital.IMC}} kg/m² </div>
+                            <div class="col-xl-3 mt-2"><strong>Peso habitual: </strong>{{objFuncionVital.PesoHabitual}} kg</div>
                         </div>
                     </div>
-                    <div class="col-xl-3  mb-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">FC (min)</label>
-                            <input type="number" class="form-control" id="" min="50" max="140" >
-                        </div>
-                    </div>
-                    <div class="col-xl-3  mb-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">PA (sistólica / distólica)
-                                (mmHg)</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" id="" min="80" max="180" >
-                                <input type="number" class="form-control" id="" placeholder="/" readonly style="text-align: center;">
-                                <input type="number" class="form-control" id="" min="50" max="140" >
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3  mb-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">Sat. O<sub>2</sub> (%)</label>
-                            <input type="number" class="form-control" id="" min="60" max="100" >
-                        </div>
-                    </div>
-                    <div class="col-xl-3 mb-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">FR (x
-                                min)</label>
-                            <input type="number" class="form-control" id="" min="20" max="30" >
-                        </div>
-                    </div>
-                    <div class="col-xl-3 mb-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">Talla (m)</label>
-                            <input type="number" class="form-control" id="" >
-                        </div>
-                    </div>
-                    <div class="col-xl-2 mb-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">Peso (kg)</label>
-                            <input type="number" class="form-control" id="" >
-                        </div>
-                    </div>
-                    <div class="col-xl-2 mb-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">IMC</label>
-                            <input type="number" class="form-control" id="" readonly>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 mb-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">Peso Hab. (kg)</label>
-                            <input type="number" class="form-control" id="">
-                        </div>
-                    </div>
-                    <div class="col-xl-12">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3" for="">Examen General</label>
-                            <textarea type="text" class="form-control" id="" rows="3"></textarea>
-                        </div>
-                    </div>
-                </div>
+                </ng-container>
             </div>
             <br/>
             <label class="fw-bold">Examen regional</label>
             <div class="row mb-3">
-                <div class="col-xl-6 mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >Piel y anexos</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.PielAnexo?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Piel anexo </div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.PielAnexo">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6  mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >Cabeza y cuello</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.CabezaCuello?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Cabeza y Cuello </div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.CabezaCuello">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6  mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >TCSC: Edemas</label>
-                        <select class="form-select" id="">
-                                    <option>Seleccionar</option>													
-                                </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.Edema?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Edema</div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.Edema">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6  mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >Tórax y pulmones</label>
-                        <select class="form-select" id="">
-                                    <option>Seleccionar</option>													
-                                </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.ToraxPulmon?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Torax Pulmones</div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.ToraxPulmon">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6  mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >Abdomen</label>
-                        <select class="form-select" id="">
-                                    <option>Seleccionar</option>													
-                                </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.Abdomen?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Abdomen</div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.Abdomen">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6  mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >Aparato cardiovascular</label>
-                        <select class="form-select" id="">
-                            <option>Seleccionar</option>													
-                        </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.AparatoCardiovascular?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Aparato Cardiovascular</div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.AparatoCardiovascular">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6  mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >Tacto rectal</label>
-                        <select class="form-select" id="">
-                                    <option>Seleccionar</option>													
-                                </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.TactoRectal?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Tacto Rectal</div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.TactoRectal">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6  mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >Aparato genitourinario</label>
-                        <select class="form-select" id="">
-                                    <option>Seleccionar</option>													
-                                </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.AparatoGenito?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Aparato Genito Urinario</div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.AparatoGenito">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6 mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >Sistema nervioso</label>
-                        <select class="form-select" id="">
-                                    <option>Seleccionar</option>													
-                                </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.SistemaNervioso?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Sistema Nervioso</div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.SistemaNervioso">- {{lista}} </div>
                     </div>
                 </div>
-                <div class="col-xl-6 mb-3">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for ="" >Aparato Locomotor</label>
-                        <select class="form-select" id="">
-                                    <option>Seleccionar</option>													
-                                </select>
+                <div class="col-xl-6 mb-3" *ngIf="objExamenRegional.AparatoLocomotor?.length != 0">
+                    <div class="row box-shadow mb-3">
+                        <div class="col-xl-12 fw-bold">Aparato Locomotor</div>
+                        <div class="col-xl-10" *ngFor="let lista of objExamenRegional.AparatoLocomotor">- {{lista}} </div>
                     </div>
                 </div>
             </div>
             <br/>
-            <div class="mb-3 bg-green-custom">VII.  DIAGNÓSTICO DEFINITIVO - PRESUNTIVO - REPETITIVO</div>						
-            <div class="row mb-3">
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for="">Diagnóstico predeterminado</label>
-                        <div style="display: flex">
-                            <div style="width: 90px; padding: 6px 12px; background-color: #eee; border-radius: 4px;">
-                                <div class="checkbox mt-0 mb-0">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" id=""> CIE10
-                                    </label>
-                                </div>
-                            </div>
-                            <div style="width: calc(100% - 90px)">
-                                <select class="form-select" id="">
-                                    <option value="">Seleccione</option>
-                                    <option value="4">A00.0 - CÓLERA DEBIDO A VIBRIO CHOLERAE 01, BIOTIPO CHOLERAE</option>
-                                    <option value="3">A00.1 - CÓLERA DEBIDO A VIBRIO CHOLERAE 01, BIOTIPO EL TOR</option>
-                                    <option value="2">A00.9 - CÓLERA, NO ESPECIFICADO</option>
-                                </select>
-                            </div>
+            <div class="mb-3 bg-green-custom">IV.  DIAGNÓSTICO DEFINITIVO - PRESUNTIVO - REPETITIVO</div>						
+            <div class="col-xl-12"  *ngFor="let lista of objDiagnostico">
+                <div class="box-shadow mb-3">
+                    <div class="row">
+                        <div class="col-xl-11">
+                            <div class="col-xl-12 fw-bold">{{lista.TipoDiagnostico}}</div>
+                            <div class="col-xl-12">{{lista.CodigoCie10}}</div>
+                            <div class="col-xl-12">{{lista.NombreDiagnostico}}</div>
+                            <hr>
+                          
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-5">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for="">Escriba su diagnóstico</label>
-                        <textarea class="form-control" id="" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="col-xl-1 pt-4 mt-2">
-                    <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modal-diagnosticos"><i class="fa fa-plus"></i></button>
-                </div>
-                <div class="col-xl-12">
-                    <div class="row box-shadow mb-3">
-                        <div class="col-xl-12 fw-bold">Diagnóstico (definitivo)</div>
-                        <div class="col-xl-10">A00 - CÓLERA</div>
-                        <div class="col-xl-2 text-right">
-                            <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="row box-shadow mb-3">
-                        <div class="col-xl-12 fw-bold">Diagnóstico (presuntivo)</div>
-                        <div class="col-xl-10">A00 - CÓLERA</div>
-                        <div class="col-xl-2 text-right">
-                            <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                        </div>
-                    </div>
-                    <div class="row box-shadow mb-3">
-                        <div class="col-xl-12 fw-bold">Diagnóstico (repetitivo)</div>
-                        <div class="col-xl-10">A00 - CÓLERA</div>
-                        <div class="col-xl-2 text-right">
-                            <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal fade" id="modal-diagnosticos" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: none;" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-sm">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Tipo diagnósico</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <form>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Diagnóstico definitivo
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Diagnóstico presuntivo
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Diagnóstico repetitivo
-                            </label>
-                        </div>
-                      </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-green-custom" onclick="salirTipodiagnostico()" ><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
-                        <button type="button" class="btn btn-danger" onclick="salirTipodiagnostico()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
-            <div class="mb-3 bg-green-custom">VIII. TRATAMIENTO</div>
-            <div class="col-xl-2 mb-3">
-                <button type="button" class="btn btn-green-custom"  (click)="AbrirReceta()"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Nuevo</button>
-            </div>
-            <div class="mb-3 bg-green-custom">IX. EXAMEN AUXILIAR</div>
-            <div class="col-xl-2 mb-3">
-                <button type="button" class="btn btn-green-custom"  (click)="AbrirOrden()"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Nuevo</button>
-            </div>
-            <div class="mb-3 bg-green-custom">X. INTERCONSULTAS</div>
-            <div class="col-xl-2 mb-3">
-                <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Nuevo</button>
-            </div>							
-            <div class="mb-3 bg-green-custom">XI. RESUMEN / PLAN DE TRABAJO</div>
+            </div>   
+            <br/>
+            <div class="mb-3 bg-green-custom">V. RESUMEN / PLAN DE TRABAJO</div>
             <div>
-                <p><strong>EXAMEN AUXILIAR:</strong>  INSULINA | INDICACIÓN: AYUNAS &nbsp;&nbsp; <button type="button" class="btn btn-green-custom btn-sm"><i class="fas fa-pencil-alt"></i></button></p> 
-                <p><strong>EXAMEN AUXILIAR:</strong> PROLACTINA | INDICACIÓN: AYUNAS &nbsp;&nbsp;<button type="button" class="btn btn-green-custom btn-sm"><i class="fas fa-pencil-alt"></i></button></p>
-                <p><strong>EXAMEN AUXILIAR:</strong> LABORATORIO/BIOQUÍMICA | INDICACIÓN: - &nbsp;&nbsp; <button type="button" class="btn btn-green-custom btn-sm"><i class="fas fa-pencil-alt"></i></button> </p>
-            </div>
-            <div class="row">
-                <div class="col-xl-11">
-                    <div class="form-group mb-3">
-                        <textarea type="text" class="form-control" id="" rows="3"></textarea>
-                    </div>
-                </div>
-                <div class="col-xl-1">
-                    <button type="button" class="btn btn-green-custom" id=""><i class="fa fa-plus"></i></button>
-                </div>
-            </div>
-
-            <div class="mb-3 mt-3 bg-green-custom">XII. DESTINO</div>
-            <div class="row">
+                <p>  {{objHistoriaExterna.PlanTrabajo}} &nbsp;&nbsp;</p> 
                 
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radObservacion" value="" class="form-check-input" data-bs-dismiss="modal"> Quedó en observación
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radSOP" value="" class="form-check-input"  data-bs-dismiss="modal"> Solicitud sala de operación - SOP
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radConsultaExterna" class="form-check-input"  data-bs-trigger="focus" data-bs-toggle="popover" title="Control de consulta externo" data-bs-content="Separar consulta por ambulatorio o atención al cliente"> Control de consulta externo
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radAltaVoluntaria" value="" class="form-check-input"  data-bs-dismiss="modal"> Consentimiento de alta voluntaria
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radLlegoCadaver" value="" class="form-check-input"  data-bs-trigger="focus" data-bs-toggle="popover" title="Paciente llego cadáver" data-bs-content="Comunicarce con el aréa de vigilancia"> Paciente llego cadáver
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Cuidados intensivos y de cuidados intermedios - UCI/UCIN
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radHospitalizado" value="" class="form-check-input" data-bs-dismiss="modal"> Fue hospitalizado
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radDomicilio" value="" class="form-check-input"> Se envió a su domicilio
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radReferencia" value="" class="form-check-input" data-bs-dismiss="modal"> Referencia institucional
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radFugado" value="" class="form-check-input" data-bs-trigger="focus" data-bs-toggle="popover" title="Fugado" data-bs-content="Comunicarce con el aréa de vigilancia para que genere su informe"> Fugado
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label class="form-check-label mt-2 mb-2 ">
-                                <input type="radio" name="destino" id="radFugado" value="" class="form-check-input" data-bs-trigger="focus" data-bs-toggle="popover" title="Paciente fallece" data-bs-content="Comunicarce con el aréa de vigilancia para que se comuniqué con la morge"> Paciente fallece
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>							
-            <hr/>
-            <div class="col-xl-3">
-                <div class="form-group mb-3" data-provide="datepicker">
-                    <label class="form-label mb-3" for="">Fecha proxima cita</label>
-                    <input type="text" class="form-control" id="" placeholder="dd/mm/aaaa" />
-                </div>
-            </div>
-            
+            </div>	
         </form>
     </div>
-    <div class="modal-footer">							
+    <div class="modal-footer">		
+        <button type="button" class="btn btn-green-custom" ><a href="{{objHistoriaExterna.UrlPdfHistoriaClinica}}"><i class="fas fa-lg fa-fw me-2 fa-file-alt"></i>HISTORIA</a></button>						
         <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal"  (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
     </div>
