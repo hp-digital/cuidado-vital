@@ -1,5 +1,5 @@
-export class ProvinciaDTO{
-    id!:number;
-    nombre!: string;
-    idDepartamento!:number;
-}
+export class ProvinciaDTO {
+    id!: number;
+    nombre!: string; 
+    idDepartamento!:number;   
+}   

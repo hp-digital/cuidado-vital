@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { forkJoin } from 'rxjs';
+import {PacienteService} from '@services/paciente.service';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { HttpClient } from '@angular/common/http';
-import { PacienteService } from '../../services/paciente.service';
 import { CommonModule } from '@angular/common';
 import { BluetoothService } from '../../services/bluetooth.service';
 import { authConfig } from '../../auth/auth-config';
@@ -17,6 +17,7 @@ import { SettingsService } from '../../services/settings.service';
   styleUrl: './dashboard.component.css'
 })
 export default class DashboardComponent implements OnInit {
+
 
   dataFormGroup: FormGroup;
   verSpinner:boolean = false;
@@ -41,7 +42,6 @@ export default class DashboardComponent implements OnInit {
       
     });
   }
-
   ngOnInit(): void {
     this.ObtenerConfiguracion();
     this.configure();

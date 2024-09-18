@@ -1,0 +1,303 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">MÉDICO</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
+    </div>
+    <div class="modal-body">
+        <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
+
+            <div id="seccion-datos-principales">
+                <div class="row mb-3 bg-green-custom">DATOS PRINCIPALES</div>
+                <div class="row">
+                    <div class="col-xl-2 p-2 text-center rounded">
+                        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="" width="80%">
+                        <div class="flex justify-content-center mt-2">
+                            <p-toast />
+                            <p-fileUpload mode="basic" chooseLabel="Subir" chooseIcon="pi pi-upload" name="demo[]"
+                                url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                                maxFileSize="1000000" styleClass="btn-green-custom h-2rem max-w-12rem text-center" />
+                        </div>
+                    </div>
+
+                    <div class="col-xl-10">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label mb-3" for="">Tipo documento</label>
+                                            <!-- <select class="form-select"
+                                                formControlName="selectRegistrarPorTipoDocumento">
+                                                 <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
+                                                    {{combo.nombre}}
+                                                </option>
+                                            </select> -->
+                                            <p-dropdown formControlName="selectTipoDocumento"
+                                                [options]="comboTipoDocumento" optionLabel="nombre" optionValue="id"
+                                                [showClear]="true" styleClass="w-full" placeholder="Selecciona" />
+                                            <div *ngIf="Controls['selectTipoDocumento'].invalid && (Controls['selectTipoDocumento'].dirty || Controls['selectTipoDocumento'].touched)"
+                                                class="text-error">
+                                                <div>Campo obligatorio.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label mb-3" for="">Nro. documento *</label>
+                                            <input type="text" class="form-control" id=""
+                                                formControlName="inputNroDocumento" />
+                                            <div *ngIf="Controls['inputNroDocumento'].invalid && (Controls['inputNroDocumento'].dirty || Controls['inputNroDocumento'].touched)"
+                                                class="text-error">
+                                                <div *ngIf="Controls['inputNroDocumento']?.errors?.['required']">
+                                                    Campo obligatorio.
+                                                </div>
+                                                <div *ngIf="Controls['inputNroDocumento']?.errors?.['minlength']">
+                                                    Documento no válido.
+                                                </div>
+                                                <div *ngIf="Controls['inputNroDocumento']?.errors?.['maxlength']">
+                                                    Documento no válido.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Apellido paterno *</label>
+                                    <input type="text" class="form-control" id=""
+                                        formControlName="inputApellidoPaterno" />
+                                    <div *ngIf="Controls['inputApellidoPaterno'].invalid && (Controls['inputApellidoPaterno'].dirty || Controls['inputApellidoPaterno'].touched)"
+                                        class="text-error">
+                                        <div>Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Apellido materno *</label>
+                                    <input type="text" class="form-control" id=""
+                                        formControlName="inputApellidoMaterno" />
+                                    <div *ngIf="Controls['inputApellidoMaterno'].invalid && (Controls['inputApellidoMaterno'].dirty || Controls['inputApellidoMaterno'].touched)"
+                                        class="text-error">
+                                        <div>Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Nombres *</label>
+                                    <input type="text" class="form-control" id="" formControlName="inputNombres" />
+                                    <div *ngIf="Controls['inputNombres'].invalid && (Controls['inputNombres'].dirty || Controls['inputNombres'].touched)"
+                                        class="text-error">
+                                        <div>Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="row">
+                                    <div class="col-xl-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label mb-3" for="">Fecha nacimiento *</label>
+                                            <p-calendar placeholder="dd/mm/aaaa" formControlName="inputFechaNacimiento"
+                                                styleClass="w-full block" inputStyleClass="w-full"
+                                                [iconDisplay]="'input'" [showIcon]="true" inputId="icondisplay"
+                                                (onSelect)="EdadPaciente($event)" (onInput)="EdadPaciente($event)" />
+                                            <div *ngIf="Controls['inputFechaNacimiento'].invalid && (Controls['inputFechaNacimiento'].dirty || Controls['inputFechaNacimiento'].touched)"
+                                                class="text-error">
+                                                <div>Campo obligatorio.</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-6">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label mb-3" for="">Edad</label>
+                                            <input type="text" class="form-control" formControlName="inputEdadPersona"
+                                                readonly />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Celular *</label>
+                                    <input type="text" class="form-control" formControlName="inputTelefonoCelular" />
+                                    <div *ngIf="Controls['inputTelefonoCelular'].invalid && (Controls['inputTelefonoCelular'].dirty || Controls['inputTelefonoCelular'].touched)"
+                                        class="text-error">
+                                        <div *ngIf="Controls['inputTelefonoCelular']?.errors?.['required']">
+                                            Campo obligatorio.
+                                        </div>
+                                        <div *ngIf="Controls['inputTelefonoCelular']?.errors?.['maxlength']">
+                                            Campo debe tener 9 dígitos.
+                                        </div>
+                                        <div *ngIf="Controls['inputTelefonoCelular']?.errors?.['validatePhoneNumber']">
+                                            No es un número celular válido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Sexo *</label><br />
+                                    <div class="form-check form-check-inline" *ngFor="let combo of comboSexo">
+                                        <input class="form-check-input" name="inputSexo" id="inputSexo" type="radio"
+                                            formControlName="inputSexo" [value]="combo.id">
+                                        <label class="form-check-label" for=""> {{combo.nombre}}</label>
+                                    </div>
+                                    <div *ngIf="Controls['inputSexo'].invalid && (Controls['inputSexo'].dirty || Controls['inputSexo'].touched)"
+                                        class="text-error">
+                                        <div>Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Correo electrónico *</label>
+                            <input type="email" class="form-control" id="" formControlName="inputCorreoElectronico" />
+                            <div *ngIf="Controls['inputCorreoElectronico'].invalid && (Controls['inputCorreoElectronico'].dirty || Controls['inputCorreoElectronico'].touched)"
+                                class="text-error">
+                                <div *ngIf="Controls['inputCorreoElectronico']?.errors?.['required']">
+                                    Campo obligatorio.
+                                </div>
+                                <div *ngIf="Controls['inputCorreoElectronico']?.errors?.['email']">
+                                    Campo debe tener un email válido.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-2">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">CMP *</label>
+                            <input type="text" class="form-control" id="" formControlName="inputCMP" />
+                            <div *ngIf="Controls['inputCMP'].invalid && (Controls['inputCMP'].dirty || Controls['inputCMP'].touched)"
+                                class="text-error">
+                                <div>Campo obligatorio.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">RNE *</label>
+                            <input type="text" class="form-control" id="" formControlName="inputRNE" />
+                            <div *ngIf="Controls['inputRNE'].invalid && (Controls['inputRNE'].dirty || Controls['inputRNE'].touched)"
+                                class="text-error">
+                                <div>Campo obligatorio.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class=" mb-3" for="">Especialidad *</label>
+                            <!-- <select class="form-select" formControlName="selectRegistrarPorTipoDocumento">
+                                 <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
+                                    {{combo.nombre}}
+                                </option>
+                            </select> -->
+                            <p-autoComplete formControlName="autocompleteEspecialidadMedica" styleClass="w-full"
+                                inputStyleClass="w-full" field="nombre" [suggestions]="filteredEspecialidad"
+                                [dropdown]="true" [multiple]="true" (completeMethod)="search($event)" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-xl-7">
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">País de origen *</label>
+
+                                    <p-dropdown formControlName="selectPaisDireccion" [options]="comboPais"
+                                        optionLabel="nombre" optionValue="id" styleClass="w-full"
+                                        placeholder="Seleccione" [showClear]="true"
+                                        (onChange)="listarDepartamentos($event)" />
+                                    <div *ngIf="Controls['selectPaisDireccion'].invalid && (Controls['selectPaisDireccion'].dirty || Controls['selectPaisDireccion'].touched)"
+                                        class="text-error">
+                                        <div>Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Departamento *</label>
+                                    <p-dropdown formControlName="selectDepartamentoDireccion"
+                                        [options]="comboDepartamento" optionLabel="nombre" optionValue="id"
+                                        styleClass="w-full" placeholder="Seleccione" [showClear]="true"
+                                        (onChange)="listarProvincias($event)" />
+                                    <div *ngIf="Controls['selectDepartamentoDireccion'].invalid && (Controls['selectDepartamentoDireccion'].dirty || Controls['selectDepartamentoDireccion'].touched)"
+                                        class="text-error">
+                                        <div>Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Provincia *</label>
+                                    <p-dropdown formControlName="selectProvinciaDireccion" [options]="comboProvincia"
+                                        optionLabel="nombre" optionValue="id" styleClass="w-full"
+                                        placeholder="Seleccione" [showClear]="true"
+                                        (onChange)="listarDistritos($event)" />
+                                    <div *ngIf="Controls['selectProvinciaDireccion'].invalid && (Controls['selectProvinciaDireccion'].dirty || Controls['selectProvinciaDireccion'].touched)"
+                                        class="text-error">
+                                        <div>Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3" for="">Distrito *</label>
+                                    <p-dropdown formControlName="selectDistritoDireccion" [options]="comboDistrito"
+                                        optionLabel="nombre" optionValue="id" styleClass="w-full"
+                                        placeholder="Seleccione" [showClear]="true" />
+                                    <div *ngIf="Controls['selectDistritoDireccion'].invalid && (Controls['selectDistritoDireccion'].dirty || Controls['selectDistritoDireccion'].touched)"
+                                        class="text-error">
+                                        <div>Campo obligatorio.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3" for="">Domicilio actual *</label>
+                            <input type="text" class="form-control" id="" formControlName="inputDireccion" />
+                            <div *ngIf="Controls['inputDireccion'].invalid && (Controls['inputDireccion'].dirty || Controls['inputDireccion'].touched)"
+                                class="text-error">
+                                <div>Campo obligatorio.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row justify-content-center">
+                    <div class="col-xl-3 text-center">
+                        <img src="https://azaharaletras.com/wp-content/uploads/2023/03/firma-m-gonzalez-4.jpg" alt=""
+                            width="80%">
+                        <div class="flex justify-content-center mt-2">
+                            <p-toast />
+                            <p-fileUpload mode="basic" chooseLabel="Subir Firma" chooseIcon="pi pi-upload" name="demo[]"
+                                url="https://www.primefaces.org/cdn/api/upload.php" accept="image/*"
+                                maxFileSize="1000000" styleClass="btn-green-custom h-2rem max-w-12rem text-center" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-green-custom" (click)="Guardar()"><i
+                class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i
+                class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
+</div>

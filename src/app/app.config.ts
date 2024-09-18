@@ -12,6 +12,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     importProvidersFrom(ModalModule.forRoot(),OAuthModule.forRoot()),
     provideHttpClient(),
-    provideAnimations(), 
+    provideAnimations(),    
   ]
 };

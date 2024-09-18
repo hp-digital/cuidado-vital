@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import MedicosComponent from './components/medicos/medicos.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuthenticatedGuard } from './guards/authenticated.guard';
 
@@ -25,6 +26,10 @@ export const routes: Routes = [
             {
                 path:'atenciones',
                 loadComponent:() => import('./components/atenciones/atenciones.component'),
+                canActivate: [AuthGuard]
+            },
+            {
+                path:'medicos',component: MedicosComponent,
                 canActivate: [AuthGuard]
             },
             {

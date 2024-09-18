@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { ComboDTO } from '../models/ComboDTO';
 import { environment } from '../../environments/environment';
-import { DepartamentoDTO } from '../models/DepartamentoDTO';
-import { ProvinciaDTO } from '../models/ProvinciaDTO';
-import { DistritoDTO } from '../models/Distrito';
+import { DepartamentoDTO} from '@models/DepartamentoDTO';
+import { ProvinciaDTO} from '@models/ProvinciaDTO';
+import { DistritoDTO} from '@models/DistritoDTO';
 import { ListadoBusquedaPacienteDTO } from '../models/ListadoBusquedaPacienteDTO';
 
 
-const API_URL = environment.apiUrl;
+
+
+const API_URL = environment.apiUrl; 
 
 @Injectable({
   providedIn: 'root'
@@ -41,25 +43,26 @@ export class PacienteService {
     return this.http.get<ComboDTO[]>(`${API_URL}EstadoCivil/ObtenerListado`)
   }
 
-  ObtenerSexo(): Observable<ComboDTO[]>{
-    return this.http.get<ComboDTO[]>(`${API_URL}Sexo/ObtenerCombo`)
+  ObtenerEspecialidadMedica(){
+    return this.http.get<ComboDTO[]>(`${API_URL}EspecialidadMedica/ObtenerCombo`)
   }
 
   ObtenerPais() {
     return this.http.get<ComboDTO[]>(`${API_URL}Pais/ObtenerCombo`);
-  }
+  } 
 
-  ObtenerDepartamento() {
+  ObtenerDepartamento(){
     return this.http.get<DepartamentoDTO[]>(`${API_URL}Departamento/ObtenerCombo`);
   }
 
-  ObtenerProvincia() {
+  ObtenerProvincia(){
     return this.http.get<ProvinciaDTO[]>(`${API_URL}Provincia/ObtenerCombo`);
   }
 
-  ObtenerDistrito() {
+  ObtenerDistrito(){
     return this.http.get<DistritoDTO[]>(`${API_URL}Distrito/ObtenerCombo`);
   }
+
   ObtenerPacienteCombo() {
     return this.http.get<ComboDTO[]>(`${API_URL}Paciente/ObtenerComboPaciente`);
   }
@@ -67,7 +70,6 @@ export class PacienteService {
   ObtenerPacienteConsulta(criterioBusqueda: string) {
     return this.http.get<ListadoBusquedaPacienteDTO[]>(`${API_URL}Paciente/ObtenerListadoPacienteBusqueda?${criterioBusqueda}`);
   }
-
 
   ObtenerDepartamentos(id: number): ComboDTO[] {
     let listaDepartamento: DepartamentoDTO[] = JSON.parse(localStorage.getItem('Departamento')!);
@@ -109,5 +111,9 @@ export class PacienteService {
       }
     });
     return comboDistrito;
+  }
+
+  ObtenerSexo() {
+    return this.http.get<ComboDTO[]>(`${API_URL}Sexo/ObtenerCombo`);
   }
 }

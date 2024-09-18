@@ -1,0 +1,118 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">CONTROL DE PRESIÓN</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nombre Paciente:</label><span> Paciente Prueba Validaciones</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-6">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Edad:</label><span> 22 años</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-6">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Sexo:</label><span> Femenino</span>
+                        </div>
+                    </div>                    
+                </div>
+            </div>            
+
+            <div id="seccion-medidas">
+                <h6>Medidas Antropométricas*</h6>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <!-- <label class="cform-label">Medidas Antropométricas*</label> -->
+                            <div class="row">
+                                <div class="col-4">
+                                    <label class="cform-label">Fecha</label>
+                                    <input type="date" class="form-control" id="">
+                                </div>
+                                <div class="col-8">
+                                    <label class="cform-label">PA (Sistolica/diastolica) (mmHg)</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                                <div class="col-4">
+                                    <label class="cform-label">PA (mmHg)</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                                <div class="col-4">
+                                    <label class="cform-label">Pulso</label>
+                                    <input type="text" class="form-control" id="">
+                                </div>
+                                <div class="col-4 d-flex align-items-center">
+                                    <button type="button" class="btn btn-sm btn-green-custom mt-3">+ AGREGAR</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered table-striped">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>FECHA</th>
+                                        <th>PA (mmHg)</th>
+                                        <th>PULSO</th>
+                                        <th>ESTADO</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>DD/MM/AA</td>
+                                        <td><input type="text" class="form-control"></td>
+                                        <td>
+                                            <input type="text" class="form-control">
+                                        </td>
+                                        <td>HIPOTENSION</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DD/MM/AA</td>
+                                        <td><input type="text" class="form-control"></td>
+                                        <td>
+                                            <input type="text" class="form-control">
+                                        </td>
+                                        <td>HIPOTENSION</td>
+                                    </tr>
+                                    <tr>
+                                        <td>DD/MM/AA</td>
+                                        <td><input type="text" class="form-control"></td>
+                                        <td>
+                                            <input type="text" class="form-control">
+                                        </td>
+                                        <td>HIPOTENSION</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>                       
+                    </div>
+                </div>
+
+                <h6>Plan de Trabajo</h6>
+                <div class="row">
+                    <div class="col-12">
+                        <textarea name="" id="" class="form-control"></textarea>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal"><i
+                class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button> -->
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
+</div>

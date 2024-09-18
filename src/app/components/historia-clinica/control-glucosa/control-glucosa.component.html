@@ -1,0 +1,379 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">CONTROL DE GLUCOSA</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nombre Paciente : </label> <span> Paciente Prueba Validaciones</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Tipo de Diabetes*</label>
+                            <input type="text" class="form-control" id="">
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="cform-label">Fecha de diagnostico*</label>
+                            <input type="date" class="form-control" id="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="seccion-complicaciones">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Complicaciones*</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="rad-complicaciones" type="radio" id=""
+                                    value="option1" checked>
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="rad-complicaciones" type="radio" id=""
+                                    value="option1">
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="row">
+                            <div class="col-xl-6 form-group mb-3">
+                                <label class="cform-label block">Grado</label>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="rad-grado" type="radio" id="" value="option1"
+                                        checked>
+                                    <label class="form-check-label" for="">Leve</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="rad-grado" type="radio" id="" value="option1">
+                                    <label class="form-check-label" for="">Moderada</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" name="rad-grado" type="radio" id="" value="option1">
+                                    <label class="form-check-label" for="">Perdida de Conocimiento</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 form-group mb-3">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <label class="cform-label block">Retinopatìa</label>
+                                    </div>
+                                    <div class="col-8 text-left">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-retinopatia" type="radio" id=""
+                                                value="option1" checked>
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-retinopatia" type="radio" id=""
+                                                value="option1">
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 form-group mb-3">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <label class="cform-label block">Nefropatìa</label>
+                                    </div>
+                                    <div class="col-8 text-left">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-nefropatia" type="radio" id=""
+                                                value="option1" checked>
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-nefropatia" type="radio" id=""
+                                                value="option1">
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 form-group mb-3">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <label class="cform-label block">Amputacìon</label>
+                                    </div>
+                                    <div class="col-8 text-left">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-amputacion" type="radio" id=""
+                                                value="option1" checked>
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-amputacion" type="radio" id=""
+                                                value="option1">
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 form-group mb-3">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <label class="cform-label block">Diàlisis</label>
+                                    </div>
+                                    <div class="col-8 text-left">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-dialisis" type="radio" id=""
+                                                value="option1" checked>
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-dialisis" type="radio" id=""
+                                                value="option1">
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 form-group mb-3">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <label class="cform-label block">Ceguera</label>
+                                    </div>
+                                    <div class="col-8 text-left">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-ceguera" type="radio" id=""
+                                                value="option1" checked>
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-ceguera" type="radio" id=""
+                                                value="option1">
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 form-group mb-3">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <label class="cform-label block">Vaculopatìa P.</label>
+                                    </div>
+                                    <div class="col-8 text-left">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-vaculopatia" type="radio" id=""
+                                                value="option1" checked>
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-vaculopatia" type="radio" id=""
+                                                value="option1">
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 form-group mb-3">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <label class="cform-label block">Transplante Renal</label>
+                                    </div>
+                                    <div class="col-8 text-left">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-renal" type="radio" id=""
+                                                value="option1" checked>
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-renal" type="radio" id=""
+                                                value="option1">
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 form-group mb-3">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <label class="cform-label block">Hipertrofia Vent.</label>
+                                    </div>
+                                    <div class="col-8 text-left">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-hipertrofia" type="radio" id=""
+                                                value="option1" checked>
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-hipertrofia" type="radio" id=""
+                                                value="option1">
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 form-group mb-3">
+                                <div class="row">
+                                    <div class="col-4 d-flex align-items-center">
+                                        <label class="cform-label block">Insuf. Cardìaca</label>
+                                    </div>
+                                    <div class="col-8 text-left">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-incardiaca" type="radio" id=""
+                                                value="option1" checked>
+                                            <label class="form-check-label" for="">SI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" name="rad-incardiaca" type="radio" id=""
+                                                value="option1">
+                                            <label class="form-check-label" for="">NO</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6>Medidas Antropométricas*</h6>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="form-group mb-3">
+                                <!-- <label class="cform-label">Medidas Antropométricas*</label> -->
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label class="cform-label">Peso (kg)</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="col-4">
+                                        <label class="cform-label">Talla</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="col-4">
+                                        <label class="cform-label">IMC</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="cform-label">Perimetro Abdomial (cm)</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="cform-label">Presiòn Artetial</label>
+                                        <input type="text" class="form-control" id="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6>Valores de Examenes</h6>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>PRESTACIÒN</th>
+                                            <th>VALORES</th>
+                                            <th>FECHA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Glucemia</td>
+                                            <td>x</td>
+                                            <td>
+                                                <input type="date" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>HBA1C</td>
+                                            <td>x</td>
+                                            <td>
+                                                <input type="date" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Creatinina</td>
+                                            <td>x</td>
+                                            <td>
+                                                <input type="date" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>LDL</td>
+                                            <td>x</td>
+                                            <td>
+                                                <input type="date" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Trigliceridos</td>
+                                            <td>x</td>
+                                            <td>
+                                                <input type="date" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Microalbuminuria</td>
+                                            <td>x</td>
+                                            <td>
+                                                <input type="date" class="form-control">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h6>Plan de Trabajo</h6>
+                    <div class="row">
+                        <div class="col-12">
+                            <textarea name="" id="" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <thead class="text-center">
+                                        <tr>
+                                            <th>PRESTACIÒN</th>
+                                            <th>MONODROGA</th>
+                                            <th>DOSIS</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Insulina</td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Medicamentos Orales</td>
+                                            <td><input type="text" class="form-control"></td>
+                                            <td><input type="text" class="form-control"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal"><i
+                class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button> -->
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
+</div>

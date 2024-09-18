@@ -22,7 +22,13 @@
     "lib": [
       "ES2022",
       "dom"
-    ]
+    ],
+    "baseUrl": "./",
+    "paths": { //Rutas absolutas
+      "@models/*": ["src/app/models/*"],
+      "@services/*":["src/app/services/*"],
+      "@enum/*":["src/app/enum/*"] 
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
