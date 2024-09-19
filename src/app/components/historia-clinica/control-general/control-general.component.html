@@ -4,7 +4,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
-        <form>
+        <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
             <div id="header-component">
                 <div class="row">
                     <div class="col-xl-3">
@@ -42,39 +42,69 @@
                         <div class="row">
                             <div class="col-6">
                                 <label class="cform-label">Baño</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectBanio"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Vestido</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectVestido"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Uso del WC</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectWC"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Movilidad</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectMovilidad"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Continencia</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectContinencia"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Alimentación</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectAlimentacion"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                         </div>
                     </div>
