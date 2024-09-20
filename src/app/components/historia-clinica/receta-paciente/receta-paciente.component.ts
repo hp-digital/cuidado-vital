@@ -21,6 +21,7 @@ import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
 import { PacienteExternoDTO } from '@models/paciente-externo';
 import { MedicoAtiendeDTO } from '@models/medico-atiende';
 import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
+import { BusquedaOpenaiComponent } from '../../atenciones/busqueda-openai/busqueda-openai.component';
 
 @Component({
   selector: 'app-receta-paciente',
@@ -91,7 +92,7 @@ export class RecetaPacienteComponent implements OnInit{
     ])
       .subscribe(
         data => {
-          console.log("hcl", data[0]);
+
           this.AsignarObjetoInicial(data[0]);
           
           
@@ -519,6 +520,11 @@ export class RecetaPacienteComponent implements OnInit{
 
     this.objHistoria = historiaCalidad;
     
+  }
+
+  EnviarMensaje(codigoCie10:string, diagnostico:string){
+    this.bsModalReceta = this.modalService.show(BusquedaOpenaiComponent, { backdrop: 'static', class: 'modal-xl' });
+    this.bsModalReceta.content.AsignarDataConsulta(codigoCie10, diagnostico);
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

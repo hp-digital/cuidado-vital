@@ -1,0 +1,26 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Consulta con nuestra Inteligencia Artificial</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <!-- Formulario para ingresar el prompt -->
+            <form [formGroup]="dataFormGroup">
+              <div>
+                <label class="form-label">Escribe un texto o pregunta:</label>
+                <textarea class="form-control" rows="5" cols="40" formControlName="inputTexto"></textarea>
+              </div>
+              <div>
+                <button type="button" class="btn btn-green-light-custom" (click)="Consultar()">Consultar</button>
+              </div>
+            </form>
+          
+            <!-- Mostrar el texto generado -->
+            <div *ngIf="generatedText">
+              <h4>Respuesta:</h4>
+              <p>{{ generatedText }}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -39,7 +39,9 @@
                         <div class="col-xl-11">
                             <div class="col-xl-12 fw-bold">{{lista.TipoDiagnostico}}</div>
                             <div class="col-xl-12">{{lista.CodigoCie10}}</div>
-                            <div class="col-xl-12">{{lista.NombreDiagnostico}}</div>              
+                            <div class="col-xl-12">{{lista.NombreDiagnostico}} </div>    
+                            <br>
+                            <button type="button" class="btn btn-green-light-custom btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Consulta con IA" (click)="EnviarMensaje(lista.CodigoCie10, lista.NombreDiagnostico)"><i class="fas fa-lg fa-fw me-2 fa-eye"></i> I A</button>          
                         </div>
                     </div>
                 </div>
