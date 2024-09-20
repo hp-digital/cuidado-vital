@@ -464,6 +464,9 @@ export class HistoriaClinicaComponent implements OnInit {
     console.log("historia",this.objHistoria.HistoriaExterna);
     
   }
+  AbrirHistoria(url:string){
+    window.open(url, "_blank");
+}
 
   AbrirModalEditarPaciente() {
     this.bsModalRefEditarDatosGenerales = this.modalService.show(DatosPacienteComponent, { backdrop: 'static', class: 'modal-lg' });

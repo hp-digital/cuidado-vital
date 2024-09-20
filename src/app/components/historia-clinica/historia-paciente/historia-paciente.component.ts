@@ -15,6 +15,7 @@ import { ListadoBusquedaAtencionDTO } from '@models/ListadoBusquedaAtencionDTO';
 import { DetalleEstadoPacienteComponent } from '../detalle-estado-paciente/detalle-estado-paciente.component';
 import { RecetaComponent } from '../../receta/receta.component';
 import { ExamenAuxiliarComponent } from '../../examen-auxiliar/examen-auxiliar.component';
+import { RecetaPacienteComponent } from '../receta-paciente/receta-paciente.component';
 
 @Component({
   selector: 'app-historia-paciente',
@@ -152,8 +153,9 @@ export default class HistoriaPacienteComponent implements OnInit{
         this.obtenerHistoriaClinica(idHistoriaClinica);
       }; */
   }
-  AbrirRecetas(){
-    this.modalRef = this.modalReceta.show(RecetaComponent, { backdrop: 'static', class: 'modal-xl' })
+  AbrirRecetas(idHistoriaClinica:number){
+    this.modalRef = this.modalReceta.show(RecetaPacienteComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
 
   AbrirExamenAuxiliar(){

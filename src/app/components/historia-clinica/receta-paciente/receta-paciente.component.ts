@@ -4,32 +4,32 @@ import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AnamnesisDTO } from '@models/anamnesis';
+import { RecetaDTO } from '@models/RecetaDTO';
 import { DiagnosticoCuidadoDTO } from '@models/diagnostico-cuidado';
-import { ExamenFisicoDTO } from '@models/examen-fisico';
 import { ExamenRegionalDTO } from '@models/examen-regional';
+import { ExamenFisicoDTO } from '@models/examen-fisico';
 import { FuncionBiologicaDTO } from '@models/funcion-biologica';
+import { AnamnesisDTO } from '@models/anamnesis';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
+import { ComboDTO } from '@models/ComboDTO';
 import { HistoriaExternaDTO } from '@models/historia-externa';
 import { SignoVitalDTO } from '@models/signo-vital';
-import { HistoriaService } from '@services/historia.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { HistoriaService } from '@services/historia.service';
+import { ControlGeneralDTO } from '@models/control-general';
 import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
 import { PacienteExternoDTO } from '@models/paciente-externo';
 import { MedicoAtiendeDTO } from '@models/medico-atiende';
 import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
-import { ComboDTO } from '@models/ComboDTO';
-import { RecetaDTO } from '@models/RecetaDTO';
-import { ControlGeneralDTO } from '@models/control-general';
 
 @Component({
-  selector: 'app-receta',
+  selector: 'app-receta-paciente',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule,FormsModule],
-  templateUrl: './receta.component.html',
-  styleUrl: './receta.component.css'
+  templateUrl: './receta-paciente.component.html',
+  styleUrl: './receta-paciente.component.css'
 })
-export class RecetaComponent implements OnInit {
+export class RecetaPacienteComponent implements OnInit{
 
   dataFormGroup: FormGroup;
 
@@ -68,13 +68,7 @@ export class RecetaComponent implements OnInit {
     private historiaService: HistoriaService
   ){
     this.dataFormGroup = new FormGroup({
-      selectBuscarMedicamento: new FormControl(),
-      inputNombreMedicamento: new FormControl(),
-      inputDosis: new FormControl(),
-      inputDuracion: new FormControl(),
-      selectDuracionDetalle: new FormControl(),
-      selectVia: new FormControl(),
-      textIndicaciones: new FormControl()
+
     });
   }
 
@@ -85,49 +79,6 @@ export class RecetaComponent implements OnInit {
     this.bsModalReceta.hide();
     //this.onGuardar();
   }
-
-  AgregarListadoReceta()
-  {
-    let indice = this.listadoRecetaDTO?.length;
-    let idMedicamento =  this.dataFormGroup.controls['selectBuscarMedicamento'].value;
-    let nombreMedicamento =  this.dataFormGroup.controls['inputNombreMedicamento'].value;
-    let dosis =  this.dataFormGroup.controls['inputDosis'].value;
-    let duracion =  this.dataFormGroup.controls['inputDuracion'].value;
-    let duracionDetalle =  this.dataFormGroup.controls['selectDuracionDetalle'].value;
-    let via =  this.dataFormGroup.controls['selectVia'].value;
-    let indicaciones =  this.dataFormGroup.controls['textIndicaciones'].value;
-
-    let receta = new RecetaDTO();
-    receta.Indice =indice;
-    receta.IdMedicamento =idMedicamento;
-    receta.NombreMedicamento =nombreMedicamento;
-    receta.Dosis =dosis;
-    receta.Duracion =duracion;
-    receta.DuracionDetalle =duracionDetalle;
-    receta.Via =via;
-    receta.Indicaciones =indicaciones;
-
-    this.listadoRecetaDTO.push(receta);
-    this.LimpiarMedicacion();
-  }
-  LimpiarMedicacion() {
-    this.dataFormGroup.controls['selectBuscarMedicamento'].setValue('');
-    this.dataFormGroup.controls['inputNombreMedicamento'].setValue('');
-    this.dataFormGroup.controls['inputDosis'].setValue('');
-    this.dataFormGroup.controls['inputDuracion'].setValue('');
-    this.dataFormGroup.controls['selectDuracionDetalle'].setValue('');
-    this.dataFormGroup.controls['selectVia'].setValue('');
-    this.dataFormGroup.controls['textIndicaciones'].reset();
-
-  }
-
-  cambiarNombreMedicamento($event: any) {
-      this.idMedicamento = this.dataFormGroup.controls['selectBuscarMedicamento'].value;
-      let resultado = this.comboMedicamento.filter(f => f.id == this.idMedicamento );
-      if (resultado.length != 0)
-        this.dataFormGroup.controls['inputNombreMedicamento'].setValue(resultado[0]['nombre']);
-  }
-
   AsignarObjetoListaPaciente(idHistoriaClinica:number){
     this.idHistoria=idHistoriaClinica;
     this.ObtenerConfiguracion();
@@ -136,14 +87,12 @@ export class RecetaComponent implements OnInit {
   ObtenerConfiguracion() {
     this.verSpinner = true;    
     forkJoin([
-      this.historiaService.ObtenerHistoriaClinica(this.idHistoria),
-      this.historiaService.ObtenerMedicamento()
+      this.historiaService.ObtenerHistoriaClinica(this.idHistoria)
     ])
       .subscribe(
         data => {
           console.log("hcl", data[0]);
           this.AsignarObjetoInicial(data[0]);
-          this.comboMedicamento = data[1];
           
           
           this.verSpinner = false;
@@ -153,28 +102,6 @@ export class RecetaComponent implements OnInit {
           this.verSpinner = false;
         }
       );
-  }
-
-  Guardar(){
-    this.objHistoria.Receta = this.listadoRecetaDTO;
-    console.log("historia guardar", this.objHistoria);
-    
-    if(this.listadoRecetaDTO.length>0){
-
-        this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
-          next: (data) => {
-            this.MostrarNotificacionSuccessModal('La historia se guardó con éxito.', '');
-          },
-          error: (e) => {
-            console.log('Error: ', e);
-            this.verSpinner = false;
-          },
-          complete: () => { this.verSpinner = false; }
-        });
-    }else{
-      this.MostrarNotificacionWarning("Ningún medicamento registrado", "Error");
-    }
-
   }
 
   AsignarObjetoInicial(data:any){
@@ -549,6 +476,25 @@ export class RecetaComponent implements OnInit {
         controlGeneral.push(control);
       });
     }
+
+    let recetaListado : RecetaDTO[]=[];
+    if(objHistoria.receta != null)
+    {
+      objHistoria.receta.forEach((element:any)=>{
+        let medi = new RecetaDTO();
+        medi.Indice = element.indice;
+        medi.IdMedicamento = element.idMedicamento;
+        medi.NombreMedicamento = element.nombreMedicamento;
+        medi.Dosis = element.dosis;
+        medi.Duracion = element.duracion;
+        medi.DuracionDetalle = element.duracionDetalle;
+        medi.Via = element.via;
+        medi.Indicaciones = element.indicaciones;
+        recetaListado.push(medi);
+      });
+    }
+
+    this.listadoRecetaDTO = recetaListado;
     
     externo.Diagnostico = diagnosticoDTO;
     externo.PlanTrabajo = objHistoria.historiaExterna.planTrabajo;

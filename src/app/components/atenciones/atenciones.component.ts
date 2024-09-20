@@ -174,8 +174,9 @@ export default class AtencionesComponent implements OnInit{
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 
-  AbrirRecetas(){
+  AbrirRecetas(idHistoriaClinica:number){
     this.modalRef = this.modalReceta.show(RecetaComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
 
   AbrirExamenAuxiliar(){

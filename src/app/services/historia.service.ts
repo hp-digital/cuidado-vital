@@ -48,4 +48,8 @@ export class HistoriaService {
       catchError(this.handleError)
     );
   }
+
+  ObtenerMedicamento(): Observable<ComboDTO[]>{
+    return this.http.get<ComboDTO[]>(`${API_URL}Medicamento/ObtenerComboMedicamento`)
+  }
 }
