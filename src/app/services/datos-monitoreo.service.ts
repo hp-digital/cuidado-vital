@@ -1,29 +1,32 @@
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ComboKatzDTO } from '@models/comboKatzDTO';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
+const API_URL = environment.apiUrl; 
 @Injectable({
   providedIn: 'root'
 })
 export class DatosMonitoreoService {
   ObtenerAlimentacion(): Observable<ComboKatzDTO[]> {
-    throw new Error('Method not implemented.');
+        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboAlimentacion`)
   }
   ObtenerContinencia(): Observable<ComboKatzDTO[]> {
-    throw new Error('Method not implemented.');
+        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboContinencia`)
   }
   ObtenerMovilidad(): Observable<ComboKatzDTO[]> {
-    throw new Error('Method not implemented.');
+        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboMovilidad`)
   }
   ObtenerWC(): Observable<ComboKatzDTO[]> {
-    throw new Error('Method not implemented.');
+        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboWC`)
   }
   ObtenerVestido(): Observable<ComboKatzDTO[]> {
-    throw new Error('Method not implemented.');
+        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboVestido`)
   }
   ObtenerBanio(): Observable<ComboKatzDTO[]> {
-    throw new Error('Method not implemented.');
+    return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboBanio`)
   }
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 }
