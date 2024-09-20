@@ -2,18 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { NotaEnfermeraComponent } from '../historia-clinica/nota-enfermera/nota-enfermera.component';
-import { ActividadTecnicaComponent } from '../historia-clinica/actividad-tecnica/actividad-tecnica.component';
-import { EpicrisisComponent } from '../historia-clinica/epicrisis/epicrisis.component';
-import { ControlGeneralComponent } from '../historia-clinica/control-general/control-general.component';
-import { ControlGlucosaComponent } from '../historia-clinica/control-glucosa/control-glucosa.component';
-import { ControlPresionComponent } from '../historia-clinica/control-presion/control-presion.component';
-import { ControlEpocComponent } from '../historia-clinica/control-epoc/control-epoc.component';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HistoriaService } from '@services/historia.service';
 import { AnamnesisDTO } from '@models/anamnesis';
 import { FuncionBiologicaDTO } from '@models/funcion-biologica';
 import { ExamenFisicoDTO } from '@models/examen-fisico';
@@ -21,25 +10,29 @@ import { SignoVitalDTO } from '@models/signo-vital';
 import { ExamenRegionalDTO } from '@models/examen-regional';
 import { DiagnosticoCuidadoDTO } from '@models/diagnostico-cuidado';
 import { HistoriaExternaDTO } from '@models/historia-externa';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { HistoriaService } from '@services/historia.service';
 import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
 import { MedicoAtiendeDTO } from '@models/medico-atiende';
 import { PacienteExternoDTO } from '@models/paciente-externo';
 import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
+import { ControlGeneralDTO } from '@models/control-general';
 
 @Component({
-  selector: 'app-cuadro-controles',
+  selector: 'app-detalle-estado-paciente',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule,FormsModule],
-  templateUrl: './cuadro-controles.component.html',
-  styleUrl: './cuadro-controles.component.css'
+  templateUrl: './detalle-estado-paciente.component.html',
+  styleUrl: './detalle-estado-paciente.component.css'
 })
-export default class CuadroControlesComponent implements OnInit {
+export class DetalleEstadoPacienteComponent implements OnInit{
 
   idHistoria:number=0;
   verSpinner:boolean = false;
 
   objHistoria=new HistoriaCuidadoDTO();
-
 
   objAnamnesis = new AnamnesisDTO();
   objFuncionBiologica = new FuncionBiologicaDTO();
@@ -48,17 +41,21 @@ export default class CuadroControlesComponent implements OnInit {
   objExamenRegional = new ExamenRegionalDTO();
   objDiagnostico : DiagnosticoCuidadoDTO[]=[];
   objHistoriaExterna = new HistoriaExternaDTO();
+  objControlGeneral : ControlGeneralDTO[]=[];
+
+  paciente:string ='';
+  medico:string='';
+  nroHcl:string='';
+  fechaHistoria:string='';
+  fechaNacimientoPaciente:string='';
+  celularPaciente:string='';
+  emailPaciente:string='';
+  direccionPaciente:string='';
+  procedencia:string='';
 
   constructor(
-    private modalCuadroControl: BsModalRef,
+    private modalRef: BsModalRef,
     private modalService: BsModalService,
-    private modalNotaEnfermera: BsModalService,
-    private modalPersonalTecnica: BsModalService,
-    private modalEpicrisis: BsModalService,
-    private modalControlGlucosa: BsModalService,
-    private modalControlPresion: BsModalService,
-    private modalControlGeneral: BsModalService,
-    private modalControlEpoc: BsModalService,
     private historiaService: HistoriaService
   ){
 
@@ -68,13 +65,10 @@ export default class CuadroControlesComponent implements OnInit {
     
   }
 
-  CerrarModal() {
-    this.modalCuadroControl.hide();
-    //this.onGuardar();
-  }
 
-  AsignarHistoriaClinica(idHistoriaClinica:number){
-    this.idHistoria=idHistoriaClinica;
+  AsignarObjetoListaPaciente(idHistoria:number)
+  {
+    this.idHistoria=idHistoria;
     this.ObtenerConfiguracion();
   }
 
@@ -101,6 +95,16 @@ export default class CuadroControlesComponent implements OnInit {
   AsignarObjetoInicial(data:any){
     this.verSpinner = true;
     let objHistoria: any = data;
+    this.paciente = objHistoria.historiaExterna.paciente.apellidoPaterno+' '+objHistoria.historiaExterna.paciente.apellidoMaterno+', '+objHistoria.historiaExterna.paciente.nombres;
+    this.medico = objHistoria.historiaExterna.medico.apellidoPaterno+' '+objHistoria.historiaExterna.medico.apellidoMaterno+', '+objHistoria.historiaExterna.medico.nombres;
+    this.nroHcl = objHistoria.historiaExterna.paciente.numeroDocumento;
+    this.fechaHistoria = objHistoria.fechaInicioAtencion ;
+    this.fechaNacimientoPaciente = objHistoria.historiaExterna.fechaNacimiento;
+    this.celularPaciente = objHistoria.historiaExterna.paciente.celular ;
+    this.emailPaciente = objHistoria.historiaExterna.paciente.email ;
+    this.direccionPaciente = objHistoria.historiaExterna.paciente.direccion ;
+    this.procedencia = objHistoria.historiaExterna.razonSocial;
+
 
     let cabecera = new CabeceraPacienteDTO();
     if(objHistoria.cabeceraPaciente != null)
@@ -429,7 +433,42 @@ export default class CuadroControlesComponent implements OnInit {
       });
     }
     this.objDiagnostico = diagnosticoDTO;
-    
+
+    let controlGeneral : ControlGeneralDTO[]=[];
+    if(objHistoria.controlGeneral != null)
+    {
+      objHistoria.controlGeneral.forEach((element:any)=>{
+        let control = new ControlGeneralDTO();
+        control.Paciente = element.paciente ;
+        control.Alergias = element.alergias ;
+        control.EscalaKatz = element.escalaKatz ;
+        control.Temperatura = element.temperatura ;
+        control.FrecuenciaCardiaca = element.frecuenciaCardiaca ;
+        control.FrecuenciaRespiratoria = element.frecuenciaRespiratoria ;
+        control.PresionArterialSistolicaDistolica = element.presionArterialSistolicaDistolica ;
+        control.SaturacionOxigeno = element.saturacionOxigeno ;
+        control.Talla = element.talla ;
+        control.Peso = element.peso ;
+        control.IMC = element.iMC ;
+        control.EstadoMental = element.estadoMental ;
+        control.EstadoMentalDetalle = element.estadoMentalDetalle ;
+        control.EstadoNutricional = element.estadoNutricional ;
+        control.EstadoNutricionalDetalle = element.estadoNutricionalDetalle ;
+        control.EstadoPsicosocial = element.estadoPsicosocial ;
+        control.EstadoPsicosocialDetalle = element.estadoPsicosocialDetalle ;
+        control.EstadoVision = element.estadoVision ;
+        control.EstadoVisionDetalle = element.estadoVisionDetalle ;
+        control.EstadoAudicion = element.estadoAudicion ;
+        control.EstadoAudicionDetalle = element.estadoAudicionDetalle ;
+        control.PlanTrabajo = element.planTrabajo ;
+
+        controlGeneral.push(control);
+      });
+      
+    }
+    this.objControlGeneral = controlGeneral;
+    console.log("ctrol", this.objControlGeneral)
+
     externo.Diagnostico = diagnosticoDTO;
     externo.PlanTrabajo = objHistoria.historiaExterna.planTrabajo;
     externo.UrlPdfHistoriaClinica = objHistoria.historiaExterna.urlPdfHistoriaClinica;
@@ -451,39 +490,15 @@ export default class CuadroControlesComponent implements OnInit {
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;
+
+    console.log("historia",this.objHistoria.HistoriaExterna);
     
   }
 
-  AbrirNotaEnfermera(){
 
-    this.modalCuadroControl = this.modalNotaEnfermera.show(NotaEnfermeraComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-
-  AbrirActividadTecnica(){
-
-    this.modalCuadroControl = this.modalPersonalTecnica.show(ActividadTecnicaComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-
-  AbrirEpicrisis(){
-
-    this.modalCuadroControl = this.modalEpicrisis.show(EpicrisisComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-
-  AbrirControlGlucosa(){
-    this.modalCuadroControl = this.modalControlGlucosa.show(ControlGlucosaComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-  AbrirControlPresion(){
-    this.modalCuadroControl = this.modalControlPresion.show(ControlPresionComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-  AbrirControlGeneral(){
-    this.modalCuadroControl = this.modalControlGeneral.show(ControlGeneralComponent, { backdrop: 'static', class: 'modal-xl' })
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
-    this.modalCuadroControl.content.onGuardar = () => {
-      //this.obtenerHistoriaClinica(this.objListaPaciente.idHistoriaClinica);
-    };
-  }
-  AbrirControlEpoc(){
-    this.modalCuadroControl = this.modalControlEpoc.show(ControlEpocComponent, { backdrop: 'static', class: 'modal-xl' })
+  CerrarModal() {
+    this.modalRef.hide();
+    //this.onGuardar();
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

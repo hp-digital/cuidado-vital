@@ -1,45 +1,44 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { NotaEnfermeraComponent } from '../historia-clinica/nota-enfermera/nota-enfermera.component';
-import { ActividadTecnicaComponent } from '../historia-clinica/actividad-tecnica/actividad-tecnica.component';
-import { EpicrisisComponent } from '../historia-clinica/epicrisis/epicrisis.component';
-import { ControlGeneralComponent } from '../historia-clinica/control-general/control-general.component';
-import { ControlGlucosaComponent } from '../historia-clinica/control-glucosa/control-glucosa.component';
-import { ControlPresionComponent } from '../historia-clinica/control-presion/control-presion.component';
-import { ControlEpocComponent } from '../historia-clinica/control-epoc/control-epoc.component';
-import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HistoriaService } from '@services/historia.service';
-import { AnamnesisDTO } from '@models/anamnesis';
-import { FuncionBiologicaDTO } from '@models/funcion-biologica';
-import { ExamenFisicoDTO } from '@models/examen-fisico';
-import { SignoVitalDTO } from '@models/signo-vital';
-import { ExamenRegionalDTO } from '@models/examen-regional';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RecetaDTO } from '@models/RecetaDTO';
 import { DiagnosticoCuidadoDTO } from '@models/diagnostico-cuidado';
+import { ExamenRegionalDTO } from '@models/examen-regional';
+import { ExamenFisicoDTO } from '@models/examen-fisico';
+import { FuncionBiologicaDTO } from '@models/funcion-biologica';
+import { AnamnesisDTO } from '@models/anamnesis';
+import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
+import { ComboDTO } from '@models/ComboDTO';
 import { HistoriaExternaDTO } from '@models/historia-externa';
-import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
-import { MedicoAtiendeDTO } from '@models/medico-atiende';
-import { PacienteExternoDTO } from '@models/paciente-externo';
+import { SignoVitalDTO } from '@models/signo-vital';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { HistoriaService } from '@services/historia.service';
+import { ControlGeneralDTO } from '@models/control-general';
 import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
+import { PacienteExternoDTO } from '@models/paciente-externo';
+import { MedicoAtiendeDTO } from '@models/medico-atiende';
+import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
+import { BusquedaOpenaiComponent } from '../../atenciones/busqueda-openai/busqueda-openai.component';
 
 @Component({
-  selector: 'app-cuadro-controles',
+  selector: 'app-receta-paciente',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule,FormsModule],
-  templateUrl: './cuadro-controles.component.html',
-  styleUrl: './cuadro-controles.component.css'
+  templateUrl: './receta-paciente.component.html',
+  styleUrl: './receta-paciente.component.css'
 })
-export default class CuadroControlesComponent implements OnInit {
+export class RecetaPacienteComponent implements OnInit{
 
+  dataFormGroup: FormGroup;
+
+  comboMedicamento: ComboDTO[]=[];
   idHistoria:number=0;
   verSpinner:boolean = false;
 
   objHistoria=new HistoriaCuidadoDTO();
-
 
   objAnamnesis = new AnamnesisDTO();
   objFuncionBiologica = new FuncionBiologicaDTO();
@@ -49,31 +48,39 @@ export default class CuadroControlesComponent implements OnInit {
   objDiagnostico : DiagnosticoCuidadoDTO[]=[];
   objHistoriaExterna = new HistoriaExternaDTO();
 
+  idMedicamento:number=0;
+  nombreMedicamento:string='';
+
+  paciente:string ='';
+  medico:string='';
+  nroHcl:string='';
+  fechaHistoria:string='';
+  fechaNacimientoPaciente:string='';
+  celularPaciente:string='';
+  emailPaciente:string='';
+  direccionPaciente:string='';
+  procedencia:string='';
+
+  listadoRecetaDTO: RecetaDTO[] = [];
+
   constructor(
-    private modalCuadroControl: BsModalRef,
     private modalService: BsModalService,
-    private modalNotaEnfermera: BsModalService,
-    private modalPersonalTecnica: BsModalService,
-    private modalEpicrisis: BsModalService,
-    private modalControlGlucosa: BsModalService,
-    private modalControlPresion: BsModalService,
-    private modalControlGeneral: BsModalService,
-    private modalControlEpoc: BsModalService,
+    private bsModalReceta: BsModalRef,
     private historiaService: HistoriaService
   ){
+    this.dataFormGroup = new FormGroup({
 
+    });
   }
 
   ngOnInit(): void {
     
   }
-
   CerrarModal() {
-    this.modalCuadroControl.hide();
+    this.bsModalReceta.hide();
     //this.onGuardar();
   }
-
-  AsignarHistoriaClinica(idHistoriaClinica:number){
+  AsignarObjetoListaPaciente(idHistoriaClinica:number){
     this.idHistoria=idHistoriaClinica;
     this.ObtenerConfiguracion();
   }
@@ -85,7 +92,7 @@ export default class CuadroControlesComponent implements OnInit {
     ])
       .subscribe(
         data => {
-          console.log("hcl", data[0]);
+
           this.AsignarObjetoInicial(data[0]);
           
           
@@ -101,6 +108,16 @@ export default class CuadroControlesComponent implements OnInit {
   AsignarObjetoInicial(data:any){
     this.verSpinner = true;
     let objHistoria: any = data;
+    this.paciente = objHistoria.historiaExterna.paciente.apellidoPaterno+' '+objHistoria.historiaExterna.paciente.apellidoMaterno+', '+objHistoria.historiaExterna.paciente.nombres;
+    this.medico = objHistoria.historiaExterna.medico.apellidoPaterno+' '+objHistoria.historiaExterna.medico.apellidoMaterno+', '+objHistoria.historiaExterna.medico.nombres;
+    this.nroHcl = objHistoria.historiaExterna.paciente.numeroDocumento;
+    this.fechaHistoria = objHistoria.fechaInicioAtencion ;
+    this.fechaNacimientoPaciente = objHistoria.historiaExterna.fechaNacimiento;
+    this.celularPaciente = objHistoria.historiaExterna.paciente.celular ;
+    this.emailPaciente = objHistoria.historiaExterna.paciente.email ;
+    this.direccionPaciente = objHistoria.historiaExterna.paciente.direccion ;
+    this.procedencia = objHistoria.historiaExterna.razonSocial;
+
 
     let cabecera = new CabeceraPacienteDTO();
     if(objHistoria.cabeceraPaciente != null)
@@ -429,6 +446,56 @@ export default class CuadroControlesComponent implements OnInit {
       });
     }
     this.objDiagnostico = diagnosticoDTO;
+
+    let controlGeneral : ControlGeneralDTO[]=[];
+    if(objHistoria.controlGeneral != null)
+    {
+      objHistoria.controlGeneral.forEach((element:any)=>{
+        let control = new ControlGeneralDTO();
+        control.Paciente =element.paciente;
+        control.Alergias =element.alergias;
+        control.EscalaKatz =element.escalaKatz;
+        control.Temperatura =element.temperatura;
+        control.FrecuenciaCardiaca =element.frecuenciaCardiaca;
+        control.FrecuenciaRespiratoria =element.frecuenciaRespiratoria;
+        control.PresionArterialSistolicaDistolica =element.presionArterialSistolicaDistolica;
+        control.SaturacionOxigeno =element.saturacionOxigeno;
+        control.Talla =element.talla;
+        control.Peso =element.peso;
+        control.IMC =element.imc;
+        control.EstadoMental =element.estadoMental;
+        control.EstadoMentalDetalle =element.estadoMentalDetalle;
+        control.EstadoNutricional =element.estadoNutricional;
+        control.EstadoNutricionalDetalle =element.estadoNutricionalDetalle;
+        control.EstadoPsicosocial =element.estadoPsicosocial;
+        control.EstadoPsicosocialDetalle =element.estadoPsicosocialDetalle;
+        control.EstadoVision =element.estadoVision;
+        control.EstadoVisionDetalle =element.estadoVisionDetalle;
+        control.EstadoAudicion =element.estadoAudicion;
+        control.EstadoAudicionDetalle =element.estadoAudicionDetalle;
+        control.PlanTrabajo =element.planTrabajo;
+        controlGeneral.push(control);
+      });
+    }
+
+    let recetaListado : RecetaDTO[]=[];
+    if(objHistoria.receta != null)
+    {
+      objHistoria.receta.forEach((element:any)=>{
+        let medi = new RecetaDTO();
+        medi.Indice = element.indice;
+        medi.IdMedicamento = element.idMedicamento;
+        medi.NombreMedicamento = element.nombreMedicamento;
+        medi.Dosis = element.dosis;
+        medi.Duracion = element.duracion;
+        medi.DuracionDetalle = element.duracionDetalle;
+        medi.Via = element.via;
+        medi.Indicaciones = element.indicaciones;
+        recetaListado.push(medi);
+      });
+    }
+
+    this.listadoRecetaDTO = recetaListado;
     
     externo.Diagnostico = diagnosticoDTO;
     externo.PlanTrabajo = objHistoria.historiaExterna.planTrabajo;
@@ -448,42 +515,16 @@ export default class CuadroControlesComponent implements OnInit {
     historiaCalidad.UsuarioModificacion = objHistoria.usuarioModificacion;
     historiaCalidad.FechaCreacion = objHistoria.fechaCreacion;
     historiaCalidad.FechaModificacion = objHistoria.fechaModificacion;
+    historiaCalidad.ControlGeneral = controlGeneral
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;
     
   }
 
-  AbrirNotaEnfermera(){
-
-    this.modalCuadroControl = this.modalNotaEnfermera.show(NotaEnfermeraComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-
-  AbrirActividadTecnica(){
-
-    this.modalCuadroControl = this.modalPersonalTecnica.show(ActividadTecnicaComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-
-  AbrirEpicrisis(){
-
-    this.modalCuadroControl = this.modalEpicrisis.show(EpicrisisComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-
-  AbrirControlGlucosa(){
-    this.modalCuadroControl = this.modalControlGlucosa.show(ControlGlucosaComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-  AbrirControlPresion(){
-    this.modalCuadroControl = this.modalControlPresion.show(ControlPresionComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-  AbrirControlGeneral(){
-    this.modalCuadroControl = this.modalControlGeneral.show(ControlGeneralComponent, { backdrop: 'static', class: 'modal-xl' })
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
-    this.modalCuadroControl.content.onGuardar = () => {
-      //this.obtenerHistoriaClinica(this.objListaPaciente.idHistoriaClinica);
-    };
-  }
-  AbrirControlEpoc(){
-    this.modalCuadroControl = this.modalControlEpoc.show(ControlEpocComponent, { backdrop: 'static', class: 'modal-xl' })
+  EnviarMensaje(codigoCie10:string, diagnostico:string){
+    this.bsModalReceta = this.modalService.show(BusquedaOpenaiComponent, { backdrop: 'static', class: 'modal-xl' });
+    this.bsModalReceta.content.AsignarDataConsulta(codigoCie10, diagnostico);
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

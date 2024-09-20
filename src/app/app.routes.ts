@@ -38,6 +38,11 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path:'historia-paciente',
+                loadComponent:() => import('./components/historia-clinica/historia-paciente/historia-paciente.component'),
+                canActivate: [AuthGuard]
+            },
+            {
                 path:'',
                 redirectTo:'dashboard',
                 pathMatch:'full',

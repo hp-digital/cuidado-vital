@@ -17,6 +17,12 @@
                     <span class="menu-text">PACIENTES</span> 
                 </a>
             </div>
+            <div class="menu-item" *ngIf="idRol==3">
+                <a href="/historia-paciente" class="menu-link">
+                    <span class="menu-icon"><i class="fa fa-chevron-right"></i></span>
+                    <span class="menu-text">HISTORIAS</span> 
+                </a>
+            </div>
             <div class="menu-item" *ngIf="idRol==4">
                 <a href="/servicios" class="menu-link">
                     <span class="menu-icon"><i class="fa fa-chevron-right"></i></span>
@@ -32,7 +38,7 @@
             <div class="menu-item" *ngIf="idRol==4 || idRol==3">
                 <a href="/convenio" class="menu-link">
                     <span class="menu-icon"><i class="fa fa-chevron-right"></i></span>
-                    <span class="menu-text">BUSQUEDA DE AFILIADOS</span> 
+                    <span class="menu-text">DIRECTORIO</span> 
                 </a>
             </div>
             <div class="menu-item has-sub" *ngIf="idRol==4">

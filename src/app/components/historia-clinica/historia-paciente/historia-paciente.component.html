@@ -2,7 +2,7 @@
 			
     <div class="card">
       <div class="card-header">
-          <div class="header-card-table">ATENCIONES</div>
+          <div class="header-card-table">LISTADO DE ATENCIONES</div>
       </div>
       <div class="card-body">	
         <form [formGroup]="dataFormGroup">			
@@ -21,18 +21,12 @@
                               <input type="date" class="form-control" formControlName="inputFechaFin"/>
                           </div>
                       </div>
-                      <div class="col-xl-2">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3" for="">Nro Documento</label>
-                            <input type="text" class="form-control" formControlName="inputNumeroDocumento"/>
-                        </div>
-                    </div>
                       <div class="col-xl-4">
                           <div class="form-group mb-3">
-                              <label class="form-label mb-3" for="">Paciente</label>
-                              <select class="form-select" formControlName="inputPaciente">
-                                <option *ngFor="let combo of comboPaciente" [value]="combo.id">
-                                    {{combo.nombre}}
+                              <label class="form-label mb-3" for="">Médico</label>
+                              <select class="form-select" formControlName="inputMedico">
+                                <option *ngFor="let combo of comboMedico" [value]="combo.id">
+                                    {{combo.medico}}
                                 </option>	
                             </select>
                           </div>
@@ -64,7 +58,7 @@
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
                         </div>
                         <div class="col-xl-12">
-                            <p><strong>PACIENTE: </strong> {{lista.paciente}}</p>
+                            <p><strong>MEDICO: </strong> {{lista.paciente}}</p>
                         </div>
                         <div class="col-xl-12">
                             <p><strong>NRO DOCUMENTO: </strong> {{lista.numeroDocumento}}</p>
@@ -81,7 +75,7 @@
                     <div class="row">
                         <div class="col-xl-6">
                             <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlSeguimiento()">Control de seguimiento</button>
+                                <!-- <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlSeguimiento()">Control de seguimiento</button> -->
                                 <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar()">Examenes auxiliares</button>
                                 <button type="button" class="btn btn-green-custom btn-sm">Estados</button>
                             </div>
@@ -90,7 +84,7 @@
                             <div class="d-grid gap-2">
                                 <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirHistoria(lista.idHistoriaClinica)">Historial de atención</button>
                                 <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirRecetas(lista.idHistoriaClinica)">Recetas</button>
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControles(lista.idHistoriaClinica)">Datos monitoreo</button>
+                                <!-- <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControles(lista.idHistoriaClinica)">Datos monitoreo</button> -->
                             </div>
                         </div>
                     </div>

@@ -39,4 +39,17 @@ export class HistoriaService {
     return this.http.get<HistoriaCuidadoDTO>(`${API_URL}HistoriaClinicaExterna/ObtenerHistoriaId?id=${id}`)
       .pipe(catchError(this.handleError));
   }
+  
+  public ActualizarHistoria(data: HistoriaCuidadoDTO) {
+    const url = `${API_URL}HistoriaClinicaExterna/HistoriaClinica`;
+    return this.http.put(url, data, { headers: this.headers }).pipe(
+      timeout(this.nTimeout),
+      retry(this.nRetry),
+      catchError(this.handleError)
+    );
+  }
+
+  ObtenerMedicamento(): Observable<ComboDTO[]>{
+    return this.http.get<ComboDTO[]>(`${API_URL}Medicamento/ObtenerComboMedicamento`)
+  }
 }
