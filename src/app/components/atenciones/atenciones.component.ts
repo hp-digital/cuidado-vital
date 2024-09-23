@@ -146,6 +146,35 @@ export default class AtencionesComponent implements OnInit{
     }
   }
 
+  AbrirPdf(idHistoria:number){
+
+    this.historiaService.ObtenerHistoriaClinica(idHistoria)
+    .subscribe(
+      data => {
+        console.log("hcl", data);
+        this.AsignarPdf(data);
+
+        this.verSpinner = false;
+      },
+      err => {
+        this.MostrarNotificacionError('Intente de nuevo.', '¡ERROR EN EL PROCESO!')
+        this.verSpinner = false;
+      }
+    );
+
+  }
+
+  AsignarPdf(data:any){
+    let objHistoria: any = data;
+
+    let url = objHistoria.historiaExterna.urlPdfHistoriaClinica;
+    if(url != " ")
+      {window.open(url, "_blank");}
+    else{
+      this.MostrarNotificacionError("No se encuentra el PDF de la Historia Clinica", "Error")
+    }
+  }
+
   Limpiar() {
     this.dataFormGroup.reset();
 /*     this.paciente = "";

@@ -61,7 +61,7 @@
                             <p><strong>FECHA HISTORIA: </strong>{{lista.fechaInicioAtencion  | date: 'yyyy-MM-dd'}}</p>
                         </div>
                         <div class="col-xl-2 text-end">
-                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir" (click)="AbrirPdf(lista.idHistoriaClinica)"><i class="fas fa-lg fa-print"></i></button>
                         </div>
                         <div class="col-xl-12">
                             <p><strong>PACIENTE: </strong> {{lista.paciente}}</p>
