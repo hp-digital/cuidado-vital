@@ -4,7 +4,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
-        <form>
+        <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
             <div id="header-component">
                 <div class="row">
                     <div class="col-xl-12">
@@ -34,22 +34,22 @@
                             <div class="row">
                                 <div class="col-4">
                                     <label class="cform-label">Fecha</label>
-                                    <input type="date" class="form-control" id="">
+                                    <input type="date" class="form-control" id="" formControlName="inputFecha">
                                 </div>
                                 <div class="col-8">
                                     <label class="cform-label">PA (Sistolica/diastolica) (mmHg)</label>
-                                    <input type="text" class="form-control" id="">
-                                </div>
+                                    <input type="text" class="form-control" id="" formControlName="inputPA">
+                                </div>  
                                 <div class="col-4">
                                     <label class="cform-label">FR (min)</label>
-                                    <input type="text" class="form-control" id="">
+                                    <input type="text" class="form-control" id="" formControlName="inputFR">
                                 </div>
                                 <div class="col-4">
                                     <label class="cform-label">Pulso</label>
-                                    <input type="text" class="form-control" id="">
+                                    <input type="text" class="form-control" id="" formControlName="inputPulso">
                                 </div>
                                 <div class="col-4 d-flex align-items-center">
-                                    <button type="button" class="btn btn-sm btn-green-custom mt-3">+ AGREGAR</button>
+                                    <button type="button" class="btn btn-sm btn-green-custom mt-3" (click)="AgregarMedidasPresion()">+ AGREGAR</button>
                                 </div>
                             </div>
                         </div>
@@ -70,26 +70,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>DD/MM/AA</td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td>HIPOTENSION</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DD/MM/AA</td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td>HIPOTENSION</td>
-                                    </tr>
-                                    <tr>
-                                        <td>DD/MM/AA</td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td><input type="text" class="form-control"></td>
-                                        <td>HIPOTENSION</td>
+                                    <tr *ngFor="let p of medidasPresion">
+                                        <td>{{ p.fecha }}</td>
+                                        <td><input type="text" class="form-control" value="{{ p.pa }}"></td>
+                                        <td><input type="text" class="form-control" value="{{ p.fr }}"></td>
+                                        <td><input type="text" class="form-control" value="{{ p.pulso }}"></td>
+                                        <td>{{ p.estado }}</td>
                                     </tr>
                                 </tbody>
                             </table>

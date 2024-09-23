@@ -39,9 +39,94 @@
                 <div class="row">
                     <div class="col-12">
                         <h6>Escala de Katz*</h6>
-                        
-                        
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="cform-label">Baño</label>
+                                <p-dropdown 
+                                    formControlName="selectBanio"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
+                            </div>
+                            <div class="col-6">
+                                <label class="cform-label">Vestido</label>
+                                <p-dropdown 
+                                    formControlName="selectVestido"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
+                            </div>
+                            <div class="col-6">
+                                <label class="cform-label">Uso del WC</label>
+                                <p-dropdown 
+                                    formControlName="selectWC"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
+                            </div>
+                            <div class="col-6">
+                                <label class="cform-label">Movilidad</label>
+                                <p-dropdown 
+                                    formControlName="selectMovilidad"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
+                            </div>
+                            <div class="col-6">
+                                <label class="cform-label">Continencia</label>
+                                <p-dropdown 
+                                    formControlName="selectContinencia"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
+                            </div>
+                            <div class="col-6">
+                                <label class="cform-label">Alimentación</label>
+                                <p-dropdown 
+                                    formControlName="selectAlimentacion"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h6>Resultado Escala de Katz</h6>
+                        <div class="form-group">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="rad-katz" type="radio" id=""
+                                    value="option1" checked>
+                                <label class="form-check-label" for="">Dependiente</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="rad-katz" type="radio" id=""
+                                    value="option1">
+                                <label class="form-check-label" for="">Independiente</label>
+                            </div>
+                        </div>
                         <textarea name="" id="" class="form-control" formControlName="inputEscalaKatz"></textarea>
+
                     </div>
                 </div>
 
@@ -86,21 +171,102 @@
                 </div>
 
                 <div class="row">
+                    <div class="col-12">
+                        <h6>Valoraciòn Mental y Emocional*</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-borderless">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th></th>
+                                        <th>Resp. Adecuada</th>
+                                        <th>Resp. Equivocada</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <tr>
+                                        <td class="text-left">¿Què fecha es Hoy? (dd/mm/aa)</td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">¿Que dia de la Semana es?</td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">¿En que lugar estamos?</td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">¿Cúal es su numero de telefono?</td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">¿Cúal es su direccion completa?</td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">¿Cuantos años tiene?</td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">¿Donde Nacio?</td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">¿Cual es el nombre del presidente?</td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-left">Digame el primer apellido de su madre</td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
                     <div class="col-xl-12">
                         <div class="form-group mb-3">
-                            <label class="cform-label block">Estado de Mental y Emocional*</label>
+                            <label class="cform-label block">Resultado de Valoracion Mental</label>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-mental" type="radio" id=""
+                                <input class="form-check-input" name="rad-valoracionmental" type="radio" id=""
                                     value="option1" checked>
                                 <label class="form-check-label" for="">Normal</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-mental" type="radio" id=""
+                                <input class="form-check-input" name="rad-valoracionmental" type="radio" id=""
                                     value="option1">
                                 <label class="form-check-label" for="">Alterado</label>
                             </div>
                         </div>
                         <textarea name="" id="" class="form-control" formControlName="inputEstadoMentalDetalle"></textarea>
+                    </div>
+                    <div class="col-xl-12 mt-3">
+                        <div class="form-group mb-3">
+                            <label class="cform-label block">Caida dentro de los 6 meses</label>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="rad-caida" type="radio" id=""
+                                    value="option1" checked>
+                                <label class="form-check-label" for="">NO</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" name="rad-caida" type="radio" id=""
+                                    value="option1">
+                                <label class="form-check-label" for="">SI</label>
+                            </div>
+                        </div>
+                        <textarea name="" id="" class="form-control"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">

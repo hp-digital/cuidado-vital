@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AnamnesisDTO } from '@models/anamnesis';
 import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
 import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
@@ -17,25 +17,43 @@ import { MedicoAtiendeDTO } from '@models/medico-atiende';
 import { PacienteExternoDTO } from '@models/paciente-externo';
 import { SignoVitalDTO } from '@models/signo-vital';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ComboKatzDTO } from '@models/comboKatzDTO';
+import { DropdownModule } from 'primeng/dropdown';
+import { DatosMonitoreoService } from '@services/datos-monitoreo.service';
 import { ControlGeneralDTO } from '@models/control-general';
 import { HistoriaService } from '@services/historia.service';
+
 
 @Component({
   selector: 'app-control-general',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [
+    ReactiveFormsModule,
+    FormsModule,
+    DropdownModule
+  ],
   templateUrl: './control-general.component.html',
-  styleUrl: './control-general.component.css'
+  styles: [`
+    :host ::ng-deep ul{
+        padding-left:0 !important;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    :host ::ng-deep th{
+      border: none;
+    }
+    :host ::ng-deep .p-autocomplete-multiple-container{
+      width:100% 
+    }
+`],
 })
-export class ControlGeneralComponent implements OnInit {
 
+export class ControlGeneralComponent implements OnInit {
   dataFormGroup: FormGroup;
 
   idHistoria:number=0;
   verSpinner:boolean = false;
-
   objHistoria=new HistoriaCuidadoDTO();
-
   objAnamnesis = new AnamnesisDTO();
   objFuncionBiologica = new FuncionBiologicaDTO();
   objExamenFisico = new ExamenFisicoDTO();
@@ -56,9 +74,18 @@ export class ControlGeneralComponent implements OnInit {
   direccionPaciente:string='';
   procedencia:string='';
 
+  public onGuardar: any;
+  comboBanio: ComboKatzDTO[] = [];
+  comboVestido: ComboKatzDTO[] = [];
+  comboWC: ComboKatzDTO[] = [];
+  comboMovilidad: ComboKatzDTO[] = [];
+  comboContinencia: ComboKatzDTO[] = [];
+  comboAlimentacion: ComboKatzDTO[] = [];
+
   constructor(
     private bsModalControlGeneral: BsModalRef,
-    private historiaService: HistoriaService
+    private historiaService: HistoriaService,
+    private monitoreoService: DatosMonitoreoService,
   ) {
     this.dataFormGroup = new FormGroup({
       inputAlergias: new FormControl(),
@@ -76,17 +103,69 @@ export class ControlGeneralComponent implements OnInit {
       inputEstadoPsicosocialDetalle: new FormControl(),
       inputEstadoVisionDetalle: new FormControl(),
       inputEstadoAudicion: new FormControl(),
-      inputPlanTrabajo: new FormControl()
+      inputPlanTrabajo: new FormControl(),
+      selectBanio: new FormControl('', [Validators.required]),
+      selectVestido: new FormControl('', [Validators.required]),
+      selectWC: new FormControl('', [Validators.required]),
+      selectMovilidad: new FormControl('', [Validators.required]),
+      selectContinencia: new FormControl('', [Validators.required]),
+      selectAlimentacion: new FormControl('', [Validators.required]),
     });
   }
 
   ngOnInit(): void {
-    
+    this.CargarDataInicio();
+  }
+
+  CargarDataInicio() {
+    this.verSpinner = true;
+    forkJoin([
+      this.monitoreoService.ObtenerBanio(),
+      this.monitoreoService.ObtenerVestido(),
+      this.monitoreoService.ObtenerWC(),
+      this.monitoreoService.ObtenerMovilidad(),
+      this.monitoreoService.ObtenerContinencia(),
+      this.monitoreoService.ObtenerAlimentacion(),
+
+    ])
+      .subscribe(
+        data => {
+          this.comboBanio = data[0];
+          this.comboVestido = data[1];
+          this.comboWC = data[2];
+          this.comboMovilidad = data[3];
+          this.comboContinencia = data[4];
+          this.comboAlimentacion = data[5];
+
+          this.verSpinner = false;
+        },
+        err => {
+          console.log(err);
+          this.MostrarNotificacionError('Intente de nuevo', 'Error');
+          this.verSpinner = false;
+        }
+      )
+  }
+
+  MostrarNotificacionError(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'error',
+      title: titulo,
+      html: `<div class="message-text-error">${mensaje} </div>`,
+    });
+  }
+
+  MostrarNotificacionSuccessModal(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'success',
+      title: titulo,
+      text: mensaje
+    });
   }
 
   CerrarModal() {
     this.bsModalControlGeneral.hide();
-    //this.onGuardar();
+    this.onGuardar();
   }
 
   AsignarHistoriaClinica(historia:HistoriaCuidadoDTO, idHistoria:number){
@@ -172,22 +251,6 @@ export class ControlGeneralComponent implements OnInit {
     console.log(this.objControl)
   }
 
-  MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
-  {
-    Swal.fire({
-      icon: 'success',
-      title: titulo,
-      text: mensaje
-    });
-  }
-  MostrarNotificacionError(mensaje: string, titulo:string)
-  {
-    Swal.fire({
-      icon: 'error',
-      title: titulo,
-      html: `<div class="message-text-error">${mensaje} </div>`,
-    });
-  }
   MostrarNotificacionInfo(mensaje: string, titulo: string) {
     Swal.fire({
       icon: 'info',
