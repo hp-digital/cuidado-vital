@@ -206,7 +206,7 @@ export class ControlGeneralComponent implements OnInit {
       this.objHistoria.ControlGeneral = this.objControl;
       this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
         next: (data) => {
-          this.MostrarNotificacionSuccessModal('La historia se guardó con éxito.', '');
+          this.MostrarNotificacionSuccessModal('El control se guardó con éxito.', '');
         },
         error: (e) => {
           console.log('Error: ', e);

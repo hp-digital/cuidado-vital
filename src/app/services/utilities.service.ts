@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { ConsultaDoctoraliaDTO } from '@models/cuerpo-envio-doctoralia';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, timeout } from 'rxjs/operators';
+import { ComboDTO } from '@models/ComboDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,9 @@ export class UtilitiesService {
   headers: HttpHeaders = new HttpHeaders({
     'Content-Type': 'application/json'
   })
+
+  comboSINO: ComboDTO[] = [{ 'id': 1, 'nombre': 'SI' }, { 'id': 2, 'nombre': 'NO' }];  
+  comboComplicaciones: ComboDTO[] = [{ 'id': 1, 'nombre': 'SI' }, { 'id': 2, 'nombre': 'NO' }, {'id': 3, 'nombre': 'DESCONOCIDO' }];  
   
   constructor(private http: HttpClient) { }
 
@@ -56,5 +60,12 @@ export class UtilitiesService {
     };
 
     return this.http.post<any>(this.apiUrl, body, { headers });
+  }
+
+  ObtenerSINO():ComboDTO[]{
+    return this.comboSINO;
+  }
+  ObtenerComplicaciones():ComboDTO[]{
+    return this.comboComplicaciones;
   }
 }

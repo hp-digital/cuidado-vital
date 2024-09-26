@@ -9,24 +9,27 @@ const API_URL = environment.apiUrl;
   providedIn: 'root'
 })
 export class DatosMonitoreoService {
-  ObtenerAlimentacion(): Observable<ComboKatzDTO[]> {
-        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboAlimentacion`)
-  }
-  ObtenerContinencia(): Observable<ComboKatzDTO[]> {
-        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboContinencia`)
-  }
-  ObtenerMovilidad(): Observable<ComboKatzDTO[]> {
-        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboMovilidad`)
-  }
-  ObtenerWC(): Observable<ComboKatzDTO[]> {
-        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboWC`)
-  }
-  ObtenerVestido(): Observable<ComboKatzDTO[]> {
-        return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboVestido`)
-  }
-  ObtenerBanio(): Observable<ComboKatzDTO[]> {
-    return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboBanio`)
-  }
+      
+      constructor(private http: HttpClient) { }
 
-  constructor(private http: HttpClient) { }
+      ObtenerAlimentacion(): Observable<ComboKatzDTO[]> {
+            return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboAlimentacion`)
+      }
+      ObtenerContinencia(): Observable<ComboKatzDTO[]> {
+            return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboContinencia`)
+      }
+      ObtenerMovilidad(): Observable<ComboKatzDTO[]> {
+            return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboMovilidad`)
+      }
+      ObtenerWC(): Observable<ComboKatzDTO[]> {
+            return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboWC`)
+      }
+      ObtenerVestido(): Observable<ComboKatzDTO[]> {
+            return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboVestido`)
+      }
+      ObtenerBanio(): Observable<ComboKatzDTO[]> {
+      return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboBanio`)
+      }
+
+  
 }
