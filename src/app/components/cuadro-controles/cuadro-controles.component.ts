@@ -488,6 +488,7 @@ export default class CuadroControlesComponent implements OnInit {
   }
   AbrirControlEpoc(){
     this.modalCuadroControl = this.modalControlEpoc.show(ControlEpocComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

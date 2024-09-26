@@ -4,12 +4,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
-        <form [formGroup]="dataFormGroup">
+        <form [formGroup]="dataFormGroup">  
             <div id="header-component">
                 <div class="row">
-                    <div class="col-xl-3">
+                    <div class="col-12">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Nombre Paciente : </label> <span> Paciente Prueba Validaciones</span>
+                            <label class="fw-bold">Nombre Paciente : </label> <span>{{paciente}}</span>
                         </div>
                     </div>
                 </div>
@@ -26,11 +26,16 @@
                                 <p-dropdown 
                                     formControlName="selectBanio"
                                     [options]="comboBanio" 
-                                    optionLabel="nombre" 
                                     optionValue="id"
+                                    optionLabel="nombre" 
                                     [showClear]="true" 
                                     styleClass="w-full" 
-                                    placeholder="Selecciona"/>
+                                    placeholder="Selecciona">
+                                    <ng-template let-item pTemplate="item" class="w-full">
+                                        {{ item.nombre }} - {{ item.descripcion }}
+                                    </ng-template>
+                                    </p-dropdown>
+                                   
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Vestido</label>
@@ -96,13 +101,13 @@
                         <h6>Resultado Escala de Katz</h6>
                         <div class="form-group">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-katz" type="radio" id=""
-                                    value="option1" checked>
+                                <input class="form-check-input" name="radKatz" type="radio" formControlName="radKatz"
+                                    value="dependiente" checked>
                                 <label class="form-check-label" for="">Dependiente</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-katz" type="radio" id=""
-                                    value="option1">
+                                <input class="form-check-input" name="radKatz" type="radio" formControlName="radKatz"
+                                    value="independiente">
                                 <label class="form-check-label" for="">Independiente</label>
                             </div>
                         </div>
@@ -112,7 +117,7 @@
                 <div class="row">
                     <div class="col-12">
                         <label class="cform-label">Dificultad</label>
-                        <textarea name="" id="" class="form-control" rows="2" placeholder="TBC / CX PULMONAR"></textarea>
+                        <textarea name="" id="" class="form-control" rows="2" placeholder="TBC / CX PULMONAR" formControlName="inputDificultad"></textarea>
                     </div>
                     <div class="col-12">
                             <label class="cform-label bold">Fase de EPOC* </label>
@@ -127,28 +132,50 @@
                     </div>
                     <div class="col-12">
                             <label class="cform-label bold">Fecha de diagnostico*</label>
-                            <input type="date" class="form-control" id="">
+                            <p-calendar 
+                            placeholder="dd/mm/aaaa" 
+                            formControlName="inputFechaDiagnostico"
+                            styleClass="w-full block" 
+                            inputStyleClass="w-full"
+                            [iconDisplay]="'input'" 
+                            [showIcon]="true" 
+                            inputId="icondisplay"/>
                     </div>
                     <div class="col-12 mt-3">
                         <h6>Habitos Nocivos*</h6>
                         <div class="row">
                             <div class="col-4">
                                 <label class="cform-label">Alcohol</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectAlcohol"
+                                    [options]="comboFaseEpoc" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Drogas</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectDrogas"
+                                    [options]="comboFaseEpoc" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Tabaco</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectTabaco"
+                                    [options]="comboFaseEpoc" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                         </div>
                     </div>
@@ -159,30 +186,30 @@
                         <h6>Sintomas Respiratorios*</h6>
                         <div class="form-group mb-3">                        
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-dependencia" type="radio" id=""
-                                    value="option1" checked>
+                                <input class="form-check-input" name="radSintomasResp" type="radio" formControlName="radSintomasResp"
+                                    value="normal" checked>
                                 <label class="form-check-label" for="">Normal</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-dependencia" type="radio" id=""
-                                    value="option1">
+                                <input class="form-check-input" name="radSintomasResp" type="radio" formControlName="radSintomasResp"
+                                    value="alterado">
                                 <label class="form-check-label" for="">Alterado</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputSintomasResp"></textarea>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-12 mt-3">
                         <h6>Evaluacion Funcional</h6>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEvalFuncional"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 mt-3">
                         <h6>Plan de Trabajo</h6>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputPlanTrabajo"></textarea>
                     </div>
                 </div>
                 
@@ -190,7 +217,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal"><i
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal" (click)="Guardar()"><i
                 class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
         <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button> -->
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
