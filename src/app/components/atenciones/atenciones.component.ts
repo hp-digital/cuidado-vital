@@ -16,11 +16,14 @@ import { ComboDTO } from '../../models/ComboDTO';
 import { CriterioBusquedaAtencionesDTO } from '../../models/CriterioBusquedaAtencionesDTO';
 import { ListadoBusquedaAtencionDTO } from '../../models/ListadoBusquedaAtencionDTO';
 import { HistoriaService } from '../../services/historia.service';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextModule } from 'primeng/inputtext';
 
 @Component({
   selector: 'app-atenciones',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule,AutoCompleteModule,CalendarModule, InputTextModule],
   templateUrl: './atenciones.component.html',
   styleUrl: './atenciones.component.css',
   providers: [BsModalService],
@@ -38,6 +41,10 @@ export default class AtencionesComponent implements OnInit{
   textoCriterioBusqueda:string="";
   visible: boolean = false;
   listadoAtencionBusqueda : ListadoBusquedaAtencionDTO[]=[];
+
+  idPaciente:string = '';
+  fechaInicio: Date | undefined;
+  numeroDocumento: string='';
 
   constructor(
     private modalRef: BsModalRef,
@@ -66,6 +73,7 @@ export default class AtencionesComponent implements OnInit{
     this.BuscarAtenciones();
   }
 
+
   ObtenerConfiguracion(){
     this.verSpinner = true;
 
@@ -85,27 +93,42 @@ export default class AtencionesComponent implements OnInit{
     )
   }
 
+  pacientes: any[] = [];
+  selectedPaciente: any; // Para almacenar el objeto seleccionado
+
+  filterCountries(event: any) {
+    const query = event.query;
+    this.pacientes = this.comboPaciente.filter(s => s.nombre.toLowerCase().includes(query.toLowerCase()));
+ 
+  }
+
+  nuevoControl(event: any){
+
+  }
+
+
   BuscarAtenciones() {
     this.criterioBusqueda = new CriterioBusquedaAtencionesDTO();
     this.textoCriterioBusqueda = "";
     let numeroDocumento = this.dataFormGroup.controls['inputNumeroDocumento'].value;
-    let idPaciente = this.dataFormGroup.controls['inputPaciente'].value;
-    let fechaInicio = this.dataFormGroup.controls['inputFechaInicio'].value;
-    let fechaFin = this.dataFormGroup.controls['inputFechaFin'].value;
+    if(this.selectedPaciente != null)
+    {
+      this.idPaciente = this.selectedPaciente.id
+    }
+    
+    let fechaInicio = this.fechaInicio?.toString();
+
 
     this.criterioBusqueda.idMedico = this.idMedico.toString();
     if (numeroDocumento != '' && numeroDocumento != null) {
       this.criterioBusqueda.numeroDocumento = numeroDocumento;
     }
-    if (idPaciente != '' && idPaciente != null) {
-      this.criterioBusqueda.idPaciente = idPaciente;
+    if (this.idPaciente != '' && this.idPaciente != null) {
+      this.criterioBusqueda.idPaciente = this.idPaciente;
     }
 
     if (fechaInicio != '' && fechaInicio != null)
       this.criterioBusqueda.fechaInicio = moment(fechaInicio).format('YYYY-MM-DD');
-
-    if (fechaFin != '' && fechaFin != null)
-      this.criterioBusqueda.fechaFin = moment(fechaFin).format('YYYY-MM-DD');
 
     let contadorParametros = 0;
     new Map(Object.entries(this.criterioBusqueda)).forEach((value, key, map) => {
@@ -181,8 +204,8 @@ export default class AtencionesComponent implements OnInit{
     this.especialidad = "";
     this.medico = "";
     this.idEspecialidad = 0;
-    this.idMedico = 0;
-    this.idPaciente = 0; */
+    this.idMedico = 0;*/
+    this.idPaciente = ''; 
     this.listadoAtencionBusqueda = [];    
     /* this.comboPersonalMedico.forEach(element => {
       this.listaMedicos.push(element.medico);
