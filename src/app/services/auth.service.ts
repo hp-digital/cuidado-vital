@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   logger(login:LoginDTO): Observable<any>{
-    const url = `${API_URL}Autenticacion/Login`;
+    const url = `${API_URL}Autenticacion/Loginn`;
     return this.httpClient.post<any>(url,login).pipe(
       tap(response => {
         if(response.token)

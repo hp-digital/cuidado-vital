@@ -22,4 +22,5 @@ export class ControlGeneralDTO
     EstadoAudicion !: string;
     EstadoAudicionDetalle !: string;
     PlanTrabajo !: string;
+    FechaRegistro !: Date;
 }

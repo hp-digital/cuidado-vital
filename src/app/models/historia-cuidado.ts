@@ -1,6 +1,6 @@
 import { CabeceraPacienteDTO } from "./cabecera-paciente";
 import { ControlGeneralDTO } from "./control-general";
-import { ControlGlucosaDTO } from "./controlGlucosaDTO";
+import { ControlGlucosaDTO } from "./control-glucosa";
 import { HistoriaExternaDTO } from "./historia-externa";
 import { RecetaDTO } from "./RecetaDTO";
 

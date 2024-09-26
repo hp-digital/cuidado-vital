@@ -61,7 +61,7 @@
                             <p><strong>FECHA HISTORIA: </strong>{{lista.fechaInicioAtencion  | date: 'yyyy-MM-dd'}}</p>
                         </div>
                         <div class="col-xl-2 text-end">
-                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
+                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir" (click)="AbrirPdf(lista.idHistoriaClinica)"><i class="fas fa-lg fa-print"></i></button>
                         </div>
                         <div class="col-xl-12">
                             <p><strong>PACIENTE: </strong> {{lista.paciente}}</p>
@@ -75,22 +75,20 @@
                         <div class="col-xl-12">
                             <p><strong>ESPECIALIDAD: </strong> {{lista.especialidadMedica}}</p>
                         </div>
-                        
-                        
                     </div>
                     <div class="row">
                         <div class="col-xl-6">
                             <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlSeguimiento()">Control de seguimiento</button>
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar()">Examenes auxiliares</button>
-                                <button type="button" class="btn btn-green-custom btn-sm">Estados</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirHistoria(lista.idHistoriaClinica)">Última Atención</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirRecetas(lista.idHistoriaClinica)">Recetas</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Reporte</button>
                             </div>
                         </div>
                         <div class="col-xl-6">
                             <div class="d-grid gap-2">
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirHistoria(lista.idHistoriaClinica)">Historial de atención</button>
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirRecetas(lista.idHistoriaClinica)">Recetas</button>
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControles(lista.idHistoriaClinica)">Datos monitoreo</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControles(lista.idHistoriaClinica)">Controles</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar()">Examenes auxiliares</button>
+                                <button type="button" class="btn btn-green-custom btn-sm">Estado</button>
                             </div>
                         </div>
                     </div>
