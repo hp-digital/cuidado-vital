@@ -4,24 +4,31 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
-        <form>
+        <form [formGroup]="dataFormGroup">
             <div id="header-component">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Nombre Paciente : </label> <span> Paciente Prueba Validaciones</span>
+                            <label class="fw-bold">Nombre Paciente : </label> <span> {{paciente}}</span>
                         </div>
                     </div>
                     <div class="col-xl-5">
                         <div class="form-group mb-3">
                             <label class="cform-label">Tipo de Diabetes*</label>
-                            <input type="text" class="form-control" id="">
+                            <input type="text" class="form-control" id="" formControlName="inputTipoDiabetes">
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="cform-label">Fecha de diagnostico*</label>
-                            <input type="date" class="form-control" id="">
+                            <p-calendar 
+                                placeholder="dd/mm/aaaa" 
+                                formControlName="inputFechaDiagnostico"
+                                styleClass="w-full block" 
+                                inputStyleClass="w-full"
+                                [iconDisplay]="'input'" 
+                                [showIcon]="true" 
+                                inputId="icondisplay"/>
                         </div>
                     </div>
                 </div>
@@ -34,42 +41,26 @@
                         <div class="form-group mb-3">
                             <label class="cform-label block">Complicaciones*</label>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-complicaciones" type="radio" id=""
-                                    value="option1" checked>
+                                <input class="form-check-input" name="radioComplicaciones" type="radio" formControlName="radioComplicaciones" 
+                                    value="si" checked>
                                 <label class="form-check-label" for="">SI</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-complicaciones" type="radio" id=""
-                                    value="option1">
+                                <input class="form-check-input" name="radioComplicaciones" type="radio" formControlName="radioComplicaciones" 
+                                    value="no">
                                 <label class="form-check-label" for="">NO</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-complicaciones" type="radio" id=""
-                                    value="option1">
+                                <input class="form-check-input" name="radioComplicaciones" type="radio" formControlName="radioComplicaciones" 
+                                    value="desconocido">
                                 <label class="form-check-label" for="">DESCONOCIDO</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-xl-12">
+                    <div class="col-xl-12" *ngIf="dataFormGroup.get('radioComplicaciones')!.value === 'si'">
                         <div class="row">
-                            <!-- <div class="col-xl-6 form-group mb-3">
-                                <label class="cform-label block">Grado</label>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="rad-grado" type="radio" id="" value="option1"
-                                        checked>
-                                    <label class="form-check-label" for="">Leve</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="rad-grado" type="radio" id="" value="option1">
-                                    <label class="form-check-label" for="">Moderada</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" name="rad-grado" type="radio" id="" value="option1">
-                                    <label class="form-check-label" for="">Perdida de Conocimiento</label>
-                                </div>
-                            </div> -->
                             <div class="col-xl-6 form-group mb-0">
                                 <div class="row">
                                     <div class="col-4 d-flex align-items-center">
@@ -77,13 +68,13 @@
                                     </div>
                                     <div class="col-8 text-left">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-retinopatia" type="radio" id=""
-                                                value="option1" checked>
+                                            <input class="form-check-input" name="radRetinopatia" type="radio" formControlName="radRetinopatia"
+                                                value="si" >
                                             <label class="form-check-label" for="">SI</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-retinopatia" type="radio" id=""
-                                                value="option1">
+                                            <input class="form-check-input" name="radRetinopatia" type="radio" formControlName="radRetinopatia"
+                                                value="no" checked>
                                             <label class="form-check-label" for="">NO</label>
                                         </div>
                                     </div>
@@ -96,13 +87,13 @@
                                     </div>
                                     <div class="col-8 text-left">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-nefropatia" type="radio" id=""
-                                                value="option1" checked>
+                                            <input class="form-check-input" name="radNefropatia" type="radio" formControlName="radNefropatia"
+                                                value="si" >
                                             <label class="form-check-label" for="">SI</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-nefropatia" type="radio" id=""
-                                                value="option1">
+                                            <input class="form-check-input" name="radNefropatia" type="radio" formControlName="radNefropatia"
+                                                value="no" checked>
                                             <label class="form-check-label" for="">NO</label>
                                         </div>
                                     </div>
@@ -115,13 +106,13 @@
                                     </div>
                                     <div class="col-8 text-left">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-amputacion" type="radio" id=""
-                                                value="option1" checked>
+                                            <input class="form-check-input" name="radAmputacion" type="radio" formControlName="radAmputacion"
+                                                value="si" >
                                             <label class="form-check-label" for="">SI</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-amputacion" type="radio" id=""
-                                                value="option1">
+                                            <input class="form-check-input" name="radAmputacion" type="radio" formControlName="radAmputacion"
+                                                value="no" checked>
                                             <label class="form-check-label" for="">NO</label>
                                         </div>
                                     </div>
@@ -134,13 +125,13 @@
                                     </div>
                                     <div class="col-8 text-left">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-dialisis" type="radio" id=""
-                                                value="option1" checked>
+                                            <input class="form-check-input" name="radDialisis" type="radio" formControlName="radDialisis"
+                                                value="si" >
                                             <label class="form-check-label" for="">SI</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-dialisis" type="radio" id=""
-                                                value="option1">
+                                            <input class="form-check-input" name="radDialisis" type="radio" formControlName="radDialisis"
+                                                value="no" checked>
                                             <label class="form-check-label" for="">NO</label>
                                         </div>
                                     </div>
@@ -153,13 +144,13 @@
                                     </div>
                                     <div class="col-8 text-left">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-ceguera" type="radio" id=""
-                                                value="option1" checked>
+                                            <input class="form-check-input" name="radCeguera" type="radio" formControlName="radCeguera"
+                                                value="si" >
                                             <label class="form-check-label" for="">SI</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-ceguera" type="radio" id=""
-                                                value="option1">
+                                            <input class="form-check-input" name="radCeguera" type="radio" formControlName="radCeguera"
+                                                value="no" checked>
                                             <label class="form-check-label" for="">NO</label>
                                         </div>
                                     </div>
@@ -172,13 +163,13 @@
                                     </div>
                                     <div class="col-8 text-left">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-renal" type="radio" id=""
-                                                value="option1" checked>
+                                            <input class="form-check-input" name="radRenal" type="radio" formControlName="radRenal"
+                                                value="si" >
                                             <label class="form-check-label" for="">SI</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" name="rad-renal" type="radio" id=""
-                                                value="option1">
+                                            <input class="form-check-input" name="radRenal" type="radio" formControlName="radRenal"
+                                                value="no" checked>
                                             <label class="form-check-label" for="">NO</label>
                                         </div>
                                     </div>
@@ -187,7 +178,6 @@
                         </div>
                     </div>
 
-                    
                     <div class="row">
                         <div class="col-xl-12 mt-3">
                             <h6>Medidas Antropométricas*</h6>
@@ -196,23 +186,23 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <label class="cform-label">Peso (kg)</label>
-                                        <input type="text" class="form-control" id="">
+                                        <input type="text" class="form-control" formControlName="inputPeso">
                                     </div>
                                     <div class="col-4">
                                         <label class="cform-label">Talla</label>
-                                        <input type="text" class="form-control" id="">
+                                        <input type="text" class="form-control" formControlName="inputTalla">
                                     </div>
                                     <div class="col-4">
                                         <label class="cform-label">IMC</label>
-                                        <input type="text" class="form-control" id="">
+                                        <input type="text" class="form-control" formControlName="inputIMC">
                                     </div>
                                     <div class="col-6">
-                                        <label class="cform-label">Perimetro Abdomial (cm)</label>
-                                        <input type="text" class="form-control" id="">
+                                        <label class="cform-label">Perimetro Abdominal (cm)</label>
+                                        <input type="text" class="form-control" formControlName="inputPerimetroAbdominal">
                                     </div>
                                     <div class="col-6">
-                                        <label class="cform-label">Presiòn Artetial</label>
-                                        <input type="text" class="form-control" id="">
+                                        <label class="cform-label">Presiòn Arterial</label>
+                                        <input type="text" class="form-control" formControlName="inputPresionArterial">
                                     </div>
                                 </div>
                             </div>
@@ -232,48 +222,15 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Glucemia</td>
-                                            <td>x</td>
+                                        <tr *ngFor="let ex of arrayExamenes">
+                                            <td>{{ex.nombre}}</td>
                                             <td>
-                                                <input type="date" class="form-control">
+                                                <input type="text" class="form-control" value="{{ex.valor}}">
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>HBA1C</td>
-                                            <td>x</td>
                                             <td>
-                                                <input type="date" class="form-control">
+                                                <input type="date" class="form-control" value="{{ex.fecha}}">
                                             </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Creatinina</td>
-                                            <td>x</td>
-                                            <td>
-                                                <input type="date" class="form-control">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>LDL</td>
-                                            <td>x</td>
-                                            <td>
-                                                <input type="date" class="form-control">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Trigliceridos</td>
-                                            <td>x</td>
-                                            <td>
-                                                <input type="date" class="form-control">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Microalbuminuria</td>
-                                            <td>x</td>
-                                            <td>
-                                                <input type="date" class="form-control">
-                                            </td>
-                                        </tr>
+                                        </tr>                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -283,7 +240,7 @@
                     <h6>Plan de Trabajo</h6>
                     <div class="row">
                         <div class="col-12">
-                            <textarea name="" id="" class="form-control" rows="4"></textarea>
+                            <textarea name="" id="" class="form-control" rows="4" formControlName="inputPlanTrabajo"></textarea>
                         </div>
                     </div>
 
@@ -299,15 +256,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>Insulina</td>
-                                            <td><input type="text" class="form-control"></td>
-                                            <td><input type="text" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Medicamentos Orales</td>
-                                            <td><input type="text" class="form-control"></td>
-                                            <td><input type="text" class="form-control"></td>
+                                        <tr *ngFor="let e of arrayPrestacion">
+                                            <td>{{ e.nombre }}</td>
+                                            <td><input type="text" class="form-control" value="{{ e.monodroga }}"></td>
+                                            <td><input type="text" class="form-control" value="{{ e.dosis }}"></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -319,7 +271,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal"><i
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal" (click)="Guardar()"><i
                 class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
         <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button> -->
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>

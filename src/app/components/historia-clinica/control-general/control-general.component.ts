@@ -127,6 +127,8 @@ export class ControlGeneralComponent implements OnInit {
       this.monitoreoService.ObtenerContinencia(),
       this.monitoreoService.ObtenerAlimentacion(),
 
+
+
     ])
       .subscribe(
         data => {
@@ -215,10 +217,8 @@ export class ControlGeneralComponent implements OnInit {
         complete: () => { this.verSpinner = false; }
       });
     }
-    
 
     console.log("historia guardar", this.objHistoria);
-
   }
 
   AsignarValores()
@@ -246,7 +246,7 @@ export class ControlGeneralComponent implements OnInit {
     controlGeneral.EstadoAudicion = "Alterado";//this.dataFormGroup.controls['textareaTiempoEnfermedad'].value ;
     controlGeneral.EstadoAudicionDetalle = this.dataFormGroup.controls['inputEstadoAudicion'].value ;
     controlGeneral.PlanTrabajo = this.dataFormGroup.controls['inputPlanTrabajo'].value ;
-    console.log(controlGeneral)
+    console.log(controlGeneral);
     this.objControl.push(controlGeneral);
     console.log(this.objControl)
   }

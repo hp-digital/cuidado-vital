@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ComboDTO } from '@models/ComboDTO';
 import { ComboKatzDTO } from '@models/comboKatzDTO';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -27,6 +28,8 @@ export class DatosMonitoreoService {
   ObtenerBanio(): Observable<ComboKatzDTO[]> {
     return this.http.get<ComboKatzDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboBanio`)
   }
-
+  ObtenerFaseEpoc(): Observable<ComboDTO[]> {
+      return this.http.get<ComboDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboFaseEpoc`)
+    }
   constructor(private http: HttpClient) { }
 }

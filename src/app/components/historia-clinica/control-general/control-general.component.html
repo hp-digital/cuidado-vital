@@ -7,19 +7,19 @@
         <form [formGroup]="dataFormGroup">
             <div id="header-component">
                 <div class="row">
-                    <div class="col-xl-3">
+                    <div class="col-xl-6">
                         <div class="form-group mb-3">
                             <label class="fw-bold">Nombre Paciente : </label> <span> {{paciente}}</span>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-6">
+                    <div class="col-xl-6 col-6">
                         <div class="form-group mb-3">
                             <label class="fw-bold">Nro HCL: </label><span> {{nroHcl}}</span>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-6">
+                    <div class="col-xl-6">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Medico: </label><span>{{medico}}</span>
+                            <label class="fw-bold">Medico: </label><span> {{medico}}</span>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                                 <label class="cform-label">Vestido</label>
                                 <p-dropdown 
                                     formControlName="selectVestido"
-                                    [options]="comboBanio" 
+                                    [options]="comboVestido" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -66,7 +66,7 @@
                                 <label class="cform-label">Uso del WC</label>
                                 <p-dropdown 
                                     formControlName="selectWC"
-                                    [options]="comboBanio" 
+                                    [options]="comboWC" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -77,7 +77,7 @@
                                 <label class="cform-label">Movilidad</label>
                                 <p-dropdown 
                                     formControlName="selectMovilidad"
-                                    [options]="comboBanio" 
+                                    [options]="comboMovilidad" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -88,7 +88,7 @@
                                 <label class="cform-label">Continencia</label>
                                 <p-dropdown 
                                     formControlName="selectContinencia"
-                                    [options]="comboBanio" 
+                                    [options]="comboContinencia" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -99,7 +99,7 @@
                                 <label class="cform-label">Alimentación</label>
                                 <p-dropdown 
                                     formControlName="selectAlimentacion"
-                                    [options]="comboBanio" 
+                                    [options]="comboAlimentacion" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -185,48 +185,48 @@
                                 <tbody class="text-center">
                                     <tr>
                                         <td class="text-left">¿Què fecha es Hoy? (dd/mm/aa)</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" name="rad-fecha" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-fecha" type="radio" id="" value="option2"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Que dia de la Semana es?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" name="rad-dia" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-dia" type="radio" id="" value="option2"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿En que lugar estamos?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" name="rad-lugar" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-lugar" type="radio" id="" value="option2"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cúal es su numero de telefono?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" name="rad-telefono" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-telefono" type="radio" id="" value="option2"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cúal es su direccion completa?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" name="rad-direccion" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-direccion" type="radio" id="" value="option2"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cuantos años tiene?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" name="rad-anios" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-anios" type="radio" id="" value="option2"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Donde Nacio?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" name="rad-dondenacio" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-dondenacio" type="radio" id="" value="option2"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cual es el nombre del presidente?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" name="rad-presidente" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-presidente" type="radio" id="" value="option2"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Digame el primer apellido de su madre</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" name="rad-apellidomadre" type="radio" id="" value="option1" checked></td>
+                                        <td><input class="form-check-input" name="rad-apellidomadre" type="radio" id="" value="option2"></td>
                                     </tr>
 
                                 </tbody>
