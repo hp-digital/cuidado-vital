@@ -84,9 +84,9 @@
                                 <tbody>
                                     <tr *ngFor="let p of medidasPresion; let i = index">
                                         <td>{{ p.fecha }}</td>
-                                        <td><input type="text" class="form-control" value="{{ p.pa }}"></td>
-                                        <td><input type="text" class="form-control" value="{{ p.fr }}"></td>
-                                        <td><input type="text" class="form-control" value="{{ p.pulso }}"></td>
+                                        <td><input type="text" class="form-control" disabled value="{{ p.pa }}"></td>
+                                        <td><input type="text" class="form-control" disabled value="{{ p.fr }}"></td>
+                                        <td><input type="text" class="form-control" disabled value="{{ p.pulso }}"></td>
                                         <td>{{ p.estado }}</td>
                                         <td>
                                             <button type="button" class="btn btn-danger btn-sm" title="Eliminar"

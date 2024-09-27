@@ -36,7 +36,7 @@ export class DatosMonitoreoService {
       ObtenerFaseEpoc(): Observable<ComboDTO[]> {
             return this.http.get<ComboDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboFaseEpoc`)
       }
-      ObtenerPresion(): Observable<ComboDTO[]> {
-            return this.http.get<DesplegableDTO[]>(`${API_URL}DataMonitoreo/ObtenerDesplegablePresion`)
+      ObtenerPresion(): Observable<DesplegableDTO[]> {
+            return this.http.get<DesplegableDTO[]>(`${API_URL}DataMonitoreo/ObtenerComboEstadoPresion`)
       }
 }
