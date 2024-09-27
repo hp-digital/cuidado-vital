@@ -1,3 +1,6 @@
+<div class="container-spinner" *ngIf="verSpinner">
+    <div class="spinner-border text-primary"></div>
+</div>
 <div id="content">			
 			
     <div class="card">
@@ -5,50 +8,60 @@
           <div class="header-card-table">ATENCIONES</div>
       </div>
       <div class="card-body">	
-        <form [formGroup]="dataFormGroup">			
+        <form [formGroup]="dataFormGroup">	
+            <div class="row">
+                <div class="col-xl-12 text-right">
+                    <!-- <button *ngIf="sinAperturaCaja" type="button" class=" btn btn-green-custom" (click)="InsertarCaja()"><i class="fas fa-lg fa-fw me-2 fa-box-open"></i>Abrir caja</button>&nbsp;&nbsp;&nbsp; -->
+                    
+                    <button type="button" class=" btn btn-green-custom" (click)="nuevoControl($event)"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Agregar Control</button>&nbsp;&nbsp;&nbsp;
+                    
+                    &nbsp;&nbsp;&nbsp;
+                </div>
+            </div>		
           <div class="row">
-              <div class="col-xl-10">
-                  <div class="row">
-                      <div class="col-xl-3">
-                          <div class="form-group mb-3">
-                              <label class="form-label mb-3" for="">Fecha inicio</label>
-                              <input type="date" class="form-control" formControlName="inputFechaInicio"/>
-                          </div>
-                      </div>
-                      <div class="col-xl-3">
-                          <div class="form-group mb-3">
-                              <label class="form-label mb-3" for="">Fecha fin</label>
-                              <input type="date" class="form-control" formControlName="inputFechaFin"/>
-                          </div>
-                      </div>
-                      <div class="col-xl-2">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3" for="">Nro Documento</label>
-                            <input type="text" class="form-control" formControlName="inputNumeroDocumento"/>
-                        </div>
+              <div class="col-xl-3">
+                    <div class="row">
+                        <label class="form-label">Paciente</label>
+                        <p-autoComplete 
+                            formControlName="inputPaciente"
+                            [(ngModel)]="selectedPaciente" 
+                            [suggestions]="pacientes" 
+                            (completeMethod)="filterCountries($event)" 
+                            field="nombre"
+                            [minLength]="2"
+                            placeholder="Buscar paciente">
+                        </p-autoComplete>
                     </div>
-                      <div class="col-xl-4">
-                          <div class="form-group mb-3">
-                              <label class="form-label mb-3" for="">Paciente</label>
-                              <select class="form-select" formControlName="inputPaciente">
-                                <option *ngFor="let combo of comboPaciente" [value]="combo.id">
-                                    {{combo.nombre}}
-                                </option>	
-                            </select>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-              <div class="col-xl-2">
-                  <div class="mt-4 pt-1">
-                      <button type="button" class="btn btn-green-custom me-2" (click)="BuscarAtenciones()">
-                          <i class="fas fa-lg fa-search"></i>
-                      </button>
-                      <button type="button" class="btn btn-green-custom me-2" (click)="Limpiar()">
-                          <i class="fas fa-lg fa-eraser"></i>
-                      </button>
-                  </div>						
-              </div>
+                   
+                </div>
+                <div class="col-xl-3">
+                    <div class="row">
+                        <label class="form-label">Fecha inicio de control</label>
+                        <p-calendar 
+                        formControlName="inputFechaInicio"
+                        [(ngModel)]="fechaInicio" 
+                        [showIcon]="true" 
+                        inputId="buttondisplay" 
+                        dateFormat="dd/mm/yy"
+                        [showOnFocus]="true" />
+                    </div>
+                </div>
+                <div class="col-xl-2">
+                    <div class="row">
+                        <label class="form-label" for="">Nro Documento</label>
+                        <input type="text" pInputText  class="form-control" [(ngModel)]="numeroDocumento" formControlName="inputNumeroDocumento"/>
+                    </div> 
+                </div>
+                <div class="col-xl-3">
+                    <div class="mt-4 pt-2">
+                        <button type="button" class="btn btn-green-custom me-2" (click)="BuscarAtenciones()">
+                            <i class="fas fa-lg fa-search"></i>
+                        </button>
+                        <button type="button" class="btn btn-green-custom me-2" (click)="Limpiar()">
+                            <i class="fas fa-lg fa-eraser"></i>
+                        </button>
+                    </div>						
+                </div>
           </div>
 
         </form>	
