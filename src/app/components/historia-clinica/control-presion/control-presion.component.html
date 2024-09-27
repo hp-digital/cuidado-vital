@@ -34,19 +34,30 @@
                             <div class="row">
                                 <div class="col-4">
                                     <label class="cform-label">Fecha</label>
-                                    <input type="date" class="form-control" id="" formControlName="inputFecha">
+                                    <p-calendar 
+                                    placeholder="dd/mm/aaaa" 
+                                    formControlName="inputFecha"
+                                    styleClass="w-full block" 
+                                    inputStyleClass="w-full"
+                                    [iconDisplay]="'input'" 
+                                    [showIcon]="true" 
+                                    inputId="icondisplay"/>
                                 </div>
                                 <div class="col-8">
                                     <label class="cform-label">PA (Sistolica/diastolica) (mmHg)</label>
-                                    <input type="text" class="form-control" id="" formControlName="inputPA">
+                                    <p-inputGroup class="w-full md:w-30rem">
+                                        <input type="number" step="any" class="form-control" id="" formControlName="inputPASistolica">
+                                        <p-inputGroupAddon>/</p-inputGroupAddon>
+                                        <input type="number" step="any" class="form-control" id="" formControlName="inputPADiastolica">
+                                    </p-inputGroup>
                                 </div>  
                                 <div class="col-4">
                                     <label class="cform-label">FR (min)</label>
-                                    <input type="text" class="form-control" id="" formControlName="inputFR">
+                                    <input type="number" step="any" class="form-control" id="" formControlName="inputFR">
                                 </div>
                                 <div class="col-4">
                                     <label class="cform-label">Pulso</label>
-                                    <input type="text" class="form-control" id="" formControlName="inputPulso">
+                                    <input type="number" step="any" class="form-control" id="" formControlName="inputPulso">
                                 </div>
                                 <div class="col-4 d-flex align-items-center">
                                     <button type="button" class="btn btn-sm btn-green-custom mt-3" (click)="AgregarMedidasPresion()">+ AGREGAR</button>
@@ -67,15 +78,21 @@
                                         <th>FR (min)</th>
                                         <th>PULSO</th>
                                         <th>ESTADO</th>
+                                        <th>ACCIONES</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let p of medidasPresion">
+                                    <tr *ngFor="let p of medidasPresion; let i = index">
                                         <td>{{ p.fecha }}</td>
                                         <td><input type="text" class="form-control" value="{{ p.pa }}"></td>
                                         <td><input type="text" class="form-control" value="{{ p.fr }}"></td>
                                         <td><input type="text" class="form-control" value="{{ p.pulso }}"></td>
                                         <td>{{ p.estado }}</td>
+                                        <td>
+                                            <button type="button" class="btn btn-danger btn-sm" title="Eliminar"
+                                            (click)="EliminarFila(i)"><i class="fas fa-lg fa-times"></i>
+                                            </button>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
