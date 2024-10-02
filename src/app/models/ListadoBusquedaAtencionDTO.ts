@@ -13,4 +13,5 @@ export class ListadoBusquedaAtencionDTO{
     especialidadMedica!:string;
     motivoAtencion!:string;
     indicaciones!:string;
+    idTipoOrigenAtencion!:number;
 }

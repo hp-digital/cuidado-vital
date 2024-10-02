@@ -68,7 +68,9 @@
           <hr/>
           <div class="row" id="ver-cuadrilla">	
             <ng-container *ngFor="let lista of listadoAtencionBusqueda">
-                <div class="col-xl-3 background-cuadrilla">
+                <div class="col-xl-3" [ngStyle]="{ 'background-color': lista.idTipoOrigenAtencion==1 ? '#e0f5ff' : '#d0ede4' }" style="border-radius: 8px;
+                padding: 0px 15px 15px 15px;
+                margin: 10px;">
                     <div class="row mb-3 mt-3">
                         <div class="col-xl-10">
                             <p><strong>FECHA: </strong>{{lista.fechaInicioAtencion  | date: 'yyyy-MM-dd'}}</p>

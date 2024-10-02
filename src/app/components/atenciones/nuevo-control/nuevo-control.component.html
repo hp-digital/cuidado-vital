@@ -17,11 +17,21 @@
                           </div>
                     </div>
                 </div>
-                <div class="col-xl-2">&nbsp;</div>
-                <div class="col-xl-3">
+                <div class="col-xl-1">&nbsp;</div>
+                <div class="col-xl-2">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3" for="">Fecha de ingreso</label>
                         <input type="date" class="form-control" formControlName="inputFechaIngreso" readonly/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3" for="">Especialidad</label>
+                        <select class="form-select" formControlName="selectEspecialidad">
+                            <option *ngFor="let combo of comboEspecialidad" [value]="combo.id">
+                                {{combo.nombre}}
+                            </option>	
+                        </select>
                     </div>
                 </div>
             </div>

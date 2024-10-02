@@ -154,7 +154,6 @@ export default class AtencionesComponent implements OnInit{
             if (data.length > 0) {
             console.log('data: ',data);
             this.listadoAtencionBusqueda = data;           
-            console.log('data: ',this.listadoAtencionBusqueda);
             }
             else {
               this.MostrarNotificacionWarning('Intente con otros criterios de búsqueda.', '¡No se encontró información!');

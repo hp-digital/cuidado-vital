@@ -6,6 +6,7 @@ import { ComboDTO } from '../models/ComboDTO';
 import { environment } from '../../environments/environment';
 import { ServicioDTO } from '../models/ServicioDTO';
 import { ListadoBusquedaServicioDTO } from '../models/ListadoBusquedaServicioDTO';
+import { RegistroNuevaAtencionPacienteDTO } from '@models/registro-paciente-nueva-atencion';
 
 const API_URL = environment.apiUrl;
 
@@ -44,6 +45,15 @@ export class ServicioServiceService {
 
   public Registrar(data: ServicioDTO) {
     const url = `${API_URL}Servicio/Registrar`;
+    return this.http.post(url, data, { headers: this.headers }).pipe(
+      timeout(this.nTimeout),
+      retry(this.nRetry),
+      catchError(this.handleError)
+    );
+  }
+
+  public RegistrarNuevaAtencion(data: RegistroNuevaAtencionPacienteDTO){
+    const url = `${API_URL}HistoriaClinicaExterna/PacienteNuevaAtencion`;
     return this.http.post(url, data, { headers: this.headers }).pipe(
       timeout(this.nTimeout),
       retry(this.nRetry),

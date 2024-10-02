@@ -8,6 +8,9 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import  moment from 'moment';
+import { RegistroNuevaAtencionPacienteDTO } from '@models/registro-paciente-nueva-atencion';
+import { SettingsService } from '@services/settings.service';
+import { ServicioServiceService } from '@services/servicio.service.service';
 
 @Component({
   selector: 'app-nuevo-control',
@@ -22,20 +25,27 @@ export class NuevoControlComponent implements OnInit{
   comboTipoDocumento: ComboDTO[] = [];
   comboEstadoCivil : ComboDTO[] = [];
   comboSexo: ComboDTO[] = [];
+  comboEspecialidad: ComboDTO[]=[];
 
   Paciente = new PacienteDTO();
   idPaciente:number=0;
+  usuario:string='';
+
+  objNuevaAtencion = new RegistroNuevaAtencionPacienteDTO();
 
   verSpinner: boolean = false;
   constructor(
     private modalNuevoControl: BsModalRef,
     private modalService: BsModalService,
-    private pacienteService: PacienteService
+    private pacienteService: PacienteService,
+    private settingsService: SettingsService,
+    private servicioService: ServicioServiceService
   ){
     this.dataFormGroup = new FormGroup({
       inputMotivoAtencion: new FormControl(),
       inputDocumentoBusqueda: new FormControl(),
       inputFechaIngreso: new FormControl(),
+      selectEspecialidad: new FormControl(),
       selectRegistrarPorTipoDocumento: new FormControl(),
       inputNumeroDocumento: new FormControl(),
       inputApellidoPaternoPaciente: new FormControl(),
@@ -50,6 +60,7 @@ export class NuevoControlComponent implements OnInit{
 
   ngOnInit(): void {
     this.CargarDataInicio();
+    this.usuario =  this.settingsService.getUserSetting('usuario');
   }
 
   CargarDataInicio(){
@@ -58,6 +69,7 @@ export class NuevoControlComponent implements OnInit{
       this.pacienteService.ObtenerTipoDocumento(),
       this.pacienteService.ObtenerEstadoCivil(),
       this.pacienteService.ObtenerSexo(),
+      this.pacienteService.ObtenerEspecialidadMedica()
       
     ])
     .subscribe(
@@ -65,6 +77,7 @@ export class NuevoControlComponent implements OnInit{
         this.comboTipoDocumento = data[0];
         this.comboEstadoCivil = data[1];
         this.comboSexo = data[2];
+        this.comboEspecialidad = data[3];
 
         this.verSpinner = false;
         ;
@@ -118,7 +131,47 @@ export class NuevoControlComponent implements OnInit{
   }
 
   Guardar(){
+    this.AsignarObjetosGuardar();
+    this.verSpinner = true;
 
+    console.log("a guardar", this.objNuevaAtencion);
+
+    this.servicioService.RegistrarNuevaAtencion(this.objNuevaAtencion)
+    .subscribe({
+      next: (data) => {
+        this.MostrarNotificacionSuccessModal('Se registró la atención correctamente.', 'Éxito ');
+        //this.listaServiciosAgregados = [];
+        let datos: any = data;
+        console.log("data al registrar", datos);
+      },
+      error: (e) => {
+        console.log(e);
+        this.verSpinner = false;
+        this.manejadorMensajeErroresGuardar(e);
+      },
+      complete: () => { this.verSpinner = false; }
+    });
+  }
+
+  AsignarObjetosGuardar(){
+    
+    this.objNuevaAtencion.idPaciente = this.idPaciente;
+    this.objNuevaAtencion.numeroDocumento = this.dataFormGroup.controls['inputNumeroDocumento'].value;
+    this.objNuevaAtencion.tipoDocumento = this.dataFormGroup.controls['selectRegistrarPorTipoDocumento'].value; 
+    this.objNuevaAtencion.apellidoPaterno = this.dataFormGroup.controls['inputApellidoPaternoPaciente'].value;
+    this.objNuevaAtencion.apellidoMaterno = this.dataFormGroup.controls['inputApellidoMaternoPaciente'].value;
+    this.objNuevaAtencion.nombres = this.dataFormGroup.controls['inputNombrePaciente'].value;
+    this.objNuevaAtencion.fechaNacimiento = this.dataFormGroup.controls['inputFechaNacimientoPaciente'].value;
+    this.objNuevaAtencion.sexo = this.dataFormGroup.controls['inputSexoPaciente'].value;
+    this.objNuevaAtencion.celular = this.dataFormGroup.controls['inputTelefonoPaciente'].value;
+    this.objNuevaAtencion.idMedico = 13;//this.dataFormGroup.controls[''].value;
+    this.objNuevaAtencion.fechaInicioAtencion = new Date();
+    this.objNuevaAtencion.idEspecialidad = this.dataFormGroup.controls['selectEspecialidad'].value;
+    this.objNuevaAtencion.estado = true;
+    this.objNuevaAtencion.usuarioCreacion = this.usuario;
+    this.objNuevaAtencion.usuarioModificacion = this.usuario;
+    this.objNuevaAtencion.fechaCreacion = new Date();
+    this.objNuevaAtencion.fechaModificacion = new Date();
   }
 
   CalcularEdad(fecha:Date){
@@ -162,6 +215,28 @@ export class NuevoControlComponent implements OnInit{
       title: titulo,
       text: mensaje
     });
+  }
+  manejadorMensajeErroresGuardar(e: any) {
+    if (typeof e != "string") {
+      let error = e;
+      let arrayErrores: any[] = [];
+      let errorValidacion = Object.keys(e);
+      if (Array.isArray(errorValidacion)) {
+        errorValidacion.forEach((propiedadConError: any) => {
+          error[propiedadConError].forEach((mensajeError: any) => {
+            if (!arrayErrores.includes(mensajeError['mensaje'])) {
+              arrayErrores.push(mensajeError['mensaje']);
+            }
+          });
+        });
+        this.MostrarNotificacionError(arrayErrores.join("<br/>"), '¡ERROR EN EL PROCESO!')
+      } else {
+        this.MostrarNotificacionError("", '¡ERROR EN EL PROCESO!')
+      }
+    }
+    else {
+      this.MostrarNotificacionError(e, '¡ERROR EN EL PROCESO!');
+    }
   }
 
   CerrarModal() {
