@@ -1,5 +1,8 @@
 <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
     <div class="row" *ngIf="idRol==3">    <!--DASHBOARD PACIENTE-->
+        <h2>{{nombreUsuario}} Bienvenido(a) a CuidadoVital</h2>
+        <span>Una aplicación segura y práctica para el cuidado de tu salud</span>
+        <h2></h2>
         <div class="col-xl-3">
                 <!-- BEGIN card -->
                 <div class="card mb-3">
@@ -99,12 +102,19 @@
                 <!-- END card-body -->
             </div>
             <!-- END card --> 
-    </div> 
+        </div> 
     </div>
     <div class="row" *ngIf="idRol==1">    <!--DASHBOARD MEDICO-->
-            <h2>DASHBOARD MEDICO</h2>
+            <h3>Bienvenido a CuidadoVital</h3>
+            <hr>
+            <h4>Dr.(a) {{nombreUsuario}}</h4>
     </div>
     <div class="row" *ngIf="idRol==4">    <!--DASHBOARD ADMIN-->
            <h2>DASHBOARD ADMIN</h2>
     </div>
-    </form>
+    <div class="row" *ngIf="idRol==2">    <!--DASHBOARD ADMIN-->
+        <h3>Perfil Asistencial CUIDADO VITAL</h3>
+        <hr>
+        <h4>Lic. {{nombreUsuario}}</h4>
+    </div>
+</form>

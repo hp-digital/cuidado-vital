@@ -71,16 +71,13 @@
                 <div class="col-xl-3 background-cuadrilla">
                     <div class="row mb-3 mt-3">
                         <div class="col-xl-10">
-                            <p><strong>FECHA HISTORIA: </strong>{{lista.fechaInicioAtencion  | date: 'yyyy-MM-dd'}}</p>
+                            <p><strong>FECHA: </strong>{{lista.fechaInicioAtencion  | date: 'yyyy-MM-dd'}}</p>
                         </div>
                         <div class="col-xl-2 text-end">
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir" (click)="AbrirPdf(lista.idHistoriaClinica)"><i class="fas fa-lg fa-print"></i></button>
                         </div>
                         <div class="col-xl-12">
                             <p><strong>PACIENTE: </strong> {{lista.paciente}}</p>
-                        </div>
-                        <div class="col-xl-12">
-                            <p><strong>NRO DOCUMENTO: </strong> {{lista.numeroDocumento}}</p>
                         </div>
                         <div class="col-xl-12">
                             <p><strong>MOTIVO: </strong>{{lista.motivoAtencion}}</p>
@@ -107,9 +104,31 @@
                     </div>
                     <div class="row">
                         <div class="col-xl-12 text-center mt-3">
-                            <button type="button" class="btn btn-warning-custom btn-sm" data-class="btnReprogramar" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Reprogramar cita" aria-label="Reprogramar cita"><i class="fas fa-lg fa-clock"></i></button>&nbsp;&nbsp;
+                            <button type="button" class="btn btn-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M0 5a2 2 0 0 1 2-2h7.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 4.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 13H2a2 2 0 0 1-2-2z"></path>
+                                </svg>
+                            </button>&nbsp;&nbsp;
+                           <button type="button" class="btn btn-info">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-watch" viewBox="0 0 16 16">
+                                    <path d="M8.5 5a.5.5 0 0 0-1 0v2.5H6a.5.5 0 0 0 0 1h2a.5.5 0 0 0 .5-.5z"/>
+                                    <path d="M5.667 16C4.747 16 4 15.254 4 14.333v-1.86A6 6 0 0 1 2 8c0-1.777.772-3.374 2-4.472V1.667C4 .747 4.746 0 5.667 0h4.666C11.253 0 12 .746 12 1.667v1.86a6 6 0 0 1 1.918 3.48.502.502 0 0 1 .582.493v1a.5.5 0 0 1-.582.493A6 6 0 0 1 12 12.473v1.86c0 .92-.746 1.667-1.667 1.667zM13 8A5 5 0 1 0 3 8a5 5 0 0 0 10 0"/>
+                                </svg>
+                           </button>&nbsp;&nbsp;
+                           <button type="button" class="btn btn-warning">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-quote" viewBox="0 0 16 16">
+                                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                    <path d="M7.066 4.76A1.665 1.665 0 0 0 4 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112zm4 0A1.665 1.665 0 0 0 8 5.668a1.667 1.667 0 0 0 2.561 1.406c-.131.389-.375.804-.777 1.22a.417.417 0 1 0 .6.58c1.486-1.54 1.293-3.214.682-4.112z"/>
+                                </svg>
+                            </button>&nbsp;&nbsp;
+                            <button type="button" class="btn btn-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-reels-fill" viewBox="0 0 16 16">
+                                    <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+                                    <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                                    <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"/>
+                                  </svg>
+                            </button>&nbsp;&nbsp;
                         </div>
-
                     </div>
                 </div>
             </ng-container>

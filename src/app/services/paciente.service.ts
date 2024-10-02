@@ -116,4 +116,8 @@ export class PacienteService {
   ObtenerSexo() {
     return this.http.get<ComboDTO[]>(`${API_URL}Sexo/ObtenerCombo`);
   }
+
+  ObtenerPacientePorNroDocumento(nroDocumento: string) {
+    return this.http.get<any>(`${API_URL}Paciente/BuscarPorDni?dni=${nroDocumento}`);
+  }
 }

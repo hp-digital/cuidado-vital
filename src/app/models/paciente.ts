@@ -1,0 +1,21 @@
+export class PacienteDTO{
+    NumeroDocumento?:string;
+    ApellidoPaterno?:string;
+    ApellidoMaterno?:string;
+    Nombres?:string;
+    FechaNacimiento?:Date;
+    IdTipoDocumento?:number;
+    IdSexo?:number;
+    NumeroCelular?:string;
+    NumeroWhatsapp?:string;
+    Email?:string;
+    IdEstadoCivil?:number;
+    IdPaisWhatsapp?:number;
+    IdPaisDireccion?:number;
+    IdDepartamentoDireccion?:number;
+    IdProvinciaDireccion?:number;
+    IdDistritoDireccion?:number;
+    DomicilioDireccion?:string;
+    IdFamiliarEncargado?:number;
+    IdParentescoFamiliar?:number;
+}

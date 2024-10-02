@@ -19,6 +19,7 @@ import { HistoriaService } from '../../services/historia.service';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
+import { NuevoControlComponent } from './nuevo-control/nuevo-control.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -53,6 +54,7 @@ export default class AtencionesComponent implements OnInit{
     private modalReceta: BsModalService,
     private modalExamenAuxiliar: BsModalService,
     private modalControlSeguimiento: BsModalService,
+    private modalNuevoRegistro: BsModalService,
     private settings : SettingsService,
     private pacienteService : PacienteService,
     private historiaService: HistoriaService
@@ -103,7 +105,8 @@ export default class AtencionesComponent implements OnInit{
   }
 
   nuevoControl(event: any){
-
+    this.modalRef = this.modalService.show(NuevoControlComponent, {backdrop: 'static', class: 'modal-xl'});
+    //this.modalRef.content.
   }
 
 
