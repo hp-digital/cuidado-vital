@@ -22,6 +22,7 @@ export default class DashboardComponent implements OnInit {
   dataFormGroup: FormGroup;
   verSpinner:boolean = false;
   idRol: number=0;
+  nombreUsuario: string='';
   heartRate: number | null = null;
   oxygenSaturation: number | null = null;
   systolic: number | null = null; // Presión sistólica
@@ -46,6 +47,7 @@ export default class DashboardComponent implements OnInit {
     this.ObtenerConfiguracion();
     this.configure();
     this.idRol=this.settings.getUserSetting('idRol');
+    this.nombreUsuario = this.settings.getUserSetting('nombres');
   }
   ObtenerConfiguracion(){                     
       forkJoin([        
