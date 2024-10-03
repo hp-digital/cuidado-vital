@@ -233,8 +233,9 @@ export default class AtencionesComponent implements OnInit{
     this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
 
-  AbrirExamenAuxiliar(){
+  AbrirExamenAuxiliar(idHistoriaClinica:number){
     this.modalRef = this.modalExamenAuxiliar.show(ExamenAuxiliarComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
 
   AbrirControlSeguimiento(){
