@@ -2,6 +2,7 @@ import { CabeceraPacienteDTO } from "./cabecera-paciente";
 import { ControlGeneralDTO } from "./control-general";
 import { ControlGlucosaDTO } from "./control-glucosa";
 import { HistoriaExternaDTO } from "./historia-externa";
+import { OrdenDTO } from "./OrdenDTO";
 import { RecetaDTO } from "./RecetaDTO";
 
 export class HistoriaCuidadoDTO{
@@ -23,5 +24,6 @@ export class HistoriaCuidadoDTO{
     ControlGlucosa?:ControlGlucosaDTO[];
     ControlEpoc?:string;
     Receta?:RecetaDTO[];
+    Orden?:OrdenDTO[];
     HistoriaExterna!:HistoriaExternaDTO;
 }

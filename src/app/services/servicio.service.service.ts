@@ -7,6 +7,7 @@ import { environment } from '../../environments/environment';
 import { ServicioDTO } from '../models/ServicioDTO';
 import { ListadoBusquedaServicioDTO } from '../models/ListadoBusquedaServicioDTO';
 import { RegistroNuevaAtencionPacienteDTO } from '@models/registro-paciente-nueva-atencion';
+import { ListadoCatalogoOrdenDTO } from '@models/listado-catalogo-orden';
 
 const API_URL = environment.apiUrl;
 
@@ -63,5 +64,9 @@ export class ServicioServiceService {
 
   ObtenerServicioConsulta(criterioBusqueda: string) {
     return this.http.get<ListadoBusquedaServicioDTO[]>(`${API_URL}Servicio/ObtenerListadoServicioBusqueda?${criterioBusqueda}`);
+  }
+  
+  ObtenerListadoCatalogoOrden(): Observable<ListadoCatalogoOrdenDTO[]>{
+    return this.http.get<ListadoCatalogoOrdenDTO[]>(`${API_URL}CatalogoOrden/ObtenerListado`)
   }
 }

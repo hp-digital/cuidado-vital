@@ -20,11 +20,16 @@ import { PacienteExternoDTO } from '@models/paciente-externo';
 import { MedicoAtiendeDTO } from '@models/medico-atiende';
 import { HistoriaExternaDTO } from '@models/historia-externa';
 import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
+import { ServicioServiceService } from '@services/servicio.service.service';
+import { ListadoCatalogoOrdenDTO } from '@models/listado-catalogo-orden';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { OrdenDTO } from '@models/OrdenDTO';
+import { RecetaDTO } from '@models/RecetaDTO';
 
 @Component({
   selector: 'app-examen-auxiliar',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule, AutoCompleteModule],
   templateUrl: './examen-auxiliar.component.html',
   styleUrl: './examen-auxiliar.component.css'
 })
@@ -56,16 +61,23 @@ export class ExamenAuxiliarComponent implements OnInit {
   direccionPaciente:string='';
   procedencia:string='';
 
+  comboCatalogoOrden: ListadoCatalogoOrdenDTO[]=[];
+  servicios: any[] = [];
+  selectedServicio: any; // Para almacenar el objeto seleccionado
+  idServicio:number=0;
+  listadoOrden: OrdenDTO[]=[];
+
   constructor(
     private bsModalExamenAuxiliar: BsModalRef,
     private modalService: BsModalService,
-    private historiaService: HistoriaService
+    private historiaService: HistoriaService,
+    private servicioService: ServicioServiceService
   ){
     this.dataFormGroup = new FormGroup({
-      selectBuscarMedicamento: new FormControl(),
-      inputNombreMedicamento: new FormControl(),
-      inputDosis: new FormControl(),
-      inputDuracion: new FormControl(),
+      inputServicio: new FormControl(),
+      inputTipo: new FormControl(),
+      inputEstudio: new FormControl(),
+      inputIndicaciones: new FormControl(),
       selectDuracionDetalle: new FormControl(),
       selectVia: new FormControl(),
       textIndicaciones: new FormControl()
@@ -84,15 +96,15 @@ export class ExamenAuxiliarComponent implements OnInit {
     this.verSpinner = true;    
     forkJoin([
       this.historiaService.ObtenerHistoriaClinica(this.idHistoria),
-      this.historiaService.ObtenerMedicamento()
+      this.historiaService.ObtenerMedicamento(),
+      this.servicioService.ObtenerListadoCatalogoOrden()
     ])
       .subscribe(
         data => {
-          console.log("hcl", data[0]);
+          
           this.AsignarObjetoInicial(data[0]);
           this.comboExamenes = data[1];
-          
-          
+          this.comboCatalogoOrden = data[2];
           this.verSpinner = false;
         },
         err => {
@@ -101,6 +113,52 @@ export class ExamenAuxiliarComponent implements OnInit {
         }
       );
   }
+
+  filterServicios(event: any) {
+    const query = event.query;
+    this.servicios = this.comboCatalogoOrden.filter(s => s.servicio.toLowerCase().includes(query.toLowerCase()));
+    
+  }
+
+  Agregar(){
+    if(this.selectedServicio != null)
+    {
+      this.idServicio = this.selectedServicio.id
+    }
+    
+    let resultado = this.comboCatalogoOrden.filter(s => s.id == this.idServicio );
+    if (resultado.length != 0)
+    {
+      this.dataFormGroup.controls['inputTipo'].setValue(resultado[0]['clasificacion']);
+      this.dataFormGroup.controls['inputEstudio'].setValue(resultado[0]['servicio']);
+    }
+        
+  }
+
+  AgregarReceta(){
+    let indice = this.listadoOrden.length;
+
+
+    let orden = new OrdenDTO();
+    orden.Indice = indice;
+    orden.IdServicio = this.idServicio
+    orden.Servicio = this.dataFormGroup.controls['inputEstudio'].value;
+    orden.Tipo =this.dataFormGroup.controls['inputTipo'].value;
+    orden.Indicaciones = this.dataFormGroup.controls['inputIndicaciones'].value;
+
+    this.listadoOrden.push(orden);
+    this.LimpiarOrden();
+  }
+
+  LimpiarOrden(){
+    this.idServicio=0
+    this.selectedServicio=[];
+
+    this.dataFormGroup.controls['inputEstudio'].setValue('');
+    this.dataFormGroup.controls['inputTipo'].setValue('');
+    this.dataFormGroup.controls['inputIndicaciones'].setValue('');
+  }
+
   AsignarObjetoInicial(data:any){
     this.verSpinner = true;
     let objHistoria: any = data;
@@ -108,7 +166,7 @@ export class ExamenAuxiliarComponent implements OnInit {
     this.nroHcl = objHistoria.cabeceraPaciente.numeroDocumento;
     this.fechaHistoria = objHistoria.cabeceraPaciente.fechaInicioAtencion ;
     this.celularPaciente = objHistoria.cabeceraPaciente.celular ;
-
+  
 
     let cabecera = new CabeceraPacienteDTO();
     if(objHistoria.cabeceraPaciente != null)
@@ -480,7 +538,41 @@ export class ExamenAuxiliarComponent implements OnInit {
       });
     }
     
-   
+    let recetaListado : RecetaDTO[]=[];
+    if(objHistoria.receta != null)
+    {
+      objHistoria.receta.forEach((element:any)=>{
+        let receta = new RecetaDTO();
+        receta.Indice = element.indice;
+        receta.IdMedicamento = element.idMedicamento;
+        receta.NombreMedicamento = element.nombreMedicamento;
+        receta.Dosis = element.dosis;
+        receta.Duracion = element.duracion;
+        receta.DuracionDetalle = element.duracionDetalle;
+        receta.Via = element.via;
+        receta.Indicaciones = element.indicaciones;
+
+        recetaListado.push(receta);
+      })
+    }
+
+
+    let ordenListado : OrdenDTO[]=[];
+    if(objHistoria.orden != null)
+    {
+      objHistoria.orden.forEach((element:any)=>{
+        let orden = new OrdenDTO();
+        orden.Indice = element.indice;
+        orden.IdServicio = element.idServicio;
+        orden.Servicio = element.servicio;
+        orden.Tipo = element.tipo;
+        orden.Indicaciones = element.indicaciones;
+        
+        ordenListado.push(orden);
+      });
+    }
+    this.listadoOrden = ordenListado;
+
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
@@ -496,11 +588,36 @@ export class ExamenAuxiliarComponent implements OnInit {
     historiaCalidad.FechaCreacion = objHistoria.fechaCreacion;
     historiaCalidad.FechaModificacion = objHistoria.fechaModificacion;
     historiaCalidad.ControlGeneral = controlGeneral
+    historiaCalidad.Orden = ordenListado;
+    historiaCalidad.Receta = recetaListado;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;
     
   }
+
+  Guardar(){
+    this.objHistoria.Orden = this.listadoOrden;
+    this.objHistoria.IdHistoriaClinica = this.idHistoria;
+    console.log("historia guardar", this.objHistoria);
+    
+    if(this.listadoOrden.length>0){
+
+        this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
+          next: (data) => {
+            this.MostrarNotificacionSuccessModal('La historia se guardó con éxito.', '');
+          },
+          error: (e) => {
+            console.log('Error: ', e);
+            this.verSpinner = false;
+          },
+          complete: () => { this.verSpinner = false; }
+        });
+    }else{
+      this.MostrarNotificacionWarning("Ningún servicio seleccionado", "Error");
+    }
+  }
+
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
   {
     Swal.fire({

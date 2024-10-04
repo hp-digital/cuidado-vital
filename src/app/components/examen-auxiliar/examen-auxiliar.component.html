@@ -4,7 +4,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
     </div>
     <div class="modal-body">
-        <form>
+        <form [formGroup]="dataFormGroup">
             <div id="header-component">
                 <div class="row">
                     <div class="col-xl-3">
@@ -44,22 +44,21 @@
              
            
             <div class="row mb-3 bg-green-custom">ÓRDENES</div>
-            <div class="row">
-                <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3" for="">Búsqueda de estudios</label>	
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="" />
-                            <button type="button" class="input-group-text btn-green-custom" for="">
-                                <i class="fas fa-lg fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-6">
-                    
-                </div>
-            </div>								
+
+                
+                <p-autoComplete 
+                    formControlName="inputServicio"
+                    [(ngModel)]="selectedServicio" 
+                    [suggestions]="servicios" 
+                    (completeMethod)="filterServicios($event)" 
+                    field="servicio"
+                    [minLength]="2"
+                    placeholder="Buscar servicio">
+                </p-autoComplete>
+                
+                <button type="button" class="btn btn-green-custom" (click)="Agregar()"><i class="fas fa-lg fa-plus"></i></button>
+                
+           	<hr>						
             <div class="row">
                 <div class="col-xl-3">
                     <h6>Tipo</h6>
@@ -73,28 +72,48 @@
             </div>
             <div class="row">
                 <div class="col-xl-3">
-                    <input type="text" class="form-control" readonly>
+                    <input type="text" class="form-control" formControlName="inputTipo" readonly>
                 </div>
                 <div class="col-xl-4">
-                    <input type="text" class="form-control" readonly>
+                    <input type="text" class="form-control" formControlName="inputEstudio" readonly>
                 </div>
                 <div class="col-xl-4">
                     <div class="row">
                         <div class="col-xl-12">
-                            <textarea type="text" class="form-control" id="" ></textarea>
+                            <textarea type="text" class="form-control" id="" formControlName="inputIndicaciones"></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-1">
-                    <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                    <button type="button" class="btn btn-green-custom" (click)="AgregarReceta()"><i class="fas fa-lg fa-plus"></i></button>
+                </div>
+            </div>
+
+            <hr>
+            <div class="box-shadow mt-3" *ngFor="let lista of listadoOrden">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <h6>Nombre Examen</h6>
+                        <p>{{lista.Servicio}}</p>
+                    </div>	
+                    <div class="col-xl-3">
+                        <h6>Tipo</h6>
+                        <p>{{lista.Tipo}}</p>
+                    </div>								
+                </div>
+                <div class="row">
+                    <div class="col-xl-12">
+                        <h6>Indicaciones</h6>
+                        <p>{{lista.Indicaciones}}</p>
+                    </div>
                 </div>
             </div>
                                             
         </form>
     </div>
     <div class="modal-footer">							
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" data-bs-dismiss="modal"><i class="fas fa-lg fa-fw me-2 fa-file-alt"></i>Generar orden</button>
-        <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button>
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" data-bs-dismiss="modal" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-file-alt"></i>Generar orden</button>
+        <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
       </div>
 </div>
