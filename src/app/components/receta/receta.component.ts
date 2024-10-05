@@ -127,7 +127,7 @@ export class RecetaComponent implements OnInit {
 
     let receta = new RecetaDTO();
     receta.Indice =indice;
-    receta.IdMedicamento =idMedicamento;
+    receta.IdMedicamento =this.idMedicamento;
     receta.NombreMedicamento =nombreMedicamento;
     receta.Dosis =dosis;
     receta.Duracion =duracion;

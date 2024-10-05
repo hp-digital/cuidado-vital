@@ -86,16 +86,45 @@ export class ControlPresionComponent implements OnInit {
     this.verSpinner = true;
     let objHistoria: any = data;
     console.log("objHistoria",objHistoria);
-    //this.paciente = objHistoria.cabeceraPaciente.apellidoMaterno+' '+objHistoria.cabeceraPaciente.apellidoMaterno+', '+objHistoria.cabeceraPaciente.nombre;
-    /* this.medico = objHistoria.HistoriaExterna.medico.apellidoPaterno+' '+objHistoria.HistoriaExterna.medico.apellidoMaterno+', '+objHistoria.HistoriaExterna.medico.nombres; */
+    
     this.nroHcl = this.objHistoria.cabeceraPaciente?.NumeroDocumento;
     this.fechaHistoria = this.objHistoria.FechaInicioAtencion ;
     this.objControlPresion = objHistoria.ControlPresion;
-    /* this.fechaNacimientoPaciente = objHistoria.HistoriaExterna.fechaNacimiento; */
+
+    
+    let control :  ControlPresionDTO[]=[];
+    let medidas : MedidasAntropometricasDTO[]=[];
+
+    if(objHistoria.ControlPresion!=null)
+    {
+      objHistoria.ControlPresion.forEach((element:any)=>{
+        let s = new ControlPresionDTO();
+        s.Fecha = element.Fecha;
+        s.Paciente = element.Paciente;
+        s.PlanTrabajo = element.PlanTrabajo;
+        if(element.MedidasAntroprometricas != null)
+        {
+          element.MedidasAntroprometricas.forEach((sstf:any)=>{
+            let _metr = new MedidasAntropometricasDTO();
+            _metr.Diastolica = sstf.Diastolica;
+            _metr.Sistolica = sstf.Sistolica;
+            _metr.Fecha = sstf.Fecha;
+            _metr.Fr = sstf.Fr;
+            _metr.Pulso = sstf.Pulso;
+            _metr.Estado = sstf.Estado;
+            medidas.push(_metr);
+          });
+        }
+        s.MedidasAntroprometricas = medidas;
+        
+        control.push(s);
+      })
+      this.objControlPresion = control;
+    }
+
+    console.log("controlss", this.objControlPresion)
     this.celularPaciente = objHistoria.cabeceraPaciente.Celular ;
-    /* this.emailPaciente = objHistoria.HistoriaExterna.paciente.email ;
-    this.direccionPaciente = objHistoria.HistoriaExterna.paciente.direccion ;
-    this.procedencia = objHistoria.HistoriaExterna.razonSocial; */
+
 
   }
 
