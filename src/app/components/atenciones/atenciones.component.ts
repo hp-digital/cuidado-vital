@@ -20,6 +20,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { NuevoControlComponent } from './nuevo-control/nuevo-control.component';
+import { CuadroControlesReportesComponent } from '../cuadro-controles-reportes/cuadro-controles-reportes.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -51,6 +52,7 @@ export default class AtencionesComponent implements OnInit{
     private modalRef: BsModalRef,
     private modalService: BsModalService,
     private modalControles: BsModalService,
+    private modalControlesReportes: BsModalService,
     private modalReceta: BsModalService,
     private modalExamenAuxiliar: BsModalService,
     private modalControlSeguimiento: BsModalService,
@@ -225,6 +227,11 @@ export default class AtencionesComponent implements OnInit{
 
   AbrirControles(idHistoriaClinica:number){
     this.modalRef = this.modalControles.show(CuadroControlesComponent, { backdrop: 'static', class: 'modal-xg' })
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
+  AbrirControlesReporte(idHistoriaClinica:number){
+    this.modalRef = this.modalControlesReportes.show(CuadroControlesReportesComponent, {backdrop: 'static', class: 'modal-xg'})
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 

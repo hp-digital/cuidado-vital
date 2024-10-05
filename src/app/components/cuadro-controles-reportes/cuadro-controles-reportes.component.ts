@@ -3,46 +3,39 @@ import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { NotaEnfermeraComponent } from '../historia-clinica/nota-enfermera/nota-enfermera.component';
-import { ActividadTecnicaComponent } from '../historia-clinica/actividad-tecnica/actividad-tecnica.component';
-import { EpicrisisComponent } from '../historia-clinica/epicrisis/epicrisis.component';
-import { ControlGeneralComponent } from '../historia-clinica/control-general/control-general.component';
-import { ControlGlucosaComponent } from '../historia-clinica/control-glucosa/control-glucosa.component';
-import { ControlPresionComponent } from '../historia-clinica/control-presion/control-presion.component';
-import { ControlEpocComponent } from '../historia-clinica/control-epoc/control-epoc.component';
-import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
-import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { HistoriaService } from '@services/historia.service';
-import { AnamnesisDTO } from '@models/anamnesis';
-import { FuncionBiologicaDTO } from '@models/funcion-biologica';
-import { ExamenFisicoDTO } from '@models/examen-fisico';
-import { SignoVitalDTO } from '@models/signo-vital';
-import { ExamenRegionalDTO } from '@models/examen-regional';
 import { DiagnosticoCuidadoDTO } from '@models/diagnostico-cuidado';
-import { HistoriaExternaDTO } from '@models/historia-externa';
-import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
-import { MedicoAtiendeDTO } from '@models/medico-atiende';
-import { PacienteExternoDTO } from '@models/paciente-externo';
-import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
 import { ControlGeneralDTO } from '@models/control-general';
 import { OrdenDTO } from '@models/OrdenDTO';
 import { RecetaDTO } from '@models/RecetaDTO';
+import { ExamenRegionalDTO } from '@models/examen-regional';
+import { SignoVitalDTO } from '@models/signo-vital';
+import { ExamenFisicoDTO } from '@models/examen-fisico';
+import { FuncionBiologicaDTO } from '@models/funcion-biologica';
+import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
+import { AnamnesisDTO } from '@models/anamnesis';
+import { PacienteExternoDTO } from '@models/paciente-externo';
+import { MedicoAtiendeDTO } from '@models/medico-atiende';
+import { HistoriaExternaDTO } from '@models/historia-externa';
+import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
 
 @Component({
-  selector: 'app-cuadro-controles',
+  selector: 'app-cuadro-controles-reportes',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule,FormsModule],
-  templateUrl: './cuadro-controles.component.html',
-  styleUrl: './cuadro-controles.component.css'
+  templateUrl: './cuadro-controles-reportes.component.html',
+  styleUrl: './cuadro-controles-reportes.component.css'
 })
-export default class CuadroControlesComponent implements OnInit {
+export class CuadroControlesReportesComponent implements OnInit {
 
+  
   idHistoria:number=0;
   verSpinner:boolean = false;
 
   objHistoria=new HistoriaCuidadoDTO();
-
 
   objAnamnesis = new AnamnesisDTO();
   objFuncionBiologica = new FuncionBiologicaDTO();
@@ -55,13 +48,6 @@ export default class CuadroControlesComponent implements OnInit {
   constructor(
     private modalCuadroControl: BsModalRef,
     private modalService: BsModalService,
-    private modalNotaEnfermera: BsModalService,
-    private modalPersonalTecnica: BsModalService,
-    private modalEpicrisis: BsModalService,
-    private modalControlGlucosa: BsModalService,
-    private modalControlPresion: BsModalService,
-    private modalControlGeneral: BsModalService,
-    private modalControlEpoc: BsModalService,
     private historiaService: HistoriaService
   ){
 
@@ -100,7 +86,6 @@ export default class CuadroControlesComponent implements OnInit {
         }
       );
   }
-
   AsignarObjetoInicial(data:any){
     this.verSpinner = true;
     let objHistoria: any = data;
@@ -228,7 +213,7 @@ export default class CuadroControlesComponent implements OnInit {
     
       anamnesis.Antecedentes = antecedentes;
       externo.Anamnesis = anamnesis;
-      this.objAnamnesis = anamnesis;
+      /* this.objAnamnesis = anamnesis; */
 
       let funcionBiologica = new FuncionBiologicaDTO();
       funcionBiologica.Apetito = [];
@@ -305,7 +290,7 @@ export default class CuadroControlesComponent implements OnInit {
       }
       
       externo.FuncionBiologica = funcionBiologica;
-      this.objFuncionBiologica = funcionBiologica;
+      /* this.objFuncionBiologica = funcionBiologica; */
 
       let examenFisico = new ExamenFisicoDTO();
       examenFisico.ExamenGeneral = objHistoria.historiaExterna.examenFisico.examenGeneral;
@@ -418,9 +403,9 @@ export default class CuadroControlesComponent implements OnInit {
       
       examenFisico.ExamenRegional = examenRegional;
       externo.ExamenFisico = examenFisico;
-      this.objFuncionVital = funcionVital;
+/*       this.objFuncionVital = funcionVital;
       this.objExamenFisico = examenFisico;
-      this.objExamenRegional = examenRegional;
+      this.objExamenRegional = examenRegional; */
       
       let diagnosticoDTO :  DiagnosticoCuidadoDTO[]=[];
       if(objHistoria.historiaExterna.diagnostico != null)
@@ -433,12 +418,12 @@ export default class CuadroControlesComponent implements OnInit {
           diagnosticoDTO.push(diagnostico);
         });
       }
-      this.objDiagnostico = diagnosticoDTO;
+      /* this.objDiagnostico = diagnosticoDTO; */
       
       externo.Diagnostico = diagnosticoDTO;
       externo.PlanTrabajo = objHistoria.historiaExterna.planTrabajo;
       externo.UrlPdfHistoriaClinica = objHistoria.historiaExterna.urlPdfHistoriaClinica;
-      this.objHistoriaExterna = externo;
+      /* this.objHistoriaExterna = externo; */
     }
 
     let controlGeneral : ControlGeneralDTO[]=[];
@@ -529,42 +514,22 @@ export default class CuadroControlesComponent implements OnInit {
     
   }
 
-  AbrirNotaEnfermera(){
+  AbrirReporteDiabetico(){
 
-    this.modalCuadroControl = this.modalNotaEnfermera.show(NotaEnfermeraComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
-
-  AbrirActividadTecnica(){
-
-    this.modalCuadroControl = this.modalPersonalTecnica.show(ActividadTecnicaComponent, { backdrop: 'static', class: 'modal-xl' })
   }
 
-  AbrirEpicrisis(){
+  AbrirReporteHipertenso(){
 
-    this.modalCuadroControl = this.modalEpicrisis.show(EpicrisisComponent, { backdrop: 'static', class: 'modal-xl' })
   }
 
-  AbrirControlGlucosa(){
-    this.modalCuadroControl = this.modalControlGlucosa.show(ControlGlucosaComponent, { backdrop: 'static', class: 'modal-xl' })
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
-    this.modalCuadroControl.content.onGuardar = () => {
-      //this.obtenerHistoriaClinica(this.objListaPaciente.idHistoriaClinica);
-    };
+  AbrirReporteMayor(){
+
   }
-  AbrirControlPresion(){
-    this.modalCuadroControl = this.modalControlPresion.show(ControlPresionComponent, { backdrop: 'static', class: 'modal-xl' })
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+
+  AbrirReporteEpoc(){
+    
   }
-  AbrirControlGeneral(){
-    this.modalCuadroControl = this.modalControlGeneral.show(ControlGeneralComponent, { backdrop: 'static', class: 'modal-xl' })
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
-    this.modalCuadroControl.content.onGuardar = () => {
-      //this.obtenerHistoriaClinica(this.objListaPaciente.idHistoriaClinica);
-    };
-  }
-  AbrirControlEpoc(){
-    this.modalCuadroControl = this.modalControlEpoc.show(ControlEpocComponent, { backdrop: 'static', class: 'modal-xl' })
-  }
+
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
   {

@@ -9,22 +9,22 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Nombre Paciente:</label><span> Paciente Prueba Validaciones</span>
+                            <label class="fw-bold">Nombre Paciente:</label><span> {{paciente}}</span>
                         </div>
                     </div>
                     <div class="col-xl-6 col-6">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Edad:</label><span> 22 años</span>
+                            <label class="fw-bold">Nro HCL:</label><span>{{nroHcl}}</span>
                         </div>
                     </div>
                     <div class="col-xl-6 col-6">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Sexo:</label><span> Femenino</span>
+                            <label class="fw-bold">Medico:</label><span> {{medico}} </span>
                         </div>
                     </div>                    
                 </div>
             </div>            
-
+            <hr>
             <div id="seccion-medidas">
                 <h6>Medidas Antropométricas*</h6>
                 <div class="row">
@@ -36,17 +36,21 @@
                                     <label class="cform-label">Fecha</label>
                                     <input type="date" class="form-control" id="" formControlName="inputFecha">
                                 </div>
-                                <div class="col-8">
-                                    <label class="cform-label">PA (Sistolica/diastolica) (mmHg)</label>
-                                    <input type="text" class="form-control" id="" formControlName="inputPA">
+                                <div class="col-4">
+                                    <label class="cform-label">PA (Sistolica)</label>
+                                    <input type="number" class="form-control" id="" formControlName="inputPA">
                                 </div>  
                                 <div class="col-4">
+                                    <label class="cform-label">PA(Diastolica)</label>
+                                    <input type="number" class="form-control" formControlName="inputDiastolica">
+                                </div>
+                                <div class="col-4">
                                     <label class="cform-label">FR (min)</label>
-                                    <input type="text" class="form-control" id="" formControlName="inputFR">
+                                    <input type="number" class="form-control" id="" formControlName="inputFR">
                                 </div>
                                 <div class="col-4">
                                     <label class="cform-label">Pulso</label>
-                                    <input type="text" class="form-control" id="" formControlName="inputPulso">
+                                    <input type="number" class="form-control" id="" formControlName="inputPulso">
                                 </div>
                                 <div class="col-4 d-flex align-items-center">
                                     <button type="button" class="btn btn-sm btn-green-custom mt-3" (click)="AgregarMedidasPresion()">+ AGREGAR</button>
@@ -63,19 +67,21 @@
                                 <thead class="text-center">
                                     <tr>
                                         <th>FECHA</th>
-                                        <th>PA (mmHg)</th>
+                                        <th>PA Sistolica(mmHg)</th>
+                                        <th>PA Diastolica(mmHg)</th>
                                         <th>FR (min)</th>
                                         <th>PULSO</th>
                                         <th>ESTADO</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let p of medidasPresion">
-                                        <td>{{ p.fecha }}</td>
-                                        <td><input type="text" class="form-control" value="{{ p.pa }}"></td>
-                                        <td><input type="text" class="form-control" value="{{ p.fr }}"></td>
-                                        <td><input type="text" class="form-control" value="{{ p.pulso }}"></td>
-                                        <td>{{ p.estado }}</td>
+                                    <tr *ngFor="let S of medidasAntropometricas">
+                                        <td>{{ S.Fecha }}</td>
+                                        <td><input type="text" class="form-control" value="{{ S.Sistolica }}"></td>
+                                        <td><input type="text" class="form-control" value="{{ S.Diastolica }}"></td>
+                                        <td><input type="text" class="form-control" value="{{ S.Fr }}"></td>
+                                        <td><input type="text" class="form-control" value="{{ S.Pulso }}"></td>
+                                        <td>{{ S.Estado }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -86,7 +92,7 @@
                 <h6>Plan de Trabajo</h6>
                 <div class="row">
                     <div class="col-12">
-                        <textarea name="" id="" class="form-control" rows="4"></textarea>
+                        <textarea name="" id="" class="form-control" rows="3" formControlName="inputPlanTrabajo"></textarea>
                     </div>
                 </div>
 

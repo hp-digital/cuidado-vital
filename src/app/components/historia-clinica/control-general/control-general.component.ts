@@ -66,8 +66,8 @@ export class ControlGeneralComponent implements OnInit {
 
   paciente:string ='';
   medico:string='';
-  nroHcl:string='';
-  fechaHistoria:string='';
+  nroHcl?:string='';
+  fechaHistoria?:string='';
   fechaNacimientoPaciente:string='';
   celularPaciente:string='';
   emailPaciente:string='';
@@ -182,15 +182,15 @@ export class ControlGeneralComponent implements OnInit {
     this.verSpinner = true;
     let objHistoria: any = data;
 
-    this.paciente = objHistoria.HistoriaExterna.paciente.apellidoPaterno+' '+objHistoria.HistoriaExterna.paciente.apellidoMaterno+', '+objHistoria.HistoriaExterna.paciente.nombres;
-    this.medico = objHistoria.HistoriaExterna.medico.apellidoPaterno+' '+objHistoria.HistoriaExterna.medico.apellidoMaterno+', '+objHistoria.HistoriaExterna.medico.nombres;
-    this.nroHcl = objHistoria.HistoriaExterna.paciente.numeroDocumento;
-    this.fechaHistoria = objHistoria.FechaInicioAtencion ;
-    this.fechaNacimientoPaciente = objHistoria.HistoriaExterna.fechaNacimiento;
-    this.celularPaciente = objHistoria.HistoriaExterna.paciente.celular ;
-    this.emailPaciente = objHistoria.HistoriaExterna.paciente.email ;
+    this.paciente = this.objHistoria.cabeceraPaciente?.ApellidoMaterno+' '+this.objHistoria.cabeceraPaciente?.ApellidoMaterno+', '+this.objHistoria.cabeceraPaciente?.Nombre;
+    /* this.medico = objHistoria.HistoriaExterna.medico.apellidoPaterno+' '+objHistoria.HistoriaExterna.medico.apellidoMaterno+', '+objHistoria.HistoriaExterna.medico.nombres; */
+    this.nroHcl = this.objHistoria.cabeceraPaciente?.NumeroDocumento;
+    this.fechaHistoria = this.objHistoria.cabeceraPaciente?.FechaAtencion.toString() ;
+    /* this.fechaNacimientoPaciente = objHistoria.HistoriaExterna.fechaNacimiento; */
+    this.celularPaciente = objHistoria.cabeceraPaciente.Celular ;
+    /* this.emailPaciente = objHistoria.HistoriaExterna.paciente.email ;
     this.direccionPaciente = objHistoria.HistoriaExterna.paciente.direccion ;
-    this.procedencia = objHistoria.HistoriaExterna.razonSocial;
+    this.procedencia = objHistoria.HistoriaExterna.razonSocial; */
     
   }
 
