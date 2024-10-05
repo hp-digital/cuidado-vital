@@ -44,6 +44,7 @@
             <div class="row mb-3 bg-green-custom">MEDICAMENTO</div>	
             <div id="seccion-medicacion" class="">
                 <p-autoComplete 
+                     *ngIf="idRol!=2"
                     formControlName="selectBuscarMedicamento"
                     [(ngModel)]="selectedMedicamento" 
                     [suggestions]="medicamentos" 
@@ -53,10 +54,10 @@
                     placeholder="Buscar medicamento">
                 </p-autoComplete>
                 
-                <button type="button" class="btn btn-green-custom" (click)="Agregar()"><i class="fas fa-lg fa-plus"></i></button>
+                <button type="button" *ngIf="idRol!=2" class="btn btn-green-custom" (click)="Agregar()"><i class="fas fa-lg fa-plus"></i></button>
 
 
-                <div class="row">
+                <div class="row" *ngIf="idRol!=2">
                     <div class="col-xl-4">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Nombre</label>
@@ -102,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="idRol!=2">
                     <div class="col-xl-12">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3" for="">Indicaciones</label>
@@ -110,7 +111,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" *ngIf="idRol!=2">
                     <div class="col-xl-12 text-right">
                         <button type="button" class="btn btn-green-custom" (click)="AgregarListadoReceta()"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Agregar medicamento</button>
                     </div>

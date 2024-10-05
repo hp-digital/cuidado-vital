@@ -23,6 +23,7 @@ import { RecetaDTO } from '@models/RecetaDTO';
 import { ControlGeneralDTO } from '@models/control-general';
 import { OrdenDTO } from '@models/OrdenDTO';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { SettingsService } from '@services/settings.service';
 
 @Component({
   selector: 'app-receta',
@@ -61,6 +62,7 @@ export class RecetaComponent implements OnInit {
   emailPaciente:string='';
   direccionPaciente:string='';
   procedencia:string='';
+  idRol:number=0;
 
   listadoRecetaDTO: RecetaDTO[] = [];
 
@@ -70,7 +72,8 @@ export class RecetaComponent implements OnInit {
   constructor(
     private modalService: BsModalService,
     private bsModalReceta: BsModalRef,
-    private historiaService: HistoriaService
+    private historiaService: HistoriaService,
+    private settings : SettingsService
   ){
     this.dataFormGroup = new FormGroup({
       selectBuscarMedicamento: new FormControl(),
@@ -84,7 +87,7 @@ export class RecetaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.idRol=this.settings.getUserSetting('idRol');
   }
   CerrarModal() {
     this.bsModalReceta.hide();

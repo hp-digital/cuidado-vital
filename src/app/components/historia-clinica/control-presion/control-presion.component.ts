@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { forkJoin } from 'rxjs';
+import Swal from 'sweetalert2';
+import moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HistoriaService } from '@services/historia.service';
 import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
-import { isBetween } from 'node_modules/ngx-bootstrap/chronos/utils/date-compare';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { ControlPresionDTO } from '@models/control-presion';
 
@@ -39,7 +41,7 @@ export class ControlPresionComponent implements OnInit {
   paciente:string ='';
   medico:string='';
   nroHcl?:string='';
-  fechaHistoria?:string='';
+  fechaHistoria= new Date();
   fechaNacimientoPaciente:string='';
   celularPaciente:string='';
   emailPaciente:string='';
@@ -71,7 +73,7 @@ export class ControlPresionComponent implements OnInit {
 
   AsignarHistoriaClinica(historia:HistoriaCuidadoDTO, idHistoria:number){
 
-    //console.log("historia llega", historia);
+    console.log("historia llega", historia);
     this.objHistoria = historia;
     this.idHistoria = idHistoria;
     //this.objControlPresion = historia.ControlPresion;
@@ -87,14 +89,14 @@ export class ControlPresionComponent implements OnInit {
     //this.paciente = objHistoria.cabeceraPaciente.apellidoMaterno+' '+objHistoria.cabeceraPaciente.apellidoMaterno+', '+objHistoria.cabeceraPaciente.nombre;
     /* this.medico = objHistoria.HistoriaExterna.medico.apellidoPaterno+' '+objHistoria.HistoriaExterna.medico.apellidoMaterno+', '+objHistoria.HistoriaExterna.medico.nombres; */
     this.nroHcl = this.objHistoria.cabeceraPaciente?.NumeroDocumento;
-    this.fechaHistoria = this.objHistoria.cabeceraPaciente?.FechaAtencion.toString() ;
-    this.objControlPresion = objHistoria.controlPresion;
+    this.fechaHistoria = this.objHistoria.FechaInicioAtencion ;
+    this.objControlPresion = objHistoria.ControlPresion;
     /* this.fechaNacimientoPaciente = objHistoria.HistoriaExterna.fechaNacimiento; */
     this.celularPaciente = objHistoria.cabeceraPaciente.Celular ;
     /* this.emailPaciente = objHistoria.HistoriaExterna.paciente.email ;
     this.direccionPaciente = objHistoria.HistoriaExterna.paciente.direccion ;
     this.procedencia = objHistoria.HistoriaExterna.razonSocial; */
-    
+
   }
 
   AgregarMedidasPresion() {
@@ -129,5 +131,88 @@ export class ControlPresionComponent implements OnInit {
     return '-'
   }
 
-  
+  Guardar(){
+
+    this.AsignarValores();
+    this.objHistoria.IdHistoriaClinica = this.idHistoria;
+    this.objHistoria.ControlPresion = this.objControlPresion;
+    this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
+      next: (data) => {
+        this.MostrarNotificacionSuccessModal('El control se guardó con éxito.', '');
+        this.CerrarModal();
+      },
+      error: (e) => {
+        console.log('Error: ', e);
+        this.verSpinner = false;
+      },
+      complete: () => { this.verSpinner = false; }
+    });
+
+  }
+
+  AsignarValores(){
+    this.objHistoria.IdHistoriaClinica = this.idHistoria;
+    let presion = new ControlPresionDTO();
+    presion.Fecha = new  Date();
+    presion.Paciente = this.paciente;
+    presion.PlanTrabajo = this.dataFormGroup.controls['inputPlanTrabajo'].value;
+    presion.MedidasAntroprometricas = this.medidasAntropometricas;
+
+    this.objControlPresion.push(presion);
+    
+    console.log("presion", this.objControlPresion);
+  }
+
+  MostrarNotificacionInfo(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'info',
+      title: titulo,
+      text: mensaje
+    });
+  }
+
+  MostrarNotificacionWarning(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'warning',
+      title: titulo,
+      text: mensaje
+    });
+  }
+  manejadorMensajeErroresGuardar(e: any) {
+    if (typeof e != "string") {
+      let error = e;
+      let arrayErrores: any[] = [];
+      let errorValidacion = Object.keys(e);
+      if (Array.isArray(errorValidacion)) {
+        errorValidacion.forEach((propiedadConError: any) => {
+          error[propiedadConError].forEach((mensajeError: any) => {
+            if (!arrayErrores.includes(mensajeError['mensaje'])) {
+              arrayErrores.push(mensajeError['mensaje']);
+            }
+          });
+        });
+        this.MostrarNotificacionError(arrayErrores.join("<br/>"), '¡ERROR EN EL PROCESO!')
+      } else {
+        this.MostrarNotificacionError("", '¡ERROR EN EL PROCESO!')
+      }
+    }
+    else {
+      this.MostrarNotificacionError(e, '¡ERROR EN EL PROCESO!');
+    }
+  }
+  MostrarNotificacionError(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'error',
+      title: titulo,
+      html: `<div class="message-text-error">${mensaje} </div>`,
+    });
+  }
+
+  MostrarNotificacionSuccessModal(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'success',
+      title: titulo,
+      text: mensaje
+    });
+  }
 }

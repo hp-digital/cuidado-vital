@@ -1,0 +1,111 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">REPORTE DEL PACIENTE HIPERTENSO</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dataFormGroup">
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha atención : </label> <span>{{fechaHistoria | date: 'yyyy-MM-dd'}}</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>
+            <hr/>		
+
+            <div id="seccion-medicacion" class="">
+                <div class="row mb-3 bg-green-custom">REPORTE</div>	
+                <div class="box-shadow mt-3" >
+                    <div *ngFor="let record of objControlPresion">
+                        <p><strong>Fecha:</strong> {{ record.Fecha | date: 'short' }}</p>
+                        <p><strong>Plan de Trabajo:</strong> {{ record.PlanTrabajo }}</p>
+                      
+                        <h5>Medidas Antropométricas:</h5>
+                        <table border="2">
+                          <thead>
+                            <tr>
+                              <th>Fecha</th>
+                              <th>Sistólica</th>
+                              <th>Diastólica</th>
+                              <th>Frecuencia Respiratoria</th>
+                              <th>Pulso</th>
+                              <th>Estado</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let medida of record.MedidasAntroprometricas">
+                              <td>{{ medida.Fecha | date: 'short' }}</td>
+                              <td>{{ medida.Sistolica }}</td>
+                              <td>{{ medida.Diastolica }}</td>
+                              <td>{{ medida.Fr }}</td>
+                              <td>{{ medida.Pulso }}</td>
+                              <td>{{ medida.Estado }}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <hr>
+                      </div>
+                    <!-- <div class="row">
+                        <div class="col-xl-3">
+                            <h6>Fecha</h6>
+                            <p>{{lista.Fecha | date : 'dd-MM-yyyy'}}</p>
+                        </div>									
+                    </div>
+                    <div class="row" *ngFor="let item of objControlPresion.MedidasAntroprometricas">
+                        <div class="col-xl-3">
+                            <h6>PA Sistolica</h6>
+                            <p>{{lista}}</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>PA Diastolica</h6>
+                            <p>{{item.Diastolica}}</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>Frecuencia Respiratoria</h6>
+                            <p>{{item.Fr}}</p>
+                        </div>		
+                        <div class="col-xl-3">
+                            <h6>Pulso</h6>
+                            <p>{{item.Pulso}}</p>
+                        </div>	
+                        <div class="col-xl-3">
+                            <h6>Estado</h6>
+                            <p>{{item.Estado}}</p>
+                        </div>										
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <h6>Indicaciones</h6>
+                            <p>{{lista.PlanTrabajo}}</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            		
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
+        <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+      </div>
+</div>

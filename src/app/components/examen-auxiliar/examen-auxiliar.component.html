@@ -47,6 +47,7 @@
 
                 
                 <p-autoComplete 
+                    *ngIf="idRol!=2"
                     formControlName="inputServicio"
                     [(ngModel)]="selectedServicio" 
                     [suggestions]="servicios" 
@@ -56,10 +57,10 @@
                     placeholder="Buscar servicio">
                 </p-autoComplete>
                 
-                <button type="button" class="btn btn-green-custom" (click)="Agregar()"><i class="fas fa-lg fa-plus"></i></button>
+                <button type="button" *ngIf="idRol!=2" class="btn btn-green-custom" (click)="Agregar()"><i class="fas fa-lg fa-plus"></i></button>
                 
            	<hr>						
-            <div class="row">
+            <div class="row" *ngIf="idRol!=2">
                 <div class="col-xl-3">
                     <h6>Tipo</h6>
                 </div>
@@ -70,7 +71,7 @@
                     <h6>Indicaciones</h6>
                 </div>									
             </div>
-            <div class="row">
+            <div class="row" *ngIf="idRol!=2">
                 <div class="col-xl-3">
                     <input type="text" class="form-control" formControlName="inputTipo" readonly>
                 </div>
@@ -87,6 +88,7 @@
                 <div class="col-xl-1">
                     <button type="button" class="btn btn-green-custom" (click)="AgregarReceta()"><i class="fas fa-lg fa-plus"></i></button>
                 </div>
+                
             </div>
 
             <hr>

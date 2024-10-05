@@ -28,6 +28,8 @@ import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
 import { ControlGeneralDTO } from '@models/control-general';
 import { OrdenDTO } from '@models/OrdenDTO';
 import { RecetaDTO } from '@models/RecetaDTO';
+import { ControlPresionDTO } from '@models/control-presion';
+import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
 
 @Component({
   selector: 'app-cuadro-controles',
@@ -104,6 +106,7 @@ export default class CuadroControlesComponent implements OnInit {
   AsignarObjetoInicial(data:any){
     this.verSpinner = true;
     let objHistoria: any = data;
+    console.log("obj", objHistoria);
 
     let cabecera = new CabeceraPacienteDTO();
     if(objHistoria.cabeceraPaciente != null)
@@ -506,6 +509,36 @@ export default class CuadroControlesComponent implements OnInit {
       })
     }
 
+    let controlPresion : ControlPresionDTO[]=[];
+    if(objHistoria.controlPresion != null){
+      let _med : MedidasAntropometricasDTO[]=[];
+      objHistoria.controlPresion.forEach((element:any)=>{
+        let presion = new ControlPresionDTO();
+        presion.Fecha = element.fecha;
+        presion.Paciente = element.paciente;
+        presion.PlanTrabajo = element.planTrabajo;
+        
+        if(element.medidasAntroprometricas != null)
+        {
+          element.medidasAntroprometricas.forEach((sstf:any)=>{
+            let medidas = new MedidasAntropometricasDTO();
+            medidas.Fecha = sstf.fecha;
+            medidas.Sistolica = sstf.sistolica;
+            medidas.Diastolica = sstf.diastolica;
+            medidas.Fr = sstf.fr;
+            medidas.Pulso = sstf.pulso;
+            medidas.Estado = sstf.estado;
+
+            _med.push(medidas);
+            //presion.MedidasAntroprometricas.push(medidas);
+          });
+          presion.MedidasAntroprometricas = _med;
+        }
+
+        controlPresion.push(presion);
+      })
+    }
+
     
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -523,6 +556,7 @@ export default class CuadroControlesComponent implements OnInit {
     historiaCalidad.FechaModificacion = objHistoria.fechaModificacion;
     historiaCalidad.Orden = ordenListado;
     historiaCalidad.Receta = recetaListado;
+    historiaCalidad.ControlPresion = controlPresion;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;

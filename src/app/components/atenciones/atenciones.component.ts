@@ -21,6 +21,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { InputTextModule } from 'primeng/inputtext';
 import { NuevoControlComponent } from './nuevo-control/nuevo-control.component';
 import { CuadroControlesReportesComponent } from '../cuadro-controles-reportes/cuadro-controles-reportes.component';
+import { ControlGeneralComponent } from '../historia-clinica/control-general/control-general.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -57,6 +58,7 @@ export default class AtencionesComponent implements OnInit{
     private modalExamenAuxiliar: BsModalService,
     private modalControlSeguimiento: BsModalService,
     private modalNuevoRegistro: BsModalService,
+    private modalControlGeneral: BsModalService,
     private settings : SettingsService,
     private pacienteService : PacienteService,
     private historiaService: HistoriaService
@@ -216,13 +218,22 @@ export default class AtencionesComponent implements OnInit{
     }); */
   }
 
-  AbrirHistoria(idHistoriaClinica:number) {
+  AbrirHistoria(idHistoriaClinica:number, idTipoOrigen: number) {
     
-    this.modalRef = this.modalService.show(HistoriaClinicaComponent, { backdrop: 'static', class: 'modal-xl' });
-    this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
-      /* this.modalRef.content.onGuardar = () => {
-        this.obtenerHistoriaClinica(idHistoriaClinica);
-      }; */
+    if(idTipoOrigen==1)
+    {
+      this.modalRef = this.modalControlGeneral.show(ControlGeneralComponent, { backdrop: 'static', class: 'modal-xl'});
+      this.modalRef.content.AsignarHistoriaClinicaInterno(idHistoriaClinica);
+    }
+    if(idTipoOrigen==2)
+    {
+      this.modalRef = this.modalService.show(HistoriaClinicaComponent, { backdrop: 'static', class: 'modal-xl' });
+      this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
+        /* this.modalRef.content.onGuardar = () => {
+          this.obtenerHistoriaClinica(idHistoriaClinica);
+        }; */
+    }
+  
   }
 
   AbrirControles(idHistoriaClinica:number){

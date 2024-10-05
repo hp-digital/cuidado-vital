@@ -25,6 +25,7 @@ import { ListadoCatalogoOrdenDTO } from '@models/listado-catalogo-orden';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { OrdenDTO } from '@models/OrdenDTO';
 import { RecetaDTO } from '@models/RecetaDTO';
+import { SettingsService } from '@services/settings.service';
 
 @Component({
   selector: 'app-examen-auxiliar',
@@ -60,6 +61,7 @@ export class ExamenAuxiliarComponent implements OnInit {
   emailPaciente:string='';
   direccionPaciente:string='';
   procedencia:string='';
+  idRol:number=0;
 
   comboCatalogoOrden: ListadoCatalogoOrdenDTO[]=[];
   servicios: any[] = [];
@@ -71,7 +73,8 @@ export class ExamenAuxiliarComponent implements OnInit {
     private bsModalExamenAuxiliar: BsModalRef,
     private modalService: BsModalService,
     private historiaService: HistoriaService,
-    private servicioService: ServicioServiceService
+    private servicioService: ServicioServiceService,
+    private settings : SettingsService
   ){
     this.dataFormGroup = new FormGroup({
       inputServicio: new FormControl(),
@@ -85,7 +88,7 @@ export class ExamenAuxiliarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.idRol=this.settings.getUserSetting('idRol');
   }
 
   AsignarObjetoListaPaciente(idHistoriaClinica:number){

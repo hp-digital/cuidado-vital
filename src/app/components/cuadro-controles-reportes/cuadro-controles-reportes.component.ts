@@ -21,6 +21,9 @@ import { PacienteExternoDTO } from '@models/paciente-externo';
 import { MedicoAtiendeDTO } from '@models/medico-atiende';
 import { HistoriaExternaDTO } from '@models/historia-externa';
 import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
+import { ControlPresionDTO } from '@models/control-presion';
+import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
+import { ReporteHipertensoComponent } from './reporte-hipertenso/reporte-hipertenso.component';
 
 @Component({
   selector: 'app-cuadro-controles-reportes',
@@ -48,6 +51,7 @@ export class CuadroControlesReportesComponent implements OnInit {
   constructor(
     private modalCuadroControl: BsModalRef,
     private modalService: BsModalService,
+    private modalReportePresion: BsModalService,
     private historiaService: HistoriaService
   ){
 
@@ -491,6 +495,36 @@ export class CuadroControlesReportesComponent implements OnInit {
       })
     }
 
+    let controlPresion : ControlPresionDTO[]=[];
+    if(objHistoria.controlPresion != null){
+      let _med : MedidasAntropometricasDTO[]=[];
+      objHistoria.controlPresion.forEach((element:any)=>{
+        let presion = new ControlPresionDTO();
+        presion.Fecha = element.fecha;
+        presion.Paciente = element.paciente;
+        presion.PlanTrabajo = element.planTrabajo;
+        
+        if(element.medidasAntroprometricas != null)
+        {
+          element.medidasAntroprometricas.forEach((sstf:any)=>{
+            let medidas = new MedidasAntropometricasDTO();
+            medidas.Fecha = sstf.fecha;
+            medidas.Sistolica = sstf.sistolica;
+            medidas.Diastolica = sstf.diastolica;
+            medidas.Fr = sstf.fr;
+            medidas.Pulso = sstf.pulso;
+            medidas.Estado = sstf.estado;
+
+            _med.push(medidas);
+            //presion.MedidasAntroprometricas.push(medidas);
+          });
+          presion.MedidasAntroprometricas = _med;
+        }
+
+        controlPresion.push(presion);
+      })
+    }
+
     
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -508,6 +542,7 @@ export class CuadroControlesReportesComponent implements OnInit {
     historiaCalidad.FechaModificacion = objHistoria.fechaModificacion;
     historiaCalidad.Orden = ordenListado;
     historiaCalidad.Receta = recetaListado;
+    historiaCalidad.ControlPresion = controlPresion;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;
@@ -519,7 +554,8 @@ export class CuadroControlesReportesComponent implements OnInit {
   }
 
   AbrirReporteHipertenso(){
-
+    this.modalCuadroControl = this.modalReportePresion.show(ReporteHipertensoComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   AbrirReporteMayor(){
