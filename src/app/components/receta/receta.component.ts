@@ -620,6 +620,8 @@ export class RecetaComponent implements OnInit {
     }
     
 
+    
+
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;

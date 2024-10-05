@@ -22,6 +22,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { NuevoControlComponent } from './nuevo-control/nuevo-control.component';
 import { CuadroControlesReportesComponent } from '../cuadro-controles-reportes/cuadro-controles-reportes.component';
 import { ControlGeneralComponent } from '../historia-clinica/control-general/control-general.component';
+import { FuncionesVitalesComponent } from '../funciones-vitales/funciones-vitales.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -59,6 +60,7 @@ export default class AtencionesComponent implements OnInit{
     private modalControlSeguimiento: BsModalService,
     private modalNuevoRegistro: BsModalService,
     private modalControlGeneral: BsModalService,
+    private modalDatoPulsera: BsModalService,
     private settings : SettingsService,
     private pacienteService : PacienteService,
     private historiaService: HistoriaService
@@ -254,6 +256,11 @@ export default class AtencionesComponent implements OnInit{
   AbrirExamenAuxiliar(idHistoriaClinica:number){
     this.modalRef = this.modalExamenAuxiliar.show(ExamenAuxiliarComponent, { backdrop: 'static', class: 'modal-xl' })
     this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
+  }
+
+  AbrirDatosPulsera(idHistoriaClinica: number){
+    this.modalRef = this.modalDatoPulsera.show(FuncionesVitalesComponent, { backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 
   AbrirControlSeguimiento(){

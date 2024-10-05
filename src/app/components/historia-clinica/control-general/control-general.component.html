@@ -1,6 +1,6 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title">CONTROL GENERAL</h4>
+        <h4 class="modal-title">CONTROL DEL ADULTO MAYOR ESTABLE</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
@@ -136,35 +136,39 @@
                         <div class="row">
                             <div class="col-4">
                                 <label class="cform-label">T (Cº)</label>
-                                <input type="text" class="form-control" formControlName="inputTemperatura">
+                                <input type="number" class="form-control" formControlName="inputTemperatura">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">FC (min)</label>
-                                <input type="text" class="form-control" formControlName="inputFrecuenciaCardiaca">
+                                <input type="number" class="form-control" formControlName="inputFrecuenciaCardiaca">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">FR (x min)</label>
-                                <input type="text" class="form-control" formControlName="inputFrecuenciaRespiratoria">
+                                <input type="number" class="form-control" formControlName="inputFrecuenciaRespiratoria">
                             </div>
-                            <div class="col-8">
+                            <div class="col-4">
                                 <label class="cform-label">PA (Sistolica/diastolica) (mmHg)</label>
-                                <input type="text" class="form-control" formControlName="inputPresionSistolicaDiastolica">
+                                <input type="number" class="form-control" formControlName="inputPresionSistolicaDiastolica">
+                            </div>
+                            <div class="col-4">
+                                <label class="cform-label">PA (Diastolica) (mmHg)</label>
+                                <input type="number" class="form-control" formControlName="inputPresionDiastolica">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Sat. O2%</label>
-                                <input type="text" class="form-control" formControlName="inputSaturacion">
+                                <input type="number" class="form-control" formControlName="inputSaturacion">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Peso (kg)</label>
-                                <input type="text" class="form-control" formControlName="inputPeso">
+                                <input type="number" class="form-control" formControlName="inputPeso">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Talla</label>
-                                <input type="text" class="form-control" formControlName="inputTalla">
+                                <input type="number" class="form-control" formControlName="inputTalla">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">IMC</label>
-                                <input type="text" class="form-control" formControlName="inputImc">
+                                <input type="number" class="form-control" formControlName="inputImc">
                             </div>
                         </div>
                     </div>

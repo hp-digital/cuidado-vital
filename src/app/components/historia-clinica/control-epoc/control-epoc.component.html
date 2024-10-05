@@ -1,6 +1,6 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title">CONTROL DE EPOC</h4>
+        <h4 class="modal-title"> CONTROL DE LA ENFERMEDAD PULMONAR OBSTRUCTIVA CRÓNICA</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Nombre Paciente : </label> <span> Paciente Prueba Validaciones</span>
+                            <label class="fw-bold">Nombre Paciente : </label> <span></span>
                         </div>
                     </div>
                 </div>
@@ -155,7 +155,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal"><i
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-dismiss="modal" (click)="Guardar()"><i
                 class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
         <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button> -->
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>

@@ -143,6 +143,7 @@ export class NuevoControlComponent implements OnInit{
         //this.listaServiciosAgregados = [];
         let datos: any = data;
         console.log("data al registrar", datos);
+        this.CerrarModal();
       },
       error: (e) => {
         console.log(e);

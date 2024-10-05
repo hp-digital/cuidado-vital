@@ -118,13 +118,14 @@ export class ControlGlucosaComponent implements OnInit {
   AsignarHistoria(historia:any)
   {
 
-    this.paciente = historia.HistoriaExterna.paciente.apellidoPaterno+ ' '+ historia.HistoriaExterna.paciente.apellidoMaterno+', '+historia.HistoriaExterna.paciente.nombres;
+    console.log("historia", historia);
+    this.paciente = historia.cabeceraPaciente.ApellidoPaterno+' '+historia.cabeceraPaciente.ApellidoMaterno+', '+historia.cabeceraPaciente.Nombre;
     
 
   }
 
   Guardar(){
-    
+    this.MostrarNotificacionSuccessModal("Control guardado correctamente", "Exito")
   }
 
   RecuperarValores(){
@@ -274,6 +275,7 @@ export class ControlGlucosaComponent implements OnInit {
       title: titulo,
       text: mensaje
     });
+    this.CerrarModal();
   }
 
 }

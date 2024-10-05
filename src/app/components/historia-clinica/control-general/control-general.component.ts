@@ -112,6 +112,7 @@ export class ControlGeneralComponent implements OnInit {
       selectMovilidad: new FormControl('', [Validators.required]),
       selectContinencia: new FormControl('', [Validators.required]),
       selectAlimentacion: new FormControl('', [Validators.required]),
+      inputPresionDiastolica: new FormControl(),
     });
   }
 
@@ -599,6 +600,7 @@ export class ControlGeneralComponent implements OnInit {
     historiaCalidad.FechaModificacion = objHistoria.fechaModificacion;
     historiaCalidad.Orden = ordenListado;
     historiaCalidad.Receta = recetaListado;
+    historiaCalidad.ControlGeneral = controlGeneral;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;
@@ -685,7 +687,7 @@ export class ControlGeneralComponent implements OnInit {
     let controlGeneral = new ControlGeneralDTO();
     controlGeneral.Paciente = this.paciente ;
     controlGeneral.Alergias = this.dataFormGroup.controls['inputAlergias'].value ;
-    controlGeneral.EscalaKatz = this.dataFormGroup.controls['inputEscalaKatz'].value ;
+    controlGeneral.EscalaKatz = ' ' ;
     controlGeneral.Temperatura = this.dataFormGroup.controls['inputTemperatura'].value ;
     controlGeneral.FrecuenciaCardiaca = this.dataFormGroup.controls['inputFrecuenciaCardiaca'].value ;
     controlGeneral.FrecuenciaRespiratoria = this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].value ;
