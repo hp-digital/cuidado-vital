@@ -35,6 +35,7 @@ export class ControlGlucosaComponent implements OnInit {
   objControlGlucosa : ControlGlucosaDTO[]=[];
 
   paciente:string = '';
+  IMC:number = 0;
 
   comboSiNo : ComboDTO[]=[];
   comboComplicacion  : ComboDTO[]=[];
@@ -126,6 +127,15 @@ export class ControlGlucosaComponent implements OnInit {
 
   Guardar(){
     this.MostrarNotificacionSuccessModal("Control guardado correctamente", "Exito")
+  }
+
+  CalcularIndiceMasaCorporal(){
+    let peso = this.dataFormGroup.controls['inputPeso'].value;
+    let talla = this.dataFormGroup.controls['inputTalla'].value;
+    if(peso != null && talla != null){
+      this.IMC = peso/(talla*talla);
+      this.dataFormGroup.controls['inputImc'].setValue((this.IMC).toFixed(1));
+    }
   }
 
   RecuperarValores(){
