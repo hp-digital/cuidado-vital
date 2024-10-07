@@ -24,6 +24,7 @@ import { ControlGeneralDTO } from '@models/control-general';
 import { HistoriaService } from '@services/historia.service';
 import { RecetaDTO } from '@models/RecetaDTO';
 import { OrdenDTO } from '@models/OrdenDTO';
+import { MedicoAtencionDTO } from '@models/medico-atiente';
 
 
 @Component({
@@ -75,6 +76,8 @@ export class ControlGeneralComponent implements OnInit {
   emailPaciente:string='';
   direccionPaciente:string='';
   procedencia:string='';
+
+  IMC:number = 0;
 
   public onGuardar: any;
   comboBanio: ComboKatzDTO[] = [];
@@ -196,6 +199,16 @@ export class ControlGeneralComponent implements OnInit {
       cabecera.Ocupacion = objHistoria.cabeceraPaciente.ocupacion;
       cabecera.NumeroDocumento = objHistoria.cabeceraPaciente.numeroDocumento;
       cabecera.Direccion = objHistoria.cabeceraPaciente.direccion;
+    }
+
+    let medic = new MedicoAtencionDTO();
+    if(objHistoria.medicoAtiende != null)
+    {
+      medic.Nombre = objHistoria.medicoAtiende.nombre;
+      medic.ApellidoPaterno = objHistoria.medicoAtiende.apellidoPaterno;
+      medic.ApellidoMaterno = objHistoria.medicoAtiende.apellidoMaterno;
+      medic.Celular = objHistoria.medicoAtiende.celular;
+      medic.NumeroDocumento = objHistoria.medicoAtiende.numeroDocumento;
     }
 
     if(objHistoria.historiaExterna != null)
@@ -587,6 +600,7 @@ export class ControlGeneralComponent implements OnInit {
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
+    historiaCalidad.MedicoAtiende = medic;
     historiaCalidad.IdPaciente = objHistoria.idPaciente;
     historiaCalidad.IdHistoriaClinica = objHistoria.idHistoriaClinica;
     historiaCalidad.IdPersonal = objHistoria.idPersonal;
@@ -641,9 +655,10 @@ export class ControlGeneralComponent implements OnInit {
   {
     this.verSpinner = true;
     let objHistoria: any = data;
+    console.log("asignar",objHistoria);
 
     this.paciente = this.objHistoria.cabeceraPaciente?.ApellidoMaterno+' '+this.objHistoria.cabeceraPaciente?.ApellidoMaterno+', '+this.objHistoria.cabeceraPaciente?.Nombre;
-    /* this.medico = objHistoria.HistoriaExterna.medico.apellidoPaterno+' '+objHistoria.HistoriaExterna.medico.apellidoMaterno+', '+objHistoria.HistoriaExterna.medico.nombres; */
+    this.medico = this.objHistoria.MedicoAtiende?.ApellidoPaterno+' '+this.objHistoria.MedicoAtiende?.ApellidoMaterno+', '+this.objHistoria.MedicoAtiende?.Nombre;
     this.nroHcl = this.objHistoria.cabeceraPaciente?.NumeroDocumento;
     this.fechaHistoria = this.objHistoria.cabeceraPaciente?.FechaAtencion.toString() ;
     /* this.fechaNacimientoPaciente = objHistoria.HistoriaExterna.fechaNacimiento; */
@@ -710,6 +725,15 @@ export class ControlGeneralComponent implements OnInit {
     console.log(controlGeneral)
     this.objControl.push(controlGeneral);
     console.log(this.objControl)
+  }
+
+  CalcularIndiceMasaCorporal(){
+    let peso = this.dataFormGroup.controls['inputPeso'].value;
+    let talla = this.dataFormGroup.controls['inputTalla'].value;
+    if(peso != null && talla != null){
+      this.IMC = peso/(talla*talla);
+      this.dataFormGroup.controls['inputImc'].setValue((this.IMC).toFixed(1));
+    }
   }
 
   MostrarNotificacionInfo(mensaje: string, titulo: string) {

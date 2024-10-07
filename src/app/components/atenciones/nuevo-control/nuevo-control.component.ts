@@ -61,6 +61,7 @@ export class NuevoControlComponent implements OnInit{
   ngOnInit(): void {
     this.CargarDataInicio();
     this.usuario =  this.settingsService.getUserSetting('usuario');
+    this.dataFormGroup.controls['inputFechaIngreso'].setValue(moment().format('DD/MM/YYYY'));
   }
 
   CargarDataInicio(){
@@ -173,6 +174,11 @@ export class NuevoControlComponent implements OnInit{
     this.objNuevaAtencion.usuarioModificacion = this.usuario;
     this.objNuevaAtencion.fechaCreacion = new Date();
     this.objNuevaAtencion.fechaModificacion = new Date();
+  }
+
+  ValidarEdad(){
+    let fecha = this.dataFormGroup.controls['inputFechaNacimientoPaciente'].value;
+    this.CalcularEdad(fecha);
   }
 
   CalcularEdad(fecha:Date){

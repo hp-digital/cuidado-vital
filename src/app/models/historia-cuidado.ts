@@ -3,11 +3,13 @@ import { ControlGeneralDTO } from "./control-general";
 import { ControlGlucosaDTO } from "./control-glucosa";
 import { ControlPresionDTO } from "./control-presion";
 import { HistoriaExternaDTO } from "./historia-externa";
+import { MedicoAtencionDTO } from "./medico-atiente";
 import { OrdenDTO } from "./OrdenDTO";
 import { RecetaDTO } from "./RecetaDTO";
 
 export class HistoriaCuidadoDTO{
     cabeceraPaciente?:CabeceraPacienteDTO;
+    MedicoAtiende?:MedicoAtencionDTO;
     IdPaciente!: number;
     IdHistoriaClinica?: number;
     IdPersonal?: number;

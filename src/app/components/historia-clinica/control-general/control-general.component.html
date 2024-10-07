@@ -160,15 +160,15 @@
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Peso (kg)</label>
-                                <input type="number" class="form-control" formControlName="inputPeso">
+                                <input type="number" class="form-control" formControlName="inputPeso" (blur)="CalcularIndiceMasaCorporal()">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Talla</label>
-                                <input type="number" class="form-control" formControlName="inputTalla">
+                                <input type="number" class="form-control" formControlName="inputTalla" (blur)="CalcularIndiceMasaCorporal()">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">IMC</label>
-                                <input type="number" class="form-control" formControlName="inputImc">
+                                <input type="number" class="form-control" formControlName="inputImc" (click)="CalcularIndiceMasaCorporal()" readonly>
                             </div>
                         </div>
                     </div>
@@ -189,48 +189,48 @@
                                 <tbody class="text-center">
                                     <tr>
                                         <td class="text-left">¿Què fecha es Hoy? (dd/mm/aa)</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option1"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option2"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Que dia de la Semana es?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option3"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option4"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿En que lugar estamos?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option5"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option6"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cúal es su numero de telefono?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option7"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option8"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cúal es su direccion completa?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option9"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option10"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cuantos años tiene?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option11"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option12"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Donde Nacio?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option13"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option14"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cual es el nombre del presidente?</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option15"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option16"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Digame el primer apellido de su madre</td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option1" checked></td>
-                                        <td><input class="form-check-input" name="rad-quefechaeshoy" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option17"></td>
+                                        <td><input class="form-check-input" type="radio" id="" value="option18"></td>
                                     </tr>
 
                                 </tbody>

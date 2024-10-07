@@ -12,7 +12,7 @@ import { ControlPresionComponent } from '../historia-clinica/control-presion/con
 import { ControlEpocComponent } from '../historia-clinica/control-epoc/control-epoc.component';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HistoriaService } from '@services/historia.service';
 import { AnamnesisDTO } from '@models/anamnesis';
 import { FuncionBiologicaDTO } from '@models/funcion-biologica';
@@ -30,6 +30,7 @@ import { OrdenDTO } from '@models/OrdenDTO';
 import { RecetaDTO } from '@models/RecetaDTO';
 import { ControlPresionDTO } from '@models/control-presion';
 import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
+import { MedicoAtencionDTO } from '@models/medico-atiente';
 
 @Component({
   selector: 'app-cuadro-controles',
@@ -45,7 +46,6 @@ export default class CuadroControlesComponent implements OnInit {
 
   objHistoria=new HistoriaCuidadoDTO();
 
-
   objAnamnesis = new AnamnesisDTO();
   objFuncionBiologica = new FuncionBiologicaDTO();
   objExamenFisico = new ExamenFisicoDTO();
@@ -53,6 +53,8 @@ export default class CuadroControlesComponent implements OnInit {
   objExamenRegional = new ExamenRegionalDTO();
   objDiagnostico : DiagnosticoCuidadoDTO[]=[];
   objHistoriaExterna = new HistoriaExternaDTO();
+
+  IMC:number = 0;
 
   constructor(
     private modalCuadroControl: BsModalRef,
@@ -122,6 +124,16 @@ export default class CuadroControlesComponent implements OnInit {
       cabecera.Ocupacion = objHistoria.cabeceraPaciente.ocupacion;
       cabecera.NumeroDocumento = objHistoria.cabeceraPaciente.numeroDocumento;
       cabecera.Direccion = objHistoria.cabeceraPaciente.direccion;
+    }
+
+    let medic = new MedicoAtencionDTO();
+    if(objHistoria.medicoAtiende != null)
+    {
+      medic.Nombre = objHistoria.medicoAtiende.nombre;
+      medic.ApellidoPaterno = objHistoria.medicoAtiende.apellidoPaterno;
+      medic.ApellidoMaterno = objHistoria.medicoAtiende.apellidoMaterno;
+      medic.Celular = objHistoria.medicoAtiende.celular;
+      medic.NumeroDocumento = objHistoria.medicoAtiende.numeroDocumento;
     }
 
     if(objHistoria.historiaExterna != null)
@@ -543,6 +555,7 @@ export default class CuadroControlesComponent implements OnInit {
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
+    historiaCalidad.MedicoAtiende = medic;
     historiaCalidad.IdPaciente = objHistoria.idPaciente;
     historiaCalidad.IdHistoriaClinica = objHistoria.idHistoriaClinica;
     historiaCalidad.IdPersonal = objHistoria.idPersonal;
@@ -562,6 +575,8 @@ export default class CuadroControlesComponent implements OnInit {
     this.objHistoria = historiaCalidad;
     
   }
+
+
 
   AbrirNotaEnfermera(){
 
