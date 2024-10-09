@@ -90,7 +90,7 @@ export class ControlPresionComponent implements OnInit {
     
     this.nroHcl = this.objHistoria.cabeceraPaciente?.NumeroDocumento;
     this.fechaHistoria = this.objHistoria.FechaInicioAtencion ;
-    this.objControlPresion = objHistoria.ControlPresion;
+    //this.objControlPresion = objHistoria.ControlPresion;
 
     
     let control :  ControlPresionDTO[]=[];
@@ -117,10 +117,12 @@ export class ControlPresionComponent implements OnInit {
           });
         }
         s.MedidasAntroprometricas = medidas;
+        medidas=[];
         
         control.push(s);
       })
       this.objControlPresion = control;
+      //medidas=[];
     }
 
     console.log("controlss", this.objControlPresion)

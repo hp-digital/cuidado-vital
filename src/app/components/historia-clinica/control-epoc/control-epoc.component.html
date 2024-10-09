@@ -4,12 +4,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
-        <form>
+        <form [formGroup]="dataFormGroup">
             <div id="header-component">
                 <div class="row">
-                    <div class="col-xl-3">
+                    <div class="col-xl-5">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Nombre Paciente : </label> <span></span>
+                            <label class="fw-bold">Nombre Paciente : </label> <span>{{paciente}}</span>
                         </div>
                     </div>
                 </div>
@@ -23,39 +23,69 @@
                         <div class="row">
                             <div class="col-6">
                                 <label class="cform-label">Baño</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectBanio"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Vestido</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectVestido"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Uso del WC</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectWC"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Movilidad</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectMovilidad"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Continencia</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectContinencia"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                             <div class="col-6">
                                 <label class="cform-label">Alimentación</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
-                                </select>
+                                <p-dropdown 
+                                    formControlName="selectAlimentacion"
+                                    [options]="comboBanio" 
+                                    optionLabel="nombre" 
+                                    optionValue="id"
+                                    [showClear]="true" 
+                                    styleClass="w-full" 
+                                    placeholder="Selecciona"/>
                             </div>
                         </div>
                     </div>
@@ -65,15 +95,9 @@
                     <div class="col-12">
                         <h6>Resultado Escala de Katz</h6>
                         <div class="form-group">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-katz" type="radio" id=""
-                                    value="option1" checked>
-                                <label class="form-check-label" for="">Dependiente</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-katz" type="radio" id=""
-                                    value="option1">
-                                <label class="form-check-label" for="">Independiente</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboResultadoKatz">
+                                <input class="form-check-input" name="inputResultadoEscalaKatz" type="radio" id="inputResultadoEscalaKatz" formControlName="inputResultadoEscalaKatz" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
                     </div>
@@ -82,37 +106,45 @@
                 <div class="row">
                     <div class="col-12">
                         <label class="cform-label">Dificultad</label>
-                        <textarea name="" id="" class="form-control" rows="2" placeholder="TBC / CX PULMONAR"></textarea>
+                        <textarea class="form-control" rows="2" placeholder="TBC / CX PULMONAR" formControlName="inputDificultad"></textarea>
                     </div>
                     <div class="col-12">
-                            <label class="cform-label bold">Fase de EPOC* </label>
-                            <select name="" id="" class="form-control">
-                                <option value="" selected disabled>SELECCIONA</option>
-                            </select>
+                        <label class="cform-label bold">Fase de EPOC* </label>
+                        <select class="form-select" formControlName="selectFaseEpoc">
+                            <option *ngFor="let combo of comboFaseEpoc" [value]="combo.id">
+                                {{combo.nombre}}
+                            </option>										
+                        </select>
                     </div>
                     <div class="col-12">
                             <label class="cform-label bold">Fecha de diagnostico*</label>
-                            <input type="date" class="form-control" id="">
+                            <input type="date" class="form-control" formControlName="selectFechaDiagnostico">
                     </div>
                     <div class="col-12 mt-3">
                         <h6>Habitos Nocivos*</h6>
                         <div class="row">
                             <div class="col-4">
                                 <label class="cform-label">Alcohol</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
+                                <select class="form-select" formControlName="selectAlcohol">
+                                    <option *ngFor="let combo of comboHabitoNocivo" [value]="combo.id">
+                                        {{combo.nombre}}
+                                    </option>										
                                 </select>
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Drogas</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
+                                <select class="form-select" formControlName="selectDrogas">
+                                    <option *ngFor="let combo of comboHabitoNocivo" [value]="combo.id">
+                                        {{combo.nombre}}
+                                    </option>										
                                 </select>
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">Tabaco</label>
-                                <select name="" id="" class="form-control">
-                                    <option value="" selected disabled>SELECCIONA</option>
+                                <select class="form-select" formControlName="selectTabaco">
+                                    <option *ngFor="let combo of comboHabitoNocivo" [value]="combo.id">
+                                        {{combo.nombre}}
+                                    </option>										
                                 </select>
                             </div>
                         </div>
@@ -123,34 +155,27 @@
                     <div class="col-xl-12 mt-3">
                         <h6>Sintomas Respiratorios*</h6>
                         <div class="form-group mb-3">                        
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-dependencia" type="radio" id=""
-                                    value="option1" checked>
-                                <label class="form-check-label" for="">Normal</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-dependencia" type="radio" id=""
-                                    value="option1">
-                                <label class="form-check-label" for="">Alterado</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboSintomaRespiratorio">
+                                <input class="form-check-input" name="inputSintomaRespiratorio" type="radio" id="inputSintomaRespiratorio" formControlName="inputSintomaRespiratorio" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea class="form-control" formControlName="textSintomaRespiratorio"></textarea>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-12 mt-3">
                         <h6>Evaluacion Funcional</h6>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea class="form-control" formControlName="inputEvaluacionFuncional"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 mt-3">
                         <h6>Plan de Trabajo</h6>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea class="form-control" formControlName="inputPlanTrabajo"></textarea>
                     </div>
                 </div>
-                
             </div>
         </form>
     </div>

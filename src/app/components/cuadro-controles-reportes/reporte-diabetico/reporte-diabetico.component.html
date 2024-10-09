@@ -1,1 +1,93 @@
-<p>reporte-diabetico works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">REPORTE DEL PACIENTE DIABETICO</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dataFormGroup">
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-5">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha atención : </label> <span>{{fechaHistoria | date: 'yyyy-MM-dd'}}</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>
+            <hr/>		
+
+            <div id="seccion-medicacion" class="">
+                <div class="row mb-3 bg-green-custom">REPORTE</div>	
+                <div class="box-shadow mt-3" *ngFor="let record of objControlGlucosa">
+                    <div >
+                        <p><strong>Tipo de Diabetes:</strong> {{ record.TipoDiabetes }}</p>
+                        <p><strong>Fecha de Diagnóstico:</strong> {{ record.FechaDiagnostico | date: 'yyyy-MM-dd' }}</p>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <h5>Complicaciones y Condiciones:</h5>
+                                <ul>
+                                <li><strong>Complicación:</strong> {{ record.Complicacion.Nombre }}</li>
+                                <li><strong>Retinopatía:</strong> {{ record.Retinopatia.Nombre }}</li>
+                                <li><strong>Nefropatía:</strong> {{ record.Nefropatia.Nombre }}</li>
+                                <li><strong>Amputación:</strong> {{ record.Amputacion.Nombre }}</li>
+                                <li><strong>Diálisis:</strong> {{ record.Dialisis.Nombre }}</li>
+                                <li><strong>Ceguera:</strong> {{ record.Ceguera.Nombre }}</li>
+                                <li><strong>Transplante Renal:</strong> {{ record.TransplanteRenal.Nombre }}</li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-4">
+                                <h5>Mediciones:</h5>
+                                <ul>
+                                  <li><strong>Talla:</strong> {{ record.Talla }} cm</li>
+                                  <li><strong>Peso:</strong> {{ record.Peso }} kg</li>
+                                  <li><strong>IMC:</strong> {{ record.IMC }}</li>
+                                  <li><strong>Perímetro Abdominal:</strong> {{ record.PerimetroAbdominal }} cm</li>
+                                  <li><strong>Presión Arterial:</strong> {{ record.PresionArterial }} mmHg</li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-4">
+                                <h5>Valores y Fechas de Pruebas:</h5>
+                                <ul>
+                                  <li><strong>Glucemia:</strong> {{ record.ValorGlucemia }} - Fecha: {{ record.FechaGlucemia | date: 'yyyy-MM-dd' }}</li>
+                                  <li><strong>HbA1c:</strong> {{ record.ValorHba }} - Fecha: {{ record.FechaHba | date: 'yyyy-MM-dd' }}</li>
+                                  <li><strong>Creatinina:</strong> {{ record.ValorCreatinina }} - Fecha: {{ record.FechaCreatinina | date: 'yyyy-MM-dd' }}</li>
+                                  <li><strong>LDL:</strong> {{ record.ValorLdl }} - Fecha: {{ record.FechaLdl | date: 'yyyy-MM-dd' }}</li>
+                                  <li><strong>Triglicéridos:</strong> {{ record.ValorTrigliceridos }} - Fecha: {{ record.FechaTrigliceridos | date: 'yyyy-MM-dd' }}</li>
+                                  <li><strong>Microalbuminuria:</strong> {{ record.ValorMicro }} - Fecha: {{ record.FechaMicro | date: 'yyyy-MM-dd' }}</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <h5>Tratamientos:</h5>
+                        <ul>
+                          <li><strong>Plan de Trabajo:</strong> {{ record.PlanTrabajo }}</li>
+                          <li><strong>Insulina Monoterapia:</strong> {{ record.InsulinaMono }} - Dosis: {{ record.InsulinaDosis }}</li>
+                          <li><strong>Medicamento Monoterapia:</strong> {{ record.MedicamentoMono }} - Dosis: {{ record.MedicamentoDosis }}</li>
+                        </ul>
+                      </div>
+                </div>
+            </div>
+            		
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
+        <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+      </div>
+</div>

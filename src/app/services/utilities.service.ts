@@ -29,7 +29,11 @@ export class UtilitiesService {
   })
 
   comboSINO: ComboDTO[] = [{ 'id': 1, 'nombre': 'SI' }, { 'id': 2, 'nombre': 'NO' }];  
-  comboComplicaciones: ComboDTO[] = [{ 'id': 1, 'nombre': 'SI' }, { 'id': 2, 'nombre': 'NO' }, {'id': 3, 'nombre': 'DESCONOCIDO' }];  
+  comboComplicaciones: ComboDTO[] = [{ 'id': 1, 'nombre': 'SI' }, { 'id': 2, 'nombre': 'NO' }, {'id': 3, 'nombre': 'DESCONOCIDO' }]; 
+  comboResultadoKatz: ComboDTO[]=[{ 'id': 1, 'nombre': 'Dependiente' }, { 'id': 2, 'nombre': 'Independiente' }] ;
+  comboFaseEpoc: ComboDTO[]=[{ 'id': 1, 'nombre': 'Fase I (Leve)' }, { 'id': 2, 'nombre': 'Fase II (Moderada)' }, {'id': 3, 'nombre': 'Fase III (Grave)'}, {'id':4 ,'nombre':'Fase IV (Muy Grave)'}];
+  comboHabitoNocivo: ComboDTO[] = [{ 'id': 1, 'nombre': 'Si' }, { 'id': 2, 'nombre': 'No' }, {'id': 3, 'nombre': 'Ocasional' }]; 
+  comboSintomaRespiratorio: ComboDTO[] = [{ 'id': 1, 'nombre': 'Normal' }, { 'id': 2, 'nombre': 'Alterado' }];  
   
   constructor(private http: HttpClient) { }
 
@@ -67,5 +71,17 @@ export class UtilitiesService {
   }
   ObtenerComplicaciones():ComboDTO[]{
     return this.comboComplicaciones;
+  }
+  ObtenerComboResultadoKatz():ComboDTO[]{
+    return this.comboResultadoKatz;
+  }
+  ObtenerComboFaseEpoc():ComboDTO[]{
+    return this.comboFaseEpoc;
+  }
+  ObtenerComboHabitoNocivo():ComboDTO[]{
+    return this.comboHabitoNocivo;
+  }
+  ObtenerComboSintomaRespiratorio():ComboDTO[]{
+    return this.comboSintomaRespiratorio;
   }
 }

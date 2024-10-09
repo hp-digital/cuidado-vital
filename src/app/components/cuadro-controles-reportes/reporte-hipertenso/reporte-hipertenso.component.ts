@@ -59,6 +59,7 @@ export class ReporteHipertensoComponent implements OnInit{
     this.idHistoria = idHistoria;
     //this.objControlPresion = historia.ControlPresion;
     this.paciente = historia.cabeceraPaciente?.ApellidoPaterno+' '+historia.cabeceraPaciente?.ApellidoMaterno+', '+historia.cabeceraPaciente?.Nombre;
+    this.medico = this.objHistoria.MedicoAtiende?.ApellidoPaterno+' '+this.objHistoria.MedicoAtiende?.ApellidoMaterno+', '+this.objHistoria.MedicoAtiende?.Nombre;
     this.AsignarObjetoHistoria(historia);
   }
 
@@ -70,11 +71,40 @@ export class ReporteHipertensoComponent implements OnInit{
   
     this.nroHcl = this.objHistoria.cabeceraPaciente?.NumeroDocumento;
     this.fechaHistoria = this.objHistoria.FechaInicioAtencion ;
-    this.objControlPresion = objHistoria.ControlPresion;
-    console.log("control", this.objControlPresion);
+
     this.celularPaciente = objHistoria.cabeceraPaciente.Celular ;
 
+    let control :  ControlPresionDTO[]=[];
+    let medidas : MedidasAntropometricasDTO[]=[];
 
+    if(objHistoria.ControlPresion!=null)
+    {
+      objHistoria.ControlPresion.forEach((element:any)=>{
+        let s = new ControlPresionDTO();
+        s.Fecha = element.Fecha;
+        s.Paciente = element.Paciente;
+        s.PlanTrabajo = element.PlanTrabajo;
+        if(element.MedidasAntroprometricas != null)
+        {
+          element.MedidasAntroprometricas.forEach((sstf:any)=>{
+            let _metr = new MedidasAntropometricasDTO();
+            _metr.Diastolica = sstf.Diastolica;
+            _metr.Sistolica = sstf.Sistolica;
+            _metr.Fecha = sstf.Fecha;
+            _metr.Fr = sstf.Fr;
+            _metr.Pulso = sstf.Pulso;
+            _metr.Estado = sstf.Estado;
+            medidas.push(_metr);
+          });
+        }
+        s.MedidasAntroprometricas = medidas;
+        medidas=[];
+        
+        control.push(s);
+      })
+      this.objControlPresion = control;
+      //medidas=[];
+    }
   }
 
 

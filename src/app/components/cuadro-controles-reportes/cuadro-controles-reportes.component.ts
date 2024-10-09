@@ -24,6 +24,10 @@ import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
 import { ControlPresionDTO } from '@models/control-presion';
 import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
 import { ReporteHipertensoComponent } from './reporte-hipertenso/reporte-hipertenso.component';
+import { MedicoAtencionDTO } from '@models/medico-atiente';
+import { DesplegableDTO } from '@models/depleglable';
+import { ControlGlucosaDTO } from '@models/control-glucosa';
+import { ReporteDiabeticoComponent } from './reporte-diabetico/reporte-diabetico.component';
 
 @Component({
   selector: 'app-cuadro-controles-reportes',
@@ -52,6 +56,7 @@ export class CuadroControlesReportesComponent implements OnInit {
     private modalCuadroControl: BsModalRef,
     private modalService: BsModalService,
     private modalReportePresion: BsModalService,
+    private modalReporteGlucosa: BsModalService,
     private historiaService: HistoriaService
   ){
 
@@ -108,6 +113,15 @@ export class CuadroControlesReportesComponent implements OnInit {
       cabecera.Ocupacion = objHistoria.cabeceraPaciente.ocupacion;
       cabecera.NumeroDocumento = objHistoria.cabeceraPaciente.numeroDocumento;
       cabecera.Direccion = objHistoria.cabeceraPaciente.direccion;
+    }
+    let medic = new MedicoAtencionDTO();
+    if(objHistoria.medicoAtiende != null)
+    {
+      medic.Nombre = objHistoria.medicoAtiende.nombre;
+      medic.ApellidoPaterno = objHistoria.medicoAtiende.apellidoPaterno;
+      medic.ApellidoMaterno = objHistoria.medicoAtiende.apellidoMaterno;
+      medic.Celular = objHistoria.medicoAtiende.celular;
+      medic.NumeroDocumento = objHistoria.medicoAtiende.numeroDocumento;
     }
 
     if(objHistoria.historiaExterna != null)
@@ -519,16 +533,74 @@ export class CuadroControlesReportesComponent implements OnInit {
             //presion.MedidasAntroprometricas.push(medidas);
           });
           presion.MedidasAntroprometricas = _med;
+          _med=[];
         }
 
         controlPresion.push(presion);
       })
     }
 
+    let controlGlucosa : ControlGlucosaDTO[] = [];
+    if(objHistoria.controlGlucosa != null){
+      objHistoria.controlGlucosa.forEach((element:any)=>{
+        let gluco = new ControlGlucosaDTO();
+        gluco.Paciente = element.paciente;
+        gluco.TipoDiabetes = element.tipoDiabetes;
+        gluco.FechaDiagnostico = element.fechaDiagnostico ;
+        gluco.Complicacion = new DesplegableDTO();
+        gluco.Complicacion.Id = element.complicacion.id;
+        gluco.Complicacion.Nombre = element.complicacion.nombre;
+        gluco.Retinopatia = new DesplegableDTO();
+        gluco.Retinopatia.Id = element.retinopatia.id;
+        gluco.Retinopatia.Nombre = element.retinopatia.nombre;
+        gluco.Nefropatia = new DesplegableDTO();
+        gluco.Nefropatia.Id = element.nefropatia.id;
+        gluco.Nefropatia.Nombre = element.nefropatia.nombre;
+        gluco.Amputacion = new DesplegableDTO();
+        gluco.Amputacion.Id = element.amputacion.id;
+        gluco.Amputacion.Nombre = element.amputacion.nombre;
+        gluco.Dialisis = new DesplegableDTO();
+        gluco.Dialisis.Id = element.dialisis.id;
+        gluco.Dialisis.Nombre = element.dialisis.nombre;
+        gluco.Ceguera = new DesplegableDTO();
+        gluco.Ceguera.Id = element.ceguera.id;
+        gluco.Ceguera.Nombre = element.ceguera.nombre;
+        gluco.TransplanteRenal = new DesplegableDTO();
+        gluco.TransplanteRenal.Id = element.transplanteRenal.id;
+        gluco.TransplanteRenal.Nombre = element.transplanteRenal.nombre;
+        gluco.Talla = element.talla;
+        gluco.Peso = element.peso;
+        gluco.IMC = element.imc;
+        gluco.PerimetroAbdominal = element.perimetroAbdominal;
+        gluco.PresionArterial = element.presionArterial;
+        gluco.ValorGlucemia = element.valorGlucemia;
+        gluco.FechaGlucemia = element.fechaGlucemia;
+        gluco.ValorHba = element.valorHba;
+        gluco.FechaHba = element.fechaHba;
+        gluco.ValorCreatinina = element.valorCreatinina;
+        gluco.FechaCreatinina = element.fechaCreatinina;
+        gluco.ValorLdl = element.valorLdl;
+        gluco.FechaLdl = element.fechaLdl;
+        gluco.ValorTrigliceridos = element.valorTrigliceridos;
+        gluco.FechaTrigliceridos = element.fechaTrigliceridos;
+        gluco.ValorMicro = element.valorMicro;
+        gluco.FechaMicro = element.fechaMicro;
+        gluco.PlanTrabajo = element.planTrabajo;
+        gluco.InsulinaMono = element.insulinaMono;
+        gluco.InsulinaDosis = element.insulinaDosis;
+        gluco.MedicamentoMono = element.medicamentoMono;
+        gluco.MedicamentoDosis = element.medicamentoDosis;
+        gluco.FechaRegistro = element.fechaRegistro;
+        
+        controlGlucosa.push(gluco);
+      });
+    }
+
     
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
+    historiaCalidad.MedicoAtiende = medic;
     historiaCalidad.IdPaciente = objHistoria.idPaciente;
     historiaCalidad.IdHistoriaClinica = objHistoria.idHistoriaClinica;
     historiaCalidad.IdPersonal = objHistoria.idPersonal;
@@ -543,6 +615,7 @@ export class CuadroControlesReportesComponent implements OnInit {
     historiaCalidad.Orden = ordenListado;
     historiaCalidad.Receta = recetaListado;
     historiaCalidad.ControlPresion = controlPresion;
+    historiaCalidad.ControlGlucosa = controlGlucosa;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;
@@ -550,7 +623,8 @@ export class CuadroControlesReportesComponent implements OnInit {
   }
 
   AbrirReporteDiabetico(){
-
+    this.modalCuadroControl = this.modalReporteGlucosa.show(ReporteDiabeticoComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   AbrirReporteHipertenso(){
