@@ -31,6 +31,9 @@ import { RecetaDTO } from '@models/RecetaDTO';
 import { ControlPresionDTO } from '@models/control-presion';
 import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
 import { MedicoAtencionDTO } from '@models/medico-atiente';
+import { ControlGlucosaDTO } from '@models/control-glucosa';
+import { DesplegableDTO } from '@models/depleglable';
+import { ComboDTO } from '@models/ComboDTO';
 
 @Component({
   selector: 'app-cuadro-controles',
@@ -92,10 +95,7 @@ export default class CuadroControlesComponent implements OnInit {
     ])
       .subscribe(
         data => {
-          console.log("hcl", data[0]);
           this.AsignarObjetoInicial(data[0]);
-          
-          
           this.verSpinner = false;
         },
         err => {
@@ -551,6 +551,62 @@ export default class CuadroControlesComponent implements OnInit {
       })
     }
 
+    let controlGlucosa : ControlGlucosaDTO[] = [];
+    if(objHistoria.controlGlucosa != null){
+      objHistoria.controlGlucosa.forEach((element:any)=>{
+        let gluco = new ControlGlucosaDTO();
+        gluco.Paciente = element.paciente;
+        gluco.TipoDiabetes = element.tipoDiabetes;
+        gluco.FechaDiagnostico = element.fechaDiagnostico ;
+        gluco.Complicacion = new DesplegableDTO();
+        gluco.Complicacion.Id = element.complicacion.id;
+        gluco.Complicacion.Nombre = element.complicacion.nombre;
+        gluco.Retinopatia = new DesplegableDTO();
+        gluco.Retinopatia.Id = element.retinopatia.id;
+        gluco.Retinopatia.Nombre = element.retinopatia.nombre;
+        gluco.Nefropatia = new DesplegableDTO();
+        gluco.Nefropatia.Id = element.nefropatia.id;
+        gluco.Nefropatia.Nombre = element.nefropatia.nombre;
+        gluco.Amputacion = new DesplegableDTO();
+        gluco.Amputacion.Id = element.amputacion.id;
+        gluco.Amputacion.Nombre = element.amputacion.nombre;
+        gluco.Dialisis = new DesplegableDTO();
+        gluco.Dialisis.Id = element.dialisis.id;
+        gluco.Dialisis.Nombre = element.dialisis.nombre;
+        gluco.Ceguera = new DesplegableDTO();
+        gluco.Ceguera.Id = element.ceguera.id;
+        gluco.Ceguera.Nombre = element.ceguera.nombre;
+        gluco.TransplanteRenal = new DesplegableDTO();
+        gluco.TransplanteRenal.Id = element.transplanteRenal.id;
+        gluco.TransplanteRenal.Nombre = element.transplanteRenal.nombre;
+        gluco.Talla = element.talla;
+        gluco.Peso = element.peso;
+        gluco.IMC = element.imc;
+        gluco.PerimetroAbdominal = element.perimetroAbdominal;
+        gluco.PresionArterial = element.presionArterial;
+        gluco.ValorGlucemia = element.valorGlucemia;
+        gluco.FechaGlucemia = element.fechaGlucemia;
+        gluco.ValorHba = element.valorHba;
+        gluco.FechaHba = element.fechaHba;
+        gluco.ValorCreatinina = element.valorCreatinina;
+        gluco.FechaCreatinina = element.fechaCreatinina;
+        gluco.ValorLdl = element.valorLdl;
+        gluco.FechaLdl = element.fechaLdl;
+        gluco.ValorTrigliceridos = element.valorTrigliceridos;
+        gluco.FechaTrigliceridos = element.fechaTrigliceridos;
+        gluco.ValorMicro = element.valorMicro;
+        gluco.FechaMicro = element.fechaMicro;
+        gluco.PlanTrabajo = element.planTrabajo;
+        gluco.InsulinaMono = element.insulinaMono;
+        gluco.InsulinaDosis = element.insulinaDosis;
+        gluco.MedicamentoMono = element.medicamentoMono;
+        gluco.MedicamentoDosis = element.medicamentoDosis;
+        gluco.FechaRegistro = element.fechaRegistro;
+        
+        controlGlucosa.push(gluco);
+      });
+    }
+
     
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -570,6 +626,7 @@ export default class CuadroControlesComponent implements OnInit {
     historiaCalidad.Orden = ordenListado;
     historiaCalidad.Receta = recetaListado;
     historiaCalidad.ControlPresion = controlPresion;
+    historiaCalidad.ControlGlucosa = controlGlucosa;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;

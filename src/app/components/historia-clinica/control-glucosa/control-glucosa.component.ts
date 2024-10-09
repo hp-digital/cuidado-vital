@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { elementAt, forkJoin } from 'rxjs';
+import { elementAt, filter, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
@@ -12,6 +12,7 @@ import { ComboDTO } from '@models/ComboDTO';
 import { UtilitiesService } from '@services/utilities.service';
 import { ControlGlucosaDTO } from '@models/control-glucosa';
 import { DesplegableDTO } from '@models/depleglable';
+import { HistoriaService } from '@services/historia.service';
 
 @Component({
   selector: 'app-control-glucosa',
@@ -42,7 +43,8 @@ export class ControlGlucosaComponent implements OnInit {
 
   constructor(
     private bsModalControlGlucosa: BsModalRef,
-    private utilitiesService: UtilitiesService
+    private utilitiesService: UtilitiesService,
+    private historiaService: HistoriaService
   ) {
     this.dataFormGroup = new FormGroup({
       inputTipoDiabetes: new FormControl(),
@@ -109,24 +111,178 @@ export class ControlGlucosaComponent implements OnInit {
   AsignarHistoriaClinica(historia:HistoriaCuidadoDTO, idHistoria:number){
     
     this.idHistoria = idHistoria;
-    this.objHistoria = historia;
-    this.AsignarHistoria(historia);
+    this.paciente = historia.cabeceraPaciente?.ApellidoPaterno+' '+historia.cabeceraPaciente?.ApellidoMaterno+', '+historia.cabeceraPaciente?.Nombre;
+    this.objHistoria= historia;
     this.comboSiNo = this.utilitiesService.ObtenerSINO();
     this.comboComplicacion = this.utilitiesService.ObtenerComplicaciones();
-    
+    console.log("obj historia", this.objHistoria);
+    this.AsignarHistoria(historia);
   }
 
   AsignarHistoria(historia:any)
   {
-
-    console.log("historia", historia);
-    this.paciente = historia.cabeceraPaciente.ApellidoPaterno+' '+historia.cabeceraPaciente.ApellidoMaterno+', '+historia.cabeceraPaciente.Nombre;
-    
+    this.verSpinner = true;
+    let controlGlucosa : ControlGlucosaDTO[] = [];
+    if(historia.ControlGlucosa != null){
+      historia.ControlGlucosa.forEach((element:any)=>{
+        let gluco = new ControlGlucosaDTO();
+        gluco.Paciente = element.Paciente;
+        gluco.TipoDiabetes = element.TipoDiabetes;
+        gluco.FechaDiagnostico = element.FechaDiagnostico ;
+        gluco.Complicacion = new DesplegableDTO();
+        gluco.Complicacion.Id = element.Complicacion.Id;
+        gluco.Complicacion.Nombre = element.Complicacion.Nombre;
+        gluco.Retinopatia = new DesplegableDTO();
+        gluco.Retinopatia.Id = element.Retinopatia.Id;
+        gluco.Retinopatia.Nombre = element.Retinopatia.Nombre;
+        gluco.Nefropatia = new DesplegableDTO();
+        gluco.Nefropatia.Id = element.Nefropatia.Id;
+        gluco.Nefropatia.Nombre = element.Nefropatia.Nombre;
+        gluco.Amputacion = new DesplegableDTO();
+        gluco.Amputacion.Id = element.Amputacion.Id;
+        gluco.Amputacion.Nombre = element.Amputacion.Nombre;
+        gluco.Dialisis = new DesplegableDTO();
+        gluco.Dialisis.Id = element.Dialisis.Id;
+        gluco.Dialisis.Nombre = element.Dialisis.Nombre;
+        gluco.Ceguera = new DesplegableDTO();
+        gluco.Ceguera.Id = element.Ceguera.Id;
+        gluco.Ceguera.Nombre = element.Ceguera.Nombre;
+        gluco.TransplanteRenal = new DesplegableDTO();
+        gluco.TransplanteRenal.Id = element.TransplanteRenal.Id;
+        gluco.TransplanteRenal.Nombre = element.TransplanteRenal.Nombre;
+        gluco.Talla = element.Talla;
+        gluco.Peso = element.Peso;
+        gluco.IMC = element.IMC;
+        gluco.PerimetroAbdominal = element.PerimetroAbdominal;
+        gluco.PresionArterial = element.PresionArterial;
+        gluco.ValorGlucemia = element.ValorGlucemia;
+        gluco.FechaGlucemia = element.FechaGlucemia;
+        gluco.ValorHba = element.ValorHba;
+        gluco.FechaHba = element.FechaHba;
+        gluco.ValorCreatinina = element.ValorCreatinina;
+        gluco.FechaCreatinina = element.FechaCreatinina;
+        gluco.ValorLdl = element.ValorLdl;
+        gluco.FechaLdl = element.FechaLdl;
+        gluco.ValorTrigliceridos = element.ValorTrigliceridos;
+        gluco.FechaTrigliceridos = element.FechaTrigliceridos;
+        gluco.ValorMicro = element.ValorMicro;
+        gluco.FechaMicro = element.FechaMicro;
+        gluco.PlanTrabajo = element.PlanTrabajo;
+        gluco.InsulinaMono = element.InsulinaMono;
+        gluco.InsulinaDosis = element.InsulinaDosis;
+        gluco.MedicamentoMono = element.MedicamentoMono;
+        gluco.MedicamentoDosis = element.MedicamentoDosis;
+        gluco.FechaRegistro = element.FechaRegistro;
+        
+        controlGlucosa.push(gluco);
+      });
+    }
+    this.objControlGlucosa = controlGlucosa;
 
   }
 
   Guardar(){
-    this.MostrarNotificacionSuccessModal("Control guardado correctamente", "Exito")
+    this.AgregarValoresObjeto();
+    this.objHistoria.ControlGlucosa = this.objControlGlucosa;
+    this.objHistoria.IdHistoriaClinica = this.idHistoria;
+    console.log("historia guardar", this.objHistoria);
+
+    this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
+      next: (data) => {
+        this.MostrarNotificacionSuccessModal('Elñ control se guardó con éxito.', '');
+        this.CerrarModal();
+      },
+      error: (e) => {
+        console.log('Error: ', e);
+        this.verSpinner = false;
+      },
+      complete: () => { this.verSpinner = false; }
+    });
+
+  }
+
+  AgregarValoresObjeto(){
+    
+    let glucosa = new ControlGlucosaDTO();
+    glucosa.Paciente= this.paciente;
+    glucosa.TipoDiabetes= this.dataFormGroup.controls['inputTipoDiabetes'].value;
+    glucosa.FechaDiagnostico= this.dataFormGroup.controls['inputFechaDiagnostico'].value;
+    let complicacion = new DesplegableDTO();
+    complicacion.Id=this.dataFormGroup.controls['inputComplicaciones'].value;
+    let _com = this.comboComplicacion.filter(s => s.id == complicacion.Id)
+    if(_com!=null)
+      complicacion.Nombre=_com[0]['nombre'];
+    glucosa.Complicacion= complicacion;
+
+    let retino = new DesplegableDTO();
+    retino.Id= this.dataFormGroup.controls['inputRetinopatia'].value;
+    let _ret = this.comboSiNo.filter(s => s.id = retino.Id)
+    if(_ret!=null)
+      retino.Nombre = _ret[0]['nombre'];
+    glucosa.Retinopatia= retino;
+
+
+    let nefro = new DesplegableDTO();
+    nefro.Id= this.dataFormGroup.controls['inputNefropatia'].value;
+    let _nef = this.comboSiNo.filter(s => s.id = nefro.Id)
+    if(_nef!=null)
+      nefro.Nombre = _nef[0]['nombre'];
+    glucosa.Nefropatia= nefro;
+
+    let amput = new DesplegableDTO();
+    amput.Id= this.dataFormGroup.controls['inputAmputacion'].value;
+    let _amp = this.comboSiNo.filter(s => s.id = amput.Id)
+    if(_amp!=null)
+      amput.Nombre = _amp[0]['nombre'];
+    glucosa.Amputacion= amput;
+
+    let dialisis = new DesplegableDTO();
+    dialisis.Id= this.dataFormGroup.controls['inputDialisis'].value;
+    let _dial = this.comboSiNo.filter(s => s.id = dialisis.Id)
+    if(_dial!=null)
+      dialisis.Nombre = _dial[0]['nombre'];
+    glucosa.Dialisis= dialisis;
+
+    let ceguera = new DesplegableDTO();
+    ceguera.Id= this.dataFormGroup.controls['inputCeguera'].value;
+    let _ceg= this.comboSiNo.filter(s => s.id = ceguera.Id)
+    if(_ceg!=null)
+      ceguera.Nombre = _ceg[0]['nombre'];
+    glucosa.Ceguera= ceguera;
+
+    let transplante = new DesplegableDTO();
+    transplante.Id= this.dataFormGroup.controls['inputTransplante'].value;
+    let _trans = this.comboSiNo.filter(s => s.id = transplante.Id)
+    if(_trans!=null)
+      transplante.Nombre = _trans[0]['nombre'];
+    glucosa.TransplanteRenal= transplante;
+
+    glucosa.Talla= this.dataFormGroup.controls['inputTalla'].value;
+    glucosa.Peso= this.dataFormGroup.controls['inputPeso'].value;
+    glucosa.IMC= this.dataFormGroup.controls['inputImc'].value;
+    glucosa.PerimetroAbdominal= this.dataFormGroup.controls['inputPerimetroAbdominal'].value;
+    glucosa.PresionArterial= this.dataFormGroup.controls['inputPerimetroArterial'].value;
+    glucosa.ValorGlucemia= this.dataFormGroup.controls['inputValorGlucemia'].value;
+    glucosa.FechaGlucemia= this.dataFormGroup.controls['inputFechaGlucemia'].value;
+    glucosa.ValorHba= this.dataFormGroup.controls['inputValorHba'].value;
+    glucosa.FechaHba= this.dataFormGroup.controls['inputFechaHba'].value;
+    glucosa.ValorCreatinina= this.dataFormGroup.controls['inputValorCreatinina'].value;
+    glucosa.FechaCreatinina= this.dataFormGroup.controls['inputFechaCreatinina'].value;
+    glucosa.ValorLdl= this.dataFormGroup.controls['inputValorLdl'].value;
+    glucosa.FechaLdl= this.dataFormGroup.controls['inputFechaLdl'].value;
+    glucosa.ValorTrigliceridos= this.dataFormGroup.controls['inputValorTrigliceridos'].value;
+    glucosa.FechaTrigliceridos= this.dataFormGroup.controls['inputFechaTrigliceridos'].value;
+    glucosa.ValorMicro= this.dataFormGroup.controls['inputValorMicroalbuminuria'].value;
+    glucosa.FechaMicro= this.dataFormGroup.controls['inputFechaMicroalbuminuria'].value;
+    glucosa.PlanTrabajo= this.dataFormGroup.controls['inputPlanTrabajo'].value;
+    glucosa.InsulinaMono= this.dataFormGroup.controls['inputMonoInsulina'].value;
+    glucosa.InsulinaDosis= this.dataFormGroup.controls['inputDosisInsulina'].value;
+    glucosa.MedicamentoMono= this.dataFormGroup.controls['inputMonoMedicamento'].value;
+    glucosa.MedicamentoDosis= this.dataFormGroup.controls['inputDosisMedicamento'].value;
+    glucosa.FechaRegistro= new Date();
+
+    this.objControlGlucosa.push(glucosa);
+
   }
 
   CalcularIndiceMasaCorporal(){
