@@ -34,6 +34,7 @@ import { MedicoAtencionDTO } from '@models/medico-atiente';
 import { ControlGlucosaDTO } from '@models/control-glucosa';
 import { DesplegableDTO } from '@models/depleglable';
 import { ComboDTO } from '@models/ComboDTO';
+import { ControlEpocDTO } from '@models/control-epoc';
 
 @Component({
   selector: 'app-cuadro-controles',
@@ -607,6 +608,60 @@ export default class CuadroControlesComponent implements OnInit {
       });
     }
 
+    let controlEpoc : ControlEpocDTO[] = [];
+    if(objHistoria.controlEpoc != null){
+      objHistoria.controlEpoc.forEach((element:any) =>{
+
+        let epoc = new ControlEpocDTO();
+        epoc.Paciente= element.paciente;
+        epoc.FechaRegistro= element.fechaRegistro;
+        epoc.Banno= new DesplegableDTO();
+        epoc.Banno.Id = element.banno.id;
+        epoc.Banno.Nombre = element.banno.nombre;
+        epoc.Vestido= new DesplegableDTO();
+        epoc.Vestido.Id = element.vestido.id;
+        epoc.Vestido.Nombre = element.vestido.nombre;
+        epoc.Wc= new DesplegableDTO();
+        epoc.Wc.Id = element.wc.id;
+        epoc.Wc.Nombre = element.wc.nombre;
+        epoc.Movilidad= new DesplegableDTO();
+        epoc.Movilidad.Id = element.movilidad.id;
+        epoc.Movilidad.Nombre = element.movilidad.nombre;
+        epoc.Continencia= new DesplegableDTO();
+        epoc.Continencia.Id = element.continencia.id;
+        epoc.Continencia.Nombre = element.continencia.nombre;
+        epoc.Alimentacion= new DesplegableDTO();
+        epoc.Alimentacion.Id = element.alimentacion.id;
+        epoc.Alimentacion.Nombre = element.alimentacion.nombre;
+        epoc.ResultadoEscala= new DesplegableDTO();
+        epoc.ResultadoEscala.Id = element.resultadoEscala.id;
+        epoc.ResultadoEscala.Nombre = element.resultadoEscala.nombre;
+        epoc.Dificultad= element.dificultad;
+        epoc.FaseEpoc= new DesplegableDTO();
+        epoc.FaseEpoc.Id = element.faseEpoc.id;
+        epoc.FaseEpoc.Nombre = element.faseEpoc.nombre;
+        epoc.FechaDiagnostico= element.fechaDiagnostico;
+        epoc.Alcohol= new DesplegableDTO();
+        epoc.Alcohol.Id = element.alcohol.id;
+        epoc.Alcohol.Nombre = element.alcohol.nombre;
+        epoc.Drogas= new DesplegableDTO();
+        epoc.Drogas.Id = element.drogas.id;
+        epoc.Drogas.Nombre = element.drogas.nombre;
+        epoc.Tabaco= new DesplegableDTO();
+        epoc.Tabaco.Id = element.tabaco.id;
+        epoc.Tabaco.Nombre = element.tabaco.nombre;
+        epoc.SistemaRespiratorio= new DesplegableDTO();
+        epoc.SistemaRespiratorio.Id = element.sistemaRespiratorio.id;
+        epoc.SistemaRespiratorio.Nombre = element.sistemaRespiratorio.nombre;
+        epoc.SistemaRespiratorioDetalle= element.sistemaRespiratorioDetalle;
+        epoc.EvaluacionFuncional= element.evaluacionFuncional;
+        epoc.PlanTrabajo= element.planTrabajo;
+
+        controlEpoc.push(epoc);
+      });
+    
+    }
+
     
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -627,6 +682,7 @@ export default class CuadroControlesComponent implements OnInit {
     historiaCalidad.Receta = recetaListado;
     historiaCalidad.ControlPresion = controlPresion;
     historiaCalidad.ControlGlucosa = controlGlucosa;
+    historiaCalidad.ControlEpoc = controlEpoc;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;
