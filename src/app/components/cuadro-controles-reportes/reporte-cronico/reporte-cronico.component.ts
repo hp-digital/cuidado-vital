@@ -64,59 +64,58 @@ export class ReporteCronicoComponent implements OnInit {
   
     this.nroHcl = this.objHistoria.cabeceraPaciente?.NumeroDocumento;
 
-    let controlEpoc : ControlEpocDTO[] = [];
-    if(objHistoria.controlEpoc != null){
-      objHistoria.controlEpoc.forEach((element:any) =>{
+    if(objHistoria.ControlEpoc != null){
+      objHistoria.ControlEpoc.forEach((element:any) =>{
 
         let epoc = new ControlEpocDTO();
-        epoc.Paciente= element.paciente;
-        epoc.FechaRegistro= element.fechaRegistro;
+        epoc.Paciente= element.Paciente;
+        epoc.FechaRegistro= element.FechaRegistro;
         epoc.Banno= new DesplegableDTO();
-        epoc.Banno.Id = element.banno.id;
-        epoc.Banno.Nombre = element.banno.nombre;
+        epoc.Banno.Id = element.Banno.Id;
+        epoc.Banno.Nombre = element.Banno.Nombre;
         epoc.Vestido= new DesplegableDTO();
-        epoc.Vestido.Id = element.vestido.id;
-        epoc.Vestido.Nombre = element.vestido.nombre;
+        epoc.Vestido.Id = element.Vestido.Id;
+        epoc.Vestido.Nombre = element.Vestido.Nombre;
         epoc.Wc= new DesplegableDTO();
-        epoc.Wc.Id = element.wc.id;
-        epoc.Wc.Nombre = element.wc.nombre;
+        epoc.Wc.Id = element.Wc.Id;
+        epoc.Wc.Nombre = element.Wc.Nombre;
         epoc.Movilidad= new DesplegableDTO();
-        epoc.Movilidad.Id = element.movilidad.id;
-        epoc.Movilidad.Nombre = element.movilidad.nombre;
+        epoc.Movilidad.Id = element.Movilidad.Id;
+        epoc.Movilidad.Nombre = element.Movilidad.Nombre;
         epoc.Continencia= new DesplegableDTO();
-        epoc.Continencia.Id = element.continencia.id;
-        epoc.Continencia.Nombre = element.continencia.nombre;
+        epoc.Continencia.Id = element.Continencia.Id;
+        epoc.Continencia.Nombre = element.Continencia.Nombre;
         epoc.Alimentacion= new DesplegableDTO();
-        epoc.Alimentacion.Id = element.alimentacion.id;
-        epoc.Alimentacion.Nombre = element.alimentacion.nombre;
+        epoc.Alimentacion.Id = element.Alimentacion.Id;
+        epoc.Alimentacion.Nombre = element.Alimentacion.Nombre;
         epoc.ResultadoEscala= new DesplegableDTO();
-        epoc.ResultadoEscala.Id = element.resultadoEscala.id;
-        epoc.ResultadoEscala.Nombre = element.resultadoEscala.nombre;
-        epoc.Dificultad= element.dificultad;
+        epoc.ResultadoEscala.Id = element.ResultadoEscala.Id;
+        epoc.ResultadoEscala.Nombre = element.ResultadoEscala.Nombre;
+        epoc.Dificultad= element.Dificultad;
         epoc.FaseEpoc= new DesplegableDTO();
-        epoc.FaseEpoc.Id = element.faseEpoc.id;
-        epoc.FaseEpoc.Nombre = element.faseEpoc.nombre;
-        epoc.FechaDiagnostico= element.fechaDiagnostico;
+        epoc.FaseEpoc.Id = element.FaseEpoc.Id;
+        epoc.FaseEpoc.Nombre = element.FaseEpoc.Nombre;
+        epoc.FechaDiagnostico= element.FechaDiagnostico;
         epoc.Alcohol= new DesplegableDTO();
-        epoc.Alcohol.Id = element.alcohol.id;
-        epoc.Alcohol.Nombre = element.alcohol.nombre;
+        epoc.Alcohol.Id = element.Alcohol.Id;
+        epoc.Alcohol.Nombre = element.Alcohol.Nombre;
         epoc.Drogas= new DesplegableDTO();
-        epoc.Drogas.Id = element.drogas.id;
-        epoc.Drogas.Nombre = element.drogas.nombre;
+        epoc.Drogas.Id = element.Drogas.Id;
+        epoc.Drogas.Nombre = element.Drogas.Nombre;
         epoc.Tabaco= new DesplegableDTO();
-        epoc.Tabaco.Id = element.tabaco.id;
-        epoc.Tabaco.Nombre = element.tabaco.nombre;
+        epoc.Tabaco.Id = element.Tabaco.Id;
+        epoc.Tabaco.Nombre = element.Tabaco.Nombre;
         epoc.SistemaRespiratorio= new DesplegableDTO();
-        epoc.SistemaRespiratorio.Id = element.sistemaRespiratorio.id;
-        epoc.SistemaRespiratorio.Nombre = element.sistemaRespiratorio.nombre;
-        epoc.SistemaRespiratorioDetalle= element.sistemaRespiratorioDetalle;
-        epoc.EvaluacionFuncional= element.evaluacionFuncional;
-        epoc.PlanTrabajo= element.planTrabajo;
+        epoc.SistemaRespiratorio.Id = element.SistemaRespiratorio.Id;
+        epoc.SistemaRespiratorio.Nombre = element.SistemaRespiratorio.Nombre;
+        epoc.SistemaRespiratorioDetalle= element.SistemaRespiratorioDetalle;
+        epoc.EvaluacionFuncional= element.EvaluacionFuncional;
+        epoc.PlanTrabajo= element.PlanTrabajo;
 
-        controlEpoc.push(epoc);
+        this.objControlEpoc.push(epoc);
       });
-    
     }
+    console.log("obj epoc", this.objControlEpoc);
   }
 
   

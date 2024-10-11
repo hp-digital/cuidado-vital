@@ -25,6 +25,7 @@ import { HistoriaService } from '@services/historia.service';
 import { RecetaDTO } from '@models/RecetaDTO';
 import { OrdenDTO } from '@models/OrdenDTO';
 import { MedicoAtencionDTO } from '@models/medico-atiente';
+import { UtilitiesService } from '@services/utilities.service';
 
 
 @Component({
@@ -91,6 +92,7 @@ export class ControlGeneralComponent implements OnInit {
     private bsModalControlGeneral: BsModalRef,
     private historiaService: HistoriaService,
     private monitoreoService: DatosMonitoreoService,
+    private utilitiesService: UtilitiesService
   ) {
     this.dataFormGroup = new FormGroup({
       inputAlergias: new FormControl(),
@@ -153,11 +155,15 @@ export class ControlGeneralComponent implements OnInit {
       )
   }
 
-  AsignarHistoriaClinicaInterno(idHistoria: number){
+  AsignarHistoriaClinicaInterno(historia: HistoriaCuidadoDTO, idHistoria: number){
 
+    this.objHistoria = historia;
     this.idHistoria = idHistoria;
-    this.ObtenerConfiguracion(idHistoria);
+    //this.ObtenerConfiguracion(idHistoria);
+    this.AsignarObjetoHistoria(historia);
   }
+
+  
 
   ObtenerConfiguracion(idHistoriaClinica: number)
   {
@@ -661,11 +667,9 @@ export class ControlGeneralComponent implements OnInit {
     this.medico = this.objHistoria.MedicoAtiende?.ApellidoPaterno+' '+this.objHistoria.MedicoAtiende?.ApellidoMaterno+', '+this.objHistoria.MedicoAtiende?.Nombre;
     this.nroHcl = this.objHistoria.cabeceraPaciente?.NumeroDocumento;
     this.fechaHistoria = this.objHistoria.cabeceraPaciente?.FechaAtencion.toString() ;
-    /* this.fechaNacimientoPaciente = objHistoria.HistoriaExterna.fechaNacimiento; */
+
     this.celularPaciente = objHistoria.cabeceraPaciente.Celular ;
-    /* this.emailPaciente = objHistoria.HistoriaExterna.paciente.email ;
-    this.direccionPaciente = objHistoria.HistoriaExterna.paciente.direccion ;
-    this.procedencia = objHistoria.HistoriaExterna.razonSocial; */
+
     
   }
 

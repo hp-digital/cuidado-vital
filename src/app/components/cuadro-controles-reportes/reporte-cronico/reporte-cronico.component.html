@@ -1,6 +1,6 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title">REPORTE DEL PACIENTE DIABETICO</h4>
+        <h4 class="modal-title">REPORTE DEL PACIENTE CON ENFERMEDAD PULMONAR OBSTRUCTIVA CRÓNICA</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
     </div>
     <div class="modal-body">
@@ -31,8 +31,58 @@
             <div id="seccion-medicacion" class="">
                 <div class="row mb-3 bg-green-custom">REPORTE</div>	
                 <div class="box-shadow mt-3" *ngFor="let record of objControlEpoc">
-                    
-                       
+                    <p><strong>Fecha de Registro:</strong> {{ record.FechaRegistro | date: 'yyyy-MM-dd' }}</p>
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <h5>Dependencia en Actividades Diarias:</h5>
+                            <ul>
+                            <li><strong>Baño:</strong> {{ record.Banno.Nombre }}</li>
+                            <li><strong>Vestido:</strong> {{ record.Vestido.Nombre }}</li>
+                            <li><strong>WC:</strong> {{ record.Wc.Nombre }}</li>
+                            <li><strong>Movilidad:</strong> {{ record.Movilidad.Nombre }}</li>
+                            <li><strong>Continencia:</strong> {{ record.Continencia.Nombre }}</li>
+                            <li><strong>Alimentación:</strong> {{ record.Alimentacion.Nombre }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-3">
+                            <h5>Resultados de Escala:</h5>
+                            <ul>
+                              <li><strong>Resultado de Escala:</strong> {{ record.ResultadoEscala.Nombre }}</li>
+                              <li><strong>Dificultad:</strong> {{ record.Dificultad }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-3">
+                            <h5>Resultados de Escala:</h5>
+                            <ul>
+                              <li><strong>Resultado de Escala:</strong> {{ record.ResultadoEscala.Nombre }}</li>
+                              <li><strong>Dificultad:</strong> {{ record.Dificultad }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-3">
+                            <h5>EPOC:</h5>
+                            <ul>
+                              <li><strong>Fase EPOC:</strong> {{ record.FaseEpoc.Nombre }}</li>
+                              <li><strong>Fecha de Diagnóstico:</strong> {{ record.FechaDiagnostico | date: 'yyyy-MM-dd' }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-3">
+                            <h5>Hábitos y Sistema Respiratorio:</h5>
+                            <ul>
+                              <li><strong>Alcohol:</strong> {{ record.Alcohol.Nombre }}</li>
+                              <li><strong>Drogas:</strong> {{ record.Drogas.Nombre }}</li>
+                              <li><strong>Tabaco:</strong> {{ record.Tabaco.Nombre }}</li>
+                              <li><strong>Sistema Respiratorio:</strong> {{ record.SistemaRespiratorio.Nombre }}</li>
+                              <li><strong>Detalles del Sistema Respiratorio:</strong> {{ record.SistemaRespiratorioDetalle }}</li>
+                            </ul>
+                        </div>
+                        <div class="col-xl-3">
+                            <h5>Evaluación y Plan de Trabajo:</h5>
+                            <ul>
+                              <li><strong>Evaluación Funcional:</strong> {{ record.EvaluacionFuncional }}</li>
+                              <li><strong>Plan de Trabajo:</strong> {{ record.PlanTrabajo }}</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
             		
