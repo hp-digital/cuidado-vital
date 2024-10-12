@@ -169,7 +169,7 @@ export class ControlEpocComponent implements OnInit {
 
     let movi = new DesplegableDTO();
     movi.Id = this.dataFormGroup.controls['selectMovilidad'].value;
-    let _movi = this.comboWC.filter(s => s.id == movi.Id)
+    let _movi = this.comboMovilidad.filter(s => s.id == movi.Id)
     if(_movi != null)
       movi.Nombre = _movi[0]['nombre'];
     epoc.Movilidad = movi;
@@ -186,7 +186,7 @@ export class ControlEpocComponent implements OnInit {
     let _ali = this.comboAlimentacion.filter(s => s.id == ali.Id)
     if(_ali != null)
       ali.Nombre = _ali[0]['nombre'];
-    epoc.Alimentacion = conti;
+    epoc.Alimentacion = ali;
 
     let res = new DesplegableDTO();
     res.Id = this.dataFormGroup.controls['inputResultadoEscalaKatz'].value;

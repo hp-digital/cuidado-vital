@@ -55,7 +55,7 @@
                                 <label class="cform-label">Vestido</label>
                                 <p-dropdown 
                                     formControlName="selectVestido"
-                                    [options]="comboBanio" 
+                                    [options]="comboVestido" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -66,7 +66,7 @@
                                 <label class="cform-label">Uso del WC</label>
                                 <p-dropdown 
                                     formControlName="selectWC"
-                                    [options]="comboBanio" 
+                                    [options]="comboWC" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -77,7 +77,7 @@
                                 <label class="cform-label">Movilidad</label>
                                 <p-dropdown 
                                     formControlName="selectMovilidad"
-                                    [options]="comboBanio" 
+                                    [options]="comboMovilidad" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -88,7 +88,7 @@
                                 <label class="cform-label">Continencia</label>
                                 <p-dropdown 
                                     formControlName="selectContinencia"
-                                    [options]="comboBanio" 
+                                    [options]="comboContinencia" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -99,7 +99,7 @@
                                 <label class="cform-label">Alimentación</label>
                                 <p-dropdown 
                                     formControlName="selectAlimentacion"
-                                    [options]="comboBanio" 
+                                    [options]="comboAlimentacion" 
                                     optionLabel="nombre" 
                                     optionValue="id"
                                     [showClear]="true" 
@@ -114,18 +114,12 @@
                     <div class="col-12">
                         <h6>Resultado Escala de Katz</h6>
                         <div class="form-group">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-katz" type="radio" id=""
-                                    value="option1" checked>
-                                <label class="form-check-label" for="">Dependiente</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-katz" type="radio" id=""
-                                    value="option1">
-                                <label class="form-check-label" for="">Independiente</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboResultadoKatz">
+                                <input class="form-check-input" name="inputEscalaKatz" type="radio" id="inputEscalaKatz" formControlName="inputEscalaKatz" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control" formControlName="inputEscalaKatz"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEscalaKatzDetalle"></textarea>
 
                     </div>
                 </div>
@@ -147,8 +141,8 @@
                                 <input type="number" class="form-control" formControlName="inputFrecuenciaRespiratoria">
                             </div>
                             <div class="col-4">
-                                <label class="cform-label">PA (Sistolica/diastolica) (mmHg)</label>
-                                <input type="number" class="form-control" formControlName="inputPresionSistolicaDiastolica">
+                                <label class="cform-label">PA (Sistolica) (mmHg)</label>
+                                <input type="number" class="form-control" formControlName="inputPresionSistolica">
                             </div>
                             <div class="col-4">
                                 <label class="cform-label">PA (Diastolica) (mmHg)</label>
@@ -189,48 +183,48 @@
                                 <tbody class="text-center">
                                     <tr>
                                         <td class="text-left">¿Què fecha es Hoy? (dd/mm/aa)</td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option1"></td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option2"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputFechaAdecuada" value="inputFechaAdecuada" formControlName="inputFechaAdecuada" (click)="AsignarFecha(1)"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputFechaEquivocada" value="inputFechaEquivocada" formControlName="inputFechaEquivocada" (click)="AsignarFecha(2)"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Que dia de la Semana es?</td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option3"></td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option4"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputDiaAdecuada" value="inputDiaAdecuada" formControlName="inputDiaAdecuada" (click)="AsignarDia(1)"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputDiaEquivocada" value="inputDiaEquivocada" formControlName="inputDiaEquivocada" (click)="AsignarDia(2)"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿En que lugar estamos?</td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option5"></td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option6"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputLugarAdecuada" value="inputLugarAdecuada" formControlName="inputLugarAdecuada" (click)="AsignarLugar(1)"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputLugarEquivocada" value="inputLugarEquivocada" formControlName="inputLugarEquivocada" (click)="AsignarLugar(2)"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cúal es su numero de telefono?</td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option7"></td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option8"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputNumeroAdecuada" value="inputNumeroAdecuada" formControlName="inputNumeroAdecuada" (click)="AsignarNumero(1)"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputNumeroEquivocada" value="inputNumeroEquivocada" formControlName="inputNumeroEquivocada" (click)="AsignarNumero(2)"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cúal es su direccion completa?</td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option9"></td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option10"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputDireccionAdecuada" value="inputDireccionAdecuada" formControlName="inputDireccionAdecuada" (click)="AsignarDireccion(1)"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputDireccionEquivocada" value="inputDireccionEquivocada" formControlName="inputDireccionEquivocada" (click)="AsignarDireccion(2)"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cuantos años tiene?</td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option11"></td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option12"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputAniosAdecuada" value="inputAniosAdecuada" formControlName="inputAniosAdecuada" (click)="AsignarAnios(1)"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputAniosEquivocada" value="inputAniosEquivocada" formControlName="inputAniosEquivocada" (click)="AsignarAnios(2)"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Donde Nacio?</td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option13"></td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option14"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputDondeNacioAdecuada" value="inputDondeNacioAdecuada" formControlName="inputDondeNacioAdecuada" (click)="AsignarLugarNacio(1)"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputDondeNacioEquivocada" value="inputDondeNacioEquivocada" formControlName="inputDondeNacioEquivocada" (click)="AsignarLugarNacio(2)"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">¿Cual es el nombre del presidente?</td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option15"></td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option16"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputNombrePresidenteAdecuada" value="inputNombrePresidenteAdecuada" formControlName="inputNombrePresidenteAdecuada" (click)="AsignarPresidente(1)"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputNombrePresidenteEquivocada" value="inputNombrePresidenteEquivocada" formControlName="inputNombrePresidenteEquivocada" (click)="AsignarPresidente(2)"></td>
                                     </tr>
                                     <tr>
                                         <td class="text-left">Digame el primer apellido de su madre</td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option17"></td>
-                                        <td><input class="form-check-input" type="radio" id="" value="option18"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputPrimerApellidoAdecuada" value="inputPrimerApellidoAdecuada" formControlName="inputPrimerApellidoAdecuada" (click)="AsignarPrimerApellido(1)"></td>
+                                        <td><input class="form-check-input" type="radio" id="inputPrimerApellidoEquivocada" value="inputPrimerApellidoEquivocada" formControlName="inputPrimerApellidoEquivocada" (click)="AsignarPrimerApellido(2)"></td>
                                     </tr>
 
                                 </tbody>
@@ -243,15 +237,9 @@
                     <div class="col-xl-12">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Resultado de Valoracion Mental</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-valoracionmental" type="radio" id=""
-                                    value="option1" checked>
-                                <label class="form-check-label" for="">Normal</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-valoracionmental" type="radio" id=""
-                                    value="option1">
-                                <label class="form-check-label" for="">Alterado</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
+                                <input class="form-check-input" name="inputEstadoMental" type="radio" id="inputEstadoMental" formControlName="inputEstadoMental" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
                         <textarea name="" id="" class="form-control" formControlName="inputEstadoMentalDetalle"></textarea>
@@ -259,31 +247,19 @@
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Caida dentro de los 6 meses</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-caida" type="radio" id=""
-                                    value="option1" checked>
-                                <label class="form-check-label" for="">NO</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-caida" type="radio" id=""
-                                    value="option1">
-                                <label class="form-check-label" for="">SI</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboSiNo">
+                                <input class="form-check-input" name="inputCaida" type="radio" id="inputCaida" formControlName="inputCaida" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputCaidaDetalle"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Estado de Nutricional*</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-nutricional" type="radio" id=""
-                                    value="option1" checked>
-                                <label class="form-check-label" for="">Normal</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-nutricional" type="radio" id=""
-                                    value="option1">
-                                <label class="form-check-label" for="">Alterado</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
+                                <input class="form-check-input" name="inputEstadoNutricional" type="radio" id="inputEstadoNutricional" formControlName="inputEstadoNutricional" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
                         <textarea name="" id="" class="form-control" formControlName="inputEstadoNutricionalDetalle"></textarea>
@@ -291,15 +267,9 @@
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Estado de Psicosocial*</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-psicosocial" type="radio" id=""
-                                    value="option1" checked>
-                                <label class="form-check-label" for="">Normal</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-psicosocial" type="radio" id=""
-                                    value="option1">
-                                <label class="form-check-label" for="">Alterado</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
+                                <input class="form-check-input" name="inputEstadoPsicosocial" type="radio" id="inputEstadoPsicosocial" formControlName="inputEstadoPsicosocial" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
                         <textarea name="" id="" class="form-control" formControlName="inputEstadoPsicosocialDetalle"></textarea>
@@ -307,15 +277,9 @@
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Estado de Vision*</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-vision" type="radio" id=""
-                                    value="option1" checked>
-                                <label class="form-check-label" for="">Normal</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-vision" type="radio" id=""
-                                    value="option1">
-                                <label class="form-check-label" for="">Alterado</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
+                                <input class="form-check-input" name="inputEstadoVision" type="radio" id="inputEstadoVision" formControlName="inputEstadoVision" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
                         <textarea name="" id="" class="form-control" formControlName="inputEstadoVisionDetalle"></textarea>
@@ -323,18 +287,12 @@
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Estado de Audición*</label>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-audicion" type="radio" id=""
-                                    value="option1" checked>
-                                <label class="form-check-label" for="">Normal</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" name="rad-audicion" type="radio" id=""
-                                    value="option1">
-                                <label class="form-check-label" for="">Alterado</label>
+                            <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
+                                <input class="form-check-input" name="inputEstadoAudicion" type="radio" id="inputEstadoAudicion" formControlName="inputEstadoAudicion" [value]="combo.id">
+                                <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control" formControlName="inputEstadoAudicion"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoAudicionDetalle"></textarea>
                     </div>
                 </div>
 

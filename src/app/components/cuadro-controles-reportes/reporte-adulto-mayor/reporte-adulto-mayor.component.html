@@ -1,1 +1,88 @@
-<p>reporte-adulto-mayor works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">REPORTE DEL ADULTO MAYOR ESTABLE</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dataFormGroup">
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-5">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>														
+                </div>
+            </div>
+            <hr/>		
+
+            <div id="seccion-medicacion" class="">
+                <div class="row mb-3 bg-green-custom">REPORTE</div>	
+                <div class="box-shadow mt-3" *ngFor="let record of objControlGeneral">
+                    <p><strong>Fecha de Registro:</strong> {{ record.FechaRegistro | date:'short' }}</p>
+                    
+                    <h3>Información de Dependencia:</h3>
+                    <ul>
+                      <li><strong>Baño:</strong> {{ record.Banno.Nombre }}</li>
+                      <li><strong>Vestido:</strong> {{ record.Vestido.Nombre }}</li>
+                      <li><strong>WC:</strong> {{ record.Wc.Nombre }}</li>
+                      <li><strong>Movilidad:</strong> {{ record.Movilidad.Nombre }}</li>
+                      <li><strong>Continencia:</strong> {{ record.Continencia.Nombre }}</li>
+                      <li><strong>Alimentación:</strong> {{ record.Alimentacion.Nombre }}</li>
+                    </ul>
+                  
+                    <h3>Resultado Escala Katz:</h3>
+                    <ul>
+                      <li><strong>Resultado:</strong> {{ record.ResultadoEscalaKatz.Nombre }}</li>
+                      <li><strong>Detalle:</strong> {{ record.DetalleResultadoKatz }}</li>
+                    </ul>
+                  
+                    <h3>Valores Vitales:</h3>
+                    <ul>
+                      <li><strong>Temperatura:</strong> {{ record.Temperatura }}</li>
+                      <li><strong>Frecuencia Cardiaca:</strong> {{ record.Fc }}</li>
+                      <li><strong>Frecuencia Respiratoria:</strong> {{ record.Fr }}</li>
+                      <li><strong>Presión Sistólica:</strong> {{ record.PresionSistolica }}</li>
+                      <li><strong>Presión Diastólica:</strong> {{ record.PresionDiastolica }}</li>
+                      <li><strong>Saturación:</strong> {{ record.Saturacion }}</li>
+                      <li><strong>Peso:</strong> {{ record.Peso }} kg</li>
+                      <li><strong>Talla:</strong> {{ record.Talla }} cm</li>
+                      <li><strong>IMC:</strong> {{ record.Imc }}</li>
+                    </ul>
+                  
+                    <h3>Evaluación Mental:</h3>
+                    <ul>
+                      <li><strong>Valoración Mental:</strong> {{ record.ValoracionMental.Nombre }}</li>
+                      <li><strong>Detalle:</strong> {{ record.ValoracionMentalDetalle }}</li>
+                    </ul>
+                  
+                    <h3>Otros Datos:</h3>
+                    <ul>
+                      <li><strong>Alergias:</strong> {{ record.Alergias }}</li>
+                      <li><strong>Caídas recientes:</strong> {{ record.Caida.Nombre }} - {{ record.CaidaDetalle }}</li>
+                      <li><strong>Plan de trabajo:</strong> {{ record.PlanTrabajo }}</li>
+                    </ul>
+                    
+                    <hr>
+                </div>
+            </div>
+            		
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
+        <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+      </div>
+</div>

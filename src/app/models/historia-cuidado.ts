@@ -29,5 +29,5 @@ export class HistoriaCuidadoDTO{
     ControlEpoc?:ControlEpocDTO[];
     Receta?:RecetaDTO[];
     Orden?:OrdenDTO[];
-    HistoriaExterna!:HistoriaExternaDTO;
+    HistoriaExterna?:HistoriaExternaDTO;
 }

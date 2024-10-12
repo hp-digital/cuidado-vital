@@ -26,6 +26,8 @@ import { RecetaDTO } from '@models/RecetaDTO';
 import { OrdenDTO } from '@models/OrdenDTO';
 import { MedicoAtencionDTO } from '@models/medico-atiente';
 import { UtilitiesService } from '@services/utilities.service';
+import { DesplegableDTO } from '@models/depleglable';
+import { ComboDTO } from '@models/ComboDTO';
 
 
 @Component({
@@ -34,7 +36,8 @@ import { UtilitiesService } from '@services/utilities.service';
   imports: [
     ReactiveFormsModule,
     FormsModule,
-    DropdownModule
+    DropdownModule,
+    CommonModule
   ],
   templateUrl: './control-general.component.html',
   styles: [`
@@ -88,6 +91,20 @@ export class ControlGeneralComponent implements OnInit {
   comboContinencia: ComboKatzDTO[] = [];
   comboAlimentacion: ComboKatzDTO[] = [];
 
+  comboEstado: ComboDTO[] = [];
+  comboSiNo: ComboDTO[] = [];
+  comboResultadoKatz: ComboDTO[] = [];
+
+  fecha: string='';
+  dia: string='';
+  lugar: string='';
+  numeroTelefono: string='';
+  direccionCompleta: string='';
+  anios: string='';
+  lugarNacio: string ='';
+  nombrePresidente: string='';
+  primerApellidoMadre: string='';
+
   constructor(
     private bsModalControlGeneral: BsModalRef,
     private historiaService: HistoriaService,
@@ -100,7 +117,7 @@ export class ControlGeneralComponent implements OnInit {
       inputTemperatura: new FormControl(),
       inputFrecuenciaCardiaca: new FormControl(),
       inputFrecuenciaRespiratoria: new FormControl(),
-      inputPresionSistolicaDiastolica: new FormControl(),
+      inputPresionSistolica: new FormControl(),
       inputSaturacion: new FormControl(),
       inputPeso: new FormControl(),
       inputTalla: new FormControl(),
@@ -111,13 +128,39 @@ export class ControlGeneralComponent implements OnInit {
       inputEstadoVisionDetalle: new FormControl(),
       inputEstadoAudicion: new FormControl(),
       inputPlanTrabajo: new FormControl(),
-      selectBanio: new FormControl('', [Validators.required]),
-      selectVestido: new FormControl('', [Validators.required]),
-      selectWC: new FormControl('', [Validators.required]),
-      selectMovilidad: new FormControl('', [Validators.required]),
-      selectContinencia: new FormControl('', [Validators.required]),
-      selectAlimentacion: new FormControl('', [Validators.required]),
+      selectBanio: new FormControl(''),
+      selectVestido: new FormControl(''),
+      selectWC: new FormControl(''),
+      selectMovilidad: new FormControl(''),
+      selectContinencia: new FormControl(''),
+      selectAlimentacion: new FormControl(''),
       inputPresionDiastolica: new FormControl(),
+      inputEscalaKatzDetalle: new FormControl(''),
+      inputEstadoMental: new FormControl(''),
+      inputCaida: new FormControl(''),
+      inputCaidaDetalle: new FormControl(''),
+      inputEstadoNutricional: new FormControl(''),
+      inputEstadoPsicosocial: new FormControl(''),
+      inputEstadoVision: new FormControl(''),
+      inputEstadoAudicionDetalle: new FormControl(''),
+      inputFechaAdecuada: new FormControl(''),
+      inputFechaEquivocada: new FormControl(''),
+      inputDiaAdecuada: new FormControl(''),
+      inputDiaEquivocada: new FormControl(''),
+      inputLugarAdecuada: new FormControl(''),
+      inputLugarEquivocada: new FormControl(''),
+      inputNumeroAdecuada: new FormControl(''),
+      inputNumeroEquivocada: new FormControl(''),
+      inputDireccionAdecuada: new FormControl(''),
+      inputDireccionEquivocada: new FormControl(''),
+      inputAniosAdecuada: new FormControl(''),
+      inputAniosEquivocada: new FormControl(''),
+      inputDondeNacioAdecuada: new FormControl(''),
+      inputDondeNacioEquivocada: new FormControl(''),
+      inputNombrePresidenteAdecuada: new FormControl(''),
+      inputNombrePresidenteEquivocada: new FormControl(''),
+      inputPrimerApellidoAdecuada: new FormControl(''),
+      inputPrimerApellidoEquivocada: new FormControl(''),
     });
   }
 
@@ -144,7 +187,6 @@ export class ControlGeneralComponent implements OnInit {
           this.comboMovilidad = data[3];
           this.comboContinencia = data[4];
           this.comboAlimentacion = data[5];
-
           this.verSpinner = false;
         },
         err => {
@@ -161,6 +203,10 @@ export class ControlGeneralComponent implements OnInit {
     this.idHistoria = idHistoria;
     //this.ObtenerConfiguracion(idHistoria);
     this.AsignarObjetoHistoria(historia);
+    this.comboEstado = this.utilitiesService.ObtenerComboSintomaRespiratorio();
+    this.comboSiNo = this.utilitiesService.ObtenerSINO();
+    this.comboResultadoKatz = this.utilitiesService.ObtenerComboResultadoKatz();
+    
   }
 
   
@@ -544,17 +590,9 @@ export class ControlGeneralComponent implements OnInit {
         let control = new ControlGeneralDTO();
         control.Paciente =element.paciente;
         control.Alergias =element.alergias;
-        control.EscalaKatz =element.escalaKatz;
         control.Temperatura =element.temperatura;
-        control.FrecuenciaCardiaca =element.frecuenciaCardiaca;
-        control.FrecuenciaRespiratoria =element.frecuenciaRespiratoria;
-        control.PresionArterialSistolicaDistolica =element.presionArterialSistolicaDistolica;
-        control.SaturacionOxigeno =element.saturacionOxigeno;
         control.Talla =element.talla;
         control.Peso =element.peso;
-        control.IMC =element.imc;
-        control.EstadoMental =element.estadoMental;
-        control.EstadoMentalDetalle =element.estadoMentalDetalle;
         control.EstadoNutricional =element.estadoNutricional;
         control.EstadoNutricionalDetalle =element.estadoNutricionalDetalle;
         control.EstadoPsicosocial =element.estadoPsicosocial;
@@ -653,8 +691,10 @@ export class ControlGeneralComponent implements OnInit {
     console.log("historia llega", historia);
     this.objHistoria = historia;
     this.idHistoria = idHistoria;
-    this.objHistoria.ControlGeneral = this.objControl;
     this.AsignarObjetoHistoria(historia);
+    this.comboEstado = this.utilitiesService.ObtenerComboSintomaRespiratorio();
+    this.comboSiNo = this.utilitiesService.ObtenerSINO();
+    this.comboResultadoKatz = this.utilitiesService.ObtenerComboResultadoKatz();
   }
 
   AsignarObjetoHistoria(data:any)
@@ -669,6 +709,80 @@ export class ControlGeneralComponent implements OnInit {
     this.fechaHistoria = this.objHistoria.cabeceraPaciente?.FechaAtencion.toString() ;
 
     this.celularPaciente = objHistoria.cabeceraPaciente.Celular ;
+
+    if(objHistoria.ControlGeneral != null)
+      {
+        objHistoria.ControlGeneral.forEach((element:any)=>{
+          let control = new ControlGeneralDTO();
+          control.Paciente = element.Paciente;
+          control.FechaRegistro = element.FechaRegistro;
+          control.Alergias = element.Alergias;
+          control.Banno = new DesplegableDTO();
+          control.Banno.Id = element.Banno.Id;
+          control.Banno.Nombre = element.Banno.Nombre;
+          control.Vestido= new DesplegableDTO();
+          control.Vestido.Id = element.Vestido.Id;
+          control.Vestido.Nombre = element.Vestido.Nombre;
+          control.Wc= new DesplegableDTO();
+          control.Wc.Id = element.Wc.Id;
+          control.Wc.Nombre = element.Wc.Nombre;
+          control.Movilidad= new DesplegableDTO();
+          control.Movilidad.Id = element.Movilidad.Id;
+          control.Movilidad.Nombre = element.Movilidad.Nombre;
+          control.Continencia= new DesplegableDTO();
+          control.Continencia.Id = element.Continencia.Id;
+          control.Continencia.Nombre = element.Continencia.Nombre;
+          control.Alimentacion= new DesplegableDTO();
+          control.Alimentacion.Id = element.Alimentacion.Id;
+          control.Alimentacion.Nombre = element.Alimentacion.Nombre;
+          control.ResultadoEscalaKatz= new DesplegableDTO();
+          control.ResultadoEscalaKatz.Id = element.ResultadoEscalaKatz.Id;
+          control.ResultadoEscalaKatz.Nombre = element.ResultadoEscalaKatz.Nombre;
+          control.DetalleResultadoKatz = element.DetalleResultadoKatz;
+          control.Temperatura = element.Temperatura;
+          control.Fc = element.Fc;
+          control.Fr = element.Fr;
+          control.PresionSistolica = element.PresionSistolica;
+          control.PresionDiastolica = element.PresionDiastolica;
+          control.Saturacion = element.Saturacion;
+          control.Peso = element.Peso;
+          control.Talla = element.Talla;
+          control.Imc = element.Imc;
+          control.FechaHoy = element.FechaHoy;
+          control.DiaSemana = element.DiaSemana;
+          control.LugarEstamos = element.LugarEstamos;
+          control.NumeroTelefono = element.NumeroTelefono;
+          control.DireccionCompleta = element.DireccionCompleta;
+          control.CuantosAnios = element.CuantosAnios;
+          control.DondeNacio = element.DondeNacio;
+          control.NombrePresidente = element.NombrePresidente;
+          control.PrimerApellidoMadre = element.PrimerApellidoMadre;
+          control.ValoracionMental = element.ValoracionMental;
+          control.ValoracionMentalDetalle = element.ValoracionMentalDetalle;
+          control.Caida = element.Caida;
+          control.CaidaDetalle = element.CaidaDetalle;
+          control.EstadoNutricional = new DesplegableDTO();
+          control.EstadoNutricional.Id = element.EstadoNutricional.Id;
+          control.EstadoNutricional.Nombre = element.EstadoNutricional.Nombre;
+          control.EstadoNutricionalDetalle = element.EstadoNutricionalDetalle;
+          control.EstadoPsicosocial = new DesplegableDTO();
+          control.EstadoPsicosocial.Id = element.EstadoPsicosocial.Id;
+          control.EstadoPsicosocial.Nombre = element.EstadoPsicosocial.Nombre;
+          control.EstadoPsicosocialDetalle = element.EstadoPsicosocialDetalle;
+          control.EstadoVision = new DesplegableDTO();
+          control.EstadoVision.Id = element.EstadoVision.Id;
+          control.EstadoVision.Nombre = element.EstadoVision.Nombre;
+          control.EstadoVisionDetalle = element.EstadoVisionDetalle;
+          control.EstadoAudicion = new DesplegableDTO();
+          control.EstadoAudicion.Id = element.EstadoAudicion.Id;
+          control.EstadoAudicion.Nombre = element.EstadoAudicion.Nombre;
+          control.EstadoAudicionDetalle = element.EstadoAudicionDetalle;
+          control.PlanTrabajo = element.PlanTrabajo;
+  
+  
+          this.objControl.push(control);
+        });
+      }
 
     
   }
@@ -705,28 +819,127 @@ export class ControlGeneralComponent implements OnInit {
   {
     let controlGeneral = new ControlGeneralDTO();
     controlGeneral.Paciente = this.paciente ;
+    controlGeneral.FechaRegistro = new Date();
     controlGeneral.Alergias = this.dataFormGroup.controls['inputAlergias'].value ;
-    controlGeneral.EscalaKatz = ' ' ;
-    controlGeneral.Temperatura = this.dataFormGroup.controls['inputTemperatura'].value ;
-    controlGeneral.FrecuenciaCardiaca = this.dataFormGroup.controls['inputFrecuenciaCardiaca'].value ;
-    controlGeneral.FrecuenciaRespiratoria = this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].value ;
-    controlGeneral.PresionArterialSistolicaDistolica = this.dataFormGroup.controls['inputPresionSistolicaDiastolica'].value ;
-    controlGeneral.SaturacionOxigeno = this.dataFormGroup.controls['inputSaturacion'].value ;
-    controlGeneral.Talla = this.dataFormGroup.controls['inputTalla'].value ;
-    controlGeneral.Peso = this.dataFormGroup.controls['inputPeso'].value ;
-    controlGeneral.IMC = this.dataFormGroup.controls['inputImc'].value ;
-    controlGeneral.EstadoMental = "Normal";// this.dataFormGroup.controls['textareaTiempoEnfermedad'].value ;
-    controlGeneral.EstadoMentalDetalle = this.dataFormGroup.controls['inputEstadoMentalDetalle'].value ;
-    controlGeneral.EstadoNutricional = "Alterado";//this.dataFormGroup.controls['textareaTiempoEnfermedad'].value ;
-    controlGeneral.EstadoNutricionalDetalle = this.dataFormGroup.controls['inputEstadoNutricionalDetalle'].value ;
-    controlGeneral.EstadoPsicosocial = "Normal";//this.dataFormGroup.controls['textareaTiempoEnfermedad'].value ;
-    controlGeneral.EstadoPsicosocialDetalle = this.dataFormGroup.controls['inputEstadoPsicosocialDetalle'].value ;
-    controlGeneral.EstadoVision = "Normal";//this.dataFormGroup.controls['textareaTiempoEnfermedad'].value ;
-    controlGeneral.EstadoVisionDetalle = this.dataFormGroup.controls['inputEstadoVisionDetalle'].value ;
-    controlGeneral.EstadoAudicion = "Alterado";//this.dataFormGroup.controls['textareaTiempoEnfermedad'].value ;
-    controlGeneral.EstadoAudicionDetalle = this.dataFormGroup.controls['inputEstadoAudicion'].value ;
-    controlGeneral.PlanTrabajo = this.dataFormGroup.controls['inputPlanTrabajo'].value ;
-    console.log(controlGeneral)
+    let b = new DesplegableDTO();
+    b.Id = this.dataFormGroup.controls['selectBanio'].value;
+    let _b = this.comboBanio.filter(s => s.id == b.Id)
+    if(_b != null)
+      b.Nombre = _b[0]['nombre'];
+    controlGeneral.Banno = b;
+
+    let v = new DesplegableDTO();
+    v.Id = this.dataFormGroup.controls['selectVestido'].value;
+    let _v = this.comboVestido.filter(s => s.id == v.Id)
+    if(_v != null)
+      v.Nombre = _v[0]['nombre'];
+    controlGeneral.Vestido = v;
+
+    let wc = new DesplegableDTO();
+    wc.Id = this.dataFormGroup.controls['selectWC'].value;
+    let _wc = this.comboWC.filter(s => s.id == wc.Id)
+    if(_wc != null)
+      wc.Nombre = _wc[0]['nombre'];
+    controlGeneral.Wc = wc;
+
+    let movi = new DesplegableDTO();
+    movi.Id = this.dataFormGroup.controls['selectMovilidad'].value;
+    let _movi = this.comboMovilidad.filter(s => s.id == movi.Id)
+    if(_movi != null)
+      movi.Nombre = _movi[0]['nombre'];
+    controlGeneral.Movilidad = movi;
+
+    let conti = new DesplegableDTO();
+    conti.Id = this.dataFormGroup.controls['selectContinencia'].value;
+    let _conti = this.comboContinencia.filter(s => s.id == conti.Id)
+    if(_conti != null)
+      conti.Nombre = _conti[0]['nombre'];
+    controlGeneral.Continencia = conti;
+
+    let ali = new DesplegableDTO();
+    ali.Id = this.dataFormGroup.controls['selectAlimentacion'].value;
+    let _ali = this.comboAlimentacion.filter(s => s.id == ali.Id)
+    if(_ali != null)
+      ali.Nombre = _ali[0]['nombre'];
+    controlGeneral.Alimentacion = ali;
+
+    let res = new DesplegableDTO();
+    res.Id = this.dataFormGroup.controls['inputEscalaKatz'].value;
+    let _res = this.comboResultadoKatz.filter(s => s.id == res.Id)
+    if(_res != null)
+      res.Nombre = _res[0]['nombre'];
+    controlGeneral.ResultadoEscalaKatz = res;
+
+    controlGeneral.DetalleResultadoKatz = this.dataFormGroup.controls['inputEscalaKatzDetalle'].value ;
+
+    controlGeneral.Temperatura = this.dataFormGroup.controls['inputTemperatura'].value.toString();
+    controlGeneral.Fc = this.dataFormGroup.controls['inputFrecuenciaCardiaca'].value.toString();
+    controlGeneral.Fr = this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].value.toString();
+    controlGeneral.PresionSistolica = this.dataFormGroup.controls['inputPresionSistolica'].value.toString();
+    controlGeneral.PresionDiastolica = this.dataFormGroup.controls['inputPresionDiastolica'].value.toString();
+    controlGeneral.Saturacion = this.dataFormGroup.controls['inputSaturacion'].value.toString();
+    controlGeneral.Peso = this.dataFormGroup.controls['inputPeso'].value.toString();
+    controlGeneral.Talla = this.dataFormGroup.controls['inputTalla'].value.toString();
+    controlGeneral.Imc = this.dataFormGroup.controls['inputImc'].value.toString();
+    controlGeneral.FechaHoy = this.fecha;
+    controlGeneral.DiaSemana = this.dia;
+    controlGeneral.LugarEstamos = this.lugar;
+    controlGeneral.NumeroTelefono = this.numeroTelefono;
+    controlGeneral.DireccionCompleta = this.direccionCompleta;
+    controlGeneral.CuantosAnios = this.anios;
+    controlGeneral.DondeNacio = this.lugarNacio;
+    controlGeneral.NombrePresidente = this.nombrePresidente;
+    controlGeneral.PrimerApellidoMadre = this.primerApellidoMadre;
+
+    let val = new DesplegableDTO();
+    val.Id = this.dataFormGroup.controls['inputEstadoMental'].value;
+    let _val = this.comboEstado.filter(s => s.id == val.Id)
+    if(_val != null)
+      val.Nombre = _val[0]['nombre'];
+    controlGeneral.ValoracionMental = val;
+    controlGeneral.ValoracionMentalDetalle = this.dataFormGroup.controls['inputEstadoMentalDetalle'].value;
+
+    let cai = new DesplegableDTO();
+    cai.Id = this.dataFormGroup.controls['inputCaida'].value;
+    let _cai = this.comboSiNo.filter(s => s.id == cai.Id)
+    if(_cai != null)
+      cai.Nombre = _cai[0]['nombre'];
+    controlGeneral.Caida = cai;
+    controlGeneral.CaidaDetalle = this.dataFormGroup.controls['inputCaidaDetalle'].value;
+
+    let nut = new DesplegableDTO();
+    nut.Id = this.dataFormGroup.controls['inputEstadoNutricional'].value;
+    let _nut = this.comboEstado.filter(s => s.id == nut.Id)
+    if(_nut != null)
+      nut.Nombre = _nut[0]['nombre'];
+    controlGeneral.EstadoNutricional = nut;
+    controlGeneral.EstadoNutricionalDetalle = this.dataFormGroup.controls['inputEstadoNutricionalDetalle'].value;
+
+    let psi = new DesplegableDTO();
+    psi.Id = this.dataFormGroup.controls['inputEstadoPsicosocial'].value;
+    let _psi = this.comboEstado.filter(s => s.id == psi.Id)
+    if(_psi != null)
+      psi.Nombre = _psi[0]['nombre'];
+    controlGeneral.EstadoPsicosocial = psi;
+    controlGeneral.EstadoPsicosocialDetalle = this.dataFormGroup.controls['inputEstadoPsicosocialDetalle'].value;
+
+    let vis = new DesplegableDTO();
+    vis.Id = this.dataFormGroup.controls['inputEstadoVision'].value;
+    let _vis = this.comboEstado.filter(s => s.id == vis.Id)
+    if(_vis != null)
+      vis.Nombre = _vis[0]['nombre'];
+    controlGeneral.EstadoVision = vis;
+    controlGeneral.EstadoVisionDetalle = this.dataFormGroup.controls['inputEstadoVisionDetalle'].value;
+
+    let audi = new DesplegableDTO();
+    audi.Id = this.dataFormGroup.controls['inputEstadoAudicion'].value;
+    let _audi = this.comboEstado.filter(s => s.id == audi.Id)
+    if(_audi != null)
+      audi.Nombre = _audi[0]['nombre'];
+    controlGeneral.EstadoAudicion = audi;
+    controlGeneral.EstadoAudicionDetalle = this.dataFormGroup.controls['inputEstadoAudicionDetalle'].value;
+    controlGeneral.PlanTrabajo = this.dataFormGroup.controls['inputPlanTrabajo'].value;
+
     this.objControl.push(controlGeneral);
     console.log(this.objControl)
   }
@@ -738,6 +951,78 @@ export class ControlGeneralComponent implements OnInit {
       this.IMC = peso/(talla*talla);
       this.dataFormGroup.controls['inputImc'].setValue((this.IMC).toFixed(1));
     }
+  }
+
+  AsignarFecha(numero:number){
+   if(numero==1){
+    this.fecha = 'Adecuado';
+   }else{
+    this.fecha = 'Equivocada';
+   }
+  }
+
+  AsignarDia(numero:number){
+    if(numero==1){
+      this.dia = 'Adecuado';
+     }else{
+      this.dia = 'Equivocada';
+     }
+  }
+
+  AsignarLugar(numero:number){
+    if(numero==1){
+      this.lugar = 'Adecuado';
+     }else{
+      this.lugar = 'Equivocada';
+     }
+  }
+
+  AsignarNumero(numero:number){
+    if(numero==1){
+      this.numeroTelefono = 'Adecuado';
+     }else{
+      this.numeroTelefono = 'Equivocada';
+     }
+  }
+
+  AsignarDireccion(numero:number){
+    if(numero==1){
+      this.direccionCompleta = 'Adecuado';
+     }else{
+      this.direccionCompleta = 'Equivocada';
+     }
+  }
+
+  AsignarAnios(numero:number){
+    if(numero==1){
+      this.anios = 'Adecuado';
+     }else{
+      this.anios = 'Equivocada';
+     }
+  }
+
+  AsignarLugarNacio(numero:number){
+    if(numero==1){
+      this.lugarNacio = 'Adecuado';
+     }else{
+      this.lugarNacio = 'Equivocada';
+     }
+  }
+
+  AsignarPresidente(numero:number){
+    if(numero==1){
+      this.nombrePresidente = 'Adecuado';
+     }else{
+      this.nombrePresidente = 'Equivocada';
+     }
+  }
+
+  AsignarPrimerApellido(numero:number){
+    if(numero==1){
+      this.primerApellidoMadre = 'Adecuado';
+     }else{
+      this.primerApellidoMadre = 'Equivocada';
+     }
   }
 
   MostrarNotificacionInfo(mensaje: string, titulo: string) {

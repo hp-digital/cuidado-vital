@@ -454,17 +454,11 @@ export class RecetaPacienteComponent implements OnInit{
         let control = new ControlGeneralDTO();
         control.Paciente =element.paciente;
         control.Alergias =element.alergias;
-        control.EscalaKatz =element.escalaKatz;
         control.Temperatura =element.temperatura;
-        control.FrecuenciaCardiaca =element.frecuenciaCardiaca;
-        control.FrecuenciaRespiratoria =element.frecuenciaRespiratoria;
-        control.PresionArterialSistolicaDistolica =element.presionArterialSistolicaDistolica;
-        control.SaturacionOxigeno =element.saturacionOxigeno;
+
         control.Talla =element.talla;
         control.Peso =element.peso;
-        control.IMC =element.imc;
-        control.EstadoMental =element.estadoMental;
-        control.EstadoMentalDetalle =element.estadoMentalDetalle;
+
         control.EstadoNutricional =element.estadoNutricional;
         control.EstadoNutricionalDetalle =element.estadoNutricionalDetalle;
         control.EstadoPsicosocial =element.estadoPsicosocial;
