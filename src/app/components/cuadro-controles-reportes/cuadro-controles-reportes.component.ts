@@ -30,6 +30,7 @@ import { ControlGlucosaDTO } from '@models/control-glucosa';
 import { ReporteDiabeticoComponent } from './reporte-diabetico/reporte-diabetico.component';
 import { ControlEpocDTO } from '@models/control-epoc';
 import { ReporteCronicoComponent } from './reporte-cronico/reporte-cronico.component';
+import { ReporteAdultoMayorComponent } from './reporte-adulto-mayor/reporte-adulto-mayor.component';
 
 @Component({
   selector: 'app-cuadro-controles-reportes',
@@ -60,6 +61,7 @@ export class CuadroControlesReportesComponent implements OnInit {
     private modalReportePresion: BsModalService,
     private modalReporteGlucosa: BsModalService,
     private modalReporteEpoc: BsModalService,
+    private modalReporteMayor: BsModalService,
     private historiaService: HistoriaService
   ){
 
@@ -736,7 +738,8 @@ export class CuadroControlesReportesComponent implements OnInit {
   }
 
   AbrirReporteMayor(){
-
+    this.modalCuadroControl = this.modalReporteMayor.show(ReporteAdultoMayorComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   AbrirReporteEpoc(){

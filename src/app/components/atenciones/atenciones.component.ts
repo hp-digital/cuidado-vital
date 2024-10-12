@@ -23,6 +23,7 @@ import { NuevoControlComponent } from './nuevo-control/nuevo-control.component';
 import { CuadroControlesReportesComponent } from '../cuadro-controles-reportes/cuadro-controles-reportes.component';
 import { ControlGeneralComponent } from '../historia-clinica/control-general/control-general.component';
 import { FuncionesVitalesComponent } from '../funciones-vitales/funciones-vitales.component';
+import { MonitoreoComponent } from '../monitoreo/monitoreo.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -61,6 +62,7 @@ export default class AtencionesComponent implements OnInit{
     private modalNuevoRegistro: BsModalService,
     private modalControlGeneral: BsModalService,
     private modalDatoPulsera: BsModalService,
+    private modalMonitoreoCamara: BsModalService,
     private settings : SettingsService,
     private pacienteService : PacienteService,
     private historiaService: HistoriaService
@@ -260,6 +262,11 @@ export default class AtencionesComponent implements OnInit{
 
   AbrirDatosPulsera(idHistoriaClinica: number){
     this.modalRef = this.modalDatoPulsera.show(FuncionesVitalesComponent, { backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
+  AbrirMonitoreoCamara(idHistoriaClinica:number){
+    this.modalRef = this.modalMonitoreoCamara.show(MonitoreoComponent, { backdrop: 'static', class: 'modal-xg'})
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 
