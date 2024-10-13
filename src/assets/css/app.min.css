@@ -6921,6 +6921,8 @@ fieldset:disabled .btn {
   border-bottom: 1px solid #dae0ec;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) -25%, rgba(50,224,196,1) 15%, rgba(13,115,119,1) 91%);
 }
 .modal-header .btn-close {
   padding: 0.5rem 0.5rem;

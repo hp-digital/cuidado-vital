@@ -71,16 +71,16 @@ legend {
     border-color: #01a39a;
 }
 .form-control {
-    border-radius: 3px;
+    border-radius: 18px;
     height: 40px;
     font-size: .875rem;
-    color: #3c4e71
+    color: #01a39a
 }
 textarea.form-control {    
     height: auto !important;
 }
 .form-select {
-    border-radius: 3px;
+    border-radius: 18px;
     height: 40px;
     font-size: .875rem;
     color: #3c4e71;
