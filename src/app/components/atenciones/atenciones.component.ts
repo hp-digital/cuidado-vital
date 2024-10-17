@@ -24,6 +24,8 @@ import { CuadroControlesReportesComponent } from '../cuadro-controles-reportes/c
 import { ControlGeneralComponent } from '../historia-clinica/control-general/control-general.component';
 import { FuncionesVitalesComponent } from '../funciones-vitales/funciones-vitales.component';
 import { MonitoreoComponent } from '../monitoreo/monitoreo.component';
+import { ChatComponent } from '../chat/chat.component';
+import { CuadroControlNotaComponent } from '../cuadro-control-nota/cuadro-control-nota.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -63,6 +65,8 @@ export default class AtencionesComponent implements OnInit{
     private modalControlGeneral: BsModalService,
     private modalDatoPulsera: BsModalService,
     private modalMonitoreoCamara: BsModalService,
+    private modalChat: BsModalService,
+    private modalControlNotasEnfermera: BsModalService,
     private settings : SettingsService,
     private pacienteService : PacienteService,
     private historiaService: HistoriaService
@@ -250,6 +254,11 @@ export default class AtencionesComponent implements OnInit{
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 
+  AbrirControlesNotasEnfermera(idHistoriaClinica:number){
+    this.modalRef = this.modalControlNotasEnfermera.show(CuadroControlNotaComponent, { backdrop: 'static', class: 'modal-xg' })
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
   AbrirRecetas(idHistoriaClinica:number){
     this.modalRef = this.modalReceta.show(RecetaComponent, { backdrop: 'static', class: 'modal-xl' })
     this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
@@ -272,6 +281,11 @@ export default class AtencionesComponent implements OnInit{
 
   AbrirControlSeguimiento(){
     this.modalRef = this.modalControlSeguimiento.show(ConsultaExternaComponent, { backdrop: 'static', class: 'modal-xl' })
+  }
+
+  AbrirChat(idHistoriaClinica: number){
+    this.modalRef = this.modalChat.show(ChatComponent, { backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
