@@ -37,7 +37,39 @@ export default class LoginComponent {
     console.log(this.dataLogin);
     this.authService.logger(this.dataLogin).subscribe({
       next: ()=> this.router.navigate(['/dashboard']),
-      error: (err) => console.error('Login failed', err),
+      error: (err) => this.MostrarNotificacionError(err.error,"Error al iniciar sesión")
     })
+  }
+
+  MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
+  {
+    Swal.fire({
+      icon: 'success',
+      title: titulo,
+      text: mensaje
+    });
+  }
+  MostrarNotificacionError(mensaje: string, titulo:string)
+  {
+    Swal.fire({
+      icon: 'error',
+      title: titulo,
+      html: `<div class="message-text-error">${mensaje} </div>`,
+    });
+  }
+  MostrarNotificacionInfo(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'info',
+      title: titulo,
+      text: mensaje
+    });
+  }
+
+  MostrarNotificacionWarning(mensaje: string, titulo: string) {
+    Swal.fire({
+      icon: 'warning',
+      title: titulo,
+      text: mensaje
+    });
   }
 }

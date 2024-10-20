@@ -41,6 +41,8 @@ export class ControlGlucosaComponent implements OnInit {
   comboSiNo : ComboDTO[]=[];
   comboComplicacion  : ComboDTO[]=[];
 
+  onGuardar:any;
+
   constructor(
     private bsModalControlGlucosa: BsModalRef,
     private utilitiesService: UtilitiesService,
@@ -105,7 +107,7 @@ export class ControlGlucosaComponent implements OnInit {
 
   CerrarModal() {
     this.bsModalControlGlucosa.hide();
-    //this.onGuardar();
+    this.onGuardar();
   }
 
   AsignarHistoriaClinica(historia:HistoriaCuidadoDTO, idHistoria:number){

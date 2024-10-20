@@ -756,7 +756,7 @@ export default class CuadroControlesComponent implements OnInit {
     this.modalCuadroControl = this.modalControlGlucosa.show(ControlGlucosaComponent, { backdrop: 'static', class: 'modal-xl' })
     this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
     this.modalCuadroControl.content.onGuardar = () => {
-      //this.obtenerHistoriaClinica(this.objListaPaciente.idHistoriaClinica);
+      console.log("e")
     };
   }
   AbrirControlPresion(){

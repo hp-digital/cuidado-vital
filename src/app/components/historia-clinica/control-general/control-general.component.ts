@@ -197,12 +197,11 @@ export class ControlGeneralComponent implements OnInit {
       )
   }
 
-  AsignarHistoriaClinicaInterno(historia: HistoriaCuidadoDTO, idHistoria: number){
+  AsignarHistoriaClinicaInterno(idHistoria: number){
 
-    this.objHistoria = historia;
     this.idHistoria = idHistoria;
-    //this.ObtenerConfiguracion(idHistoria);
-    this.AsignarObjetoHistoria(historia);
+    this.ObtenerConfiguracion(idHistoria);
+
     this.comboEstado = this.utilitiesService.ObtenerComboSintomaRespiratorio();
     this.comboSiNo = this.utilitiesService.ObtenerSINO();
     this.comboResultadoKatz = this.utilitiesService.ObtenerComboResultadoKatz();
@@ -683,7 +682,7 @@ export class ControlGeneralComponent implements OnInit {
 
   CerrarModal() {
     this.bsModalControlGeneral.hide();
-    this.onGuardar();
+    //this.onGuardar();
   }
 
   AsignarHistoriaClinica(historia:HistoriaCuidadoDTO, idHistoria:number){
