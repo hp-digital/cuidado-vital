@@ -16,6 +16,7 @@ import { DetalleEstadoPacienteComponent } from '../detalle-estado-paciente/detal
 import { RecetaComponent } from '../../receta/receta.component';
 import { ExamenAuxiliarComponent } from '../../examen-auxiliar/examen-auxiliar.component';
 import { RecetaPacienteComponent } from '../receta-paciente/receta-paciente.component';
+import { CuadroControlesReportesComponent } from '../../cuadro-controles-reportes/cuadro-controles-reportes.component';
 
 @Component({
   selector: 'app-historia-paciente',
@@ -42,6 +43,7 @@ export default class HistoriaPacienteComponent implements OnInit{
     private modalService: BsModalService,
     private modalReceta: BsModalService,
     private modalExamenAuxiliar: BsModalService,
+    private modalControlesReportes: BsModalService,
     private settings : SettingsService,
     private pacienteService : PacienteService,
     private historiaService: HistoriaService,
@@ -161,6 +163,13 @@ export default class HistoriaPacienteComponent implements OnInit{
   AbrirExamenAuxiliar(){
     this.modalRef = this.modalExamenAuxiliar.show(ExamenAuxiliarComponent, { backdrop: 'static', class: 'modal-xl' })
   }
+
+  AbrirControlesReporte(idHistoriaClinica:number){
+    this.modalRef = this.modalControlesReportes.show(CuadroControlesReportesComponent, {backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
+
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
   {
     Swal.fire({
