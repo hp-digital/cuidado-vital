@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { elementAt, filter, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
@@ -43,6 +43,8 @@ export class ControlGlucosaComponent implements OnInit {
 
   onGuardar:any;
 
+  public eventControl: EventEmitter<ControlGlucosaDTO[]> = new EventEmitter();
+
   constructor(
     private bsModalControlGlucosa: BsModalRef,
     private utilitiesService: UtilitiesService,
@@ -80,6 +82,7 @@ export class ControlGlucosaComponent implements OnInit {
       inputDosisInsulina: new FormControl(),
       inputMonoMedicamento: new FormControl(),
       inputDosisMedicamento: new FormControl(),
+      inputPerimetroArterialDias: new FormControl(),
     });
   }
 
@@ -107,7 +110,7 @@ export class ControlGlucosaComponent implements OnInit {
 
   CerrarModal() {
     this.bsModalControlGlucosa.hide();
-    this.onGuardar();
+    //this.onGuardar();
   }
 
   AsignarHistoriaClinica(historia:HistoriaCuidadoDTO, idHistoria:number){
@@ -191,7 +194,8 @@ export class ControlGlucosaComponent implements OnInit {
 
     this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
       next: (data) => {
-        this.MostrarNotificacionSuccessModal('Elñ control se guardó con éxito.', '');
+        this.MostrarNotificacionSuccessModal('El control se guardó con éxito.', '');
+        this.eventControl.emit(this.objControlGlucosa)
         this.CerrarModal();
       },
       error: (e) => {
@@ -263,7 +267,7 @@ export class ControlGlucosaComponent implements OnInit {
     glucosa.Peso= this.dataFormGroup.controls['inputPeso'].value;
     glucosa.IMC= this.dataFormGroup.controls['inputImc'].value;
     glucosa.PerimetroAbdominal= this.dataFormGroup.controls['inputPerimetroAbdominal'].value;
-    glucosa.PresionArterial= this.dataFormGroup.controls['inputPerimetroArterial'].value;
+    glucosa.PresionArterial= this.dataFormGroup.controls['inputPerimetroArterial'].value ;// + this.dataFormGroup.controls['inputPerimetroArterialDias'].value;
     glucosa.ValorGlucemia= this.dataFormGroup.controls['inputValorGlucemia'].value;
     glucosa.FechaGlucemia= this.dataFormGroup.controls['inputFechaGlucemia'].value;
     glucosa.ValorHba= this.dataFormGroup.controls['inputValorHba'].value;

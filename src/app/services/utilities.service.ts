@@ -15,6 +15,8 @@ export class UtilitiesService {
   private apiUrl = 'https://api.openai.com/v1/chat/completions';  
   private apiKey = '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';  
 
+  private apiUrlVideo = 'https://rnckc-200-106-13-121.a.free.pinggy.link/stream.m3u8';
+
   private handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){
       console.error('Error : ', error.error.message);
@@ -37,8 +39,11 @@ export class UtilitiesService {
   
   constructor(private http: HttpClient) { }
 
+  
+
   ObtenerDirectorioMedico(consulta: ConsultaDoctoraliaDTO) {
     const url = 'https://api.apify.com/v2/acts/giovannibiancia~doctoralia/run-sync-get-dataset-items?token=apify_api_6qoxc9LmA0SonlGCKjaSvHcYbDa4O21upWzl';
+    
     return this.http.post(url, consulta, { headers: this.headers }).pipe(
       timeout(this.nTimeout),
       retry(this.nRetry),
@@ -64,6 +69,15 @@ export class UtilitiesService {
     };
 
     return this.http.post<any>(this.apiUrl, body, { headers });
+  }
+
+   // Método para hacer una solicitud GET
+   getData(): Observable<any> {
+    const headers = new HttpHeaders({
+      //'User-Agent': 'CustomUserAgent/1.0'  // User-Agent personalizado
+    });
+
+    return this.http.get(this.apiUrlVideo, { headers });
   }
 
   ObtenerSINO():ComboDTO[]{

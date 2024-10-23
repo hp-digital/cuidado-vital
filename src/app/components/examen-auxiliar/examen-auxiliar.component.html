@@ -47,7 +47,7 @@
 
                 
                 <p-autoComplete 
-                    *ngIf="idRol!=2"
+                    *ngIf="idRol==1"
                     formControlName="inputServicio"
                     [(ngModel)]="selectedServicio" 
                     [suggestions]="servicios" 
@@ -57,10 +57,10 @@
                     placeholder="Buscar servicio">
                 </p-autoComplete>
                 
-                <button type="button" *ngIf="idRol!=2" class="btn btn-green-custom" (click)="Agregar()"><i class="fas fa-lg fa-plus"></i></button>
+                <button type="button" *ngIf="idRol==1" class="btn btn-green-custom" (click)="Agregar()"><i class="fas fa-lg fa-plus"></i></button>
                 
            	<hr>						
-            <div class="row" *ngIf="idRol!=2">
+            <div class="row" *ngIf="idRol==1">
                 <div class="col-xl-3">
                     <h6>Tipo</h6>
                 </div>
@@ -71,7 +71,7 @@
                     <h6>Indicaciones</h6>
                 </div>									
             </div>
-            <div class="row" *ngIf="idRol!=2">
+            <div class="row" *ngIf="idRol==1">
                 <div class="col-xl-3">
                     <input type="text" class="form-control" formControlName="inputTipo">
                 </div>
@@ -114,8 +114,8 @@
         </form>
     </div>
     <div class="modal-footer">							
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" data-bs-dismiss="modal" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-file-alt"></i>Generar orden</button>
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" *ngIf="idRol==1" data-bs-dismiss="modal" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-file-alt"></i>Generar orden</button>
         <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
-      </div>
+    </div>
 </div>

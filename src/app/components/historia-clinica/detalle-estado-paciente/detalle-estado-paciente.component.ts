@@ -45,13 +45,14 @@ export class DetalleEstadoPacienteComponent implements OnInit{
 
   paciente:string ='';
   medico:string='';
-  nroHcl:string='';
+  nroHcl?:string='';
   fechaHistoria:string='';
   fechaNacimientoPaciente:string='';
   celularPaciente:string='';
   emailPaciente:string='';
   direccionPaciente:string='';
   procedencia:string='';
+  
 
   constructor(
     private modalRef: BsModalRef,
@@ -95,15 +96,10 @@ export class DetalleEstadoPacienteComponent implements OnInit{
   AsignarObjetoInicial(data:any){
     this.verSpinner = true;
     let objHistoria: any = data;
-    this.paciente = objHistoria.historiaExterna.paciente.apellidoPaterno+' '+objHistoria.historiaExterna.paciente.apellidoMaterno+', '+objHistoria.historiaExterna.paciente.nombres;
-    this.medico = objHistoria.historiaExterna.medico.apellidoPaterno+' '+objHistoria.historiaExterna.medico.apellidoMaterno+', '+objHistoria.historiaExterna.medico.nombres;
-    this.nroHcl = objHistoria.historiaExterna.paciente.numeroDocumento;
-    this.fechaHistoria = objHistoria.fechaInicioAtencion ;
-    this.fechaNacimientoPaciente = objHistoria.historiaExterna.fechaNacimiento;
-    this.celularPaciente = objHistoria.historiaExterna.paciente.celular ;
-    this.emailPaciente = objHistoria.historiaExterna.paciente.email ;
-    this.direccionPaciente = objHistoria.historiaExterna.paciente.direccion ;
-    this.procedencia = objHistoria.historiaExterna.razonSocial;
+    this.paciente = this.objHistoria.cabeceraPaciente?.ApellidoMaterno+' '+this.objHistoria.cabeceraPaciente?.ApellidoMaterno+', '+this.objHistoria.cabeceraPaciente?.Nombre;
+    this.medico = this.objHistoria.MedicoAtiende?.ApellidoPaterno+' '+this.objHistoria.MedicoAtiende?.ApellidoMaterno+', '+this.objHistoria.MedicoAtiende?.Nombre;
+    this.nroHcl = this.objHistoria.cabeceraPaciente?.NumeroDocumento;
+    this.celularPaciente = objHistoria.cabeceraPaciente.Celular ;
 
 
     let cabecera = new CabeceraPacienteDTO();
@@ -483,8 +479,6 @@ export class DetalleEstadoPacienteComponent implements OnInit{
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;
-
-    console.log("historia",this.objHistoria.HistoriaExterna);
     
   }
 

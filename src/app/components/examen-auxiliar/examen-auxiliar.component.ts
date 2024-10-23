@@ -31,6 +31,7 @@ import { DesplegableDTO } from '@models/depleglable';
 import { ControlGlucosaDTO } from '@models/control-glucosa';
 import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
 import { ControlPresionDTO } from '@models/control-presion';
+import { ControlEpocDTO } from '@models/control-epoc';
 
 @Component({
   selector: 'app-examen-auxiliar',
@@ -533,22 +534,72 @@ export class ExamenAuxiliarComponent implements OnInit {
     {
       objHistoria.controlGeneral.forEach((element:any)=>{
         let control = new ControlGeneralDTO();
-        control.Paciente =element.paciente;
-        control.Alergias =element.alergias;
-        control.Temperatura =element.temperatura;
+        control.Paciente = element.paciente;
+        control.FechaRegistro = element.fechaRegistro;
+        control.Alergias = element.alergias;
+        control.Banno = new DesplegableDTO();
+        control.Banno.Id = element.banno.id;
+        control.Banno.Nombre = element.banno.nombre;
+        control.Vestido= new DesplegableDTO();
+        control.Vestido.Id = element.vestido.id;
+        control.Vestido.Nombre = element.vestido.nombre;
+        control.Wc= new DesplegableDTO();
+        control.Wc.Id = element.wc.id;
+        control.Wc.Nombre = element.wc.nombre;
+        control.Movilidad= new DesplegableDTO();
+        control.Movilidad.Id = element.movilidad.id;
+        control.Movilidad.Nombre = element.movilidad.nombre;
+        control.Continencia= new DesplegableDTO();
+        control.Continencia.Id = element.continencia.id;
+        control.Continencia.Nombre = element.continencia.nombre;
+        control.Alimentacion= new DesplegableDTO();
+        control.Alimentacion.Id = element.alimentacion.id;
+        control.Alimentacion.Nombre = element.alimentacion.nombre;
+        control.ResultadoEscalaKatz= new DesplegableDTO();
+        control.ResultadoEscalaKatz.Id = element.resultadoEscalaKatz.id;
+        control.ResultadoEscalaKatz.Nombre = element.resultadoEscalaKatz.nombre;
+        control.DetalleResultadoKatz = element.detalleResultadoKatz;
+        control.Temperatura = element.temperatura;
+        control.Fc = element.fc;
+        control.Fr = element.fr;
+        control.PresionSistolica = element.presionSistolica;
+        control.PresionDiastolica = element.presionDiastolica;
+        control.Saturacion = element.saturacion;
+        control.Peso = element.peso;
+        control.Talla = element.talla;
+        control.Imc = element.imc;
+        control.FechaHoy = element.fechaHoy;
+        control.DiaSemana = element.diaSemana;
+        control.LugarEstamos = element.lugarEstamos;
+        control.NumeroTelefono = element.numeroTelefono;
+        control.DireccionCompleta = element.direccionCompleta;
+        control.CuantosAnios = element.cuantosAnios;
+        control.DondeNacio = element.dondeNacio;
+        control.NombrePresidente = element.nombrePresidente;
+        control.PrimerApellidoMadre = element.primerApellidoMadre;
+        control.ValoracionMental = element.valoracionMental;
+        control.ValoracionMentalDetalle = element.valoracionMentalDetalle;
+        control.Caida = element.caida;
+        control.CaidaDetalle = element.caidaDetalle;
+        control.EstadoNutricional = new DesplegableDTO();
+        control.EstadoNutricional.Id = element.estadoNutricional.id;
+        control.EstadoNutricional.Nombre = element.estadoNutricional.nombre;
+        control.EstadoNutricionalDetalle = element.estadoNutricionalDetalle;
+        control.EstadoPsicosocial = new DesplegableDTO();
+        control.EstadoPsicosocial.Id = element.estadoPsicosocial.id;
+        control.EstadoPsicosocial.Nombre = element.estadoPsicosocial.nombre;
+        control.EstadoPsicosocialDetalle = element.estadoPsicosocialDetalle;
+        control.EstadoVision = new DesplegableDTO();
+        control.EstadoVision.Id = element.estadoVision.id;
+        control.EstadoVision.Nombre = element.estadoVision.nombre;
+        control.EstadoVisionDetalle = element.estadoVisionDetalle;
+        control.EstadoAudicion = new DesplegableDTO();
+        control.EstadoAudicion.Id = element.estadoAudicion.id;
+        control.EstadoAudicion.Nombre = element.estadoAudicion.nombre;
+        control.EstadoAudicionDetalle = element.estadoAudicionDetalle;
+        control.PlanTrabajo = element.planTrabajo;
 
-        control.Talla =element.talla;
-        control.Peso =element.peso;
 
-        control.EstadoNutricional =element.estadoNutricional;
-        control.EstadoNutricionalDetalle =element.estadoNutricionalDetalle;
-        control.EstadoPsicosocial =element.estadoPsicosocial;
-        control.EstadoPsicosocialDetalle =element.estadoPsicosocialDetalle;
-        control.EstadoVision =element.estadoVision;
-        control.EstadoVisionDetalle =element.estadoVisionDetalle;
-        control.EstadoAudicion =element.estadoAudicion;
-        control.EstadoAudicionDetalle =element.estadoAudicionDetalle;
-        control.PlanTrabajo =element.planTrabajo;
         controlGeneral.push(control);
       });
     }
@@ -674,6 +725,60 @@ export class ExamenAuxiliarComponent implements OnInit {
       });
     }
 
+    let controlEpoc : ControlEpocDTO[] = [];
+    if(objHistoria.controlEpoc != null){
+      objHistoria.controlEpoc.forEach((element:any) =>{
+
+        let epoc = new ControlEpocDTO();
+        epoc.Paciente= element.paciente;
+        epoc.FechaRegistro= element.fechaRegistro;
+        epoc.Banno= new DesplegableDTO();
+        epoc.Banno.Id = element.banno.id;
+        epoc.Banno.Nombre = element.banno.nombre;
+        epoc.Vestido= new DesplegableDTO();
+        epoc.Vestido.Id = element.vestido.id;
+        epoc.Vestido.Nombre = element.vestido.nombre;
+        epoc.Wc= new DesplegableDTO();
+        epoc.Wc.Id = element.wc.id;
+        epoc.Wc.Nombre = element.wc.nombre;
+        epoc.Movilidad= new DesplegableDTO();
+        epoc.Movilidad.Id = element.movilidad.id;
+        epoc.Movilidad.Nombre = element.movilidad.nombre;
+        epoc.Continencia= new DesplegableDTO();
+        epoc.Continencia.Id = element.continencia.id;
+        epoc.Continencia.Nombre = element.continencia.nombre;
+        epoc.Alimentacion= new DesplegableDTO();
+        epoc.Alimentacion.Id = element.alimentacion.id;
+        epoc.Alimentacion.Nombre = element.alimentacion.nombre;
+        epoc.ResultadoEscala= new DesplegableDTO();
+        epoc.ResultadoEscala.Id = element.resultadoEscala.id;
+        epoc.ResultadoEscala.Nombre = element.resultadoEscala.nombre;
+        epoc.Dificultad= element.dificultad;
+        epoc.FaseEpoc= new DesplegableDTO();
+        epoc.FaseEpoc.Id = element.faseEpoc.id;
+        epoc.FaseEpoc.Nombre = element.faseEpoc.nombre;
+        epoc.FechaDiagnostico= element.fechaDiagnostico;
+        epoc.Alcohol= new DesplegableDTO();
+        epoc.Alcohol.Id = element.alcohol.id;
+        epoc.Alcohol.Nombre = element.alcohol.nombre;
+        epoc.Drogas= new DesplegableDTO();
+        epoc.Drogas.Id = element.drogas.id;
+        epoc.Drogas.Nombre = element.drogas.nombre;
+        epoc.Tabaco= new DesplegableDTO();
+        epoc.Tabaco.Id = element.tabaco.id;
+        epoc.Tabaco.Nombre = element.tabaco.nombre;
+        epoc.SistemaRespiratorio= new DesplegableDTO();
+        epoc.SistemaRespiratorio.Id = element.sistemaRespiratorio.id;
+        epoc.SistemaRespiratorio.Nombre = element.sistemaRespiratorio.nombre;
+        epoc.SistemaRespiratorioDetalle= element.sistemaRespiratorioDetalle;
+        epoc.EvaluacionFuncional= element.evaluacionFuncional;
+        epoc.PlanTrabajo= element.planTrabajo;
+
+        controlEpoc.push(epoc);
+      });
+    
+    }
+
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
@@ -694,6 +799,7 @@ export class ExamenAuxiliarComponent implements OnInit {
     historiaCalidad.Receta = recetaListado;
     historiaCalidad.ControlPresion = controlPresion;
     historiaCalidad.ControlGlucosa = controlGlucosa;
+    historiaCalidad.ControlEpoc = controlEpoc;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
 
     this.objHistoria = historiaCalidad;

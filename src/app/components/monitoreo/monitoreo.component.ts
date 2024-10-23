@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UtilitiesService } from '@services/utilities.service';
 
 @Component({
   selector: 'app-monitoreo',
@@ -21,7 +22,8 @@ export class MonitoreoComponent implements AfterViewInit {
 
   @ViewChild('videoElement') videoElement!: ElementRef;
 
-  videoSrc = 'http://localhost:3000/stream.m3u8'; 
+  videoSrc = 'http://192.168.1.37:3000/stream.m3u8'; 
+  //videoSrc = 'https://rnpev-200-106-13-121.a.free.pinggy.link/stream.m3u8';
 
   dataFormGroup: FormGroup;
   idHistoria:number=0;
@@ -34,7 +36,8 @@ export class MonitoreoComponent implements AfterViewInit {
     private modalService: BsModalService,
     private bsModalMonitoreo: BsModalRef,
     private historiaService: HistoriaService,
-    private settings : SettingsService
+    private settings : SettingsService,
+    private utilities : UtilitiesService
   ) { 
     this.dataFormGroup = new FormGroup({
 
@@ -42,6 +45,15 @@ export class MonitoreoComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    /* this.utilities.getData().subscribe(
+      (response) => {
+        console.log('Respuesta del servidor:', response);
+      },
+      (error) => {
+        console.error('Error en la solicitud GET:', error);
+      }
+    ); */
+    
     if (Hls.isSupported()) {
       const hls = new Hls();
       hls.loadSource(this.videoSrc);

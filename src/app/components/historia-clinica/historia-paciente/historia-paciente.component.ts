@@ -17,6 +17,9 @@ import { RecetaComponent } from '../../receta/receta.component';
 import { ExamenAuxiliarComponent } from '../../examen-auxiliar/examen-auxiliar.component';
 import { RecetaPacienteComponent } from '../receta-paciente/receta-paciente.component';
 import { CuadroControlesReportesComponent } from '../../cuadro-controles-reportes/cuadro-controles-reportes.component';
+import { FuncionesVitalesComponent } from '../../funciones-vitales/funciones-vitales.component';
+import { MonitoreoComponent } from '../../monitoreo/monitoreo.component';
+import { ChatComponent } from '../../chat/chat.component';
 
 @Component({
   selector: 'app-historia-paciente',
@@ -44,6 +47,9 @@ export default class HistoriaPacienteComponent implements OnInit{
     private modalReceta: BsModalService,
     private modalExamenAuxiliar: BsModalService,
     private modalControlesReportes: BsModalService,
+    private modalDatoPulsera: BsModalService,
+    private modalMonitoreoCamara: BsModalService,
+    private modalChat: BsModalService,
     private settings : SettingsService,
     private pacienteService : PacienteService,
     private historiaService: HistoriaService,
@@ -147,7 +153,7 @@ export default class HistoriaPacienteComponent implements OnInit{
     this.listadoAtencionBusqueda = [];    
 
   }
-  AbrirHistoria(idHistoriaClinica:number) {
+  AbrirHistoria(idHistoriaClinica:number) {//////////
     
     this.modalRef = this.modalService.show(DetalleEstadoPacienteComponent, { backdrop: 'static', class: 'modal-xl' });
     this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
@@ -160,12 +166,27 @@ export default class HistoriaPacienteComponent implements OnInit{
     this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
 
-  AbrirExamenAuxiliar(){
+  AbrirExamenAuxiliar(idHistoriaClinica: number){
     this.modalRef = this.modalExamenAuxiliar.show(ExamenAuxiliarComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
 
   AbrirControlesReporte(idHistoriaClinica:number){
     this.modalRef = this.modalControlesReportes.show(CuadroControlesReportesComponent, {backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
+  AbrirDatosPulsera(idHistoriaClinica: number){
+    this.modalRef = this.modalDatoPulsera.show(FuncionesVitalesComponent, { backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
+  AbrirMonitoreoCamara(idHistoriaClinica:number){
+    this.modalRef = this.modalMonitoreoCamara.show(MonitoreoComponent, { backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+  AbrirChat(idHistoriaClinica: number){
+    this.modalRef = this.modalChat.show(ChatComponent, { backdrop: 'static', class: 'modal-xg'})
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 
