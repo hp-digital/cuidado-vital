@@ -34,6 +34,7 @@ export default class HistoriaPacienteComponent implements OnInit{
   idRol: number=0;
   idMedico: number=0;
   idPaciente:number=0;
+  usuario:string='';
 
   comboMedico :ListadoMedicoDTO[]=[];
 
@@ -66,6 +67,7 @@ export default class HistoriaPacienteComponent implements OnInit{
   ngOnInit(): void {
     this.ObtenerConfiguracion();
     this.idRol=this.settings.getUserSetting('idRol');
+    this.usuario = this.settings.getUserSetting('usuario');
     //this.idPaciente = this.settings.getUserSetting('idPersonal');
     this.BuscarAtenciones();
   }
@@ -129,7 +131,7 @@ export default class HistoriaPacienteComponent implements OnInit{
           next: (data) => {
             if (data.length > 0) {
             console.log('data: ',data);
-            this.listadoAtencionBusqueda = data;           
+            this.listadoAtencionBusqueda = data.filter(s => s.numeroDocumento == this.usuario);           
             console.log('data: ',this.listadoAtencionBusqueda);
             }
             else {
