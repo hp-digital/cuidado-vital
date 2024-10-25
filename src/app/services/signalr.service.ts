@@ -20,7 +20,7 @@ export class SignalrService {
     // Iniciar la conexión a SignalR
   public startConnection() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl('https://localhost:7233/chatHub')  // URL del Hub en el servidor
+      .withUrl('https://hub-eldoctor.somee.com/chatHub')  // URL del Hub en el servidor
       .build();
 
     this.hubConnection
@@ -44,8 +44,8 @@ export class SignalrService {
     });
   }
 
-  // Enviar mensajes
-  public sendMessage(user: string, message: string) {
+
+  public sendMessage(user: string, message: string): void {
     this.hubConnection.invoke('SendMessage', user, message)
       .catch(err => console.error(err));
   }

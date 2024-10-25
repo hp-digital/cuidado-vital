@@ -1,29 +1,30 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgClass } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule  } from '@angular/forms';
 import { SignalrService } from '@services/signalr.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { HistoriaService } from '@services/historia.service';
+import { SettingsService } from '@services/settings.service';
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [NgClass,FormsModule,CommonModule],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
 export class ChatComponent implements OnInit {
   
   public currentMessage: string = '';
-  public messages: { user: string, message: string }[] = [];
+  messages: { user: string, message: string }[] = [];
   public usersOnline: string[] = [];
-  public user: string = '';
+  user: string = '';
+  message: string = '';
 
-  dataFormGroup: FormGroup;
 
   idHistoria:number=0;
   verSpinner:boolean = false;
@@ -34,16 +35,15 @@ export class ChatComponent implements OnInit {
   constructor(
     private signalService:SignalrService,
      private msModalChat:BsModalRef,
-     private historiaService: HistoriaService
+     private historiaService: HistoriaService,
+     private settingsService: SettingsService
     ){
-    this.dataFormGroup = new FormGroup({
-      inputNombre:new FormControl(),
-      inputMensaje: new FormControl()
-    });
+
   }
 
   ngOnInit(): void {
     
+    this.user = this.settingsService.getUserSetting('nombres');
     // Iniciar la conexión SignalR
     this.signalService.startConnection();
 
@@ -92,13 +92,10 @@ export class ChatComponent implements OnInit {
   }
 
     // Enviar un mensaje
-    public sendMessage() {
-      this.currentMessage = this.dataFormGroup.controls['inputNombre'].value;
-      this.user = this.dataFormGroup.controls['inputMensaje'].value;
-
-      if (this.currentMessage) {
-        this.signalService.sendMessage(this.user, this.currentMessage);
-        this.currentMessage = '';
+    sendMessage(): void {
+      if (this.user && this.message) {
+        this.signalService.sendMessage(this.user, this.message);
+        this.message = ''; // Limpiar el campo de mensaje
       }
     }
 

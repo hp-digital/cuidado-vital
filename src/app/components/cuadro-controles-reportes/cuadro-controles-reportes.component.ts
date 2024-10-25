@@ -55,6 +55,12 @@ export class CuadroControlesReportesComponent implements OnInit {
   objDiagnostico : DiagnosticoCuidadoDTO[]=[];
   objHistoriaExterna = new HistoriaExternaDTO();
 
+
+  BsModalGlucosa!:BsModalRef;
+  BsModalPresion!: BsModalRef;
+  BsModalControlGeneral!:BsModalRef;
+  BsModalEpoc!:BsModalRef;
+
   constructor(
     private modalCuadroControl: BsModalRef,
     private modalService: BsModalService,
@@ -728,23 +734,23 @@ export class CuadroControlesReportesComponent implements OnInit {
   }
 
   AbrirReporteDiabetico(){
-    this.modalCuadroControl = this.modalReporteGlucosa.show(ReporteDiabeticoComponent, {backdrop: 'static', class: 'modal-xl'})
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.BsModalGlucosa = this.modalReporteGlucosa.show(ReporteDiabeticoComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.BsModalGlucosa.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   AbrirReporteHipertenso(){
-    this.modalCuadroControl = this.modalReportePresion.show(ReporteHipertensoComponent, {backdrop: 'static', class: 'modal-xl'})
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.BsModalPresion = this.modalReportePresion.show(ReporteHipertensoComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.BsModalPresion.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   AbrirReporteMayor(){
-    this.modalCuadroControl = this.modalReporteMayor.show(ReporteAdultoMayorComponent, {backdrop: 'static', class: 'modal-xl'})
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.BsModalControlGeneral = this.modalReporteMayor.show(ReporteAdultoMayorComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.BsModalControlGeneral.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   AbrirReporteEpoc(){
-    this.modalCuadroControl = this.modalReporteEpoc.show(ReporteCronicoComponent, {backdrop: 'static', class:'modal-xl'})
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.BsModalEpoc = this.modalReporteEpoc.show(ReporteCronicoComponent, {backdrop: 'static', class:'modal-xl'})
+    this.BsModalEpoc.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
 

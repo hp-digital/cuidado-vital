@@ -60,6 +60,11 @@ export default class CuadroControlesComponent implements OnInit {
 
   IMC:number = 0;
 
+  BsModalGlucosa!:BsModalRef;
+  BsModalPresion!: BsModalRef;
+  BsModalControlGeneral!:BsModalRef;
+  BsModalEpoc!:BsModalRef;
+
   constructor(
     private modalCuadroControl: BsModalRef,
     private modalService: BsModalService,
@@ -754,26 +759,28 @@ export default class CuadroControlesComponent implements OnInit {
 
   AbrirControlGlucosa(){
     //this.modalControlGlucosa.dismissAll();
-    this.modalCuadroControl = this.modalControlGlucosa.show(ControlGlucosaComponent, { backdrop: 'static', class: 'modal-xl' })
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
-    this.modalCuadroControl.content.eventControl.subscribe((data:ControlGlucosaDTO[]) => { 
+    this.BsModalGlucosa = this.modalService.show(ControlGlucosaComponent, { backdrop: 'static', class: 'modal-xl' });
+    this.BsModalGlucosa.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.BsModalGlucosa.content.onCancelar = () => {};
+    this.BsModalGlucosa.content.onGuardar = () => {};
+    this.BsModalGlucosa.content.eventControl.subscribe((data:ControlGlucosaDTO[]) => { 
       console.log("control llega", data);
     });
   }
   AbrirControlPresion(){
-    this.modalCuadroControl = this.modalControlPresion.show(ControlPresionComponent, { backdrop: 'static', class: 'modal-xl' })
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.BsModalPresion = this.modalControlPresion.show(ControlPresionComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.BsModalPresion.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
   AbrirControlGeneral(){
-    this.modalCuadroControl = this.modalControlGeneral.show(ControlGeneralComponent, { backdrop: 'static', class: 'modal-xl' })
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
-    this.modalCuadroControl.content.onGuardar = () => {
+    this.BsModalControlGeneral = this.modalControlGeneral.show(ControlGeneralComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.BsModalControlGeneral.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.BsModalControlGeneral.content.onGuardar = () => {
       //this.obtenerHistoriaClinica(this.objListaPaciente.idHistoriaClinica);
     };
   }
   AbrirControlEpoc(){
-    this.modalCuadroControl = this.modalControlEpoc.show(ControlEpocComponent, { backdrop: 'static', class: 'modal-xl' })
-    this.modalCuadroControl.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.BsModalEpoc = this.modalControlEpoc.show(ControlEpocComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.BsModalEpoc.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

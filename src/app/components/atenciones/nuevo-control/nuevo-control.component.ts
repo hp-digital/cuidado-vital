@@ -106,6 +106,13 @@ export class NuevoControlComponent implements OnInit{
             this.Paciente = data;
             this.MostrarDatos(data);
             console.log(this.Paciente);
+
+            const n = data.fechaNacimiento;
+            console.log(n)
+            /* var y = n.getFullYear();
+            var m = n.getMonth() + 1;
+            var d = n.getDate();
+            this.dataFormGroup.controls['inputFechaNacimientoPaciente'].setValue(d+"/"+m+"/"+y); */
           }
 
         },
@@ -124,7 +131,7 @@ export class NuevoControlComponent implements OnInit{
     this.dataFormGroup.controls['inputApellidoPaternoPaciente'].setValue(paciente['apellidoPaterno']);
     this.dataFormGroup.controls['inputApellidoMaternoPaciente'].setValue(paciente['apellidoMaterno']);
     this.dataFormGroup.controls['inputNombrePaciente'].setValue(paciente['nombres']);
-    this.dataFormGroup.controls['inputFechaNacimientoPaciente'].setValue(paciente['fechaNacimiento']);
+    
     this.dataFormGroup.controls['inputSexoPaciente'].setValue(paciente['idSexo']);
     this.dataFormGroup.controls['inputTelefonoPaciente'].setValue(paciente['numeroCelular']);
     this.idPaciente=paciente['id'];

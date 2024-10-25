@@ -53,6 +53,8 @@ export default class AtencionesComponent implements OnInit{
   fechaInicio: Date | undefined;
   numeroDocumento: string='';
 
+  modalControlesRef!: BsModalRef;
+
   constructor(
     private modalRef: BsModalRef,
     private modalService: BsModalService,
@@ -245,8 +247,9 @@ export default class AtencionesComponent implements OnInit{
   }
 
   AbrirControles(idHistoriaClinica:number){
-    this.modalRef = this.modalControles.show(CuadroControlesComponent, { backdrop: 'static', class: 'modal-xg' })
-    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+    this.modalControlesRef = this.modalControles.show(CuadroControlesComponent, { backdrop: 'static', class: 'modal-xg' });
+    this.modalControlesRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+    
   }
 
   AbrirControlesReporte(idHistoriaClinica:number){
