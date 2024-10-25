@@ -67,8 +67,7 @@
                                 <thead class="text-center">
                                     <tr>
                                         <th>FECHA</th>
-                                        <th>PA Sistolica(mmHg)</th>
-                                        <th>PA Diastolica(mmHg)</th>
+                                        <th>PA Sistolica(mmHg) - PA Diastolica(mmHg)</th>
                                         <th>FR (min)</th>
                                         <th>PULSO</th>
                                         <th>ESTADO</th>
@@ -77,8 +76,7 @@
                                 <tbody>
                                     <tr *ngFor="let S of medidasAntropometricas">
                                         <td>{{ S.Fecha }}</td>
-                                        <td><input type="text" class="form-control" value="{{ S.Sistolica }}"></td>
-                                        <td><input type="text" class="form-control" value="{{ S.Diastolica }}"></td>
+                                        <td><input type="text" class="form-control" value="{{ S.Sistolica +' - '+ S.Diastolica }}"></td>
                                         <td><input type="text" class="form-control" value="{{ S.Fr }}"></td>
                                         <td><input type="text" class="form-control" value="{{ S.Pulso }}"></td>
                                         <td>{{ S.Estado }}</td>

@@ -135,7 +135,6 @@ export class ControlGeneralComponent implements OnInit {
       selectContinencia: new FormControl(''),
       selectAlimentacion: new FormControl(''),
       inputPresionDiastolica: new FormControl(),
-      inputEscalaKatzDetalle: new FormControl(''),
       inputEstadoMental: new FormControl(''),
       inputCaida: new FormControl(''),
       inputCaidaDetalle: new FormControl(''),
@@ -869,7 +868,7 @@ export class ControlGeneralComponent implements OnInit {
       res.Nombre = _res[0]['nombre'];
     controlGeneral.ResultadoEscalaKatz = res;
 
-    controlGeneral.DetalleResultadoKatz = this.dataFormGroup.controls['inputEscalaKatzDetalle'].value ;
+    controlGeneral.DetalleResultadoKatz = ' - ' ;
 
     controlGeneral.Temperatura = this.dataFormGroup.controls['inputTemperatura'].value.toString();
     controlGeneral.Fc = this.dataFormGroup.controls['inputFrecuenciaCardiaca'].value.toString();
