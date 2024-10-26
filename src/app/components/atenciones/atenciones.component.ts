@@ -26,6 +26,7 @@ import { FuncionesVitalesComponent } from '../funciones-vitales/funciones-vitale
 import { MonitoreoComponent } from '../monitoreo/monitoreo.component';
 import { ChatComponent } from '../chat/chat.component';
 import { CuadroControlNotaComponent } from '../cuadro-control-nota/cuadro-control-nota.component';
+import { CuadroControlEnfermeraComponent } from '../cuadro-control-enfermera/cuadro-control-enfermera.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -254,6 +255,11 @@ export default class AtencionesComponent implements OnInit{
 
   AbrirControlesReporte(idHistoriaClinica:number){
     this.modalRef = this.modalControlesReportes.show(CuadroControlesReportesComponent, {backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
+  AbrirControlesReporteEnfermera(idHistoriaClinica:number){
+    this.modalRef = this.modalControlesReportes.show(CuadroControlEnfermeraComponent, {backdrop: 'static', class: 'modal-xg'})
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 

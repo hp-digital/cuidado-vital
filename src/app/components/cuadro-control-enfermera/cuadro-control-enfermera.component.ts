@@ -2,44 +2,42 @@ import { Component, OnInit } from '@angular/core';
 import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { DesplegableDTO } from '@models/depleglable';
-import { ControlEpocDTO } from '@models/control-epoc';
-import { ControlGlucosaDTO } from '@models/control-glucosa';
-import { ControlPresionDTO } from '@models/control-presion';
-import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
-import { RecetaDTO } from '@models/RecetaDTO';
-import { OrdenDTO } from '@models/OrdenDTO';
-import { ControlGeneralDTO } from '@models/control-general';
-import { DiagnosticoCuidadoDTO } from '@models/diagnostico-cuidado';
-import { ExamenRegionalDTO } from '@models/examen-regional';
+import { HistoriaService } from '@services/historia.service';
+import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
+import { MedicoAtencionDTO } from '@models/medico-atiente';
+import { HistoriaExternaDTO } from '@models/historia-externa';
+import { MedicoAtiendeDTO } from '@models/medico-atiende';
+import { PacienteExternoDTO } from '@models/paciente-externo';
+import { AnamnesisDTO } from '@models/anamnesis';
+import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
+import { FuncionBiologicaDTO } from '@models/funcion-biologica';
 import { ExamenFisicoDTO } from '@models/examen-fisico';
 import { SignoVitalDTO } from '@models/signo-vital';
-import { FuncionBiologicaDTO } from '@models/funcion-biologica';
-import { AntecedentesAnamnesisDTO } from '@models/antecedente-anamnesis';
-import { AnamnesisDTO } from '@models/anamnesis';
-import { PacienteExternoDTO } from '@models/paciente-externo';
-import { MedicoAtiendeDTO } from '@models/medico-atiende';
-import { HistoriaExternaDTO } from '@models/historia-externa';
-import { MedicoAtencionDTO } from '@models/medico-atiente';
-import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
-import { HistoriaService } from '@services/historia.service';
-import { KardexComponent } from './kardex/kardex.component';
-import { NotaEvolucionComponent } from './nota-evolucion/nota-evolucion.component';
-import { HojaMonitoreoComponent } from './hoja-monitoreo/hoja-monitoreo.component';
-import { BalanceHidricoComponent } from './balance-hidrico/balance-hidrico.component';
+import { ExamenRegionalDTO } from '@models/examen-regional';
+import { DiagnosticoCuidadoDTO } from '@models/diagnostico-cuidado';
+import { ControlGeneralDTO } from '@models/control-general';
+import { DesplegableDTO } from '@models/depleglable';
+import { OrdenDTO } from '@models/OrdenDTO';
+import { RecetaDTO } from '@models/RecetaDTO';
+import { ControlPresionDTO } from '@models/control-presion';
+import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
+import { ControlGlucosaDTO } from '@models/control-glucosa';
+import { ControlEpocDTO } from '@models/control-epoc';
+import { ReporteKardexComponent } from './reporte-kardex/reporte-kardex.component';
+import { ReporteNotaEvolucionComponent } from './reporte-nota-evolucion/reporte-nota-evolucion.component';
+import { ReporteHojaMonitoreoComponent } from './reporte-hoja-monitoreo/reporte-hoja-monitoreo.component';
+import { ReporteBalanceComponent } from './reporte-balance/reporte-balance.component';
 
 @Component({
-  selector: 'app-cuadro-control-nota',
+  selector: 'app-cuadro-control-enfermera',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
-  templateUrl: './cuadro-control-nota.component.html',
-  styleUrl: './cuadro-control-nota.component.css'
+  imports: [],
+  templateUrl: './cuadro-control-enfermera.component.html',
+  styleUrl: './cuadro-control-enfermera.component.css'
 })
-export class CuadroControlNotaComponent implements OnInit{
+export class CuadroControlEnfermeraComponent {
 
   idHistoria:number=0;
   verSpinner:boolean = false;
@@ -724,22 +722,22 @@ export class CuadroControlNotaComponent implements OnInit{
   }
 
   AbrirKardex(){
-    this.BsModalKardez = this.modalKardex.show(KardexComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.BsModalKardez = this.modalKardex.show(ReporteKardexComponent, {backdrop: 'static', class: 'modal-xl'})
     this.BsModalKardez.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   AbrirNotaEvolucion(){
-    this.BsModalNota = this.modalNotaEvolucicion.show(NotaEvolucionComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.BsModalNota = this.modalNotaEvolucicion.show(ReporteNotaEvolucionComponent, {backdrop: 'static', class: 'modal-xl'})
     this.BsModalNota.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   AbrirHojaMonitoreo(){
-    this.BsModalHoja = this.modalHojaMonitoreo.show(HojaMonitoreoComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.BsModalHoja = this.modalHojaMonitoreo.show(ReporteHojaMonitoreoComponent, {backdrop: 'static', class: 'modal-xl'})
     this.BsModalHoja.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 
   AbrirBalanceHidrico(){
-    this.BsModalBalance = this.modalBalanceHidrico.show(BalanceHidricoComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.BsModalBalance = this.modalBalanceHidrico.show(ReporteBalanceComponent, {backdrop: 'static', class: 'modal-xl'})
     this.BsModalBalance.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 

@@ -1,7 +1,7 @@
 <div class="modal-content">
 <div class="modal-header">
     <h4 class="modal-title">KÁRDEX </h4>
-    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
 </div>
 <div class="modal-body">							
     <form>
@@ -9,10 +9,10 @@
             <div class="row">
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
-                        <label class="fw-bold">Paciente : </label> <span>Maritza Córdova Juarez</span>
+                        <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
                     </div>
                 </div>
-                <div class="col-xl-3">
+               <!--  <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="fw-bold">Nro. HCL : </label> <span>75488545</span>
                     </div>
@@ -26,9 +26,9 @@
                     <div class="form-group mb-3">
                         <label class="fw-bold">Hora : </label> <span>08:30 am</span>
                     </div>
-                </div>																
+                </div>		 -->														
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="fw-bold">Estado civil : </label> <span>Soltero</span>
@@ -49,19 +49,7 @@
                         <label class="fw-bold">Tipo paciente : </label> <span>Particular</span>
                     </div>
                 </div>																
-            </div>
-            <div class="row">
-                <div class="col-xl-3">
-                    <div class="form-group mb-3">
-                        <label class="fw-bold">Nro. de cama : </label> <span>405</span>
-                    </div>
-                </div>
-                <div class="col-xl-3">									
-                    <div class="form-group mb-3">
-                        <label class="fw-bold">Nro CTA. CTE.: </label> <span>987454545</span>
-                    </div>
-                </div>
-            </div>
+            </div> -->
         </div>						
         <hr/>
         <div class="row">
@@ -543,8 +531,7 @@
     </form>
 </div>
 <div class="modal-footer">							
-    <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modal-hospitalizacion"  data-bs-dismiss="modal"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
-    <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button>
-    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modal-hospitalizacion"  data-bs-dismiss="modal" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
     </div>
 </div>

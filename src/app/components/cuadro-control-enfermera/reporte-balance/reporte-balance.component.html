@@ -1,0 +1,70 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">REPORTE DEL PACIENTE DIABETICO</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dataFormGroup">
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-5">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha atención : </label> <span>{{fechaHistoria | date: 'yyyy-MM-dd'}}</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>
+            <hr/>		
+
+            <div id="seccion-medicacion" class="">
+                <div class="row mb-3 bg-green-custom">REPORTE</div>	
+                <div class="box-shadow mt-3" *ngFor="let registro of datos">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <h5>Ingreso</h5>
+                            <p><strong>Oral:</strong> {{ registro.ingreso.oral.primerTurno }} / {{ registro.ingreso.oral.segundoTurno }} - Total: {{ registro.ingreso.oral.total }}</p>
+                            <p><strong>Parental:</strong> {{ registro.ingreso.parental.primerTurno }} / {{ registro.ingreso.parental.segundoTurno }} - Total: {{ registro.ingreso.parental.total }}</p>
+                            <p><strong>Parental Tratamiento:</strong> {{ registro.ingreso.parentalTratamiento.primerTurno }} / {{ registro.ingreso.parentalTratamiento.segundoTurno }} - Total: {{ registro.ingreso.parentalTratamiento.total }}</p>
+                            <p><strong>Sangre:</strong> {{ registro.ingreso.sangre.total }}</p>
+                            <p><strong>Agua Oxidación:</strong> {{ registro.ingreso.aguaOxidacion.primerTurno }} / {{ registro.ingreso.aguaOxidacion.segundoTurno }} - Total: {{ registro.ingreso.aguaOxidacion.total }}</p>
+                            <p><strong>Otros:</strong> {{ registro.ingreso.otros[0].total }}</p>
+                            <p><strong>Sumatoria Total Ingreso:</strong> {{ registro.ingreso.sumatoriaTotal }}</p>
+                        </div>
+                        <div class="col-xl-6">
+                            <h5>Egreso</h5>
+                            <p><strong>Orina:</strong> {{ registro.egreso.orina.primerTurno }} / {{ registro.egreso.orina.segundoTurno }} - Total: {{ registro.egreso.orina.total }}</p>
+                            <p><strong>Vómito:</strong> {{ registro.egreso.vomito.total }}</p>
+                            <p><strong>Aspiración:</strong> {{ registro.egreso.aspiracion.total }}</p>
+                            <p><strong>Perdida Incesante:</strong> {{ registro.egreso.perdidaIncesante.primerTurno }} / {{ registro.egreso.perdidaIncesante.segundoTurno }} - Total: {{ registro.egreso.perdidaIncesante.total }}</p>
+                            <p><strong>Deposiciones:</strong> {{ registro.egreso.deposiciones.primerTurno }} / {{ registro.egreso.deposiciones.segundoTurno }} - Total: {{ registro.egreso.deposiciones.total }}</p>
+                            <p><strong>Otros:</strong> {{ registro.egreso.otros[0].total }}</p>
+                            <p><strong>Sumatoria Total Egreso:</strong> {{ registro.egreso.sumatoriaTotal }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            		
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
+        <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+      </div>
+</div>

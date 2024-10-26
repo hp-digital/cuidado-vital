@@ -94,16 +94,21 @@
                                 <button type="button" *ngIf="lista.idTipoOrigenAtencion==2" class="btn btn-green-custom btn-sm" (click)="AbrirHistoria(lista.idHistoriaClinica, lista.idTipoOrigenAtencion)"> Última Atención</button>
                                 <button type="button" *ngIf="lista.idTipoOrigenAtencion==1" class="btn btn-green-custom btn-sm" (click)="AbrirHistoria(lista.idHistoriaClinica, lista.idTipoOrigenAtencion)"> Primera Atención</button>
                                 <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirRecetas(lista.idHistoriaClinica)">Recetas</button>
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlesReporte(lista.idHistoriaClinica)">Reporte</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlesReporte(lista.idHistoriaClinica)">Reporte Médico</button>
                             </div>
                         </div>
                         <div class="col-xl-6">
                             <div class="d-grid gap-2">
                                 <button type="button" *ngIf="idRol==1" class="btn btn-green-custom btn-sm" (click)="AbrirControles(lista.idHistoriaClinica)">Controles</button>
-                                <button type="button" *ngIf="idRol==2" class="btn btn-green-custom btn-sm" (click)="AbrirControlesNotasEnfermera(lista.idHistoriaClinica)">Notas Enfermera</button>
+                                <button type="button" *ngIf="idRol==2" class="btn btn-green-custom btn-sm" (click)="AbrirControlesNotasEnfermera(lista.idHistoriaClinica)">Controles</button>
                                 <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar(lista.idHistoriaClinica)">Examenes auxiliares</button>
-                                <button type="button" class="btn btn-green-custom btn-sm">Estado</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlesReporteEnfermera(lista.idHistoriaClinica)">Reporte Enfermera</button>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 text-center mt-3">
+                            <button type="button" class="btn btn-green-custom btn-sm">Estado</button>
                         </div>
                     </div>
                     <div class="row">
