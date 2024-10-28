@@ -1,1 +1,116 @@
-<p>historial-clinico works!</p>
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">HISTORIAL CLÍNICO</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dataFormGroup">
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-5">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : &nbsp;&nbsp;</label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL :&nbsp;&nbsp; </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha : &nbsp;&nbsp;&nbsp;</label> <span>{{ fechaActual}}</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>
+            <hr/>
+            <div class="row mb-3 bg-green-custom">ANÁMNESIS</div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <textarea type="text" class="form-control" id="" formControlName="inputAnamnesis"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row mb-3 bg-green-custom">FUNCIONES BIOLÓGICAS</div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <textarea type="text" class="form-control" id="" formControlName="inputFuncionBiologica"></textarea>
+                </div>
+            </div>
+            <br>
+            <div class="row mb-3 bg-green-custom">FUNCIONES VITALES</div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <textarea type="text" class="form-control" id="" formControlName="inputFuncionVital"></textarea>
+                </div>
+            </div>
+                <br>
+                <div class="row mb-3 bg-green-custom"> DIAGNÓSTICO</div>									
+                <div class="row">
+                    <div class="col-xl-6">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">Diagnóstico predeterminado</label><br/>
+                            <div class="btn-group width-100">
+                                <div class="cie10">
+                                    <div class="col-xl-2">
+                                        <div class="form-check mt-2">
+                                            <input class="form-check-input" type="checkbox" value="" name="chk0" id="chk0">
+                                            <label class="form-check-label" for="defaultCheck1">CIE10</label>
+                                        </div>
+                                    </div>
+                                </div>												
+                                <select class="form-select form-control" id="">
+                                    <option>Seleccionar</option>												
+                                </select>
+                            </div>											
+                        </div>										
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="row">
+                            <div class="col-xl-10">
+                                <div class="form-group mb-3">
+                                    <label class="form-label mb-3">Escriba su diagnóstico</label>
+                                    <input type="text" class="form-control" id="" formControlName="inputDiagnosticoPropio"/>
+                                </div>
+                            </div>
+                            <div class="col-xl-2">
+                                <div class="form-group mb-3 mt-4 pt-2">
+                                    <label class="form-label mb-3">&nbsp;</label>
+                                    <button type="button" class="btn btn-green-custom" (click)="AgregarDiagnostico()"><i class="fas fa-lg fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>										
+
+                <div class="row" *ngIf="objDiagnosticoPrimera!=null">
+                    <div class="box-shadow mt-3" *ngFor="let item of objDiagnosticoPrimera">
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <h6>Cie10</h6>
+                                <p>{{item.CodigoCie10}}</p>
+                            </div>	
+                            <div class="col-xl-3">
+                                <h6>Nombre Diagnóstico</h6>
+                                <p>{{item.NombreDiagnostico}}</p>
+                            </div>								
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <h6>Tipo Diagnóstico</h6>
+                                <p>{{item.TipoDiagnostico}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                                            
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" *ngIf="idRol==1" data-bs-dismiss="modal" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-file-alt"></i>Guardar</button>
+        <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
+</div>

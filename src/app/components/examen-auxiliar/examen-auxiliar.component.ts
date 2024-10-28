@@ -32,6 +32,8 @@ import { ControlGlucosaDTO } from '@models/control-glucosa';
 import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
 import { ControlPresionDTO } from '@models/control-presion';
 import { ControlEpocDTO } from '@models/control-epoc';
+import { HistoriaPrimeraAtencionDTO } from '@models/primera-atencion';
+import { DiagnosticoPrimeraAtencionDTO } from '@models/diagnostico-primera-atencion';
 
 @Component({
   selector: 'app-examen-auxiliar',
@@ -205,6 +207,30 @@ export class ExamenAuxiliarComponent implements OnInit {
       medic.Celular = objHistoria.medicoAtiende.celular;
       medic.NumeroDocumento = objHistoria.medicoAtiende.numeroDocumento;
     }
+
+    let primeraAtencion = new HistoriaPrimeraAtencionDTO();
+if(objHistoria.primeraAtencion != null)
+{
+  primeraAtencion.Paciente = objHistoria.primeraAtencion.paciente;
+  primeraAtencion.NroHcl = objHistoria.primeraAtencion.nroHcl;
+  primeraAtencion.FechaPrimeraAtencion = objHistoria.primeraAtencion.fechaPrimeraAtencion;
+  primeraAtencion.Anamnesis = objHistoria.primeraAtencion.anamnesis;
+  primeraAtencion.FuncionBiologica = objHistoria.primeraAtencion.funcionBiologica;
+  primeraAtencion.FuncionVital = objHistoria.primeraAtencion.funcionVital;
+
+  primeraAtencion.Diagnostico=[];
+  if(objHistoria.primeraAtencion.diagnostico != null)
+  {
+    objHistoria.primeraAtencion.diagnostico.forEach((element : any) => {
+      let diag = new DiagnosticoPrimeraAtencionDTO();
+      diag.CodigoCie10 = element.codigoCie10;
+      diag.NombreDiagnostico = element.nombreDiagnostico;
+      diag.TipoDiagnostico = element.tipoDiagnostico;
+
+      primeraAtencion.Diagnostico.push(diag);
+    });
+  }
+}
 
     let externo = new HistoriaExternaDTO();
     if(objHistoria.historiaExterna!= null)
@@ -801,6 +827,7 @@ export class ExamenAuxiliarComponent implements OnInit {
     historiaCalidad.ControlGlucosa = controlGlucosa;
     historiaCalidad.ControlEpoc = controlEpoc;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
+    historiaCalidad.PrimeraAtencion = primeraAtencion;
 
     this.objHistoria = historiaCalidad;
     

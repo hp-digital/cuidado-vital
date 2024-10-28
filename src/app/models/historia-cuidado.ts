@@ -6,6 +6,7 @@ import { ControlPresionDTO } from "./control-presion";
 import { HistoriaExternaDTO } from "./historia-externa";
 import { MedicoAtencionDTO } from "./medico-atiente";
 import { OrdenDTO } from "./OrdenDTO";
+import { HistoriaPrimeraAtencionDTO } from "./primera-atencion";
 import { RecetaDTO } from "./RecetaDTO";
 
 export class HistoriaCuidadoDTO{
@@ -30,4 +31,5 @@ export class HistoriaCuidadoDTO{
     Receta?:RecetaDTO[];
     Orden?:OrdenDTO[];
     HistoriaExterna?:HistoriaExternaDTO;
+    PrimeraAtencion?:HistoriaPrimeraAtencionDTO;
 }

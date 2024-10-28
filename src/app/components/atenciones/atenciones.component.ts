@@ -27,6 +27,7 @@ import { MonitoreoComponent } from '../monitoreo/monitoreo.component';
 import { ChatComponent } from '../chat/chat.component';
 import { CuadroControlNotaComponent } from '../cuadro-control-nota/cuadro-control-nota.component';
 import { CuadroControlEnfermeraComponent } from '../cuadro-control-enfermera/cuadro-control-enfermera.component';
+import { HistorialClinicoComponent } from '../historia-clinica/historial-clinico/historial-clinico.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -233,8 +234,8 @@ export default class AtencionesComponent implements OnInit{
     
     if(idTipoOrigen==1)
     {
-      this.modalRef = this.modalControlGeneral.show(ControlGeneralComponent, { backdrop: 'static', class: 'modal-xl'});
-      this.modalRef.content.AsignarHistoriaClinicaInterno(idHistoriaClinica);
+      this.modalRef = this.modalControlGeneral.show(HistorialClinicoComponent, { backdrop: 'static', class: 'modal-xl'});
+      this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
     }
     if(idTipoOrigen==2)
     {
