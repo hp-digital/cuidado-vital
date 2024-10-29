@@ -66,6 +66,27 @@ export class ReporteHojaMonitoreoComponent implements OnInit {
           "personal": this.medico,
           "fechaRegistro": "2024-10-26"
         }
+      },
+      {
+        "turno": "1 2024-10-26 11:40:08",
+        "fechaTexto": "2024-10-26 11:40:08",
+        "presionArterialSistolica": 110,
+        "presionArterialDiastolica": 80,
+        "pulso": 76,
+        "temperatura": 36.6,
+        "frecuenciaRespiratoria": 16,
+        "saturacionOxigeno": 95,
+        "oxigeno": 0,
+        "peso": 51,
+        "deposiciones": "0",
+        "orina": "0",
+        "ingresos": 0,
+        "egresos": 0,
+        "totalBH": 0,
+        "personalResponsable": {
+          "personal": this.medico,
+          "fechaRegistro": "2024-10-26"
+        }
       }
     ],
     "personalResponsable": {
