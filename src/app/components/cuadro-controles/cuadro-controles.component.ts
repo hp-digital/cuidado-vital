@@ -37,6 +37,8 @@ import { ComboDTO } from '@models/ComboDTO';
 import { ControlEpocDTO } from '@models/control-epoc';
 import { HistoriaPrimeraAtencionDTO } from '@models/primera-atencion';
 import { DiagnosticoPrimeraAtencionDTO } from '@models/diagnostico-primera-atencion';
+import { HojaMonitoreoSignosDTO } from '@models/hoja-monitoreo';
+import { SignoVitalHojaDTO } from '@models/signo-vital-hoja';
 
 @Component({
   selector: 'app-cuadro-controles',
@@ -737,6 +739,33 @@ export default class CuadroControlesComponent implements OnInit {
     
     }
 
+    let hojaMonitoreo = new HojaMonitoreoSignosDTO();
+    hojaMonitoreo.Paciente = objHistoria.hojaMonitoreoSignos.paciente;
+    hojaMonitoreo.Medico = objHistoria.hojaMonitoreoSignos.medico;
+    hojaMonitoreo.SignoVital=[]
+    if(objHistoria.hojaMonitoreoSignos.signoVital!=null)
+    {
+      objHistoria.hojaMonitoreoSignos.signoVital.forEach((element:any)=>{
+        let signo = new SignoVitalHojaDTO();
+        signo.FechaRegistro=element.fechaRegistro;
+        signo.PresionSistolica=element.presionSistolica;
+        signo.PresionDiastolica=element.presionDiastolica;
+        signo.Pulso=element.pulso;
+        signo.Temperatura=element.temperatura;
+        signo.FrecuenciaRespiratoria=element.frecuenciaRespiratoria;
+        signo.Saturacion=element.saturacion;
+        signo.Oxigeno=element.oxigeno;
+        signo.Peso=element.peso;
+        signo.Deposiciones=element.deposiciones;
+        signo.Orina=element.orina;
+        signo.Ingresos=element.ingresos;
+        signo.Egresos=element.egresos;
+        signo.TotalBH=element.totalBH;
+
+        hojaMonitoreo.SignoVital?.push(signo);
+      });
+    }
+
     
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -761,6 +790,7 @@ export default class CuadroControlesComponent implements OnInit {
     historiaCalidad.ControlGeneral = controlGeneral;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
     historiaCalidad.PrimeraAtencion = primeraAtencion;
+    historiaCalidad.HojaMonitoreoSignos = hojaMonitoreo;
 
     this.objHistoria = historiaCalidad;
 

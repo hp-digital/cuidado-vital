@@ -29,6 +29,10 @@ import { MedidasAntropometricasDTO } from '@models/medidas-antropometricas';
 import { ControlPresionDTO } from '@models/control-presion';
 import { OrdenDTO } from '@models/OrdenDTO';
 import { MedicoAtencionDTO } from '@models/medico-atiente';
+import { HojaMonitoreoSignosDTO } from '@models/hoja-monitoreo';
+import { SignoVitalHojaDTO } from '@models/signo-vital-hoja';
+import { HistoriaPrimeraAtencionDTO } from '@models/primera-atencion';
+import { DiagnosticoPrimeraAtencionDTO } from '@models/diagnostico-primera-atencion';
 
 @Component({
   selector: 'app-receta-paciente',
@@ -149,6 +153,30 @@ export class RecetaPacienteComponent implements OnInit{
       medic.ApellidoMaterno = objHistoria.medicoAtiende.apellidoMaterno;
       medic.Celular = objHistoria.medicoAtiende.celular;
       medic.NumeroDocumento = objHistoria.medicoAtiende.numeroDocumento;
+    }
+
+    let primeraAtencion = new HistoriaPrimeraAtencionDTO();
+    if(objHistoria.primeraAtencion != null)
+    {
+      primeraAtencion.Paciente = objHistoria.primeraAtencion.paciente;
+      primeraAtencion.NroHcl = objHistoria.primeraAtencion.nroHcl;
+      primeraAtencion.FechaPrimeraAtencion = objHistoria.primeraAtencion.fechaPrimeraAtencion;
+      primeraAtencion.Anamnesis = objHistoria.primeraAtencion.anamnesis;
+      primeraAtencion.FuncionBiologica = objHistoria.primeraAtencion.funcionBiologica;
+      primeraAtencion.FuncionVital = objHistoria.primeraAtencion.funcionVital;
+
+      primeraAtencion.Diagnostico=[];
+      if(objHistoria.primeraAtencion.diagnostico != null)
+      {
+        objHistoria.primeraAtencion.diagnostico.forEach((element : any) => {
+          let diag = new DiagnosticoPrimeraAtencionDTO();
+          diag.CodigoCie10 = element.codigoCie10;
+          diag.NombreDiagnostico = element.nombreDiagnostico;
+          diag.TipoDiagnostico = element.tipoDiagnostico;
+
+          primeraAtencion.Diagnostico.push(diag);
+        });
+      }
     }
 
     if(objHistoria.historiaExterna != null)
@@ -720,9 +748,32 @@ export class RecetaPacienteComponent implements OnInit{
       });
     
     }
-    
+    let hojaMonitoreo = new HojaMonitoreoSignosDTO();
+    hojaMonitoreo.Paciente = objHistoria.hojaMonitoreoSignos.paciente;
+    hojaMonitoreo.Medico = objHistoria.hojaMonitoreoSignos.medico;
+    hojaMonitoreo.SignoVital=[]
+    if(objHistoria.hojaMonitoreoSignos.signoVital!=null)
+    {
+      objHistoria.hojaMonitoreoSignos.signoVital.forEach((element:any)=>{
+        let signo = new SignoVitalHojaDTO();
+        signo.FechaRegistro=element.fechaRegistro;
+        signo.PresionSistolica=element.presionSistolica;
+        signo.PresionDiastolica=element.presionDiastolica;
+        signo.Pulso=element.pulso;
+        signo.Temperatura=element.temperatura;
+        signo.FrecuenciaRespiratoria=element.frecuenciaRespiratoria;
+        signo.Saturacion=element.saturacion;
+        signo.Oxigeno=element.oxigeno;
+        signo.Peso=element.peso;
+        signo.Deposiciones=element.deposiciones;
+        signo.Orina=element.orina;
+        signo.Ingresos=element.ingresos;
+        signo.Egresos=element.egresos;
+        signo.TotalBH=element.totalBH;
 
-    
+        hojaMonitoreo.SignoVital?.push(signo);
+      });
+    }
 
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -746,6 +797,8 @@ export class RecetaPacienteComponent implements OnInit{
     historiaCalidad.ControlGlucosa = controlGlucosa;
     historiaCalidad.ControlEpoc = controlEpoc;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
+    historiaCalidad.PrimeraAtencion = primeraAtencion;
+    historiaCalidad.HojaMonitoreoSignos = hojaMonitoreo;
 
     this.objHistoria = historiaCalidad;
     

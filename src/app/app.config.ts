@@ -5,6 +5,7 @@ import {provideHttpClient} from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideAnimations } from '@angular/platform-browser/animations'
 import { OAuthModule } from 'angular-oauth2-oidc';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,6 +13,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes), 
     importProvidersFrom(ModalModule.forRoot(),OAuthModule.forRoot()),
     provideHttpClient(),
-    provideAnimations(),    
+    provideAnimations(),
+    TitleCasePipe    
   ]
 };

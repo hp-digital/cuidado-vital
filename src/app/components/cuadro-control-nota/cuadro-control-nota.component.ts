@@ -33,6 +33,9 @@ import { HojaMonitoreoComponent } from './hoja-monitoreo/hoja-monitoreo.componen
 import { BalanceHidricoComponent } from './balance-hidrico/balance-hidrico.component';
 import { HistoriaPrimeraAtencionDTO } from '@models/primera-atencion';
 import { DiagnosticoPrimeraAtencionDTO } from '@models/diagnostico-primera-atencion';
+import { HojaMonitoreoSignosDTO } from '@models/hoja-monitoreo';
+import { SignoVitalHojaDTO } from '@models/signo-vital-hoja';
+import { NotaEnfermeraComponent } from '../historia-clinica/nota-enfermera/nota-enfermera.component';
 
 @Component({
   selector: 'app-cuadro-control-nota',
@@ -721,6 +724,32 @@ export class CuadroControlNotaComponent implements OnInit{
     
     }
 
+    let hojaMonitoreo = new HojaMonitoreoSignosDTO();
+    hojaMonitoreo.Paciente = objHistoria.hojaMonitoreoSignos.paciente;
+    hojaMonitoreo.Medico = objHistoria.hojaMonitoreoSignos.medico;
+    hojaMonitoreo.SignoVital=[]
+    if(objHistoria.hojaMonitoreoSignos.signoVital!=null)
+    {
+      objHistoria.hojaMonitoreoSignos.signoVital.forEach((element:any)=>{
+        let signo = new SignoVitalHojaDTO();
+        signo.FechaRegistro=element.fechaRegistro;
+        signo.PresionSistolica=element.presionSistolica;
+        signo.PresionDiastolica=element.presionDiastolica;
+        signo.Pulso=element.pulso;
+        signo.Temperatura=element.temperatura;
+        signo.FrecuenciaRespiratoria=element.frecuenciaRespiratoria;
+        signo.Saturacion=element.saturacion;
+        signo.Oxigeno=element.oxigeno;
+        signo.Peso=element.peso;
+        signo.Deposiciones=element.deposiciones;
+        signo.Orina=element.orina;
+        signo.Ingresos=element.ingresos;
+        signo.Egresos=element.egresos;
+        signo.TotalBH=element.totalBH;
+
+        hojaMonitoreo.SignoVital?.push(signo);
+      });
+    }
     
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -745,6 +774,7 @@ export class CuadroControlNotaComponent implements OnInit{
     historiaCalidad.ControlGeneral = controlGeneral;
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
     historiaCalidad.PrimeraAtencion = primeraAtencion;
+    historiaCalidad.HojaMonitoreoSignos = hojaMonitoreo;
 
     this.objHistoria = historiaCalidad;
     
@@ -756,7 +786,7 @@ export class CuadroControlNotaComponent implements OnInit{
   }
 
   AbrirNotaEvolucion(){
-    this.BsModalNota = this.modalNotaEvolucicion.show(NotaEvolucionComponent, {backdrop: 'static', class: 'modal-xl'})
+    this.BsModalNota = this.modalNotaEvolucicion.show(NotaEnfermeraComponent, {backdrop: 'static', class: 'modal-xl'})
     this.BsModalNota.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
   }
 

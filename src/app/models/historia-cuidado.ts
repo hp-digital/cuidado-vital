@@ -4,6 +4,7 @@ import { ControlGeneralDTO } from "./control-general";
 import { ControlGlucosaDTO } from "./control-glucosa";
 import { ControlPresionDTO } from "./control-presion";
 import { HistoriaExternaDTO } from "./historia-externa";
+import { HojaMonitoreoSignosDTO } from "./hoja-monitoreo";
 import { MedicoAtencionDTO } from "./medico-atiente";
 import { OrdenDTO } from "./OrdenDTO";
 import { HistoriaPrimeraAtencionDTO } from "./primera-atencion";
@@ -32,4 +33,5 @@ export class HistoriaCuidadoDTO{
     Orden?:OrdenDTO[];
     HistoriaExterna?:HistoriaExternaDTO;
     PrimeraAtencion?:HistoriaPrimeraAtencionDTO;
+    HojaMonitoreoSignos?:HojaMonitoreoSignosDTO;
 }
