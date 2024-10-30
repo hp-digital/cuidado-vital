@@ -89,13 +89,13 @@ export class HojaMonitoreoComponent implements OnInit {
     signo.Egresos = this.dataFormGroup.controls['inputEgresos'].value; 
     signo.TotalBH = this.dataFormGroup.controls['inputTotalBH'].value; 
 
-    this.objSignoVitalHoja.push(signo);
+    this.objSignoVitalHoja.unshift(signo);
 
     console.log("sig", this.objSignoVitalHoja);
   }
 
   formatDate(date= new Date()) {
-    return moment(date).format('DD-MM-yyyy hh-mm-ss');
+    return moment(date).format('DD-MM-yyyy hh:mm:ss');
   }
 
   Guardar(){

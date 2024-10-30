@@ -28,6 +28,7 @@ import { ChatComponent } from '../chat/chat.component';
 import { CuadroControlNotaComponent } from '../cuadro-control-nota/cuadro-control-nota.component';
 import { CuadroControlEnfermeraComponent } from '../cuadro-control-enfermera/cuadro-control-enfermera.component';
 import { HistorialClinicoComponent } from '../historia-clinica/historial-clinico/historial-clinico.component';
+import { MonitoreoGeneralComponent } from './monitoreo-general/monitoreo-general.component';
 
 @Component({
   selector: 'app-atenciones',
@@ -71,6 +72,7 @@ export default class AtencionesComponent implements OnInit{
     private modalMonitoreoCamara: BsModalService,
     private modalChat: BsModalService,
     private modalControlNotasEnfermera: BsModalService,
+    private modalMonitoreoGeneral: BsModalService,
     private settings : SettingsService,
     private pacienteService : PacienteService,
     private historiaService: HistoriaService
@@ -295,6 +297,12 @@ export default class AtencionesComponent implements OnInit{
 
   AbrirChat(idHistoriaClinica: number){
     this.modalRef = this.modalChat.show(ChatComponent, { backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
+  AbrirMonitoreoGeneral(idHistoriaClinica : number)
+  {
+    this.modalRef = this.modalMonitoreoGeneral.show(MonitoreoGeneralComponent, { backdrop: 'static', class: 'modal-xl'})
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 

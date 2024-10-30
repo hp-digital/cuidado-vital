@@ -87,7 +87,7 @@ export class ControlGlucosaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.ObtenerConfiguracion();
+    //this.ObtenerConfiguracion();
   }
 
   ObtenerConfiguracion() {
@@ -122,6 +122,7 @@ export class ControlGlucosaComponent implements OnInit {
     this.comboComplicacion = this.utilitiesService.ObtenerComplicaciones();
     console.log("obj historia", this.objHistoria);
     this.AsignarHistoria(historia);
+    this.verSpinner = false;
   }
 
   AsignarHistoria(historia:any)

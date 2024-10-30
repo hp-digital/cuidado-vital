@@ -80,6 +80,7 @@ export class ControlPresionComponent implements OnInit {
     this.paciente = historia.cabeceraPaciente?.ApellidoPaterno+' '+historia.cabeceraPaciente?.ApellidoMaterno+', '+historia.cabeceraPaciente?.Nombre;
     this.medico = this.objHistoria.MedicoAtiende?.ApellidoPaterno+' '+this.objHistoria.MedicoAtiende?.ApellidoMaterno+', '+this.objHistoria.MedicoAtiende?.Nombre;
     this.AsignarObjetoHistoria(historia);
+    this.verSpinner = false;
   }
 
   AsignarObjetoHistoria(data:any)

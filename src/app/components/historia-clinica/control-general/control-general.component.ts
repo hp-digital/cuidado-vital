@@ -693,6 +693,7 @@ export class ControlGeneralComponent implements OnInit {
     this.comboEstado = this.utilitiesService.ObtenerComboSintomaRespiratorio();
     this.comboSiNo = this.utilitiesService.ObtenerSINO();
     this.comboResultadoKatz = this.utilitiesService.ObtenerComboResultadoKatz();
+    this.verSpinner = false;
   }
 
   AsignarObjetoHistoria(data:any)

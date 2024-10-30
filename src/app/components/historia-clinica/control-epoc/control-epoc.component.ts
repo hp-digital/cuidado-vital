@@ -251,6 +251,7 @@ export class ControlEpocComponent implements OnInit {
     this.comboFaseEpoc = this.utilitiesService.ObtenerComboFaseEpoc();
     this.comboHabitoNocivo = this.utilitiesService.ObtenerComboHabitoNocivo();
     this.comboSintomaRespiratorio = this.utilitiesService.ObtenerComboSintomaRespiratorio();
+    this.verSpinner = false;
   }
 
   AsignarObjetoHistoria(data:any)

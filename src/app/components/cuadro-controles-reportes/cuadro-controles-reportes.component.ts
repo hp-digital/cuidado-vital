@@ -35,6 +35,10 @@ import { HistoriaPrimeraAtencionDTO } from '@models/primera-atencion';
 import { DiagnosticoPrimeraAtencionDTO } from '@models/diagnostico-primera-atencion';
 import { HojaMonitoreoSignosDTO } from '@models/hoja-monitoreo';
 import { SignoVitalHojaDTO } from '@models/signo-vital-hoja';
+import { EvaluacionDTO } from '@models/evaluacion-nota';
+import { SoapieDTO } from '@models/soapie';
+import { SignoVitalNotaDTO } from '@models/signo-vital-notal';
+import { NotaEnfermeraDTO } from '@models/nota-enfermera';
 
 @Component({
   selector: 'app-cuadro-controles-reportes',
@@ -569,6 +573,7 @@ export class CuadroControlesReportesComponent implements OnInit {
         orden.Servicio = element.servicio;
         orden.Tipo = element.tipo;
         orden.Indicaciones = element.indicaciones;
+        orden.Fecha = element.fecha;
         
         ordenListado.push(orden);
       });
@@ -587,6 +592,7 @@ export class CuadroControlesReportesComponent implements OnInit {
         receta.DuracionDetalle = element.duracionDetalle;
         receta.Via = element.via;
         receta.Indicaciones = element.indicaciones;
+        receta.Fecha = element.fecha;
 
         recetaListado.push(receta);
       })
@@ -734,30 +740,184 @@ export class CuadroControlesReportesComponent implements OnInit {
     }
 
     let hojaMonitoreo = new HojaMonitoreoSignosDTO();
-    hojaMonitoreo.Paciente = objHistoria.hojaMonitoreoSignos.paciente;
-    hojaMonitoreo.Medico = objHistoria.hojaMonitoreoSignos.medico;
-    hojaMonitoreo.SignoVital=[]
-    if(objHistoria.hojaMonitoreoSignos.signoVital!=null)
+    if(objHistoria.hojaMonitoreoSignos != null){
+      hojaMonitoreo.Paciente = objHistoria.hojaMonitoreoSignos.paciente;
+      hojaMonitoreo.Medico = objHistoria.hojaMonitoreoSignos.medico;
+      hojaMonitoreo.SignoVital=[]
+      if(objHistoria.hojaMonitoreoSignos.signoVital!=null)
+      {
+        objHistoria.hojaMonitoreoSignos.signoVital.forEach((element:any)=>{
+          let signo = new SignoVitalHojaDTO();
+          signo.FechaRegistro=element.fechaRegistro;
+          signo.PresionSistolica=element.presionSistolica;
+          signo.PresionDiastolica=element.presionDiastolica;
+          signo.Pulso=element.pulso;
+          signo.Temperatura=element.temperatura;
+          signo.FrecuenciaRespiratoria=element.frecuenciaRespiratoria;
+          signo.Saturacion=element.saturacion;
+          signo.Oxigeno=element.oxigeno;
+          signo.Peso=element.peso;
+          signo.Deposiciones=element.deposiciones;
+          signo.Orina=element.orina;
+          signo.Ingresos=element.ingresos;
+          signo.Egresos=element.egresos;
+          signo.TotalBH=element.totalBH;
+  
+          hojaMonitoreo.SignoVital?.push(signo);
+        });
+      }
+    }
+    
+    let notaEnfermera = new NotaEnfermeraDTO();
+    if(objHistoria.notaEnfermera != null)
     {
-      objHistoria.hojaMonitoreoSignos.signoVital.forEach((element:any)=>{
-        let signo = new SignoVitalHojaDTO();
-        signo.FechaRegistro=element.fechaRegistro;
-        signo.PresionSistolica=element.presionSistolica;
-        signo.PresionDiastolica=element.presionDiastolica;
-        signo.Pulso=element.pulso;
-        signo.Temperatura=element.temperatura;
-        signo.FrecuenciaRespiratoria=element.frecuenciaRespiratoria;
-        signo.Saturacion=element.saturacion;
-        signo.Oxigeno=element.oxigeno;
-        signo.Peso=element.peso;
-        signo.Deposiciones=element.deposiciones;
-        signo.Orina=element.orina;
-        signo.Ingresos=element.ingresos;
-        signo.Egresos=element.egresos;
-        signo.TotalBH=element.totalBH;
-
-        hojaMonitoreo.SignoVital?.push(signo);
-      });
+      
+      notaEnfermera.Paciente = objHistoria.notaEnfermera.paciente;
+      notaEnfermera.Medico = objHistoria.notaEnfermera.medico;
+      notaEnfermera.NroHcl = objHistoria.notaEnfermera.nroHcl;
+      notaEnfermera.FechaNota = objHistoria.notaEnfermera.fechaNota;
+      
+      let sign = new SignoVitalNotaDTO();
+      if(objHistoria.notaEnfermera.signoVital!= null)
+      {
+        sign.Temperatura = objHistoria.notaEnfermera.signoVital.temperatura;
+        sign.FrecuenciaCardiaca = objHistoria.notaEnfermera.signoVital.frecuenciaCardiaca;
+        sign.PresionSistolica = objHistoria.notaEnfermera.signoVital.presionSistolica;
+        sign.PresionDiastolica = objHistoria.notaEnfermera.signoVital.presionDiastolica;
+        sign.SaturacionOxigeno = objHistoria.notaEnfermera.signoVital.saturacionOxigeno;
+        sign.FrecuenciaRespiratoria = objHistoria.notaEnfermera.signoVital.frecuenciaRespiratoria;
+        notaEnfermera.SignoVital = sign;
+      }
+      
+      
+      let soapie = new SoapieDTO();
+      if(objHistoria.notaEnfermera.soapie != null)
+      {
+        soapie.Subjetivos = objHistoria.notaEnfermera.soapie.subjetivos;
+        soapie.Objetivos = objHistoria.notaEnfermera.soapie.objetivos;
+        
+        soapie.Medicacion= [] ;
+        soapie.Procedimiento= [] ;
+        soapie.Diagnostico= [] ;
+        soapie.Planteamiento= [] ;
+        soapie.Ocurrencias= [] ;
+        soapie.Pendientes= [] ;
+        soapie.Evaluacion= [] ;
+        soapie.Diuresis= [] ;
+        soapie.Deposicion= [] ;
+        
+        if(objHistoria.notaEnfermera.soapie.medicacion != null)
+        {
+          objHistoria.notaEnfermera.soapie.medicacion.forEach((element:any)=>{
+            let medicacion = new EvaluacionDTO();
+            medicacion.Item = element.item;
+            medicacion.Nota = element.nota;
+            medicacion.FechaNota = element.fechaNota;
+            medicacion.Usuario = element.usuario;
+        
+            soapie.Medicacion?.push(medicacion);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.procedimiento != null)
+        {
+          objHistoria.notaEnfermera.soapie.procedimiento.forEach((element:any)=>{
+            let procedimiento = new EvaluacionDTO();
+            procedimiento.Item = element.item;
+            procedimiento.Nota = element.nota;
+            procedimiento.FechaNota = element.fechaNota;
+            procedimiento.Usuario = element.usuario;
+        
+            soapie.Procedimiento?.push(procedimiento);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.diagnostico != null)
+        {
+          objHistoria.notaEnfermera.soapie.diagnostico.forEach((element:any)=>{
+            let diagnostico = new EvaluacionDTO();
+            diagnostico.Item = element.item;
+            diagnostico.Nota = element.nota;
+            diagnostico.FechaNota = element.fechaNota;
+            diagnostico.Usuario = element.usuario;
+        
+            soapie.Diagnostico?.push(diagnostico);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.planteamiento != null)
+        {
+          objHistoria.notaEnfermera.soapie.planteamiento.forEach((element:any)=>{
+            let planteamiento = new EvaluacionDTO();
+            planteamiento.Item = element.item;
+            planteamiento.Nota = element.nota;
+            planteamiento.FechaNota = element.fechaNota;
+            planteamiento.Usuario = element.usuario;
+        
+            soapie.Planteamiento?.push(planteamiento);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.ocurrencias != null)
+        {
+          objHistoria.notaEnfermera.soapie.ocurrencias.forEach((element:any)=>{
+            let ocurrencias = new EvaluacionDTO();
+            ocurrencias.Item = element.item;
+            ocurrencias.Nota = element.nota;
+            ocurrencias.FechaNota = element.fechaNota;
+            ocurrencias.Usuario = element.usuario;
+        
+            soapie.Ocurrencias?.push(ocurrencias);
+          });
+        }
+        
+        
+        if(objHistoria.notaEnfermera.soapie.pendientes != null)
+        {
+          objHistoria.notaEnfermera.soapie.pendientes.forEach((element:any)=>{
+            let pendientes = new EvaluacionDTO();
+            pendientes.Item = element.item;
+            pendientes.Nota = element.nota;
+            pendientes.FechaNota = element.fechaNota;
+            pendientes.Usuario = element.usuario;
+        
+            soapie.Pendientes?.push(pendientes);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.evaluacion != null)
+        {
+          objHistoria.notaEnfermera.soapie.evaluacion.forEach((element:any)=>{
+            let evaluacion = new EvaluacionDTO();
+            evaluacion.Item = element.item;
+            evaluacion.Nota = element.nota;
+            evaluacion.FechaNota = element.fechaNota;
+            evaluacion.Usuario = element.usuario;
+        
+            soapie.Evaluacion?.push(evaluacion);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.diuresis != null)
+        {
+          objHistoria.notaEnfermera.soapie.diuresis.forEach((element:any)=>{
+            let diuresis = new EvaluacionDTO();
+            diuresis.Item = element.item;
+            diuresis.Nota = element.nota;
+            diuresis.FechaNota = element.fechaNota;
+            diuresis.Usuario = element.usuario;
+        
+            soapie.Diuresis?.push(diuresis);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.deposicion != null)
+        {
+          objHistoria.notaEnfermera.soapie.deposicion.forEach((element:any)=>{
+            let deposicion = new EvaluacionDTO();
+            deposicion.Item = element.item;
+            deposicion.Nota = element.nota;
+            deposicion.FechaNota = element.fechaNota;
+            deposicion.Usuario = element.usuario;
+        
+            soapie.Deposicion?.push(deposicion);
+          });
+        }
+      }
+      notaEnfermera.Soapie = soapie;
     }
 
     
@@ -785,6 +945,7 @@ export class CuadroControlesReportesComponent implements OnInit {
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
     historiaCalidad.PrimeraAtencion = primeraAtencion;
     historiaCalidad.HojaMonitoreoSignos = hojaMonitoreo;
+    historiaCalidad.NotaEnfermera = notaEnfermera;
 
     this.objHistoria = historiaCalidad;
     

@@ -8,4 +8,5 @@ export class RecetaDTO
     DuracionDetalle !: string;
     Via !: string;
     Indicaciones !: string;
+    Fecha !: Date;
 }

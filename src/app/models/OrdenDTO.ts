@@ -4,4 +4,5 @@ export class OrdenDTO{
     Servicio!: string;
     Tipo!: string;
     Indicaciones!: string;
+    Fecha!:Date;
 }

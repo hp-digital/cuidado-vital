@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Fecha : </label> <span></span>
+                            <label class="fw-bold">Fecha : </label> <span>{{fechaHoy| date: 'dd-MM-yyyy'}}</span>
                         </div>
                     </div>															
                 </div>
@@ -104,17 +104,18 @@
                     </div>
                     <div class="col-xl-1">
                         <div class="form-group mb-3 mt-4 pt-1">													
-                            <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                            <button type="button" class="btn btn-green-custom" (click)="AgregarMedicacion()"><i class="fas fa-lg fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">Medicamento 001</div>
-                    <div class="col-xl-2 text-right">
+                <div class="row box-shadow" *ngFor="let lista of listadoMedicacion; let i = index">
+                    <div class="col-xl-12 fw-bold">{{lista.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</div>
+                    <div class="col-xl-10">{{lista.Nota}}</div>
+                    <!-- <div class="col-xl-2 text-right">
                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
+                    </div> -->
+                    <br>
                 </div>
                 <br>
                 <hr/>
@@ -127,17 +128,18 @@
                     </div>
                     <div class="col-xl-1">
                         <div class="form-group mb-3 mt-4 pt-1">													
-                            <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                            <button type="button" class="btn btn-green-custom" (click)="AgregarProcedimiento()"><i class="fas fa-lg fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">Procedimiento 001</div>
-                    <div class="col-xl-2 text-right">
+                <div class="row box-shadow" *ngFor="let lista of listadoProcedimiento; let i = index">
+                    <div class="col-xl-12 fw-bold">{{lista.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</div>
+                    <div class="col-xl-10">{{lista.Nota}}</div>
+                    <!-- <div class="col-xl-2 text-right">
                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
+                    </div> -->
+                    <br>
                 </div>
                 <br>
                 <hr/>
@@ -146,18 +148,19 @@
                         <h6> DIAGNÓSTICO DE ENFERMERIA</h6>
                     </div>
                     <div class="col-xl-8 text-right">
-                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                        <button type="button" class="btn btn-green-custom" (click)="AgregarDiagnostico()"><i class="fas fa-lg fa-plus"></i></button>
                     </div>
                 </div>
                 <br>
                 <textarea type="text" class="form-control" formControlName="inputDiagnosticoEnfermera" rows="3"> </textarea>
                 <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">DIAGNÓSTICO DE ENFERMERIA 001</div>
-                    <div class="col-xl-2 text-right">
+                <div class="row box-shadow" *ngFor="let lista of listadoDiagnostico; let i = index">
+                    <div class="col-xl-12 fw-bold">{{lista.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</div>
+                    <div class="col-xl-10">{{lista.Nota}}</div>
+                    <!-- <div class="col-xl-2 text-right">
                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
+                    </div> -->
+                    <br>
                 </div>
                 <br>
                 <hr/>
@@ -166,18 +169,19 @@
                         <h6>PLANTEAMIENTO</h6>
                     </div>
                     <div class="col-xl-8 text-right">
-                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                        <button type="button" class="btn btn-green-custom" (click)="AgregarPlanteamiento()"><i class="fas fa-lg fa-plus"></i></button>
                     </div>
                 </div>
                 <br>
                 <textarea type="text" class="form-control" formControlName="inputPlanteamiento" rows="3"> </textarea>
                 <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">PLANTEAMIENTO 001</div>
-                    <div class="col-xl-2 text-right">
+                <div class="row box-shadow" *ngFor="let lista of listadoPlanteamiento; let i = index">
+                    <div class="col-xl-12 fw-bold">{{lista.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</div>
+                    <div class="col-xl-10">{{lista.Nota}}</div>
+                    <!-- <div class="col-xl-2 text-right">
                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
+                    </div> -->
+                    <br>
                 </div>
                 <hr/>
                 <h6>OCURRENCIAS</h6>
@@ -196,17 +200,18 @@
                     </div>
                     <div class="col-xl-1">
                         <div class="form-group mb-3 mt-4 pt-1">													
-                            <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                            <button type="button" class="btn btn-green-custom" (click)="AgregarOcurrencia()"><i class="fas fa-lg fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">OCURRENCIAS 001</div>
-                    <div class="col-xl-2 text-right">
+                <div class="row box-shadow" *ngFor="let lista of listadoOcurrencia; let i = index">
+                    <div class="col-xl-12 fw-bold">{{lista.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</div>
+                    <div class="col-xl-10">{{lista.Nota}}</div>
+                    <!-- <div class="col-xl-2 text-right">
                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
+                    </div> -->
+                    <br>
                 </div>
                 <br>
                 <hr/>
@@ -215,22 +220,24 @@
                     <div class="col-xl-11">
                         <div class="form-group mb-3">
                             <label class="cform-label">&nbsp;</label>
-                            <textarea type="text" class="form-control" id="" rows="3"> </textarea>
+                            <textarea type="text" class="form-control" formControlName="inputPendientes" rows="3"> </textarea>
                         </div>
                     </div>
                     <div class="col-xl-1">
                         <div class="form-group mb-3 mt-4 pt-1">													
-                            <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                            <button type="button" class="btn btn-green-custom" (click)="AgregarPendientes()"><i class="fas fa-lg fa-plus"></i></button>
                         </div>
                     </div>
+                    <br>
                 </div>
                 <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">PENDIENTES 001</div>
-                    <div class="col-xl-2 text-right">
+                <div class="row box-shadow" *ngFor="let lista of listadoPendiente; let i = index">
+                    <div class="col-xl-12 fw-bold">{{lista.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</div>
+                    <div class="col-xl-10">{{lista.Nota}}</div>
+                    <!-- <div class="col-xl-2 text-right">
                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
+                    </div> -->
+                    <br>
                 </div>
                 <br>
                 <hr/>
@@ -244,17 +251,19 @@
                     </div>
                     <div class="col-xl-1">
                         <div class="form-group mb-3 mt-4 pt-1">													
-                            <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                            <button type="button" class="btn btn-green-custom" (click)="AgregarEvaluacion()"><i class="fas fa-lg fa-plus"></i></button>
                         </div>
                     </div>
+                    <br>
                 </div>
                 <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">EVALUACIÓN 001</div>
-                    <div class="col-xl-2 text-right">
+                <div class="row box-shadow" *ngFor="let lista of listadoEvaluacion; let i = index">
+                    <div class="col-xl-12 fw-bold">{{lista.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</div>
+                    <div class="col-xl-10">{{lista.Nota}}</div>
+                    <!-- <div class="col-xl-2 text-right">
                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
+                    </div> -->
+                    <br>
                 </div>
                 <br>
                 <hr/>
@@ -268,17 +277,18 @@
                     </div>
                     <div class="col-xl-1">
                         <div class="form-group mb-3 mt-4 pt-1">													
-                            <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                            <button type="button" class="btn btn-green-custom" (click)="AgregarDiuresis()"><i class="fas fa-lg fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">diuresis 001</div>
-                    <div class="col-xl-2 text-right">
+                <div class="row box-shadow" *ngFor="let lista of listadoDiuresis; let i = index">
+                    <div class="col-xl-12 fw-bold">{{lista.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</div>
+                    <div class="col-xl-10">{{lista.Nota}}</div>
+                    <!-- <div class="col-xl-2 text-right">
                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
+                    </div> -->
+                    <br>
                 </div>
                 <br>
                 <hr/>
@@ -291,33 +301,25 @@
                     </div>
                     <div class="col-xl-1">
                         <div class="form-group mb-3 mt-4 pt-1">													
-                            <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                            <button type="button" class="btn btn-green-custom" (click)="AgregarDeposicion()"><i class="fas fa-lg fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
                 <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">Deposición 001</div>
-                    <div class="col-xl-2 text-right">
+                <div class="row box-shadow" *ngFor="let lista of listadoDeposicion; let i = index">
+                    <div class="col-xl-12 fw-bold">{{lista.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</div>
+                    <div class="col-xl-10">{{lista.Nota}}</div>
+                    <!-- <div class="col-xl-2 text-right">
                         <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
-                </div>
-                <br>
-                <div class="row box-shadow">
-                    <div class="col-xl-12 fw-bold">02/02/2022 - 08:13:25</div>
-                    <div class="col-xl-10">Deposición 002</div>
-                    <div class="col-xl-2 text-right">
-                        <button type="button" class="btn btn-danger btn-sm"><i class="fas fa-lg fa-trash"></i></button>
-                    </div>
+                    </div> -->
+                    <br>
                 </div>
                 <br>
             </div>
         </form>
     </div>
     <div class="modal-footer">							
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal"  data-bs-dismiss="modal"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
-        <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button>
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal"  data-bs-dismiss="modal" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
       </div>
 </div>

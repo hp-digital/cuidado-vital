@@ -6,6 +6,7 @@ import { ControlPresionDTO } from "./control-presion";
 import { HistoriaExternaDTO } from "./historia-externa";
 import { HojaMonitoreoSignosDTO } from "./hoja-monitoreo";
 import { MedicoAtencionDTO } from "./medico-atiente";
+import { NotaEnfermeraDTO } from "./nota-enfermera";
 import { OrdenDTO } from "./OrdenDTO";
 import { HistoriaPrimeraAtencionDTO } from "./primera-atencion";
 import { RecetaDTO } from "./RecetaDTO";
@@ -34,4 +35,5 @@ export class HistoriaCuidadoDTO{
     HistoriaExterna?:HistoriaExternaDTO;
     PrimeraAtencion?:HistoriaPrimeraAtencionDTO;
     HojaMonitoreoSignos?:HojaMonitoreoSignosDTO;
+    NotaEnfermera?: NotaEnfermeraDTO;
 }

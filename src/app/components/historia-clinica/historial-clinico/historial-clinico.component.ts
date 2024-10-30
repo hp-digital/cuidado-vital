@@ -767,7 +767,7 @@ export class HistorialClinicoComponent implements OnInit {
 
         this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
           next: (data) => {
-            this.MostrarNotificacionSuccessModal('La orden se guardó con éxito.', '');
+            this.MostrarNotificacionSuccessModal('El registro de la primera atención se guardó con éxito.', '');
             this.CerrarModal();
           },
           error: (e) => {

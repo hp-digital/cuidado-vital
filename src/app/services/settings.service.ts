@@ -43,6 +43,7 @@ export class SettingsService {
         this.setUserSetting('usuario', decodeToken.usuario);
         this.setUserSetting('idRol', decodeToken.idRol);  
         this.setUserSetting('nombres', decodeToken.nombres);
+        this.setUserSetting('apellidos', decodeToken.apellidos);
         /* if(Array.isArray(decodeToken.idRol)){
           let aRol:number[]=[];
           decodeToken.idRol.forEach((element:any) => {
