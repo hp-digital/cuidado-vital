@@ -1,465 +1,1128 @@
 <div class="modal-content">
     <div class="modal-header">
         <h4 class="modal-title">BALANCE HIDRICO </h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
-    <div class="modal-body">							
-        <form>
+    <div class="modal-body">
+        <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
             <div id="header-component">
                 <div class="row">
-                    <div class="col-xl-3">
+                    <div class="col-xl-4">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Paciente : </label> <span>Maritza Córdova Juarez</span>
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Nro. HCL : </label> <span>75488545</span>
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
                         </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Fecha : </label> <span>22/03/2022</span>
+                            <label class="fw-bold">Fecha : </label> <span>{{fechaHoy| date: 'dd-MM-yyyy'}}</span>
                         </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="fw-bold">Hora : </label> <span>08:30 am</span>
-                        </div>
-                    </div>																
+                    </div>															
                 </div>
                 <div class="row">
-                    <div class="col-xl-3">
+                    <div class="col-xl-4">
                         <div class="form-group mb-3">
-                            <label class="fw-bold">Estado civil : </label> <span>Soltero</span>
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
                         </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="fw-bold">Edad : </label> <span>28 años</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="fw-bold">Sexo : </label> <span>Femenino</span>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="fw-bold">Tipo paciente : </label> <span>Particular</span>
-                        </div>
-                    </div>																
+                    </div>															
                 </div>
             </div>
-            <hr/>
+            <hr/>            
             <div class="row">
-                <div class="col-xl-4">
+                <div class="col-xl-3 col-sm-3">
                     <div class="form-group mb-3">
                         <label class="cform-label" for="">Peso</label>
-                        <input type="text" class="form-control">
+                        <input type="number" class="form-control" formControlName="inputPeso" min="0"
+                            (blur)="CalcularIndiceMasaCorporal()" onKeypress="if (
+                                (event.keyCode < 48 || event.keyCode > 57) &&
+                                event.keyCode !== 9 &&
+                                event.keyCode !== 44 &&
+                                event.keyCode !== 46
+                              ) event.returnValue = false;" maxlength="5"
+                            oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                    </div>
+                    <div *ngIf="Controls['inputPeso'].invalid && (Controls['inputPeso'].dirty || Controls['inputPeso'].touched)"
+                        class="text-error">
+                        <div>Campo obligatorio.</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-3">
+                    <div class="form-group mb-3">
+                        <label class="cform-label" for="">Talla</label>
+                        <input type="number" class="form-control" formControlName="inputTalla"
+                            (blur)="CalcularIndiceMasaCorporal()">
+                    </div>
+                    <div *ngIf="Controls['inputTalla'].invalid && (Controls['inputTalla'].dirty || Controls['inputTalla'].touched)"
+                        class="text-error">
+                        <div>Campo obligatorio.</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-3">
+                    <div class="form-group mb-3">
+                        <label class="cform-label" for="">IMC</label>
+                        <input type="number" class="form-control" formControlName="inputImc"
+                            (blur)="CalcularIndiceMasaCorporal()">
+                    </div>
+                    <div *ngIf="Controls['inputImc'].invalid && (Controls['inputImc'].dirty || Controls['inputImc'].touched)"
+                        class="text-error">
+                        <div>Campo obligatorio.</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-3">
+                    <div class="form-group mb-3">
+                        <label class="cform-label" for="">Tiempo</label>
+                        <input type="number" class="form-control" formControlName="inputTiempo">
+                    </div>
+                    <div *ngIf="Controls['inputTiempo'].invalid && (Controls['inputTiempo'].dirty || Controls['inputTiempo'].touched)"
+                        class="text-error">
+                        <div>Campo obligatorio.</div>
                     </div>
                 </div>
             </div>
-            <hr/>
-            <div class="row">
-                <div class="col-xl-2 mt-1">
-                    <h6> Ingresos</h6>
+            <hr />
+            <div id="contenedor-Ingresos" [ngStyle]="{'border': verErrorIngreso? 'solid red' : ''}">
+                <div class="row">
+                    <div class="col-xl-2 col-sm-2 mt-1">
+                        <h6> Ingresos</h6>
+                    </div>
                 </div>
-                <div class="col-xl-10 text-right">
-                    <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for=""> <strong>Descripcion</strong> </label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for=""><strong>1er Turno</strong> </label>
-                        </div>
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for=""> <strong>2do Turno</strong></label>
-                        </div>
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for=""> <strong>3er Turno</strong></label>
-                        </div>
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for=""><strong>Total</strong> </label>
+                <div class="row">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-4 col-sm-4 ">
+                            <label class="form-label mt-2" for=""> <strong>Descripcion</strong> </label>
                         </div>
                     </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for="">Oral</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <label class="form-label mt-2" for=""><strong>1er Turno</strong> </label>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <label class="form-label mt-2" for=""> <strong>2do Turno</strong></label>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <label class="form-label mt-2" for=""><strong>Total</strong> </label>
+                            </div>
                         </div>
                     </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for="">Parental</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for="">Sangre</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-12">
-                        <label class="form-label mt-2" for="">Agua oxidación(formula)</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for="">Otros</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for="">Total de Horas</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control" readonly>
-                        </div>
-                        <div class="col-xl-3">
-                            
-                        </div>
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for="">Sumatoria Total</label>
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control" readonly>
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <hr/>
-            <div class="row">
-                <div class="col-xl-2 mt-1">
-                    <h6> Egresos</h6>
                 </div>
-                <div class="col-xl-10 text-right">
-                    <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-plus"></i></button>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-4 col-sm-4 ">
+                            <label class="form-label mt-2" for="">Oral</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerOral"
+                                    (click)="SumarIngresosOral()" (blur)="SumarIngresosOral()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerOral'].invalid && (Controls['inputPrimerOral'].dirty || Controls['inputPrimerOral'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoOral"
+                                    (click)="SumarIngresosOral()" (blur)="SumarIngresosOral()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoOral'].invalid && (Controls['inputSegundoOral'].dirty || Controls['inputSegundoOral'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalOral"
+                                    (click)="SumarIngresosOral()" (blur)="SumarIngresosOral()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;" readonly>
+                                <div *ngIf="Controls['inputTotalOral'].invalid && (Controls['inputTotalOral'].dirty || Controls['inputTotalOral'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-4 col-sm-4 ">
+                            <label class="form-label mt-2" for="">Parenteral</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerParental"
+                                    (click)="SumarIngresosParental()" (blur)="SumarIngresosParental()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerParental'].invalid && (Controls['inputPrimerParental'].dirty || Controls['inputPrimerParental'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoParental"
+                                    (click)="SumarIngresosParental()" (blur)="SumarIngresosParental()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoParental'].invalid && (Controls['inputSegundoParental'].dirty || Controls['inputSegundoParental'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalParental"
+                                    (click)="SumarIngresosParental()" (blur)="SumarIngresosParental()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;" readonly>
+                                <div *ngIf="Controls['inputTotalParental'].invalid && (Controls['inputTotalParental'].dirty || Controls['inputTotalParental'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-4 col-sm-4 ">
+                            <label class="form-label mt-2" for="">Parenteral tratamiento</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerParentalTratamiento"
+                                    (click)="SumarIngresosParentalTratamiento()" (blur)="SumarIngresosParentalTratamiento()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerParentalTratamiento'].invalid && (Controls['inputPrimerParentalTratamiento'].dirty || Controls['inputPrimerParentalTratamiento'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoParentalTratamiento"
+                                    (click)="SumarIngresosParentalTratamiento()" (blur)="SumarIngresosParentalTratamiento()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoParentalTratamiento'].invalid && (Controls['inputSegundoParentalTratamiento'].dirty || Controls['inputSegundoParentalTratamiento'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalParentalTratamiento"
+                                    (click)="SumarIngresosParentalTratamiento()" (blur)="SumarIngresosParentalTratamiento()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;" readonly>
+                                <div *ngIf="Controls['inputTotalParentalTratamiento'].invalid && (Controls['inputTotalParentalTratamiento'].dirty || Controls['inputTotalParentalTratamiento'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-4 col-sm-4 ">
+                            <label class="form-label mt-2" for="">Sangre</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerSangre"
+                                    (click)="SumarIngresosSangre()" (blur)="SumarIngresosSangre()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerSangre'].invalid && (Controls['inputPrimerSangre'].dirty || Controls['inputPrimerSangre'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoSangre"
+                                    (click)="SumarIngresosSangre()" (blur)="SumarIngresosSangre()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoSangre'].invalid && (Controls['inputSegundoSangre'].dirty || Controls['inputSegundoSangre'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalSangre"
+                                    (click)="SumarIngresosSangre()" (blur)="SumarIngresosSangre()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;" readonly>
+                                <div *ngIf="Controls['inputTotalSangre'].invalid && (Controls['inputTotalSangre'].dirty || Controls['inputTotalSangre'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-12 col-sm-12">
+                            <label class="form-label mt-2" for="">Agua oxidación(formula)</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerAguaOxidacion"
+                                    (click)="PrimerIngresosAguaOxidacion()" (blur)="PrimerIngresosAguaOxidacion()"
+                                    min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                        event.keyCode !== 9 &&
+                                        event.keyCode !== 44 &&
+                                        event.keyCode !== 46
+                                      ) event.returnValue = false;" maxlength="6"
+                                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                <div *ngIf="Controls['inputPrimerAguaOxidacion'].invalid && (Controls['inputPrimerAguaOxidacion'].dirty || Controls['inputPrimerAguaOxidacion'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoAguaOxidacion"
+                                    (click)="SegundoIngresosAguaOxidacion()" (blur)="SegundoIngresosAguaOxidacion()"
+                                    min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                        event.keyCode !== 9 &&
+                                        event.keyCode !== 44 &&
+                                        event.keyCode !== 46
+                                      ) event.returnValue = false;" maxlength="6"
+                                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                <div *ngIf="Controls['inputSegundoAguaOxidacion'].invalid && (Controls['inputSegundoAguaOxidacion'].dirty || Controls['inputSegundoAguaOxidacion'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalAguaOxidacion"
+                                    min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                        event.keyCode !== 9 &&
+                                        event.keyCode !== 44 &&
+                                        event.keyCode !== 46
+                                      ) event.returnValue = false;" maxlength="6"
+                                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" readonly>
+                                <div *ngIf="Controls['inputTotalAguaOxidacion'].invalid && (Controls['inputTotalAguaOxidacion'].dirty || Controls['inputTotalAguaOxidacion'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="row">
+                            <div class="col-xl-3 col-sm-3">
+                                <label class="form-label mt-2" for="">Otros</label>
+                            </div>
+                            <div class="col-xl-9">
+                                <input type="text" class="form-control" formControlName="inputTextoPrimerOtro"
+                                    (click)="SumarIngresosOtro()" (blur)="SumarIngresosOtro()" />
+                                <div *ngIf="Controls['inputTextoPrimerOtro'].invalid && (Controls['inputTextoPrimerOtro'].dirty || Controls['inputTextoPrimerOtro'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerOtro"
+                                    (click)="SumarIngresosOtro()" (blur)="SumarIngresosOtro()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerOtro'].invalid && (Controls['inputPrimerOtro'].dirty || Controls['inputPrimerOtro'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoOtro"
+                                    (click)="SumarIngresosOtro()" (blur)="SumarIngresosOtro()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoOtro'].invalid && (Controls['inputSegundoOtro'].dirty || Controls['inputSegundoOtro'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-sm-2">
+                                <div class="row">
+                                    <div class="col-xl-8 col-sm-8">
+                                        <input type="number" class="form-control" formControlName="inputTotalOtro"
+                                            min="0" onKeypress="if (
+                                            (event.keyCode < 48 || event.keyCode > 57) &&
+                                            event.keyCode !== 9 &&
+                                            event.keyCode !== 44 &&
+                                            event.keyCode !== 46
+                                            ) event.returnValue = false;" readonly>
+                                        <div *ngIf="Controls['inputTotalOtro'].invalid && (Controls['inputTotalOtro'].dirty || Controls['inputTotalOtro'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-2 col-sm-2">
+                                <button type="button" class="btn btn-green-custom"
+                                    (click)="AgregarOtrosIngresos()"><i class="fa fa-plus"></i></button>
+                            </div>
+                        </div>
+                        <ol type="a" class="mt-3">
+                            <li *ngFor="let lista of listadoOtrosIngreso">
+                                <div class="row mb-2">
+                                    <div class="col-xl-8 col-sm-8"><span class="fw-bold">Otros: </span> {{lista.Texto}}
+                                        &nbsp;&nbsp;<span class="fw-bold">Primero: </span> {{lista.PrimerTurno}}
+                                        &nbsp;&nbsp;<span class="fw-bold">Segundo: </span> {{lista.SegundoTurno}}
+                                        &nbsp;&nbsp;<span class="fw-bold">Total: </span>{{lista.Total}}</div>
+                                    <div class="col-xl-4 col-sm-4  text-right">
+                                        <button type="button" class="btn btn-green-custom btn-sm"
+                                            (click)="ActualizarOtrosIngresos(lista)"><i
+                                                class="fas fa-pencil-alt"></i></button>&nbsp;
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            (click)="EliminarOtrosIngresos(lista.Item)"><i
+                                                class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-4 col-sm-4 ">
+                            <label class="form-label mt-2" for="" hidden>Total de Horas</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="text" class="form-control" readonly hidden>
+                            </div>
+                            <div class="col-xl-1 col-sm-1">
 
-            <div class="row">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for=""> <strong>Descripcion</strong> </label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for=""><strong>1er Turno</strong> </label>
-                        </div>
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for=""> <strong>2do Turno</strong></label>
-                        </div>
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for=""> <strong>3er Turno</strong></label>
-                        </div>
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for=""><strong>Total</strong> </label>
+                            </div>
+                            <div class="col-xl-3 col-sm-3">
+                                <label class="form-label mt-2" for="">Sumatoria Total</label>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalSumatoriaIngresos"
+                                    readonly>
+                            </div>
                         </div>
                     </div>
-                </div>	
+                    <div class="box-shadow mt-3" *ngIf="verListaIngresosEgresos">
+                        <ng-container *ngFor="let lista of listadoBalanceHidrico">
+                            <div class="row" *ngIf="lista.Item == esItemVisualizar">
+                                <div class="col-xl-4 col-sm-4  fw-bold"><b>Fecha: </b>{{lista.Ingreso?.FechaTexto | date: 'dd-MM-yyyy HH:mm:ss' }}</div>
+                                <div class="col-xl-6 col-sm-6"></div>
+                                <div class="col-xl-2 col-sm-2 text-right">
+                                </div>
+                                <div class="col-xl-12 col-sm-12"><b>Primer Turno</b></div>
+                                <div class="col-xl-3 col-sm-3"><b>Oral: </b>{{lista.Ingreso?.Oral?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Parenteral: </b>{{lista.Ingreso?.Parental?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Parenteral tratamiento: </b>{{lista.Ingreso?.ParentalTratamiento?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Sangre: </b>{{lista.Ingreso?.Sangre?.PrimerTurno}}</div>
+                                <div class="col-xl-3 col-sm-3"><b>Agua Oxidacion:
+                                    </b>{{lista.Ingreso?.AguaOxidacion?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2 mb-3"><b>Otros: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let otro of lista.Ingreso?.Otros">
+                                            <li *ngIf="otro.PrimerTurno != ''">
+                                                {{otro.Texto}} {{otro.PrimerTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+
+                                <div class="col-xl-12 col-sm-12"><b>Segundo Turno</b></div>
+                                <div class="col-xl-3 col-sm-3"><b>Oral: </b>{{lista.Ingreso?.Oral?.SegundoTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Parenteral: </b>{{lista.Ingreso?.Parental?.SegundoTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Parenteral tratamiento: </b>{{lista.Ingreso?.ParentalTratamiento?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Sangre: </b>{{lista.Ingreso?.Sangre?.SegundoTurno}}</div>
+                                <div class="col-xl-3 col-sm-3"><b>Agua Oxidacion:
+                                    </b>{{lista.Ingreso?.AguaOxidacion?.SegundoTurno}}</div>
+                                <div class="col-xl-2 col-sm-2 mb-3"><b>Otros: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let otro of lista.Ingreso?.Otros">
+                                            <li *ngIf="otro.SegundoTurno != ''">
+                                                {{otro.Texto}} {{otro.SegundoTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12">
+                    <div class="form-group mb-3">
+                        <input type="number" class="form-control" formControlName="inputArrayIngreso" hidden>
+                    </div>
+                </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
+            <div *ngIf="Controls['inputArrayIngreso'].invalid && (Controls['inputArrayIngreso'].dirty || Controls['inputArrayIngreso'].touched)"
+                class="text-error">
+                <div>Campo obligatorio.</div>
+            </div>
+            <hr />
+            <div id="contenedor-Egregos" [ngStyle]="{'border': verErrorEgreso? 'solid red' : ''}">
+                <div class="row">
+                    <div class="col-xl-2 col-sm-2 mt-1">
+                        <h6> Egresos</h6>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-4 col-sm-4 ">
+                            <label class="form-label mt-2" for=""> <strong>Descripcion</strong> </label>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <label class="form-label mt-2" for=""><strong>1er Turno</strong> </label>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <label class="form-label mt-2" for=""> <strong>2do Turno</strong></label>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <label class="form-label mt-2" for=""><strong>Total</strong> </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
                         <label class="form-label mt-2" for="">Orina</label>
                     </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerOrina"
+                                    (click)="SumarEgresosOrina()" (blur)="SumarEgresosOrina()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerOrina'].invalid && (Controls['inputPrimerOrina'].dirty || Controls['inputPrimerOrina'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoOrina"
+                                    (click)="SumarEgresosOrina()" (blur)="SumarEgresosOrina()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoOrina'].invalid && (Controls['inputSegundoOrina'].dirty || Controls['inputSegundoOrina'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalOrina"
+                                    (click)="SumarEgresosOrina()" (blur)="SumarEgresosOrina()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;" readonly>
+                                <div *ngIf="Controls['inputTotalOrina'].invalid && (Controls['inputTotalOrina'].dirty || Controls['inputTotalOrina'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
                         <label class="form-label mt-2" for="">Vómito</label>
                     </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerVomito"
+                                    (click)="SumarEgresosVomito()" (blur)="SumarEgresosVomito()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerVomito'].invalid && (Controls['inputPrimerVomito'].dirty || Controls['inputPrimerVomito'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoVomito"
+                                    (click)="SumarEgresosVomito()" (blur)="SumarEgresosVomito()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoVomito'].invalid && (Controls['inputSegundoVomito'].dirty || Controls['inputSegundoVomito'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalVomito"
+                                    (click)="SumarEgresosVomito()" (blur)="SumarEgresosVomito()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;" readonly>
+                                <div *ngIf="Controls['inputTotalVomito'].invalid && (Controls['inputTotalVomito'].dirty || Controls['inputTotalVomito'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>	
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <label class="form-label mt-2" for="">Aspiración</label>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerAspiracion"
+                                    (click)="SumarEgresosAspiracion()" (blur)="SumarEgresosAspiracion()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerAspiracion'].invalid && (Controls['inputPrimerAspiracion'].dirty || Controls['inputPrimerAspiracion'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoAspiracion"
+                                    (click)="SumarEgresosAspiracion()" (blur)="SumarEgresosAspiracion()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoAspiracion'].invalid && (Controls['inputSegundoAspiracion'].dirty || Controls['inputSegundoAspiracion'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalAspiracion"
+                                    (click)="SumarEgresosAspiracion()" (blur)="SumarEgresosAspiracion()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;" readonly>
+                                <div *ngIf="Controls['inputTotalAspiracion'].invalid && (Controls['inputTotalAspiracion'].dirty || Controls['inputTotalAspiracion'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="row">
+                            <div class="col-xl-3 col-sm-3">
+                                <label class="form-label mt-2" for="">Drenaje</label>
+                            </div>
+                            <div class="col-xl-9">
+                                <input type="text" class="form-control" formControlName="inputTextoDrenaje"
+                                    (click)="SumarEgresosDrenaje()" (blur)="SumarEgresosDrenaje()" />
+                                <div *ngIf="Controls['inputTextoDrenaje'].invalid && (Controls['inputTextoDrenaje'].dirty || Controls['inputTextoDrenaje'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerDrenaje"
+                                    (click)="SumarEgresosDrenaje()" (blur)="SumarEgresosDrenaje()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerDrenaje'].invalid && (Controls['inputPrimerDrenaje'].dirty || Controls['inputPrimerDrenaje'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoDrenaje"
+                                    (click)="SumarEgresosDrenaje()" (blur)="SumarEgresosDrenaje()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoDrenaje'].invalid && (Controls['inputSegundoDrenaje'].dirty || Controls['inputSegundoDrenaje'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <div class="row">
+                                    <div class="col-xl-8 col-sm-8">
+                                        <input type="number" class="form-control" formControlName="inputTotalDrenaje"
+                                            (click)="SumarEgresosDrenaje()" (blur)="SumarEgresosDrenaje()" min="0"
+                                            onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;" readonly>
+                                        <div *ngIf="Controls['inputTotalDrenaje'].invalid && (Controls['inputTotalDrenaje'].dirty || Controls['inputTotalDrenaje'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-sm-4 ">
+                                        <button type="button" class="btn btn-green-custom"
+                                            (click)="AgregarDrenajeEgresos()"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ol type="a" class="mt-3">
+                            <li *ngFor="let lista of listadoDrenaje">
+                                <div class="row mb-2">
+                                    <div class="col-xl-8 col-sm-8"><span class="fw-bold">Drenaje: </span>
+                                        {{lista.Texto}}&nbsp;&nbsp;<span class="fw-bold">Primero: </span>
+                                        {{lista.PrimerTurno}}&nbsp;&nbsp; <span class="fw-bold">Segundo: </span>
+                                        {{lista.SegundoTurno}}&nbsp;&nbsp; <span class="fw-bold">Total: </span>
+                                        {{lista.Total}}</div>
+                                    <div class="col-xl-4 col-sm-4  text-right">
+                                        <button type="button" class="btn btn-green-custom btn-sm"
+                                            (click)="ActualizarDrenaje(lista)"><i
+                                                class="fas fa-pencil-alt"></i></button>&nbsp;
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            (click)="EliminarDrenaje(lista.Item)"><i class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <label class="form-label mt-2" for="">Perdida insensible (fórmula)</label>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerPerdidaIncesante"
+                                    (click)="PrimerEgresoPerdidaIncesante()" (blur)="PrimerEgresoPerdidaIncesante()"
+                                    min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                        event.keyCode !== 9 &&
+                                        event.keyCode !== 44 &&
+                                        event.keyCode !== 46
+                                      ) event.returnValue = false;" maxlength="6"
+                                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                <div *ngIf="Controls['inputPrimerPerdidaIncesante'].invalid && (Controls['inputPrimerPerdidaIncesante'].dirty || Controls['inputPrimerPerdidaIncesante'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoPerdidaIncesante"
+                                    (click)="SegundoEgresoPerdidaIncesante()" (blur)="SegundoEgresoPerdidaIncesante()"
+                                    min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                        event.keyCode !== 9 &&
+                                        event.keyCode !== 44 &&
+                                        event.keyCode !== 46
+                                      ) event.returnValue = false;" maxlength="6"
+                                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);">
+                                <div *ngIf="Controls['inputSegundoPerdidaIncesante'].invalid && (Controls['inputSegundoPerdidaIncesante'].dirty || Controls['inputSegundoPerdidaIncesante'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalPerdidaIncesante"
+                                    min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                        event.keyCode !== 9 &&
+                                        event.keyCode !== 44 &&
+                                        event.keyCode !== 46
+                                      ) event.returnValue = false;" maxlength="6"
+                                    oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" readonly>
+                                <div *ngIf="Controls['inputTotalPerdidaIncesante'].invalid && (Controls['inputTotalPerdidaIncesante'].dirty || Controls['inputTotalPerdidaIncesante'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-12 col-sm-12">
+                            <label class="form-label mt-2" for="">Deposiciones</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerDeposicion"
+                                    (click)="SumarEgresosDeposicion()" (blur)="SumarEgresosDeposicion()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerDeposicion'].invalid && (Controls['inputPrimerDeposicion'].dirty || Controls['inputPrimerDeposicion'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoDeposicion"
+                                    (click)="SumarEgresosDeposicion()" (blur)="SumarEgresosDeposicion()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoDeposicion'].invalid && (Controls['inputSegundoDeposicion'].dirty || Controls['inputSegundoDeposicion'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalDeposicion"
+                                    (click)="SumarEgresosDeposicion()" (blur)="SumarEgresosDeposicion()" min="0"
+                                    onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;" readonly>
+                                <div *ngIf="Controls['inputTotalDeposicion'].invalid && (Controls['inputTotalDeposicion'].dirty || Controls['inputTotalDeposicion'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="row">
+                            <div class="col-xl-3 col-sm-3">
+                                <label class="form-label mt-2" for="">Otros</label>
+                            </div>
+                            <div class="col-xl-9">
+                                <input type="text" class="form-control" formControlName="inputTextoSegundoOtro"
+                                    (click)="SumarEgresosOtro()" (blur)="SumarEgresosOtro()" />
+                                <div *ngIf="Controls['inputTextoSegundoOtro'].invalid && (Controls['inputTextoSegundoOtro'].dirty || Controls['inputTextoSegundoOtro'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputPrimerOtroEgreso"
+                                    (click)="SumarEgresosOtro()" (blur)="SumarEgresosOtro()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputPrimerOtroEgreso'].invalid && (Controls['inputPrimerOtroEgreso'].dirty || Controls['inputPrimerOtroEgreso'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputSegundoOtroEgreso"
+                                    (click)="SumarEgresosOtro()" (blur)="SumarEgresosOtro()" min="0" onKeypress="if (
+                                        (event.keyCode < 48 || event.keyCode > 57) &&
+                                         event.keyCode !== 9 &&
+                                         event.keyCode !== 44 &&
+                                         event.keyCode !== 46
+                                      ) event.returnValue = false;">
+                                <div *ngIf="Controls['inputSegundoOtroEgreso'].invalid && (Controls['inputSegundoOtroEgreso'].dirty || Controls['inputSegundoOtroEgreso'].touched)"
+                                    class="text-error">
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <div class="row">
+                                    <div class="col-xl-8 col-sm-8">
+                                        <input type="number" class="form-control" formControlName="inputTotalOtroEgreso"
+                                            (click)="SumarEgresosOtro()" (blur)="SumarEgresosOtro()" min="0" onKeypress="if (
+                                                (event.keyCode < 48 || event.keyCode > 57) &&
+                                                 event.keyCode !== 9 &&
+                                                 event.keyCode !== 44 &&
+                                                 event.keyCode !== 46
+                                              ) event.returnValue = false;" readonly>
+                                        <div *ngIf="Controls['inputTotalOtroEgreso'].invalid && (Controls['inputTotalOtroEgreso'].dirty || Controls['inputTotalOtroEgreso'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-sm-4 ">
+                                        <button type="button" class="btn btn-green-custom"
+                                            (click)="AgregarOtrosEgresos()"><i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ol type="a" class="mt-3">
+                            <li *ngFor="let lista of listadoOtrosEgreso">
+                                <div class="row mb-2">
+                                    <div class="col-xl-8 col-sm-8"><span class="fw-bold">Otro: </span>
+                                        {{lista.Texto}}&nbsp;&nbsp;<span class="fw-bold">Primero: </span>
+                                        {{lista.PrimerTurno}} &nbsp;&nbsp;<span class="fw-bold">Segundo: </span>
+                                        {{lista.SegundoTurno}} &nbsp;&nbsp;<span class="fw-bold">Total: </span>
+                                        {{lista.Total}}</div>
+                                    <div class="col-xl-4 col-sm-4  text-right">
+                                        <button type="button" class="btn btn-green-custom btn-sm"
+                                            (click)="ActualizarOtrosEgresos(lista)"><i
+                                                class="fas fa-pencil-alt"></i></button>&nbsp;
+                                        <button type="button" class="btn btn-danger btn-sm"
+                                            (click)="EliminarOtrosEgresos(lista.Item)"><i
+                                                class="fas fa-trash"></i></button>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-xl-4 col-sm-4 ">
+                        <div class="col-xl-4 col-sm-4 ">
+                            <label class="form-label mt-2" for="" hidden>Total de Horas</label>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-sm-8">
+                        <div class="row">
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="text" class="form-control" readonly hidden>
+                            </div>
+                            <div class="col-xl-1 col-sm-1">
+
+                            </div>
+                            <div class="col-xl-3 col-sm-3">
+                                <label class="form-label mt-2" for="">Sumatoria Total</label>
+                            </div>
+                            <div class="col-xl-4 col-sm-4 ">
+                                <input type="number" class="form-control" formControlName="inputTotalSumatoriaEgreso"
+                                    readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-sm-12 text-right mt-3">
+                        <button type="button" class="btn btn-green-custom" (click)="AgregarAmbosBalanceHidrico()"><i
+                                class="fas fa-lg fa-plus"></i> Agregar registro</button>
+                    </div>
+                    <div class="box-shadow mt-3" *ngIf="verListaIngresosEgresos">
+                        <ng-container *ngFor="let lista of listadoBalanceHidrico">
+                            <div class="row" *ngIf="lista.Item == esItemVisualizar">
+                                <div class="col-xl-4 col-sm-4  fw-bold"><b>Fecha: </b>{{lista.Egreso?.FechaTexto | date: 'dd-MM-yyyy HH:mm:ss' }}</div>
+                                <div class="col-xl-6 col-sm-6"></div>
+                                <div class="col-xl-2 col-sm-2 text-right">
+
+                                </div>
+                                <div class="col-xl-12 col-sm-12"><b>Primer turno: </b></div>
+                                <div class="col-xl-2 col-sm-2"><b>Orina: </b>{{lista.Egreso?.Orina?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Vómito: </b>{{lista.Egreso?.Vomito?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Aspiración: </b>{{lista.Egreso?.Aspiracion?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Drenaje: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let drenaje of lista.Egreso?.Drenaje">
+                                            <li *ngIf="drenaje.PrimerTurno!=''">
+                                                {{drenaje.Texto}} {{drenaje.PrimerTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+                                <div class="col-xl-2 col-sm-2"><b>Pérdida incesante:
+                                    </b>{{lista.Egreso?.PerdidaIncesante?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Deposición: </b>{{lista.Egreso?.Deposiciones?.PrimerTurno}}
+                                </div>
+                                <div class="col-xl-10 col-sm-10 mb-3"><b>Otros: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let otro of lista.Egreso?.Otros">
+                                            <li *ngIf="otro.PrimerTurno != ''">
+                                                {{otro.Texto}} {{otro.PrimerTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+
+                                <div class="col-xl-12 col-sm-12"><b>Segundo turno: </b></div>
+                                <div class="col-xl-2 col-sm-2"><b>Orina: </b>{{lista.Egreso?.Orina?.SegundoTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Vómito: </b>{{lista.Egreso?.Vomito?.SegundoTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Aspiración: </b>{{lista.Egreso?.Aspiracion?.SegundoTurno}}
+                                </div>
+                                <div class="col-xl-2 col-sm-2"><b>Drenaje: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let drenaje of lista.Egreso?.Drenaje">
+                                            <li *ngIf="drenaje.SegundoTurno != ''">
+                                                {{drenaje.Texto}} {{drenaje.SegundoTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+                                <div class="col-xl-2 col-sm-2"><b>Pérdida incesante:
+                                    </b>{{lista.Egreso?.PerdidaIncesante?.SegundoTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Deposición: </b>{{lista.Egreso?.Deposiciones?.SegundoTurno}}
+                                </div>
+                                <div class="col-xl-10 col-sm-10 mb-3"><b>Otros: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let otro of lista.Egreso?.Otros">
+                                            <li *ngIf="otro.SegundoTurno != ''">
+                                                {{otro.Texto}} {{otro.SegundoTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-sm-12">
+                    <div class="form-group mb-3">
+                        <input type="number" class="form-control" formControlName="inputArrayEgresos" hidden>
+                    </div>
+                </div>
             </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for="">Succión</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>	
+            <div *ngIf="Controls['inputArrayEgresos'].invalid && (Controls['inputArrayEgresos'].dirty || Controls['inputArrayEgresos'].touched)"
+                class="text-error">
+                <div>Campo obligatorio.</div>
             </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-12">
-                        <label class="form-label mt-2" for="">Drenaje</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for="">Perdida Incesantes(fórmula)</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-12">
-                        <label class="form-label mt-2" for="">Deposiciones</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-12">
-                        <label class="form-label mt-2" for="">Otros</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control">
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <div class="row mt-3">
-                <div class="col-xl-4">
-                    <div class="col-xl-4">
-                        <label class="form-label mt-2" for="">Total de Horas</label>
-                    </div>
-                </div>	
-                <div class="col-xl-8">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control" readonly>
-                        </div>
-                        <div class="col-xl-3">
-                            
-                        </div>
-                        <div class="col-xl-3">
-                            <label class="form-label mt-2" for="">Sumatoria Total</label>
-                        </div>
-                        <div class="col-xl-3">
-                            <input type="text" class="form-control" readonly>
-                        </div>
-                    </div>
-                </div>	
-            </div>
-            <hr/>
+            <hr />
             <h6>Balance Hídrico</h6>
-            <div class="col-xl-4">
+            <div class="col-xl-4 col-sm-4">
                 <div class="form-group mb-3">
-                    <input type="text" class="form-control" readonly>
+                    <input type="number" class="form-control" readonly formControlName="inputBalanceHidrico">
+                </div>
+            </div>
+            <div class="box-shadow mt-3" *ngFor="let lista of listadoBalanceHidrico;">
+                <div class="row">
+                    <div class="col-xl-2 col-sm-2 fw-bold"><b>Fecha: </b>{{lista.FechaTexto | date: 'dd-MM-yyyy' }}</div>
+                    <div class="col-xl-1 col-sm-1 fw-bold"><b>Hora: </b>{{lista.FechaTexto | date: 'HH:mm'}}</div>
+                    <div class="col-xl-3 col-sm-3"><b>Balance Hidrico: </b>{{lista.BalanceHidrico}}</div>
+                    <div class="col-xl-2 col-sm-2"><b>Ingresos: </b>{{lista.Ingreso?.SumatoriaTotal}}</div>
+                    <div class="col-xl-2 col-sm-2"><b>Egresos: </b>{{lista.Egreso?.SumatoriaTotal}}</div>
+                    <div class="col-xl-2 col-sm-2 text-right">
+                        <button type="button" class="btn btn-danger btn-sm"
+                            (click)="EliminarBalanceHidricoAmbos(lista.Item)"><i
+                                class="fas fa-lg fa-trash"></i></button> &nbsp;
+                        <button type="button" class="btn btn-primary btn-sm"
+                            (click)="VerListaIngresosyEgresos(lista.Item)"><i class="fas fa-lg fa-eye"></i></button>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
-    <div class="modal-footer">							
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modal-hospitalizacion"  data-bs-dismiss="modal"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
-        <button type="button" class="btn btn-green-light-custom"><i class="fas fa-file-pdf"></i> Imprimir</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
-        </div>
+    <div class="modal-footer">
+       
+        <button type="button" *ngIf="!esEstadoSolicitudCamaAlta" class="btn btn-green-custom" (click)="Guardar()"><i
+                class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i
+                class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
 </div>

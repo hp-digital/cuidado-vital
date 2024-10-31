@@ -38,6 +38,11 @@ import { SignoVitalNotaDTO } from '@models/signo-vital-notal';
 import { NotaEnfermeraDTO } from '@models/nota-enfermera';
 import { HojaMonitoreoSignosDTO } from '@models/hoja-monitoreo';
 import { SignoVitalHojaDTO } from '@models/signo-vital-hoja';
+import { BalanceHidricoDetalleDTO } from '@models/balance-hidrico-detalle';
+import { BalanceHidricoEgresoDTO } from '@models/balance-hidrico-egreso';
+import { BalanceHidricoIngresoDTO } from '@models/balance-hidrico-ingresos';
+import { BalanceHidricoTurnoDTO } from '@models/balance-hidrico-turno';
+import { BalanceHidricoDTO } from '@models/balance-hidrico';
 
 @Component({
   selector: 'app-receta',
@@ -1037,6 +1042,125 @@ export class RecetaComponent implements OnInit {
       }
       notaEnfermera.Soapie = soapie;
     }
+
+    let balance = new BalanceHidricoDTO();
+    if(objHistoria.balanceHidrico != null)
+    {
+      balance.Paciente = objHistoria.balanceHidrico.paciente;
+      balance.Medico = objHistoria.balanceHidrico.medico;
+      balance.NroHcl = objHistoria.balanceHidrico.nroHcl;
+      balance.Peso = objHistoria.balanceHidrico.peso;
+      balance.Talla = objHistoria.balanceHidrico.talla;
+      balance.IMC = objHistoria.balanceHidrico.imc;
+      balance.Tiempo = objHistoria.balanceHidrico.tiempo;
+      balance.Fecha = objHistoria.balanceHidrico.fecha;
+      balance.FechaTexto = objHistoria.balanceHidrico.fechaTexto;
+
+      if(objHistoria.balanceHidrico.balanceHidrico != null)
+      {
+        balance.BalanceHidrico = [];
+        objHistoria.balanceHidrico.balanceHidrico.forEach((element:any)=>{
+
+          let item: any = objHistoria.balanceHidrico.balanceHidrico.length;
+          let hidrico = new BalanceHidricoTurnoDTO();
+          hidrico.Item = ++item;
+          hidrico.Fecha = element.fecha;
+          hidrico.FechaTexto = element.fechaTexto; 
+          hidrico.DatosCompletos = element.datosCompletos;  
+          hidrico.BalanceHidrico = element.balanceHidrico;
+
+          hidrico.Ingreso = new BalanceHidricoIngresoDTO();
+          hidrico.Ingreso.Oral = new BalanceHidricoDetalleDTO();
+          hidrico.Ingreso.Oral.PrimerTurno = element.ingreso.oral.primerTurno;
+          hidrico.Ingreso.Oral.SegundoTurno = element.ingreso.oral.segundoTurno;
+          hidrico.Ingreso.Oral.Total = element.ingreso.oral.total;
+          hidrico.Ingreso.ParentalTratamiento = new BalanceHidricoDetalleDTO();
+          hidrico.Ingreso.ParentalTratamiento.PrimerTurno = element.ingreso.parentalTratamiento.primerTurno;
+          hidrico.Ingreso.ParentalTratamiento.SegundoTurno = element.ingreso.parentalTratamiento.segundoTurno;
+          hidrico.Ingreso.ParentalTratamiento.Total = element.ingreso.parentalTratamiento.total;
+          hidrico.Ingreso.Sangre = new BalanceHidricoDetalleDTO();
+          hidrico.Ingreso.Sangre.PrimerTurno = element.ingreso.sangre.primerTurno;
+          hidrico.Ingreso.Sangre.SegundoTurno = element.ingreso.sangre.segundoTurno;
+          hidrico.Ingreso.Sangre.Total = element.ingreso.sangre.total;
+          hidrico.Ingreso.AguaOxidacion = new BalanceHidricoDetalleDTO();
+          hidrico.Ingreso.AguaOxidacion.PrimerTurno = element.ingreso.aguaOxidacion.primerTurno;
+          hidrico.Ingreso.AguaOxidacion.SegundoTurno = element.ingreso.aguaOxidacion.segundoTurno;
+          hidrico.Ingreso.AguaOxidacion.Total = element.ingreso.aguaOxidacion.total;
+          hidrico.Ingreso.Otros = [];
+          if (element.ingreso.otros != null) {
+            element.ingreso.otros.forEach((dato: any) => {
+              let item: any = hidrico.Ingreso?.Otros?.length;
+              let otro = new BalanceHidricoDetalleDTO();
+              otro.Item = ++item;
+              otro.Texto = dato.texto;
+              otro.PrimerTurno = dato.primerTurno;
+              otro.SegundoTurno = dato.segundoTurno;
+              otro.Total = dato.total;
+              hidrico.Ingreso?.Otros?.push(otro);
+            });
+          }
+          hidrico.Ingreso.SumatoriaTotal = element.ingreso.sumatoriaTotal;
+          hidrico.Ingreso.Fecha = element.ingreso.fecha;
+          hidrico.Ingreso.FechaTexto = element.ingreso.fechaTexto;
+          
+
+          hidrico.Egreso = new BalanceHidricoEgresoDTO();
+          hidrico.Egreso.Orina = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.Orina.PrimerTurno = element.egreso.orina.primerTurno;
+          hidrico.Egreso.Orina.SegundoTurno = element.egreso.orina.segundoTurno;
+          hidrico.Egreso.Orina.Total = element.egreso.orina.total;
+          hidrico.Egreso.Vomito = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.Vomito.PrimerTurno = element.egreso.vomito.primerTurno;
+          hidrico.Egreso.Vomito.SegundoTurno = element.egreso.vomito.segundoTurno;
+          hidrico.Egreso.Vomito.Total = element.egreso.vomito.total;
+          hidrico.Egreso.Aspiracion = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.Aspiracion.PrimerTurno = element.egreso.aspiracion.primerTurno;
+          hidrico.Egreso.Aspiracion.SegundoTurno = element.egreso.aspiracion.segundoTurno;
+          hidrico.Egreso.Aspiracion.Total = element.egreso.aspiracion.total;
+          hidrico.Egreso.Drenaje = [];
+          if (element.egreso.drenaje != null) {
+            element.egreso.drenaje.forEach((dato: any) => {
+              let item: any = hidrico.Egreso?.Drenaje?.length;
+              let otro = new BalanceHidricoDetalleDTO();
+              otro.Item = ++item;
+              otro.Texto = dato.texto;
+              otro.PrimerTurno = dato.primerTurno;
+              otro.SegundoTurno = dato.segundoTurno;
+              otro.Total = dato.total;
+              hidrico.Egreso?.Drenaje?.push(otro);
+            });
+          }
+          hidrico.Egreso.PerdidaIncesante = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.PerdidaIncesante.PrimerTurno = element.egreso.perdidaIncesante.primerTurno;
+          hidrico.Egreso.PerdidaIncesante.SegundoTurno = element.egreso.perdidaIncesante.segundoTurno;
+          hidrico.Egreso.PerdidaIncesante.Total = element.egreso.perdidaIncesante.total;
+          hidrico.Egreso.Deposiciones = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.Deposiciones.PrimerTurno = element.egreso.deposiciones.primerTurno;
+          hidrico.Egreso.Deposiciones.SegundoTurno = element.egreso.deposiciones.segundoTurno;
+          hidrico.Egreso.Deposiciones.Total = element.egreso.deposiciones.total;
+          hidrico.Egreso.Otros = [];
+          if (element.egreso.otros != null) {
+            element.egreso.otros.forEach((dato: any) => {
+              let item: any = hidrico.Egreso?.Otros?.length;
+              let otro = new BalanceHidricoDetalleDTO();
+              otro.Item = ++item;
+              otro.Texto = dato.texto;
+              otro.PrimerTurno = dato.primerTurno;
+              otro.SegundoTurno = dato.segundoTurno;
+              otro.Total = dato.total;
+              hidrico.Egreso?.Otros?.push(otro);
+            });
+          }
+          hidrico.Egreso.SumatoriaTotal = element.egreso.sumatoriaTotal;
+          hidrico.Egreso.Fecha = element.egreso.fecha;
+          hidrico.Egreso.FechaTexto = element.egreso.fechaTexto;
+
+          balance.BalanceHidrico?.push(hidrico);
+        });
+        
+      }
+      
+    }
     
 
     
@@ -1066,6 +1190,7 @@ export class RecetaComponent implements OnInit {
     historiaCalidad.PrimeraAtencion = primeraAtencion;
     historiaCalidad.HojaMonitoreoSignos = hojaMonitoreo;
     historiaCalidad.NotaEnfermera = notaEnfermera;
+    historiaCalidad.BalanceHidrico = balance;
 
     this.objHistoria = historiaCalidad;
     

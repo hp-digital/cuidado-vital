@@ -1,3 +1,4 @@
+import { BalanceHidricoDTO } from "./balance-hidrico";
 import { CabeceraPacienteDTO } from "./cabecera-paciente";
 import { ControlEpocDTO } from "./control-epoc";
 import { ControlGeneralDTO } from "./control-general";
@@ -36,4 +37,5 @@ export class HistoriaCuidadoDTO{
     PrimeraAtencion?:HistoriaPrimeraAtencionDTO;
     HojaMonitoreoSignos?:HojaMonitoreoSignosDTO;
     NotaEnfermera?: NotaEnfermeraDTO;
+    BalanceHidrico?: BalanceHidricoDTO;
 }

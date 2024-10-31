@@ -140,6 +140,23 @@
                 </div>
             </div>
 
+            <div class="row">
+                <br>
+                <h6>Balance Hídrico</h6>
+                <div class="box-shadow mt-3" *ngFor="let lista of listadoBalanceHidrico;">
+                    <div class="row">
+                        <div class="col-xl-2 col-sm-2 fw-bold"><b>Fecha: </b>{{lista.FechaTexto | date: 'dd-MM-yyyy' }}</div>
+                        <div class="col-xl-1 col-sm-1 fw-bold"><b>Hora: </b>{{lista.FechaTexto | date: 'HH:mm'}}</div>
+                        <div class="col-xl-3 col-sm-3"><b>Balance Hidrico: </b>{{lista.BalanceHidrico}}</div>
+                        <div class="col-xl-2 col-sm-2"><b>Ingresos: </b>{{lista.Ingreso?.SumatoriaTotal}}</div>
+                        <div class="col-xl-2 col-sm-2"><b>Egresos: </b>{{lista.Egreso?.SumatoriaTotal}}</div>
+                        <div class="col-xl-2 col-sm-2 text-right">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             
             		
         </form>
