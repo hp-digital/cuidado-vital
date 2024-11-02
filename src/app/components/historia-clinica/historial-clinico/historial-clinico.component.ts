@@ -73,6 +73,7 @@ export class HistorialClinicoComponent implements OnInit {
       inputFuncionBiologica: new FormControl(),
       inputFuncionVital: new FormControl(),
       inputDiagnosticoPropio: new FormControl(),
+      inputExamenFisico: new FormControl(),
     });
   }
 

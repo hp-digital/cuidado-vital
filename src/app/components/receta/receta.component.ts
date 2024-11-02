@@ -68,6 +68,7 @@ export class RecetaComponent implements OnInit {
   objExamenRegional = new ExamenRegionalDTO();
   objDiagnostico : DiagnosticoCuidadoDTO[]=[];
   objHistoriaExterna = new HistoriaExternaDTO();
+  objDiagnosticoPrimer : DiagnosticoPrimeraAtencionDTO[]=[];
 
   idMedicamento:number=0;
   nombreMedicamento:string='';
@@ -287,6 +288,7 @@ export class RecetaComponent implements OnInit {
           diag.TipoDiagnostico = element.tipoDiagnostico;
 
           primeraAtencion.Diagnostico.push(diag);
+          this.objDiagnosticoPrimer.push(diag);
         });
       }
     }
@@ -1194,6 +1196,7 @@ export class RecetaComponent implements OnInit {
 
     this.objHistoria = historiaCalidad;
     
+    console.log(this.objHistoria);
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

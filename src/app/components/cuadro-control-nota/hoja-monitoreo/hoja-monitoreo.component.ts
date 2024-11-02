@@ -89,7 +89,7 @@ export class HojaMonitoreoComponent implements OnInit {
     signo.Egresos = this.dataFormGroup.controls['inputEgresos'].value; 
     signo.TotalBH = this.dataFormGroup.controls['inputTotalBH'].value; 
 
-    this.objSignoVitalHoja.unshift(signo);
+    this.objSignoVitalHoja.push(signo);
 
     console.log("sig", this.objSignoVitalHoja);
   }

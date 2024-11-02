@@ -28,6 +28,7 @@ import { MedicoAtencionDTO } from '@models/medico-atiente';
 import { UtilitiesService } from '@services/utilities.service';
 import { DesplegableDTO } from '@models/depleglable';
 import { ComboDTO } from '@models/ComboDTO';
+import { SignoVitalHojaDTO } from '@models/signo-vital-hoja';
 
 
 @Component({
@@ -694,6 +695,45 @@ export class ControlGeneralComponent implements OnInit {
     this.comboSiNo = this.utilitiesService.ObtenerSINO();
     this.comboResultadoKatz = this.utilitiesService.ObtenerComboResultadoKatz();
     this.verSpinner = false;
+
+    let objSignos : SignoVitalHojaDTO[]=[]
+    if(historia.HojaMonitoreoSignos != null)
+    {
+      if(historia.HojaMonitoreoSignos.SignoVital?.length != 0 )
+      {
+        historia.HojaMonitoreoSignos.SignoVital?.forEach((element : any)=>{
+          let sstf = new SignoVitalHojaDTO();
+          sstf.FechaRegistro = element.FechaRegistro;
+          sstf.PresionSistolica = element.PresionSistolica;
+          sstf.PresionDiastolica = element.PresionDiastolica;
+          sstf.Pulso = element.Pulso;
+          sstf.Temperatura = element.Temperatura;
+          sstf.FrecuenciaRespiratoria = element.FrecuenciaRespiratoria;
+          sstf.Saturacion = element.Saturacion;
+          sstf.Oxigeno = element.Oxigeno;
+          sstf.Peso = element.Peso;
+          sstf.Deposiciones = element.Deposiciones;
+          sstf.Orina = element.Orina;
+          sstf.Ingresos = element.Ingresos;
+          sstf.Egresos = element.Egresos;
+          sstf.TotalBH = element.TotalBH;
+          objSignos.push(sstf);
+        });
+        
+        if(objSignos){
+          console.log(objSignos);
+          this.dataFormGroup.controls['inputTemperatura'].setValue((objSignos[0].Temperatura));
+          this.dataFormGroup.controls['inputFrecuenciaCardiaca'].setValue((objSignos[0].Pulso));
+          this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].setValue((objSignos[0].FrecuenciaRespiratoria));
+          this.dataFormGroup.controls['inputPresionSistolica'].setValue((objSignos[0].PresionSistolica));
+          this.dataFormGroup.controls['inputPresionDiastolica'].setValue((objSignos[0].PresionDiastolica));
+          this.dataFormGroup.controls['inputSaturacion'].setValue((objSignos[0].Saturacion));
+          this.dataFormGroup.controls['inputPeso'].setValue((objSignos[0].Peso));
+        }
+      }
+    }else{
+      this.MostrarNotificacionInfo("Ingrese los datos manualmente", "Signos vitales no registrados")
+    }
   }
 
   AsignarObjetoHistoria(data:any)

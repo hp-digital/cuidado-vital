@@ -13,6 +13,7 @@ import { UtilitiesService } from '@services/utilities.service';
 import { ControlGlucosaDTO } from '@models/control-glucosa';
 import { DesplegableDTO } from '@models/depleglable';
 import { HistoriaService } from '@services/historia.service';
+import { SignoVitalHojaDTO } from '@models/signo-vital-hoja';
 
 @Component({
   selector: 'app-control-glucosa',
@@ -123,6 +124,40 @@ export class ControlGlucosaComponent implements OnInit {
     console.log("obj historia", this.objHistoria);
     this.AsignarHistoria(historia);
     this.verSpinner = false;
+    let objSignos : SignoVitalHojaDTO[]=[]
+    if(historia.HojaMonitoreoSignos != null)
+    {
+      if(historia.HojaMonitoreoSignos.SignoVital?.length != 0 )
+      {
+        historia.HojaMonitoreoSignos.SignoVital?.forEach((element : any)=>{
+          let sstf = new SignoVitalHojaDTO();
+          sstf.FechaRegistro = element.FechaRegistro;
+          sstf.PresionSistolica = element.PresionSistolica;
+          sstf.PresionDiastolica = element.PresionDiastolica;
+          sstf.Pulso = element.Pulso;
+          sstf.Temperatura = element.Temperatura;
+          sstf.FrecuenciaRespiratoria = element.FrecuenciaRespiratoria;
+          sstf.Saturacion = element.Saturacion;
+          sstf.Oxigeno = element.Oxigeno;
+          sstf.Peso = element.Peso;
+          sstf.Deposiciones = element.Deposiciones;
+          sstf.Orina = element.Orina;
+          sstf.Ingresos = element.Ingresos;
+          sstf.Egresos = element.Egresos;
+          sstf.TotalBH = element.TotalBH;
+          objSignos.push(sstf);
+        });
+        
+        if(objSignos){
+          console.log(objSignos);
+          this.dataFormGroup.controls['inputPeso'].setValue((objSignos[0].Peso));
+          this.dataFormGroup.controls['inputPerimetroArterial'].setValue((objSignos[0].PresionSistolica));
+          this.dataFormGroup.controls['inputPerimetroArterialDias'].setValue((objSignos[0].PresionDiastolica));
+        }
+      }
+    }else{
+      this.MostrarNotificacionInfo("Ingrese los datos manualmente", "Signos vitales no registrados")
+    }
   }
 
   AsignarHistoria(historia:any)
