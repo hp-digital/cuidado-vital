@@ -70,6 +70,7 @@ export class ExamenAuxiliarComponent implements OnInit {
   objExamenRegional = new ExamenRegionalDTO();
   objDiagnostico : DiagnosticoCuidadoDTO[]=[];
   objHistoriaExterna = new HistoriaExternaDTO();
+  objDiagnosticoPrimer : DiagnosticoPrimeraAtencionDTO[]=[];
 
   paciente:string ='';
   medico:string='';
@@ -240,6 +241,7 @@ if(objHistoria.primeraAtencion != null)
       diag.TipoDiagnostico = element.tipoDiagnostico;
 
       primeraAtencion.Diagnostico.push(diag);
+      this.objDiagnosticoPrimer.push(diag);
     });
   }
 }
