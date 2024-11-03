@@ -21,12 +21,20 @@
                             <label class="cform-label">Tipo de Diabetes*</label>
                             <input type="text" class="form-control" formControlName="inputTipoDiabetes">
                         </div>
+                        <div *ngIf="Controls['inputTipoDiabetes'].invalid && (Controls['inputTipoDiabetes'].dirty || Controls['inputTipoDiabetes'].touched)"
+                            class="text-error">
+                        <div>Campo obligatorio.</div>
+                    </div>
                     </div>
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="cform-label">Fecha de diagnostico*</label>
                             <input type="date" class="form-control" formControlName="inputFechaDiagnostico">
                         </div>
+                        <div *ngIf="Controls['inputFechaDiagnostico'].invalid && (Controls['inputFechaDiagnostico'].dirty || Controls['inputFechaDiagnostico'].touched)"
+                        class="text-error">
+                        <div>Campo obligatorio.</div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -39,6 +47,10 @@
                         <div class="form-check form-check-inline" *ngFor="let combo of comboComplicacion">
                             <input class="form-check-input" name="inputComplicaciones" type="radio" id="inputComplicaciones" formControlName="inputComplicaciones" [value]="combo.id">
                             <label class="form-check-label" for=""> {{combo.nombre}}</label>
+                        </div>
+                        <div *ngIf="Controls['inputComplicaciones'].invalid && (Controls['inputComplicaciones'].dirty || Controls['inputComplicaciones'].touched)"
+                            class="text-error">
+                            <div>Campo obligatorio.</div>
                         </div>
                     </div>
                 </div>
@@ -55,6 +67,10 @@
                                             <input class="form-check-input" name="inputRetinopatia" type="radio" id="inputRetinopatia" formControlName="inputRetinopatia" [value]="combo.id">
                                             <label class="form-check-label" for=""> {{combo.nombre}}</label>
                                         </div>
+                                        <div *ngIf="Controls['inputRetinopatia'].invalid && (Controls['inputRetinopatia'].dirty || Controls['inputRetinopatia'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -67,6 +83,10 @@
                                         <div class="form-check form-check-inline" *ngFor="let combo of comboSiNo">
                                             <input class="form-check-input" name="inputNefropatia" type="radio" id="inputNefropatia" formControlName="inputNefropatia" [value]="combo.id">
                                             <label class="form-check-label" for=""> {{combo.nombre}}</label>
+                                        </div>
+                                        <div *ngIf="Controls['inputNefropatia'].invalid && (Controls['inputNefropatia'].dirty || Controls['inputNefropatia'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -81,6 +101,10 @@
                                             <input class="form-check-input" name="inputAmputacion" type="radio" id="inputAmputacion" formControlName="inputAmputacion" [value]="combo.id">
                                             <label class="form-check-label" for=""> {{combo.nombre}}</label>
                                         </div>
+                                        <div *ngIf="Controls['inputAmputacion'].invalid && (Controls['inputAmputacion'].dirty || Controls['inputAmputacion'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
@@ -93,6 +117,10 @@
                                         <div class="form-check form-check-inline" *ngFor="let combo of comboSiNo">
                                             <input class="form-check-input" name="inputDialisis" type="radio" id="inputDialisis" formControlName="inputDialisis" [value]="combo.id">
                                             <label class="form-check-label" for=""> {{combo.nombre}}</label>
+                                        </div>
+                                        <div *ngIf="Controls['inputDialisis'].invalid && (Controls['inputDialisis'].dirty || Controls['inputDialisis'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -107,6 +135,10 @@
                                             <input class="form-check-input" name="inputCeguera" type="radio" id="inputCeguera" formControlName="inputCeguera" [value]="combo.id">
                                             <label class="form-check-label" for=""> {{combo.nombre}}</label>
                                         </div>
+                                        <div *ngIf="Controls['inputCeguera'].invalid && (Controls['inputCeguera'].dirty || Controls['inputCeguera'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -119,6 +151,10 @@
                                         <div class="form-check form-check-inline" *ngFor="let combo of comboSiNo">
                                             <input class="form-check-input" name="inputTransplante" type="radio" id="inputTransplante" formControlName="inputTransplante" [value]="combo.id">
                                             <label class="form-check-label" for=""> {{combo.nombre}}</label>
+                                        </div>
+                                        <div *ngIf="Controls['inputTransplante'].invalid && (Controls['inputTransplante'].dirty || Controls['inputTransplante'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
                                         </div>
                                     </div>
                                 </div>
@@ -136,26 +172,50 @@
                                     <div class="col-4">
                                         <label class="cform-label">Peso (kg)</label>
                                         <input type="number" class="form-control" formControlName="inputPeso" (blur)="CalcularIndiceMasaCorporal()">
+                                        <div *ngIf="Controls['inputPeso'].invalid && (Controls['inputPeso'].dirty || Controls['inputPeso'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
                                     </div>
                                     <div class="col-4">
                                         <label class="cform-label">Talla</label>
                                         <input type="number" class="form-control" formControlName="inputTalla" (blur)="CalcularIndiceMasaCorporal()">
+                                        <div *ngIf="Controls['inputTalla'].invalid && (Controls['inputTalla'].dirty || Controls['inputTalla'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
                                     </div>
                                     <div class="col-4">
                                         <label class="cform-label">IMC</label>
                                         <input type="number" class="form-control" formControlName="inputImc" (click)="CalcularIndiceMasaCorporal()" readonly>
+                                        <div *ngIf="Controls['inputImc'].invalid && (Controls['inputImc'].dirty || Controls['inputImc'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
                                     </div>
                                     <div class="col-4">
                                         <label class="cform-label">Perimetro Abdomial (cm)</label>
                                         <input type="number" class="form-control" formControlName="inputPerimetroAbdominal">
+                                        <div *ngIf="Controls['inputPerimetroAbdominal'].invalid && (Controls['inputPerimetroAbdominal'].dirty || Controls['inputPerimetroAbdominal'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
                                     </div>
                                     <div class="col-4">
                                         <label class="cform-label">Presiòn Arterial (Sistolica)</label>
                                         <input type="number" class="form-control" formControlName="inputPerimetroArterial">
+                                        <div *ngIf="Controls['inputPerimetroArterial'].invalid && (Controls['inputPerimetroArterial'].dirty || Controls['inputPerimetroArterial'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
                                     </div>
                                     <div class="col-4">
                                         <label class="cform-label">Presiòn Arterial (Diastolica)</label>
                                         <input type="number" class="form-control" formControlName="inputPerimetroArterialDias">
+                                        <div *ngIf="Controls['inputPerimetroArterialDias'].invalid && (Controls['inputPerimetroArterialDias'].dirty || Controls['inputPerimetroArterialDias'].touched)"
+                                            class="text-error">
+                                            <div>Campo obligatorio.</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -177,44 +237,102 @@
                                     <tbody>
                                         <tr>
                                             <td>Glucemia</td>
-                                            <td><input type="text" class="form-control" formControlName="inputValorGlucemia"></td>
+                                            <td><input type="text" class="form-control" formControlName="inputValorGlucemia">
+                                                <div *ngIf="Controls['inputValorGlucemia'].invalid && (Controls['inputValorGlucemia'].dirty || Controls['inputValorGlucemia'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <input type="date" class="form-control" formControlName="inputFechaGlucemia">
+                                                <div *ngIf="Controls['inputFechaGlucemia'].invalid && (Controls['inputFechaGlucemia'].dirty || Controls['inputFechaGlucemia'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>HBA1C</td>
-                                            <td><input type="text" class="form-control" formControlName="inputValorHba"></td>
+                                            <td><input type="text" class="form-control" formControlName="inputValorHba">
+                                                <div *ngIf="Controls['inputValorHba'].invalid && (Controls['inputValorHba'].dirty || Controls['inputValorHba'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <input type="date" class="form-control" formControlName="inputFechaHba">
+                                                <div *ngIf="Controls['inputFechaHba'].invalid && (Controls['inputFechaHba'].dirty || Controls['inputFechaHba'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Creatinina</td>
-                                            <td><input type="text" class="form-control" formControlName="inputValorCreatinina"></td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="inputValorCreatinina">
+                                                <div *ngIf="Controls['inputValorCreatinina'].invalid && (Controls['inputValorCreatinina'].dirty || Controls['inputValorCreatinina'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <input type="date" class="form-control" formControlName="inputFechaCreatinina">
+                                                <div *ngIf="Controls['inputFechaCreatinina'].invalid && (Controls['inputFechaCreatinina'].dirty || Controls['inputFechaCreatinina'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>LDL</td>
-                                            <td><input type="text" class="form-control" formControlName="inputValorLdl"></td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="inputFechaLdl">
+                                                <div *ngIf="Controls['inputFechaLdl'].invalid && (Controls['inputFechaLdl'].dirty || Controls['inputFechaLdl'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <input type="date" class="form-control" formControlName="inputFechaLdl">
+                                                <div *ngIf="Controls['inputFechaLdl'].invalid && (Controls['inputFechaLdl'].dirty || Controls['inputFechaLdl'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Trigliceridos</td>
-                                            <td><input type="text" class="form-control" formControlName="inputValorTrigliceridos"></td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="inputValorTrigliceridos">
+                                                <div *ngIf="Controls['inputValorTrigliceridos'].invalid && (Controls['inputValorTrigliceridos'].dirty || Controls['inputValorTrigliceridos'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <input type="date" class="form-control" formControlName="inputFechaTrigliceridos">
+                                                <div *ngIf="Controls['inputFechaTrigliceridos'].invalid && (Controls['inputFechaTrigliceridos'].dirty || Controls['inputFechaTrigliceridos'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Microalbuminuria</td>
-                                            <td><input type="text" class="form-control" formControlName="inputValorMicroalbuminuria"></td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="inputValorMicroalbuminuria">
+                                                <div *ngIf="Controls['inputValorMicroalbuminuria'].invalid && (Controls['inputValorMicroalbuminuria'].dirty || Controls['inputValorMicroalbuminuria'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <input type="date" class="form-control" formControlName="inputFechaMicroalbuminuria">
+                                                <div *ngIf="Controls['inputFechaMicroalbuminuria'].invalid && (Controls['inputFechaMicroalbuminuria'].dirty || Controls['inputFechaMicroalbuminuria'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -227,6 +345,10 @@
                     <div class="row">
                         <div class="col-12">
                             <textarea name="" id="" class="form-control" rows="4" formControlName="inputPlanTrabajo"></textarea>
+                            <div *ngIf="Controls['inputPlanTrabajo'].invalid && (Controls['inputPlanTrabajo'].dirty || Controls['inputPlanTrabajo'].touched)"
+                                class="text-error">
+                                <div>Campo obligatorio.</div>
+                            </div>
                         </div>
                     </div>
 
@@ -244,13 +366,37 @@
                                     <tbody>
                                         <tr>
                                             <td>Insulina</td>
-                                            <td><input type="text" class="form-control" formControlName="inputMonoInsulina"></td>
-                                            <td><input type="text" class="form-control" formControlName="inputDosisInsulina"></td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="inputMonoInsulina">
+                                                <div *ngIf="Controls['inputMonoInsulina'].invalid && (Controls['inputMonoInsulina'].dirty || Controls['inputMonoInsulina'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="inputDosisInsulina">
+                                                <div *ngIf="Controls['inputDosisInsulina'].invalid && (Controls['inputDosisInsulina'].dirty || Controls['inputDosisInsulina'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>Medicamentos Orales</td>
-                                            <td><input type="text" class="form-control" formControlName="inputMonoMedicamento"></td>
-                                            <td><input type="text" class="form-control" formControlName="inputDosisMedicamento"></td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="inputMonoMedicamento">
+                                                <div *ngIf="Controls['inputMonoMedicamento'].invalid && (Controls['inputMonoMedicamento'].dirty || Controls['inputMonoMedicamento'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control" formControlName="inputDosisMedicamento">
+                                                <div *ngIf="Controls['inputDosisMedicamento'].invalid && (Controls['inputDosisMedicamento'].dirty || Controls['inputDosisMedicamento'].touched)"
+                                                    class="text-error">
+                                                    <div>Campo obligatorio.</div>
+                                                </div>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>

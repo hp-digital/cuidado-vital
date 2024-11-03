@@ -6,7 +6,7 @@ import moment from 'moment';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { DropdownModule } from 'primeng/dropdown';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HistoriaExternaDTO } from '@models/historia-externa';
 import { ComboDTO } from '@models/ComboDTO';
 import { UtilitiesService } from '@services/utilities.service';
@@ -51,38 +51,38 @@ export class ControlGlucosaComponent implements OnInit {
     private historiaService: HistoriaService
   ) {
     this.dataFormGroup = new FormGroup({
-      inputTipoDiabetes: new FormControl(),
-      inputFechaDiagnostico: new FormControl(),
-      inputComplicaciones: new FormControl(),
-      inputRetinopatia: new FormControl(),
-      inputNefropatia: new FormControl(),
-      inputAmputacion: new FormControl(),
-      inputDialisis: new FormControl(),
-      inputCeguera: new FormControl(),
-      inputTransplante: new FormControl(),
-      inputPeso: new FormControl(),
-      inputTalla: new FormControl(),
-      inputImc: new FormControl(),
-      inputPerimetroAbdominal: new FormControl(),
-      inputPerimetroArterial: new FormControl(),
-      inputValorGlucemia: new FormControl(),
-      inputFechaGlucemia: new FormControl(),
-      inputValorHba: new FormControl(),
-      inputFechaHba: new FormControl(),
-      inputValorCreatinina: new FormControl(),
-      inputFechaCreatinina: new FormControl(),
-      inputValorLdl: new FormControl(),
-      inputFechaLdl: new FormControl(),
-      inputValorTrigliceridos: new FormControl(),
-      inputFechaTrigliceridos: new FormControl(),
-      inputValorMicroalbuminuria: new FormControl(),
-      inputFechaMicroalbuminuria: new FormControl(),
-      inputPlanTrabajo: new FormControl(),
-      inputMonoInsulina: new FormControl(),
-      inputDosisInsulina: new FormControl(),
-      inputMonoMedicamento: new FormControl(),
-      inputDosisMedicamento: new FormControl(),
-      inputPerimetroArterialDias: new FormControl(),
+      inputTipoDiabetes: new FormControl('', [Validators.required]),
+      inputFechaDiagnostico: new FormControl('', [Validators.required]),
+      inputComplicaciones: new FormControl('', [Validators.required]),
+      inputRetinopatia: new FormControl('', [Validators.required]),
+      inputNefropatia: new FormControl('', [Validators.required]),
+      inputAmputacion: new FormControl('', [Validators.required]),
+      inputDialisis: new FormControl('', [Validators.required]),
+      inputCeguera: new FormControl('', [Validators.required]),
+      inputTransplante: new FormControl('', [Validators.required]),
+      inputPeso: new FormControl('', [Validators.required]),
+      inputTalla: new FormControl('', [Validators.required]),
+      inputImc: new FormControl('', [Validators.required]),
+      inputPerimetroAbdominal: new FormControl('', [Validators.required]),
+      inputPerimetroArterial: new FormControl('', [Validators.required]),
+      inputValorGlucemia: new FormControl('', [Validators.required]),
+      inputFechaGlucemia: new FormControl('', [Validators.required]),
+      inputValorHba: new FormControl('', [Validators.required]),
+      inputFechaHba: new FormControl('', [Validators.required]),
+      inputValorCreatinina: new FormControl('', [Validators.required]),
+      inputFechaCreatinina: new FormControl('', [Validators.required]),
+      inputValorLdl: new FormControl('', [Validators.required]),
+      inputFechaLdl: new FormControl('', [Validators.required]),
+      inputValorTrigliceridos: new FormControl('', [Validators.required]),
+      inputFechaTrigliceridos: new FormControl('', [Validators.required]),
+      inputValorMicroalbuminuria: new FormControl('', [Validators.required]),
+      inputFechaMicroalbuminuria: new FormControl('', [Validators.required]),
+      inputPlanTrabajo: new FormControl('', [Validators.required]),
+      inputMonoInsulina: new FormControl('', [Validators.required]),
+      inputDosisInsulina: new FormControl('', [Validators.required]),
+      inputMonoMedicamento: new FormControl('', [Validators.required]),
+      inputDosisMedicamento: new FormControl('', [Validators.required]),
+      inputPerimetroArterialDias: new FormControl('', [Validators.required]),
     });
   }
 
@@ -111,6 +111,10 @@ export class ControlGlucosaComponent implements OnInit {
   CerrarModal() {
     this.bsModalControlGlucosa.hide();
     //this.onGuardar();
+  }
+
+  get Controls() {
+    return this.dataFormGroup.controls;
   }
 
   AsignarHistoriaClinica(historia:HistoriaCuidadoDTO, idHistoria:number){
