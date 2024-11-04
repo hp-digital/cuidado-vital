@@ -211,6 +211,7 @@ export class ExamenAuxiliarComponent implements OnInit {
     this.nroHcl = objHistoria.cabeceraPaciente.numeroDocumento;
     this.fechaHistoria = objHistoria.cabeceraPaciente.fechaInicioAtencion ;
     this.celularPaciente = objHistoria.cabeceraPaciente.celular ;
+    this.medico = objHistoria.medicoAtiende.apellidoPaterno + ' ' + objHistoria.medicoAtiende.apellidoMaterno + ', '+objHistoria.medicoAtiende.nombre;
   
 
     let cabecera = new CabeceraPacienteDTO();
