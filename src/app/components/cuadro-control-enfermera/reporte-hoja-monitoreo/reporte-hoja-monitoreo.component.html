@@ -38,44 +38,68 @@
 
             <div id="seccion-medicacion" class="">
                 <div class="row mb-3 bg-green-custom">REPORTE</div>	
-                <div class="box-shadow mt-3" >
-                    <div class="row">
-                        
-
-                        <div class="col-xl-2">
-
-                        </div>
-                        <div class="col-xl-4">
-                            <h5>Registro de Signos Vitales</h5>
-                            <div *ngFor="let registro of datos.registroGraficoSignosVitales">
-                              <p><strong>Turno:</strong> {{ registro.turno }}</p>
-                              <p><strong>Fecha:</strong> {{ registro.fechaTexto }}</p>
-                              <p><strong>Presión Arterial:</strong> {{ registro.presionArterialSistolica }}/{{ registro.presionArterialDiastolica }} mmHg</p>
-                              <p><strong>Pulso:</strong> {{ registro.pulso }} bpm</p>
-                              <p><strong>Temperatura:</strong> {{ registro.temperatura }}°C</p>
-                              <p><strong>Frecuencia Respiratoria:</strong> {{ registro.frecuenciaRespiratoria }} rpm</p>
-                              <p><strong>Saturación de Oxígeno:</strong> {{ registro.saturacionOxigeno }}%</p>
-                              <p><strong>Peso:</strong> {{ registro.peso }} kg</p>
-                              <p><strong>Deposiciones:</strong> {{ registro.deposiciones }}</p>
-                              <p><strong>Orina:</strong> {{ registro.orina }}</p>
-                              <p><strong>Ingresos:</strong> {{ registro.ingresos }}</p>
-                              <p><strong>Egresos:</strong> {{ registro.egresos }}</p>
-                              <p><strong>Total BH:</strong> {{ registro.totalBH }}</p>
-                              <p><strong>Responsable:</strong> {{ registro.personalResponsable.personal }}</p>
-                              <p><strong>Fecha Registro:</strong> {{ registro.personalResponsable.fechaRegistro }}</p>
-                            </div>
-                        </div>
-                        <div class="col-xl-6">
-
-                        </div>
-                        <div class="col-xl-4">
-
-                        </div>
-                        <div class="col-xl-4">
-
-                        </div>
-                    </div>
-                </div>
+                <p-tabView>
+                    <p-tabPanel *ngFor="let item of objSignoVitalHoja" [header]="item.FechaRegistro!">
+                        <table class="table table-bordered mb-2">
+                            <tr>
+                                <td>Fecha</td>
+                                <td>{{item.FechaRegistro}}</td>
+                            </tr>
+                            <tr>
+                                <td>PresionSistolica</td>
+                                <td>{{item.PresionSistolica}}</td>
+                            </tr>
+                            <tr>
+                                <td>PresionDiastolica</td>
+                                <td>{{item.PresionDiastolica}}</td>
+                            </tr>
+                            <tr>
+                                <td>Pulso</td>
+                                <td>{{item.Pulso}}</td>
+                            </tr>
+                            <tr>
+                                <td>Temperatura</td>
+                                <td>{{item.Temperatura}}</td>
+                            </tr>
+                            <tr>
+                                <td>FrecuenciaRespiratoria</td>
+                                <td>{{item.FrecuenciaRespiratoria}}</td>
+                            </tr>
+                            <tr>
+                                <td>Saturacion</td>
+                                <td>{{item.Saturacion}}</td>
+                            </tr>
+                            <tr>
+                                <td>Oxigeno</td>
+                                <td>{{item.Oxigeno}}</td>
+                            </tr>
+                            <tr>
+                                <td>Peso</td>
+                                <td>{{item.Peso}}</td>
+                            </tr>
+                            <tr>
+                                <td>Deposiciones</td>
+                                <td>{{item.Deposiciones}}</td>
+                            </tr>
+                            <tr>
+                                <td>Orina</td>
+                                <td>{{item.Orina}}</td>
+                            </tr>
+                            <tr>
+                                <td>Egresos</td>
+                                <td>{{item.Egresos}}</td>
+                            </tr>
+                            <tr>
+                                <td>Ingresos</td>
+                                <td>{{item.Ingresos}}</td>
+                            </tr>
+                            <tr>
+                                <td>TotalBH</td>
+                                <td>{{item.TotalBH}}</td>
+                            </tr>
+                        </table>
+                    </p-tabPanel>
+                </p-tabView>
             </div>
             		
         </form>

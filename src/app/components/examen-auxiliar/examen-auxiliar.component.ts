@@ -230,6 +230,7 @@ if(objHistoria.primeraAtencion != null)
   primeraAtencion.Anamnesis = objHistoria.primeraAtencion.anamnesis;
   primeraAtencion.FuncionBiologica = objHistoria.primeraAtencion.funcionBiologica;
   primeraAtencion.FuncionVital = objHistoria.primeraAtencion.funcionVital;
+  primeraAtencion.ExamenFisico = objHistoria.primeraAtencion.examenFisico;
 
   primeraAtencion.Diagnostico=[];
   if(objHistoria.primeraAtencion.diagnostico != null)

@@ -697,7 +697,7 @@ export class ControlGeneralComponent implements OnInit {
     this.verSpinner = false;
 
     let objSignos : SignoVitalHojaDTO[]=[]
-    if(historia.HojaMonitoreoSignos != null)
+    if(historia.HojaMonitoreoSignos?.SignoVital != null)
     {
       if(historia.HojaMonitoreoSignos.SignoVital?.length != 0 )
       {

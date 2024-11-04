@@ -31,24 +31,73 @@
         
             <div class="row mb-3 bg-green-custom">REPORTE</div>	
             <div class="row">
-                <div class="table-responsive">
-                    <table class="table table-bordered mb-2">
-                        <tr>
-                          <th>FUNCIONES</th>
-                          <!-- <th *ngFor="let item of objSignoVitalHoja">Registro {{ objSignoVitalHoja.indexOf(item) + 1 }}</th> -->
-                        </tr>
-                        <tr *ngFor="let header of headers">
-                          <td>{{ header }}</td>
-                          <td *ngFor="let item of objSignoVitalHoja">
-                            {{ item[header] }}
-                          </td>
-                        </tr>
-                    </table>
-                </div>
+                <h5>MONITOREO DE SIGNOS VITALES </h5>
+                <p-tabView>
+                    <p-tabPanel *ngFor="let item of objSignoVitalHoja" [header]="item.FechaRegistro!">
+                        <table class="table table-bordered mb-2">
+                            <tr>
+                                <td>Fecha</td>
+                                <td>{{item.FechaRegistro}}</td>
+                            </tr>
+                            <tr>
+                                <td>PresionSistolica</td>
+                                <td>{{item.PresionSistolica}}</td>
+                            </tr>
+                            <tr>
+                                <td>PresionDiastolica</td>
+                                <td>{{item.PresionDiastolica}}</td>
+                            </tr>
+                            <tr>
+                                <td>Pulso</td>
+                                <td>{{item.Pulso}}</td>
+                            </tr>
+                            <tr>
+                                <td>Temperatura</td>
+                                <td>{{item.Temperatura}}</td>
+                            </tr>
+                            <tr>
+                                <td>FrecuenciaRespiratoria</td>
+                                <td>{{item.FrecuenciaRespiratoria}}</td>
+                            </tr>
+                            <tr>
+                                <td>Saturacion</td>
+                                <td>{{item.Saturacion}}</td>
+                            </tr>
+                            <tr>
+                                <td>Oxigeno</td>
+                                <td>{{item.Oxigeno}}</td>
+                            </tr>
+                            <tr>
+                                <td>Peso</td>
+                                <td>{{item.Peso}}</td>
+                            </tr>
+                            <tr>
+                                <td>Deposiciones</td>
+                                <td>{{item.Deposiciones}}</td>
+                            </tr>
+                            <tr>
+                                <td>Orina</td>
+                                <td>{{item.Orina}}</td>
+                            </tr>
+                            <tr>
+                                <td>Egresos</td>
+                                <td>{{item.Egresos}}</td>
+                            </tr>
+                            <tr>
+                                <td>Ingresos</td>
+                                <td>{{item.Ingresos}}</td>
+                            </tr>
+                            <tr>
+                                <td>TotalBH</td>
+                                <td>{{item.TotalBH}}</td>
+                            </tr>
+                        </table>
+                    </p-tabPanel>
+                </p-tabView>
             </div>
-            
+            <br>
             <div class="row">
-                <h4>EVALUACIÓN SEGÚN ENFERMERA</h4>
+                <h5>EVALUACIÓN SEGÚN ENFERMERA</h5>
                 <br>
                 <div class="col-xl-6">
                     <div class="form-group mb-3">
@@ -60,83 +109,85 @@
                         <label class="fw-bold">Objetivo :&nbsp; </label> <span>{{objetivos}}</span>
                     </div>
                 </div>
+                <br>
                 <div class="col-xl-12">
                     <!-- Datos generales del paciente -->
                      <h6>Diuresis</h6>
-                    <table border="1" >
-                        <tr>
-                            <th>Nota</th>
-                            <th>Fecha Registro</th>
-                            <th>Enfermera</th>
-                        </tr>
-                        <tr *ngFor="let item of listadoDiuresis">
-                            <td>{{item.Nota}}</td>
-                            <td>{{ item.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</td>
-                            <td>{{item.Usuario}}</td>
-                        </tr>
-                    </table>
-
+                     <div class="table-responsive">
+                        <table class="table table-bordered table-striped" >
+                            <thead>
+                                <th>Nota</th>
+                                <th>Fecha Registro</th>
+                                <th>Enfermera</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of listadoDiuresis">
+                                    <td>{{item.Nota}}</td>
+                                    <td>{{ item.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                    <td>{{item.Usuario}}</td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                     </div>
+                    
+                    <br>
                     <h6>Deposicion</h6>
-                    <table border="1" >
-                        <tr>
-                            <th>Nota</th>
-                            <th>Fecha Registro</th>
-                            <th>Enfermera</th>
-                        </tr>
-                        <tr *ngFor="let item of listadoDeposicion">
-                            <td>{{item.Nota}}</td>
-                            <td>{{ item.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</td>
-                            <td>{{item.Usuario}}</td>
-                        </tr>
-                    </table>
-
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" >
+                            <thead>
+                                <th>Nota</th>
+                                <th>Fecha Registro</th>
+                                <th>Enfermera</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of listadoDeposicion">
+                                    <td>{{item.Nota}}</td>
+                                    <td>{{ item.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                    <td>{{item.Usuario}}</td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                     </div>
+                    <br>
                     <h6>Medicación</h6>
-                    <table border="1" >
-                        <tr>
-                            <th>Nota</th>
-                            <th>Fecha Registro</th>
-                            <th>Enfermera</th>
-                        </tr>
-                        <tr *ngFor="let item of listadoMedicacion">
-                            <td>{{item.Nota}}</td>
-                            <td>{{ item.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</td>
-                            <td>{{item.Usuario}}</td>
-                        </tr>
-                    </table>
-
-                    <!-- Tabla de Signos Vitales -->
-                    <!-- <h3>Signos Vitales</h3>
-                    <table border="1">
-                    <tr *ngFor="let [key, value] of (objNotaEnfermera.SignoVital | keyvalue)">
-                        <td>{{ key }}</td>
-                        <td>{{ value }}</td>
-                    </tr>
-                    </table>
-
-
-                    <h3>Soapie</h3>
-                    <p><strong>Subjetivos:</strong> {{ objNotaEnfermera.Soapie.Subjetivos }}</p>
-                    <p><strong>Objetivos:</strong> {{ objNotaEnfermera.Soapie.Objetivos }}</p>
-
-
-                    <div *ngFor="let section of ['Medicacion', 'Procedimiento', 'Diagnostico', 'Planteamiento', 'Ocurrencias', 'Pendientes', 'Evaluacion', 'Diuresis', 'Deposicion']">
-                    <h4>{{ section }}</h4>
-                    <table border="1" *ngIf="objNotaEnfermera.Soapie[section]?.length">
-                        <tr>
-                        <th>Item</th>
-                        <th>Nota</th>
-                        <th>FechaNota</th>
-                        <th>Usuario</th>
-                        </tr>
-                        <tr *ngFor="let item of objNotaEnfermera.Soapie[section]">
-                        <td>{{ item.Item }}</td>
-                        <td>{{ item.Nota }}</td>
-                        <td>{{ item.FechaNota }}</td>
-                        <td>{{ item.Usuario }}</td>
-                        </tr>
-                    </table>
-                    <p *ngIf="!objNotaEnfermera.Soapie[section]?.length">Sin datos</p>
-                    </div> -->
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" >
+                            <thead>
+                                <th>Nota</th>
+                                <th>Fecha Registro</th>
+                                <th>Enfermera</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of listadoMedicacion">
+                                    <td>{{item.Nota}}</td>
+                                    <td>{{ item.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                    <td>{{item.Usuario}}</td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                     </div>
+                    <br>
+                    <h6>Diagnostico</h6>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" >
+                            <thead>
+                                <th>Nota</th>
+                                <th>Fecha Registro</th>
+                                <th>Enfermera</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let item of listadoDiagnostico">
+                                    <td>{{item.Nota}}</td>
+                                    <td>{{ item.FechaNota | date: 'dd-MM-yyyy HH:mm'}}</td>
+                                    <td>{{item.Usuario}}</td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                     </div>
                 </div>
             </div>
 

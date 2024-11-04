@@ -4,16 +4,19 @@ import { forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TabViewModule } from 'primeng/tabview';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { HistoriaService } from '@services/historia.service';
+import { SignoVitalHojaDTO } from '@models/signo-vital-hoja';
 
 @Component({
   selector: 'app-reporte-hoja-monitoreo',
   standalone: true,
   imports: [CommonModule,
     ReactiveFormsModule,
-    FormsModule],
+    FormsModule,
+    TabViewModule],
   templateUrl: './reporte-hoja-monitoreo.component.html',
   styleUrl: './reporte-hoja-monitoreo.component.css'
 })
@@ -34,66 +37,13 @@ export class ReporteHojaMonitoreoComponent implements OnInit {
   direccionPaciente:string='';
   procedencia:string='';
 
-  datos: any = {
-    "idHospitalizacion": 7,
-    "ultimaFechaOrdenMedica": "2023-06-05 14:28:22",
-    "cabeceraGraficoSignosVitales": {
-      "paciente": this.paciente,
-      "nroHistoriaClinica": this.nroHcl,
-      "estadoCivil": "SOLTERO(A)",
-      "edad": 37,
-      "sexo": "FEMENINO",
-      "tipoPaciente": "PACIENTE CLÍNICA"
-    },
-    "registroGraficoSignosVitales": [
-      {
-        "turno": "1 2024-10-26 11:40:08",
-        "fechaTexto": "2024-10-26 11:40:08",
-        "presionArterialSistolica": 110,
-        "presionArterialDiastolica": 80,
-        "pulso": 76,
-        "temperatura": 36.6,
-        "frecuenciaRespiratoria": 16,
-        "saturacionOxigeno": 95,
-        "oxigeno": 0,
-        "peso": 51,
-        "deposiciones": "0",
-        "orina": "0",
-        "ingresos": 0,
-        "egresos": 0,
-        "totalBH": 0,
-        "personalResponsable": {
-          "personal": this.medico,
-          "fechaRegistro": "2024-10-26"
-        }
-      },
-      {
-        "turno": "1 2024-10-26 11:40:08",
-        "fechaTexto": "2024-10-26 11:40:08",
-        "presionArterialSistolica": 110,
-        "presionArterialDiastolica": 80,
-        "pulso": 76,
-        "temperatura": 36.6,
-        "frecuenciaRespiratoria": 16,
-        "saturacionOxigeno": 95,
-        "oxigeno": 0,
-        "peso": 51,
-        "deposiciones": "0",
-        "orina": "0",
-        "ingresos": 0,
-        "egresos": 0,
-        "totalBH": 0,
-        "personalResponsable": {
-          "personal": this.medico,
-          "fechaRegistro": "2024-10-26"
-        }
-      }
-    ],
-    "personalResponsable": {
-      "personal": this.medico,
-      "fechaRegistro": new Date()
-    }
-  };
+  objSignoVitalHoja: SignoVitalHojaDTO[] = [];
+
+  headers : (keyof SignoVitalHojaDTO)[] =  [
+    "FechaRegistro", "PresionSistolica", "PresionDiastolica", "Pulso", 
+    "Temperatura", "FrecuenciaRespiratoria", "Saturacion", "Oxigeno", 
+    "Peso", "Deposiciones", "Orina", "Ingresos", "Egresos", "TotalBH"
+  ];
 
   constructor(
     private bsModalReporte: BsModalRef,
@@ -117,6 +67,33 @@ export class ReporteHojaMonitoreoComponent implements OnInit {
     this.paciente = historia.cabeceraPaciente?.ApellidoPaterno+' '+historia.cabeceraPaciente?.ApellidoMaterno+', '+historia.cabeceraPaciente?.Nombre;
     this.medico = this.objHistoria.MedicoAtiende?.ApellidoPaterno+' '+this.objHistoria.MedicoAtiende?.ApellidoMaterno+', '+this.objHistoria.MedicoAtiende?.Nombre;
     this.AsignarObjetoHistoria(historia);
+    if(historia.HojaMonitoreoSignos?.SignoVital?.length != 0)
+      {
+        historia.HojaMonitoreoSignos?.SignoVital?.forEach((element:any) => {
+          let sstf = new SignoVitalHojaDTO();
+          sstf.FechaRegistro = moment(element.FechaRegistro).format('DD-MM-yyyy HH:mm');
+          sstf.PresionSistolica = element.PresionSistolica;
+          sstf.PresionDiastolica = element.PresionDiastolica;
+          sstf.Pulso = element.Pulso;
+          sstf.Temperatura = element.Temperatura;
+          sstf.FrecuenciaRespiratoria = element.FrecuenciaRespiratoria;
+          sstf.Saturacion = element.Saturacion;
+          sstf.Oxigeno = element.Oxigeno;
+          sstf.Peso = element.Peso;
+          sstf.Deposiciones = element.Deposiciones;
+          sstf.Orina = element.Orina;
+          sstf.Ingresos = element.Ingresos;
+          sstf.Egresos = element.Egresos;
+          sstf.TotalBH = element.TotalBH;
+  
+          this.objSignoVitalHoja.push(sstf);
+        });
+        
+      }
+      else{
+        this.MostrarNotificacionError("Datos no registrados", "Error");
+      }
+      this.verSpinner = false;
   }
 
   AsignarObjetoHistoria(data:any)

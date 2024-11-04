@@ -1,6 +1,6 @@
 <div class="modal-content">
     <div class="modal-header">
-        <h4 class="modal-title">REPORTE DEL PACIENTE DIABETICO</h4>
+        <h4 class="modal-title">REPORTE DE BALANCE HIDRICO</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
     </div>
     <div class="modal-body">
@@ -35,30 +35,129 @@
 
             <div id="seccion-medicacion" class="">
                 <div class="row mb-3 bg-green-custom">REPORTE</div>	
-                <div class="box-shadow mt-3" *ngFor="let registro of datos">
+                <div class="box-shadow mt-3" *ngFor="let lista of listadoBalanceHidrico;">
                     <div class="row">
-                        <div class="col-xl-6">
-                            <h5>Ingreso</h5>
-                            <p><strong>Oral:</strong> {{ registro.ingreso.oral.primerTurno }} / {{ registro.ingreso.oral.segundoTurno }} - Total: {{ registro.ingreso.oral.total }}</p>
-                            <p><strong>Parental:</strong> {{ registro.ingreso.parental.primerTurno }} / {{ registro.ingreso.parental.segundoTurno }} - Total: {{ registro.ingreso.parental.total }}</p>
-                            <p><strong>Parental Tratamiento:</strong> {{ registro.ingreso.parentalTratamiento.primerTurno }} / {{ registro.ingreso.parentalTratamiento.segundoTurno }} - Total: {{ registro.ingreso.parentalTratamiento.total }}</p>
-                            <p><strong>Sangre:</strong> {{ registro.ingreso.sangre.total }}</p>
-                            <p><strong>Agua Oxidación:</strong> {{ registro.ingreso.aguaOxidacion.primerTurno }} / {{ registro.ingreso.aguaOxidacion.segundoTurno }} - Total: {{ registro.ingreso.aguaOxidacion.total }}</p>
-                            <p><strong>Otros:</strong> {{ registro.ingreso.otros[0].total }}</p>
-                            <p><strong>Sumatoria Total Ingreso:</strong> {{ registro.ingreso.sumatoriaTotal }}</p>
-                        </div>
-                        <div class="col-xl-6">
-                            <h5>Egreso</h5>
-                            <p><strong>Orina:</strong> {{ registro.egreso.orina.primerTurno }} / {{ registro.egreso.orina.segundoTurno }} - Total: {{ registro.egreso.orina.total }}</p>
-                            <p><strong>Vómito:</strong> {{ registro.egreso.vomito.total }}</p>
-                            <p><strong>Aspiración:</strong> {{ registro.egreso.aspiracion.total }}</p>
-                            <p><strong>Perdida Incesante:</strong> {{ registro.egreso.perdidaIncesante.primerTurno }} / {{ registro.egreso.perdidaIncesante.segundoTurno }} - Total: {{ registro.egreso.perdidaIncesante.total }}</p>
-                            <p><strong>Deposiciones:</strong> {{ registro.egreso.deposiciones.primerTurno }} / {{ registro.egreso.deposiciones.segundoTurno }} - Total: {{ registro.egreso.deposiciones.total }}</p>
-                            <p><strong>Otros:</strong> {{ registro.egreso.otros[0].total }}</p>
-                            <p><strong>Sumatoria Total Egreso:</strong> {{ registro.egreso.sumatoriaTotal }}</p>
+                        <div class="col-xl-2 col-sm-2 fw-bold"><b>Fecha: </b>{{lista.FechaTexto | date: 'dd-MM-yyyy' }}</div>
+                        <div class="col-xl-1 col-sm-1 fw-bold"><b>Hora: </b>{{lista.FechaTexto | date: 'HH:mm'}}</div>
+                        <div class="col-xl-3 col-sm-3"><b>Balance Hidrico: </b>{{lista.BalanceHidrico}}</div>
+                        <div class="col-xl-2 col-sm-2"><b>Ingresos: </b>{{lista.Ingreso?.SumatoriaTotal}}</div>
+                        <div class="col-xl-2 col-sm-2"><b>Egresos: </b>{{lista.Egreso?.SumatoriaTotal}}</div>
+                        <div class="col-xl-2 col-sm-2 text-right"> &nbsp;
+                            <button type="button" class="btn btn-primary btn-sm"
+                                (click)="VerListaIngresosyEgresos(lista.Item)"><i class="fas fa-lg fa-eye"></i></button>
                         </div>
                     </div>
                 </div>
+                <br>
+                <div class="box-shadow mt-3" *ngIf="verListaIngresosEgresos">
+                    <ng-container *ngFor="let lista of listadoBalanceHidrico">
+                        <div class="row" *ngIf="lista.Item == esItemVisualizar">
+                            <div class="col-xl-4 col-sm-4  fw-bold"><b>Fecha: </b>{{lista.Ingreso?.FechaTexto | date: 'dd-MM-yyyy HH:mm:ss' }}</div>
+                            <div class="col-xl-6 col-sm-6"></div>
+                            <div class="col-xl-2 col-sm-2 text-right">
+                            </div>
+                            <div class="col-xl-12 col-sm-12"><b>Primer Turno</b></div>
+                            <div class="col-xl-3 col-sm-3"><b>Oral: </b>{{lista.Ingreso?.Oral?.PrimerTurno}}</div>
+                            <div class="col-xl-2 col-sm-2"><b>Parenteral: </b>{{lista.Ingreso?.Parental?.PrimerTurno}}</div>
+                            <div class="col-xl-2 col-sm-2"><b>Parenteral tratamiento: </b>{{lista.Ingreso?.ParentalTratamiento?.PrimerTurno}}</div>
+                            <div class="col-xl-2 col-sm-2"><b>Sangre: </b>{{lista.Ingreso?.Sangre?.PrimerTurno}}</div>
+                            <div class="col-xl-3 col-sm-3"><b>Agua Oxidacion:
+                                </b>{{lista.Ingreso?.AguaOxidacion?.PrimerTurno}}</div>
+                            <div class="col-xl-2 col-sm-2 mb-3"><b>Otros: </b>
+                                <ol type="a">
+                                    <ng-container *ngFor="let otro of lista.Ingreso?.Otros">
+                                        <li *ngIf="otro.PrimerTurno != ''">
+                                            {{otro.Texto}} {{otro.PrimerTurno}}
+                                        </li>
+                                    </ng-container>
+                                </ol>
+                            </div>
+
+                            <div class="col-xl-12 col-sm-12"><b>Segundo Turno</b></div>
+                            <div class="col-xl-3 col-sm-3"><b>Oral: </b>{{lista.Ingreso?.Oral?.SegundoTurno}}</div>
+                            <div class="col-xl-2 col-sm-2"><b>Parenteral: </b>{{lista.Ingreso?.Parental?.SegundoTurno}}</div>
+                            <div class="col-xl-2 col-sm-2"><b>Parenteral tratamiento: </b>{{lista.Ingreso?.ParentalTratamiento?.PrimerTurno}}</div>
+                            <div class="col-xl-2 col-sm-2"><b>Sangre: </b>{{lista.Ingreso?.Sangre?.SegundoTurno}}</div>
+                            <div class="col-xl-3 col-sm-3"><b>Agua Oxidacion:
+                                </b>{{lista.Ingreso?.AguaOxidacion?.SegundoTurno}}</div>
+                            <div class="col-xl-2 col-sm-2 mb-3"><b>Otros: </b>
+                                <ol type="a">
+                                    <ng-container *ngFor="let otro of lista.Ingreso?.Otros">
+                                        <li *ngIf="otro.SegundoTurno != ''">
+                                            {{otro.Texto}} {{otro.SegundoTurno}}
+                                        </li>
+                                    </ng-container>
+                                </ol>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <br>
+                <div class="box-shadow mt-3" *ngIf="verListaIngresosEgresos">
+                        <ng-container *ngFor="let lista of listadoBalanceHidrico">
+                            <div class="row" *ngIf="lista.Item == esItemVisualizar">
+                                <div class="col-xl-4 col-sm-4  fw-bold"><b>Fecha: </b>{{lista.Egreso?.FechaTexto | date: 'dd-MM-yyyy HH:mm:ss' }}</div>
+                                <div class="col-xl-6 col-sm-6"></div>
+                                <div class="col-xl-2 col-sm-2 text-right">
+
+                                </div>
+                                <div class="col-xl-12 col-sm-12"><b>Primer turno: </b></div>
+                                <div class="col-xl-2 col-sm-2"><b>Orina: </b>{{lista.Egreso?.Orina?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Vómito: </b>{{lista.Egreso?.Vomito?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Aspiración: </b>{{lista.Egreso?.Aspiracion?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Drenaje: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let drenaje of lista.Egreso?.Drenaje">
+                                            <li *ngIf="drenaje.PrimerTurno!=''">
+                                                {{drenaje.Texto}} {{drenaje.PrimerTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+                                <div class="col-xl-2 col-sm-2"><b>Pérdida incesante:
+                                    </b>{{lista.Egreso?.PerdidaIncesante?.PrimerTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Deposición: </b>{{lista.Egreso?.Deposiciones?.PrimerTurno}}
+                                </div>
+                                <div class="col-xl-10 col-sm-10 mb-3"><b>Otros: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let otro of lista.Egreso?.Otros">
+                                            <li *ngIf="otro.PrimerTurno != ''">
+                                                {{otro.Texto}} {{otro.PrimerTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+
+                                <div class="col-xl-12 col-sm-12"><b>Segundo turno: </b></div>
+                                <div class="col-xl-2 col-sm-2"><b>Orina: </b>{{lista.Egreso?.Orina?.SegundoTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Vómito: </b>{{lista.Egreso?.Vomito?.SegundoTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Aspiración: </b>{{lista.Egreso?.Aspiracion?.SegundoTurno}}
+                                </div>
+                                <div class="col-xl-2 col-sm-2"><b>Drenaje: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let drenaje of lista.Egreso?.Drenaje">
+                                            <li *ngIf="drenaje.SegundoTurno != ''">
+                                                {{drenaje.Texto}} {{drenaje.SegundoTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+                                <div class="col-xl-2 col-sm-2"><b>Pérdida incesante:
+                                    </b>{{lista.Egreso?.PerdidaIncesante?.SegundoTurno}}</div>
+                                <div class="col-xl-2 col-sm-2"><b>Deposición: </b>{{lista.Egreso?.Deposiciones?.SegundoTurno}}
+                                </div>
+                                <div class="col-xl-10 col-sm-10 mb-3"><b>Otros: </b>
+                                    <ol type="a">
+                                        <ng-container *ngFor="let otro of lista.Egreso?.Otros">
+                                            <li *ngIf="otro.SegundoTurno != ''">
+                                                {{otro.Texto}} {{otro.SegundoTurno}}
+                                            </li>
+                                        </ng-container>
+                                    </ol>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </div>
             </div>
             		
         </form>

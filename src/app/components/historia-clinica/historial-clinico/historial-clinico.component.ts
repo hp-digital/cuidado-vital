@@ -33,6 +33,17 @@ import { ControlEpocDTO } from '@models/control-epoc';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { HistoriaPrimeraAtencionDTO } from '@models/primera-atencion';
 import { DiagnosticoPrimeraAtencionDTO } from '@models/diagnostico-primera-atencion';
+import { HojaMonitoreoSignosDTO } from '@models/hoja-monitoreo';
+import { SignoVitalHojaDTO } from '@models/signo-vital-hoja';
+import { NotaEnfermeraDTO } from '@models/nota-enfermera';
+import { SignoVitalNotaDTO } from '@models/signo-vital-notal';
+import { SoapieDTO } from '@models/soapie';
+import { EvaluacionDTO } from '@models/evaluacion-nota';
+import { BalanceHidricoDTO } from '@models/balance-hidrico';
+import { BalanceHidricoTurnoDTO } from '@models/balance-hidrico-turno';
+import { BalanceHidricoIngresoDTO } from '@models/balance-hidrico-ingresos';
+import { BalanceHidricoDetalleDTO } from '@models/balance-hidrico-detalle';
+import { BalanceHidricoEgresoDTO } from '@models/balance-hidrico-egreso';
 
 @Component({
   selector: 'app-historial-clinico',
@@ -149,6 +160,7 @@ export class HistorialClinicoComponent implements OnInit {
       primeraAtencion.Anamnesis = objHistoria.primeraAtencion.anamnesis;
       primeraAtencion.FuncionBiologica = objHistoria.primeraAtencion.funcionBiologica;
       primeraAtencion.FuncionVital = objHistoria.primeraAtencion.funcionVital;
+      primeraAtencion.ExamenFisico = objHistoria.primeraAtencion.examenFisico;
 
       primeraAtencion.Diagnostico=[];
       if(objHistoria.primeraAtencion.diagnostico != null)
@@ -730,6 +742,306 @@ export class HistorialClinicoComponent implements OnInit {
     
     }
 
+    let hojaMonitoreo = new HojaMonitoreoSignosDTO();
+    if(objHistoria.hojaMonitoreoSignos != null){
+      hojaMonitoreo.Paciente = objHistoria.hojaMonitoreoSignos.paciente;
+      hojaMonitoreo.Medico = objHistoria.hojaMonitoreoSignos.medico;
+      hojaMonitoreo.SignoVital=[]
+      if(objHistoria.hojaMonitoreoSignos.signoVital!=null)
+      {
+        objHistoria.hojaMonitoreoSignos.signoVital.forEach((element:any)=>{
+          let signo = new SignoVitalHojaDTO();
+          signo.FechaRegistro=element.fechaRegistro;
+          signo.PresionSistolica=element.presionSistolica;
+          signo.PresionDiastolica=element.presionDiastolica;
+          signo.Pulso=element.pulso;
+          signo.Temperatura=element.temperatura;
+          signo.FrecuenciaRespiratoria=element.frecuenciaRespiratoria;
+          signo.Saturacion=element.saturacion;
+          signo.Oxigeno=element.oxigeno;
+          signo.Peso=element.peso;
+          signo.Deposiciones=element.deposiciones;
+          signo.Orina=element.orina;
+          signo.Ingresos=element.ingresos;
+          signo.Egresos=element.egresos;
+          signo.TotalBH=element.totalBH;
+  
+          hojaMonitoreo.SignoVital?.push(signo);
+        });
+      }
+    }
+
+    let notaEnfermera = new NotaEnfermeraDTO();
+    if(objHistoria.notaEnfermera != null)
+    {
+      
+      notaEnfermera.Paciente = objHistoria.notaEnfermera.paciente;
+      notaEnfermera.Medico = objHistoria.notaEnfermera.medico;
+      notaEnfermera.NroHcl = objHistoria.notaEnfermera.nroHcl;
+      notaEnfermera.FechaNota = objHistoria.notaEnfermera.fechaNota;
+      
+      let sign = new SignoVitalNotaDTO();
+      if(objHistoria.notaEnfermera.signoVital!= null)
+      {
+        sign.Temperatura = objHistoria.notaEnfermera.signoVital.temperatura;
+        sign.FrecuenciaCardiaca = objHistoria.notaEnfermera.signoVital.frecuenciaCardiaca;
+        sign.PresionSistolica = objHistoria.notaEnfermera.signoVital.presionSistolica;
+        sign.PresionDiastolica = objHistoria.notaEnfermera.signoVital.presionDiastolica;
+        sign.SaturacionOxigeno = objHistoria.notaEnfermera.signoVital.saturacionOxigeno;
+        sign.FrecuenciaRespiratoria = objHistoria.notaEnfermera.signoVital.frecuenciaRespiratoria;
+        notaEnfermera.SignoVital = sign;
+      }
+      
+      
+      let soapie = new SoapieDTO();
+      if(objHistoria.notaEnfermera.soapie != null)
+      {
+        soapie.Subjetivos = objHistoria.notaEnfermera.soapie.subjetivos;
+        soapie.Objetivos = objHistoria.notaEnfermera.soapie.objetivos;
+        
+        soapie.Medicacion= [] ;
+        soapie.Procedimiento= [] ;
+        soapie.Diagnostico= [] ;
+        soapie.Planteamiento= [] ;
+        soapie.Ocurrencias= [] ;
+        soapie.Pendientes= [] ;
+        soapie.Evaluacion= [] ;
+        soapie.Diuresis= [] ;
+        soapie.Deposicion= [] ;
+        
+        if(objHistoria.notaEnfermera.soapie.medicacion != null)
+        {
+          objHistoria.notaEnfermera.soapie.medicacion.forEach((element:any)=>{
+            let medicacion = new EvaluacionDTO();
+            medicacion.Item = element.item;
+            medicacion.Nota = element.nota;
+            medicacion.FechaNota = element.fechaNota;
+            medicacion.Usuario = element.usuario;
+        
+            soapie.Medicacion?.push(medicacion);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.procedimiento != null)
+        {
+          objHistoria.notaEnfermera.soapie.procedimiento.forEach((element:any)=>{
+            let procedimiento = new EvaluacionDTO();
+            procedimiento.Item = element.item;
+            procedimiento.Nota = element.nota;
+            procedimiento.FechaNota = element.fechaNota;
+            procedimiento.Usuario = element.usuario;
+        
+            soapie.Procedimiento?.push(procedimiento);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.diagnostico != null)
+        {
+          objHistoria.notaEnfermera.soapie.diagnostico.forEach((element:any)=>{
+            let diagnostico = new EvaluacionDTO();
+            diagnostico.Item = element.item;
+            diagnostico.Nota = element.nota;
+            diagnostico.FechaNota = element.fechaNota;
+            diagnostico.Usuario = element.usuario;
+        
+            soapie.Diagnostico?.push(diagnostico);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.planteamiento != null)
+        {
+          objHistoria.notaEnfermera.soapie.planteamiento.forEach((element:any)=>{
+            let planteamiento = new EvaluacionDTO();
+            planteamiento.Item = element.item;
+            planteamiento.Nota = element.nota;
+            planteamiento.FechaNota = element.fechaNota;
+            planteamiento.Usuario = element.usuario;
+        
+            soapie.Planteamiento?.push(planteamiento);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.ocurrencias != null)
+        {
+          objHistoria.notaEnfermera.soapie.ocurrencias.forEach((element:any)=>{
+            let ocurrencias = new EvaluacionDTO();
+            ocurrencias.Item = element.item;
+            ocurrencias.Nota = element.nota;
+            ocurrencias.FechaNota = element.fechaNota;
+            ocurrencias.Usuario = element.usuario;
+        
+            soapie.Ocurrencias?.push(ocurrencias);
+          });
+        }
+        
+        
+        if(objHistoria.notaEnfermera.soapie.pendientes != null)
+        {
+          objHistoria.notaEnfermera.soapie.pendientes.forEach((element:any)=>{
+            let pendientes = new EvaluacionDTO();
+            pendientes.Item = element.item;
+            pendientes.Nota = element.nota;
+            pendientes.FechaNota = element.fechaNota;
+            pendientes.Usuario = element.usuario;
+        
+            soapie.Pendientes?.push(pendientes);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.evaluacion != null)
+        {
+          objHistoria.notaEnfermera.soapie.evaluacion.forEach((element:any)=>{
+            let evaluacion = new EvaluacionDTO();
+            evaluacion.Item = element.item;
+            evaluacion.Nota = element.nota;
+            evaluacion.FechaNota = element.fechaNota;
+            evaluacion.Usuario = element.usuario;
+        
+            soapie.Evaluacion?.push(evaluacion);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.diuresis != null)
+        {
+          objHistoria.notaEnfermera.soapie.diuresis.forEach((element:any)=>{
+            let diuresis = new EvaluacionDTO();
+            diuresis.Item = element.item;
+            diuresis.Nota = element.nota;
+            diuresis.FechaNota = element.fechaNota;
+            diuresis.Usuario = element.usuario;
+        
+            soapie.Diuresis?.push(diuresis);
+          });
+        }
+        if(objHistoria.notaEnfermera.soapie.deposicion != null)
+        {
+          objHistoria.notaEnfermera.soapie.deposicion.forEach((element:any)=>{
+            let deposicion = new EvaluacionDTO();
+            deposicion.Item = element.item;
+            deposicion.Nota = element.nota;
+            deposicion.FechaNota = element.fechaNota;
+            deposicion.Usuario = element.usuario;
+        
+            soapie.Deposicion?.push(deposicion);
+          });
+        }
+      }
+      notaEnfermera.Soapie = soapie;
+    }
+
+    let balance = new BalanceHidricoDTO();
+    if(objHistoria.balanceHidrico != null)
+    {
+      balance.Paciente = objHistoria.balanceHidrico.paciente;
+      balance.Medico = objHistoria.balanceHidrico.medico;
+      balance.NroHcl = objHistoria.balanceHidrico.nroHcl;
+      balance.Peso = objHistoria.balanceHidrico.peso;
+      balance.Talla = objHistoria.balanceHidrico.talla;
+      balance.IMC = objHistoria.balanceHidrico.imc;
+      balance.Tiempo = objHistoria.balanceHidrico.tiempo;
+      balance.Fecha = objHistoria.balanceHidrico.fecha;
+      balance.FechaTexto = objHistoria.balanceHidrico.fechaTexto;
+
+      if(objHistoria.balanceHidrico.balanceHidrico != null)
+      {
+        balance.BalanceHidrico = [];
+        objHistoria.balanceHidrico.balanceHidrico.forEach((element:any)=>{
+
+          let item: any = objHistoria.balanceHidrico.balanceHidrico.length;
+          let hidrico = new BalanceHidricoTurnoDTO();
+          hidrico.Item = ++item;
+          hidrico.Fecha = element.fecha;
+          hidrico.FechaTexto = element.fechaTexto; 
+          hidrico.DatosCompletos = element.datosCompletos;  
+          hidrico.BalanceHidrico = element.balanceHidrico;
+
+          hidrico.Ingreso = new BalanceHidricoIngresoDTO();
+          hidrico.Ingreso.Oral = new BalanceHidricoDetalleDTO();
+          hidrico.Ingreso.Oral.PrimerTurno = element.ingreso.oral.primerTurno;
+          hidrico.Ingreso.Oral.SegundoTurno = element.ingreso.oral.segundoTurno;
+          hidrico.Ingreso.Oral.Total = element.ingreso.oral.total;
+          hidrico.Ingreso.ParentalTratamiento = new BalanceHidricoDetalleDTO();
+          hidrico.Ingreso.ParentalTratamiento.PrimerTurno = element.ingreso.parentalTratamiento.primerTurno;
+          hidrico.Ingreso.ParentalTratamiento.SegundoTurno = element.ingreso.parentalTratamiento.segundoTurno;
+          hidrico.Ingreso.ParentalTratamiento.Total = element.ingreso.parentalTratamiento.total;
+          hidrico.Ingreso.Sangre = new BalanceHidricoDetalleDTO();
+          hidrico.Ingreso.Sangre.PrimerTurno = element.ingreso.sangre.primerTurno;
+          hidrico.Ingreso.Sangre.SegundoTurno = element.ingreso.sangre.segundoTurno;
+          hidrico.Ingreso.Sangre.Total = element.ingreso.sangre.total;
+          hidrico.Ingreso.AguaOxidacion = new BalanceHidricoDetalleDTO();
+          hidrico.Ingreso.AguaOxidacion.PrimerTurno = element.ingreso.aguaOxidacion.primerTurno;
+          hidrico.Ingreso.AguaOxidacion.SegundoTurno = element.ingreso.aguaOxidacion.segundoTurno;
+          hidrico.Ingreso.AguaOxidacion.Total = element.ingreso.aguaOxidacion.total;
+          hidrico.Ingreso.Otros = [];
+          if (element.ingreso.otros != null) {
+            element.ingreso.otros.forEach((dato: any) => {
+              let item: any = hidrico.Ingreso?.Otros?.length;
+              let otro = new BalanceHidricoDetalleDTO();
+              otro.Item = ++item;
+              otro.Texto = dato.texto;
+              otro.PrimerTurno = dato.primerTurno;
+              otro.SegundoTurno = dato.segundoTurno;
+              otro.Total = dato.total;
+              hidrico.Ingreso?.Otros?.push(otro);
+            });
+          }
+          hidrico.Ingreso.SumatoriaTotal = element.ingreso.sumatoriaTotal;
+          hidrico.Ingreso.Fecha = element.ingreso.fecha;
+          hidrico.Ingreso.FechaTexto = element.ingreso.fechaTexto;
+          
+
+          hidrico.Egreso = new BalanceHidricoEgresoDTO();
+          hidrico.Egreso.Orina = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.Orina.PrimerTurno = element.egreso.orina.primerTurno;
+          hidrico.Egreso.Orina.SegundoTurno = element.egreso.orina.segundoTurno;
+          hidrico.Egreso.Orina.Total = element.egreso.orina.total;
+          hidrico.Egreso.Vomito = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.Vomito.PrimerTurno = element.egreso.vomito.primerTurno;
+          hidrico.Egreso.Vomito.SegundoTurno = element.egreso.vomito.segundoTurno;
+          hidrico.Egreso.Vomito.Total = element.egreso.vomito.total;
+          hidrico.Egreso.Aspiracion = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.Aspiracion.PrimerTurno = element.egreso.aspiracion.primerTurno;
+          hidrico.Egreso.Aspiracion.SegundoTurno = element.egreso.aspiracion.segundoTurno;
+          hidrico.Egreso.Aspiracion.Total = element.egreso.aspiracion.total;
+          hidrico.Egreso.Drenaje = [];
+          if (element.egreso.drenaje != null) {
+            element.egreso.drenaje.forEach((dato: any) => {
+              let item: any = hidrico.Egreso?.Drenaje?.length;
+              let otro = new BalanceHidricoDetalleDTO();
+              otro.Item = ++item;
+              otro.Texto = dato.texto;
+              otro.PrimerTurno = dato.primerTurno;
+              otro.SegundoTurno = dato.segundoTurno;
+              otro.Total = dato.total;
+              hidrico.Egreso?.Drenaje?.push(otro);
+            });
+          }
+          hidrico.Egreso.PerdidaIncesante = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.PerdidaIncesante.PrimerTurno = element.egreso.perdidaIncesante.primerTurno;
+          hidrico.Egreso.PerdidaIncesante.SegundoTurno = element.egreso.perdidaIncesante.segundoTurno;
+          hidrico.Egreso.PerdidaIncesante.Total = element.egreso.perdidaIncesante.total;
+          hidrico.Egreso.Deposiciones = new BalanceHidricoDetalleDTO();
+          hidrico.Egreso.Deposiciones.PrimerTurno = element.egreso.deposiciones.primerTurno;
+          hidrico.Egreso.Deposiciones.SegundoTurno = element.egreso.deposiciones.segundoTurno;
+          hidrico.Egreso.Deposiciones.Total = element.egreso.deposiciones.total;
+          hidrico.Egreso.Otros = [];
+          if (element.egreso.otros != null) {
+            element.egreso.otros.forEach((dato: any) => {
+              let item: any = hidrico.Egreso?.Otros?.length;
+              let otro = new BalanceHidricoDetalleDTO();
+              otro.Item = ++item;
+              otro.Texto = dato.texto;
+              otro.PrimerTurno = dato.primerTurno;
+              otro.SegundoTurno = dato.segundoTurno;
+              otro.Total = dato.total;
+              hidrico.Egreso?.Otros?.push(otro);
+            });
+          }
+          hidrico.Egreso.SumatoriaTotal = element.egreso.sumatoriaTotal;
+          hidrico.Egreso.Fecha = element.egreso.fecha;
+          hidrico.Egreso.FechaTexto = element.egreso.fechaTexto;
+
+          balance.BalanceHidrico?.push(hidrico);
+        });
+        
+      }
+      
+    }
+
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
@@ -791,6 +1103,7 @@ export class HistorialClinicoComponent implements OnInit {
     primera.Anamnesis = this.dataFormGroup.controls['inputAnamnesis'].value;
     primera.FuncionBiologica = this.dataFormGroup.controls['inputFuncionBiologica'].value;
     primera.FuncionVital = this.dataFormGroup.controls['inputFuncionVital'].value;
+    primera.ExamenFisico = this.dataFormGroup.controls['inputExamenFisico'].value;
     primera.Diagnostico = this.objDiagnosticoPrimera;
 
     return primera;
@@ -810,6 +1123,7 @@ export class HistorialClinicoComponent implements OnInit {
     this.dataFormGroup.controls['inputAnamnesis'].setValue(obj.Anamnesis);
     this.dataFormGroup.controls['inputFuncionBiologica'].setValue(obj.FuncionVital);
     this.dataFormGroup.controls['inputFuncionVital'].setValue(obj.FuncionBiologica);
+    this.dataFormGroup.controls['inputExamenFisico'].setValue(obj.ExamenFisico);
 
     this.objDiagnosticoPrimera = obj.Diagnostico
     

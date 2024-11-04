@@ -4,6 +4,7 @@ import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import { AutoCompleteModule } from 'primeng/autocomplete';
+import { TabViewModule } from 'primeng/tabview';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComboDTO } from '@models/ComboDTO';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
@@ -47,7 +48,7 @@ import { BalanceHidricoDTO } from '@models/balance-hidrico';
 @Component({
   selector: 'app-monitoreo-general',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule, AutoCompleteModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule, AutoCompleteModule, TabViewModule],
   templateUrl: './monitoreo-general.component.html',
   styleUrl: './monitoreo-general.component.css'
 })

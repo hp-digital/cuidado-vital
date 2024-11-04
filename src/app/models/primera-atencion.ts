@@ -7,5 +7,6 @@ export class HistoriaPrimeraAtencionDTO{
     Anamnesis !: string;
     FuncionBiologica !: string;
     FuncionVital !: string;
+    ExamenFisico !: string;
     Diagnostico !: DiagnosticoPrimeraAtencionDTO[];
 }
