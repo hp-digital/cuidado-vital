@@ -1093,7 +1093,7 @@ export class MonitoreoGeneralComponent implements OnInit{
     {
       historia.HojaMonitoreoSignos?.SignoVital?.forEach((element:any) => {
         let sstf = new SignoVitalHojaDTO();
-        sstf.FechaRegistro = element.FechaRegistro;
+        sstf.FechaRegistro = moment(element.FechaRegistro).format('MM/DD/yyyy HH:mm');
         sstf.PresionSistolica = element.PresionSistolica;
         sstf.PresionDiastolica = element.PresionDiastolica;
         sstf.Pulso = element.Pulso;

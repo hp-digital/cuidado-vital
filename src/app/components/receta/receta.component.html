@@ -127,43 +127,155 @@
                         <button type="button" class="btn btn-green-custom" (click)="AgregarListadoReceta()"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Agregar medicamento</button>
                     </div>
                 </div>
-                <div class="box-shadow mt-3" *ngFor="let lista of listadoRecetaDTO">
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <h6>Nombre medicamento</h6>
-                            <p>{{lista.NombreMedicamento}}</p>
-                        </div>									
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-3">
-                            <h6>Dosis</h6>
-                            <p>{{lista.Dosis}}</p>
+                <div class="row" *ngIf="verImpresion==false">
+                    <div class="box-shadow mt-3" *ngFor="let lista of listadoRecetaDTO">
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <h6>Nombre medicamento</h6>
+                                <p>{{lista.NombreMedicamento}}</p>
+                            </div>									
                         </div>
-                        <div class="col-xl-3">
-                            <h6>Duración</h6>
-                            <p>{{lista.Duracion}}</p>
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <h6>Dosis</h6>
+                                <p>{{lista.Dosis}}</p>
+                            </div>
+                            <div class="col-xl-3">
+                                <h6>Duración</h6>
+                                <p>{{lista.Duracion + ' '+ lista.DuracionDetalle}}</p>
+                            </div>
+                            <div class="col-xl-3">
+                                <h6>Vía</h6>
+                                <p>{{lista.Via}}</p>
+                            </div>	
+                            <div class="col-xl-3">
+                                <h6>Fecha Receta</h6>
+                                <p>{{lista.Fecha | date : 'dd-MM-yyyy HH:mm'}}</p>
+                            </div>											
                         </div>
-                        <div class="col-xl-3">
-                            <h6>Vía</h6>
-                            <p>{{lista.Via}}</p>
-                        </div>	
-                        <div class="col-xl-3">
-                            <h6>Fecha Receta</h6>
-                            <p>{{lista.Fecha | date : 'dd-MM-yyyy HH:mm'}}</p>
-                        </div>											
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <h6>Indicaciones</h6>
-                            <p>{{lista.Indicaciones}}</p>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <h6>Indicaciones</h6>
+                                <p>{{lista.Indicaciones}}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+                
             </div>
+
+            
             		
         </form>
+        <div class="row" id="imprimir" *ngIf="verImpresion">
+            <div class="row">
+                <div class="col-xl-2">
+                    <img src="../../../assets/img/logotipo.png" alt="logo" width="250" height="60">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-xl-12">
+                    <h5 style="text-align: center;">RECETA</h5>
+                </div>
+            </div>
+            <br><br><br>
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente :&nbsp; </label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL :&nbsp; </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-5">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Medico :&nbsp;&nbsp; </label> <span>{{medico}}</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="row mb-3 bg-green-custom" style="background: #3594E0;">DIAGNÓSTICO</div>												
+                <div class="col-xl-12"  *ngFor="let lista of objDiagnostico">
+                    <div class="box-shadow mb-3">
+                        <div class="row">
+                            <div class="col-xl-11">
+                                <div class="col-xl-12 fw-bold">{{lista.TipoDiagnostico}}</div>
+                                <div class="col-xl-12">{{lista.CodigoCie10}}</div>
+                                <div class="col-xl-12">{{lista.NombreDiagnostico}}</div>              
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+                <div class="col-xl-12"  *ngFor="let lista of objDiagnosticoPrimer">
+                    <div class="box-shadow mb-3">
+                        <div class="row">
+                            <div class="col-xl-11">
+                                <div class="col-xl-12 fw-bold">{{lista.TipoDiagnostico}}</div>
+                                <div class="col-xl-12">{{lista.CodigoCie10}}</div>
+                                <div class="col-xl-12">{{lista.NombreDiagnostico}}</div>              
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+                <hr/>
+            </div>
+            <br>
+            <br>
+            <div class="row mb-3 bg-green-custom" style="background: #3594E0;">MEDICACIÓN</div>	
+            <div class="table-responsive" id="ver-tabla">
+            <table class="table table-bordered table-striped">
+                    <thead>
+                        <th>Índice</th>
+                        <th>Fecha Registro</th>
+                        <th>Medicamento</th>
+                        <th>Duración</th>
+                        <th>Via</th>
+                        <th>Indicaciones</th>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr *ngFor="let lista of listadoRecetaDTO; index as s">
+                            <td>{{s + 1 }}</td>
+                            <td>{{lista.Fecha  | date: 'dd/MM/yyyy'}}</td>
+                            <td>{{lista.NombreMedicamento}}</td>
+                            <td>{{lista.Duracion +' '+ lista.DuracionDetalle}}</td>
+                            <td>{{lista.Via}}</td>
+                            <td>{{lista.Indicaciones}}</td>
+    
+                        </tr>
+                    </tbody>
+            </table>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="row">
+                <div class="col-xl-3">
+                    <p>___________________________________________</p>
+                    <p>{{medico}}</p>
+                    <!-- <p>
+                        <a href="eldoctor.pe" target="_blank">web</a>
+                    </p> -->
+                </div>
+            </div>
+            
+            
+        </div>
+        </div>
     </div>
-    <div class="modal-footer">							
+    
+    <div class="modal-footer">
+        <button class="btn btn-green-custom btn-sm" (click)="Cotizar()" *ngIf="idRol==3"> <i class="fas fa-lg fa-fw me-2 fa-eye" ></i> Mostra historial</button>&nbsp;&nbsp;
+        <button type="button" class="btn btn-green-light-custom" (click)="Imprimir()" *ngIf="verImpresion">
+            <i class="fa fa-lg fa-fw me-2 fa-print"></i>Imprimir</button>&nbsp;&nbsp;		
+        <button type="button" class="btn btn-primary" (click)="GenerarPdf()" *ngIf="verImpresion==false">
+        <i class="fa fa-lg fa-fw me-2 fa-print"></i>Vista de impresión</button>&nbsp;&nbsp;						
         <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" data-bs-dismiss="modal" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-file-alt" ></i>Generar receta</button>
         <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
         <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>

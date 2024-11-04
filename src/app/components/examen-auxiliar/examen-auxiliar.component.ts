@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
@@ -45,6 +45,8 @@ import { BalanceHidricoEgresoDTO } from '@models/balance-hidrico-egreso';
 import { BalanceHidricoIngresoDTO } from '@models/balance-hidrico-ingresos';
 import { BalanceHidricoTurnoDTO } from '@models/balance-hidrico-turno';
 import { BalanceHidricoDTO } from '@models/balance-hidrico';
+import html2canvas from 'html2canvas';
+import jspdf, { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-examen-auxiliar',
@@ -91,12 +93,16 @@ export class ExamenAuxiliarComponent implements OnInit {
   idServicio:number=0;
   listadoOrden: OrdenDTO[]=[];
 
+
+  verImpresion:boolean = false;
+
   constructor(
     private bsModalExamenAuxiliar: BsModalRef,
     private modalService: BsModalService,
     private historiaService: HistoriaService,
     private servicioService: ServicioServiceService,
-    private settings : SettingsService
+    private settings : SettingsService,
+    private elementRef: ElementRef<HTMLElement>
   ){
     this.dataFormGroup = new FormGroup({
       inputServicio: new FormControl(),
@@ -163,14 +169,26 @@ export class ExamenAuxiliarComponent implements OnInit {
 
   AgregarReceta(){
     let indice = this.listadoOrden.length;
+    let serv = this.dataFormGroup.controls['inputEstudio'].value;
+    let tip = this.dataFormGroup.controls['inputTipo'].value;
 
+    if(serv=='' || serv == null)
+    {
+      this.MostrarNotificacionError("Debe ingresar un estudio para continuar", "Error");
+      return
+    }
+    if(tip=='' || tip == null)
+      {
+        this.MostrarNotificacionError("Debe ingresar un estudio para continuar", "Error");
+        return
+      }
 
     let orden = new OrdenDTO();
     orden.Indice = indice+1;
     orden.IdServicio = this.idServicio
-    orden.Servicio = this.dataFormGroup.controls['inputEstudio'].value;
-    orden.Tipo =this.dataFormGroup.controls['inputTipo'].value;
-    orden.Indicaciones = this.dataFormGroup.controls['inputIndicaciones'].value;
+    orden.Servicio = serv;
+    orden.Tipo =tip;
+    orden.Indicaciones = this.dataFormGroup.controls['inputIndicaciones'].value != null ? this.dataFormGroup.controls['inputIndicaciones'].value: '-';
     orden.Fecha = new Date();
 
     this.listadoOrden.push(orden);
@@ -1173,6 +1191,29 @@ if(objHistoria.primeraAtencion != null)
     }else{
       this.MostrarNotificacionWarning("Ningún servicio seleccionado", "Error");
     }
+  }
+
+  GenerarPdf(){
+    this.verImpresion = true;
+  }
+
+  Imprimir(){
+    const elementToPrint:any  = document.getElementById('imprimir');
+    console.log(elementToPrint)
+
+    html2canvas(elementToPrint, {scale: 2}).then((canvas)=>{
+      const pdf = new jsPDF();
+      
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG',4, 0, 202, 150);
+
+      pdf.setFontSize(12);
+      pdf.save('orden-'+this.nroHcl+'.pdf');
+      this.verImpresion= false;
+      //console.log(pdf.text);
+    });
+  }
+  Cotizar(){
+    this.MostrarNotificacionInfo("Solicitud de cotización de medicamentos generada", "Info");
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

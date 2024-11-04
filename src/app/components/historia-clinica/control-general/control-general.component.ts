@@ -106,6 +106,13 @@ export class ControlGeneralComponent implements OnInit {
   nombrePresidente: string='';
   primerApellidoMadre: string='';
 
+  esNormalResultado: boolean = true;
+  esSiCaida: boolean = true;
+  esNormalNutricional: boolean = true;
+  esNormalPsico: boolean = true;
+  esNormalVision: boolean = true;
+  esNormalAudicion: boolean = true;
+
   constructor(
     private bsModalControlGeneral: BsModalRef,
     private historiaService: HistoriaService,
@@ -936,7 +943,7 @@ export class ControlGeneralComponent implements OnInit {
     if(_val != null)
       val.Nombre = _val[0]['nombre'];
     controlGeneral.ValoracionMental = val;
-    controlGeneral.ValoracionMentalDetalle = this.dataFormGroup.controls['inputEstadoMentalDetalle'].value;
+    controlGeneral.ValoracionMentalDetalle = (this.dataFormGroup.controls['inputEstadoMentalDetalle'].value != null ? this.dataFormGroup.controls['inputEstadoMentalDetalle'].value : '-');
 
     let cai = new DesplegableDTO();
     cai.Id = this.dataFormGroup.controls['inputCaida'].value;
@@ -944,7 +951,7 @@ export class ControlGeneralComponent implements OnInit {
     if(_cai != null)
       cai.Nombre = _cai[0]['nombre'];
     controlGeneral.Caida = cai;
-    controlGeneral.CaidaDetalle = this.dataFormGroup.controls['inputCaidaDetalle'].value;
+    controlGeneral.CaidaDetalle = (this.dataFormGroup.controls['inputCaidaDetalle'].value != null ? this.dataFormGroup.controls['inputCaidaDetalle'].value : '-');
 
     let nut = new DesplegableDTO();
     nut.Id = this.dataFormGroup.controls['inputEstadoNutricional'].value;
@@ -952,7 +959,7 @@ export class ControlGeneralComponent implements OnInit {
     if(_nut != null)
       nut.Nombre = _nut[0]['nombre'];
     controlGeneral.EstadoNutricional = nut;
-    controlGeneral.EstadoNutricionalDetalle = this.dataFormGroup.controls['inputEstadoNutricionalDetalle'].value;
+    controlGeneral.EstadoNutricionalDetalle = (this.dataFormGroup.controls['inputEstadoNutricionalDetalle'].value != null ? this.dataFormGroup.controls['inputEstadoNutricionalDetalle'].value : '-');
 
     let psi = new DesplegableDTO();
     psi.Id = this.dataFormGroup.controls['inputEstadoPsicosocial'].value;
@@ -960,7 +967,7 @@ export class ControlGeneralComponent implements OnInit {
     if(_psi != null)
       psi.Nombre = _psi[0]['nombre'];
     controlGeneral.EstadoPsicosocial = psi;
-    controlGeneral.EstadoPsicosocialDetalle = this.dataFormGroup.controls['inputEstadoPsicosocialDetalle'].value;
+    controlGeneral.EstadoPsicosocialDetalle = (this.dataFormGroup.controls['inputEstadoPsicosocialDetalle'].value != null ? this.dataFormGroup.controls['inputEstadoPsicosocialDetalle'].value : '-');
 
     let vis = new DesplegableDTO();
     vis.Id = this.dataFormGroup.controls['inputEstadoVision'].value;
@@ -968,7 +975,7 @@ export class ControlGeneralComponent implements OnInit {
     if(_vis != null)
       vis.Nombre = _vis[0]['nombre'];
     controlGeneral.EstadoVision = vis;
-    controlGeneral.EstadoVisionDetalle = this.dataFormGroup.controls['inputEstadoVisionDetalle'].value;
+    controlGeneral.EstadoVisionDetalle = (this.dataFormGroup.controls['inputEstadoVisionDetalle'].value != null ? this.dataFormGroup.controls['inputEstadoVisionDetalle'].value : '-');
 
     let audi = new DesplegableDTO();
     audi.Id = this.dataFormGroup.controls['inputEstadoAudicion'].value;
@@ -976,7 +983,7 @@ export class ControlGeneralComponent implements OnInit {
     if(_audi != null)
       audi.Nombre = _audi[0]['nombre'];
     controlGeneral.EstadoAudicion = audi;
-    controlGeneral.EstadoAudicionDetalle = this.dataFormGroup.controls['inputEstadoAudicionDetalle'].value;
+    controlGeneral.EstadoAudicionDetalle = (this.dataFormGroup.controls['inputEstadoAudicionDetalle'].value != null ? this.dataFormGroup.controls['inputEstadoAudicionDetalle'].value : '-');
     controlGeneral.PlanTrabajo = this.dataFormGroup.controls['inputPlanTrabajo'].value;
 
     this.objControl.push(controlGeneral);
@@ -1101,4 +1108,43 @@ export class ControlGeneralComponent implements OnInit {
       this.MostrarNotificacionError(e, '¡ERROR EN EL PROCESO!');
     }
   }
+
+  ValidarResultado(id:number){
+    if(id==1) 
+      this.esNormalResultado= false;
+    else
+      this.esNormalResultado=true;
+  }
+  ValidarCaida(id:number){
+    if(id==1)
+      this.esSiCaida=false;
+    else
+      this.esSiCaida=true;
+  }
+  ValidarNutricional(id:number)
+  {
+    if(id==1)
+      this.esNormalNutricional=false;
+    else
+      this.esNormalNutricional=true;
+  }
+  ValidarPsico(id:number){
+    if(id==1)
+      this.esNormalPsico=false;
+    else
+      this.esNormalPsico=true;
+  }
+  ValidarVision(id:number){
+    if(id==1)
+      this.esNormalVision=false;
+    else
+      this.esNormalVision=true;
+  }
+  ValidarAudicion(id:number){
+    if(id==1)
+      this.esNormalAudicion=false;
+    else
+      this.esNormalAudicion=true;
+  }
+
 }

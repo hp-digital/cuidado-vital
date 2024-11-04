@@ -241,61 +241,61 @@
                         <div class="form-group mb-3">
                             <label class="cform-label block">Resultado de Valoracion Mental</label>
                             <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
-                                <input class="form-check-input" name="inputEstadoMental" type="radio" id="inputEstadoMental" formControlName="inputEstadoMental" [value]="combo.id">
+                                <input class="form-check-input" name="inputEstadoMental" type="radio" id="inputEstadoMental" formControlName="inputEstadoMental" [value]="combo.id" (click)="ValidarResultado(combo.id)">
                                 <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control" formControlName="inputEstadoMentalDetalle"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoMentalDetalle" *ngIf="esNormalResultado"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Caida dentro de los 6 meses</label>
                             <div class="form-check form-check-inline" *ngFor="let combo of comboSiNo">
-                                <input class="form-check-input" name="inputCaida" type="radio" id="inputCaida" formControlName="inputCaida" [value]="combo.id">
+                                <input class="form-check-input" name="inputCaida" type="radio" id="inputCaida" formControlName="inputCaida" [value]="combo.id" (click)="ValidarCaida(combo.id)">
                                 <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control" formControlName="inputCaidaDetalle"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputCaidaDetalle" *ngIf="esSiCaida"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Estado de Nutricional*</label>
                             <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
-                                <input class="form-check-input" name="inputEstadoNutricional" type="radio" id="inputEstadoNutricional" formControlName="inputEstadoNutricional" [value]="combo.id">
+                                <input class="form-check-input" name="inputEstadoNutricional" type="radio" id="inputEstadoNutricional" formControlName="inputEstadoNutricional" [value]="combo.id" (click)="ValidarNutricional(combo.id)">
                                 <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control" formControlName="inputEstadoNutricionalDetalle"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoNutricionalDetalle" *ngIf="esNormalNutricional"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Estado de Psicosocial*</label>
                             <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
-                                <input class="form-check-input" name="inputEstadoPsicosocial" type="radio" id="inputEstadoPsicosocial" formControlName="inputEstadoPsicosocial" [value]="combo.id">
+                                <input class="form-check-input" name="inputEstadoPsicosocial" type="radio" id="inputEstadoPsicosocial" formControlName="inputEstadoPsicosocial" [value]="combo.id" (click)="ValidarPsico(combo.id)">
                                 <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control" formControlName="inputEstadoPsicosocialDetalle"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoPsicosocialDetalle" *ngIf="esNormalPsico"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Estado de Vision*</label>
                             <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
-                                <input class="form-check-input" name="inputEstadoVision" type="radio" id="inputEstadoVision" formControlName="inputEstadoVision" [value]="combo.id">
+                                <input class="form-check-input" name="inputEstadoVision" type="radio" id="inputEstadoVision" formControlName="inputEstadoVision" [value]="combo.id" (click)="ValidarVision(combo.id)">
                                 <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control" formControlName="inputEstadoVisionDetalle"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoVisionDetalle" *ngIf="esNormalVision"></textarea>
                     </div>
                     <div class="col-xl-12 mt-3">
                         <div class="form-group mb-3">
                             <label class="cform-label block">Estado de Audición*</label>
                             <div class="form-check form-check-inline" *ngFor="let combo of comboEstado">
-                                <input class="form-check-input" name="inputEstadoAudicion" type="radio" id="inputEstadoAudicion" formControlName="inputEstadoAudicion" [value]="combo.id">
+                                <input class="form-check-input" name="inputEstadoAudicion" type="radio" id="inputEstadoAudicion" formControlName="inputEstadoAudicion" [value]="combo.id" (click)="ValidarAudicion(combo.id)">
                                 <label class="form-check-label" for=""> {{combo.nombre}}</label>
                             </div>
                         </div>
-                        <textarea name="" id="" class="form-control" formControlName="inputEstadoAudicionDetalle"></textarea>
+                        <textarea name="" id="" class="form-control" formControlName="inputEstadoAudicionDetalle" *ngIf="esNormalAudicion"></textarea>
                     </div>
                 </div>
 

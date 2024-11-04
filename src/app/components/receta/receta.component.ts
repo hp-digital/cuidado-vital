@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
@@ -43,6 +43,8 @@ import { BalanceHidricoEgresoDTO } from '@models/balance-hidrico-egreso';
 import { BalanceHidricoIngresoDTO } from '@models/balance-hidrico-ingresos';
 import { BalanceHidricoTurnoDTO } from '@models/balance-hidrico-turno';
 import { BalanceHidricoDTO } from '@models/balance-hidrico';
+import html2canvas from 'html2canvas';
+import jspdf, { jsPDF } from 'jspdf';
 
 @Component({
   selector: 'app-receta',
@@ -91,11 +93,14 @@ export class RecetaComponent implements OnInit {
   medicamentos: any[] = [];
   selectedMedicamento: any; // Para almacenar el objeto seleccionado
 
+  verImpresion:boolean = false;
+
   constructor(
     private modalService: BsModalService,
     private bsModalReceta: BsModalRef,
     private historiaService: HistoriaService,
-    private settings : SettingsService
+    private settings : SettingsService,
+    private elementRef: ElementRef<HTMLElement>
   ){
     this.dataFormGroup = new FormGroup({
       selectBuscarMedicamento: new FormControl(),
@@ -148,6 +153,12 @@ export class RecetaComponent implements OnInit {
     let via =  this.dataFormGroup.controls['selectVia'].value;
     let indicaciones =  this.dataFormGroup.controls['textIndicaciones'].value;
 
+    if(nombreMedicamento=='' || nombreMedicamento == null)
+    {
+      this.MostrarNotificacionError("Debe Ingresar un medicamento para continuar", "Error");
+      return
+    }
+
     let receta = new RecetaDTO();
     receta.Indice =indice;
     receta.IdMedicamento =this.idMedicamento;
@@ -156,7 +167,7 @@ export class RecetaComponent implements OnInit {
     receta.Duracion =duracion;
     receta.DuracionDetalle =duracionDetalle;
     receta.Via =via;
-    receta.Indicaciones =indicaciones;
+    receta.Indicaciones =indicaciones!=null ? indicaciones : '-';
     receta.Fecha = new Date();
 
     this.listadoRecetaDTO.push(receta);
@@ -240,6 +251,7 @@ export class RecetaComponent implements OnInit {
     this.nroHcl = objHistoria.cabeceraPaciente.numeroDocumento;
     this.fechaHistoria = objHistoria.cabeceraPaciente.fechaInicioAtencion ;
     this.celularPaciente = objHistoria.cabeceraPaciente.celular ;
+    this.medico = objHistoria.medicoAtiende.apellidoPaterno + ' ' + objHistoria.medicoAtiende.apellidoMaterno + ', '+objHistoria.medicoAtiende.nombre;
 
 
     let cabecera = new CabeceraPacienteDTO();
@@ -1198,6 +1210,29 @@ export class RecetaComponent implements OnInit {
     this.objHistoria = historiaCalidad;
     
     console.log(this.objHistoria);
+  }
+
+  GenerarPdf(){
+    this.verImpresion = true;
+  }
+
+  Imprimir(){
+    const elementToPrint:any  = document.getElementById('imprimir');
+    console.log(elementToPrint)
+
+    html2canvas(elementToPrint, {scale: 2}).then((canvas)=>{
+      const pdf = new jsPDF();
+      
+      pdf.addImage(canvas.toDataURL('image/png'), 'PNG',4, 0, 202, 150);
+
+      pdf.setFontSize(12);
+      pdf.save('receta-'+this.nroHcl+'.pdf');
+      this.verImpresion= false;
+      //console.log(pdf.text);
+    });
+  }
+  Cotizar(){
+    this.MostrarNotificacionInfo("Solicitud de cotización de medicamentos generada", "Info");
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
