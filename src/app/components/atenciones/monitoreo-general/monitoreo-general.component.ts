@@ -44,6 +44,7 @@ import { BalanceHidricoEgresoDTO } from '@models/balance-hidrico-egreso';
 import { BalanceHidricoIngresoDTO } from '@models/balance-hidrico-ingresos';
 import { BalanceHidricoTurnoDTO } from '@models/balance-hidrico-turno';
 import { BalanceHidricoDTO } from '@models/balance-hidrico';
+import { SignoVitalHojaReporteDTO } from '@models/signo-vital-hoja-reporte';
 
 @Component({
   selector: 'app-monitoreo-general',
@@ -91,6 +92,7 @@ export class MonitoreoGeneralComponent implements OnInit{
   ];
 
   objSignoVitalHoja: SignoVitalHojaDTO[] = [];
+  objSignoVitalHojaReporte: SignoVitalHojaReporteDTO[] = [];
 
   constructor(
     private modalService: BsModalService,
@@ -1111,6 +1113,11 @@ export class MonitoreoGeneralComponent implements OnInit{
         this.objSignoVitalHoja.push(sstf);
       });
     }
+    if(this.objSignoVitalHoja.length!=0)
+    {
+      this.AgregarSignoVitalReporte();
+    }
+
     if(historia.NotaEnfermera?.Soapie != null)
     {
       if(historia.NotaEnfermera.Soapie.Subjetivos != null)
@@ -1223,6 +1230,32 @@ export class MonitoreoGeneralComponent implements OnInit{
       }
     }
 
+  }
+
+  AgregarSignoVitalReporte(){
+
+
+    this.objSignoVitalHoja.forEach((element:any)=>{
+
+      let signoReporte = new SignoVitalHojaReporteDTO();
+      signoReporte.FechaCabecera = moment(element.FechaCabecera).format('MM/DD/yyyy');
+      signoReporte.FechaRegistro = element.FechaRegistro;
+      signoReporte.PresionSistolica = element.PresionSistolica;
+      signoReporte.PresionDiastolica = element.PresionDiastolica;
+      signoReporte.Pulso = element.Pulso;
+      signoReporte.Temperatura = element.Temperatura;
+      signoReporte.FrecuenciaRespiratoria = element.FrecuenciaRespiratoria;
+      signoReporte.Saturacion = element.Saturacion;
+      signoReporte.Oxigeno = element.Oxigeno;
+      signoReporte.Peso = element.Peso;
+      signoReporte.Deposiciones = element.Deposiciones;
+      signoReporte.Orina = element.Orina;
+      signoReporte.Ingresos = element.Ingresos;
+      signoReporte.Egresos = element.Egresos;
+      signoReporte.TotalBH = element.TotalBH;
+
+      this.objSignoVitalHojaReporte.push(signoReporte);
+    });
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

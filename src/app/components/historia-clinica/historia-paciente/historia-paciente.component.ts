@@ -164,7 +164,7 @@ export default class HistoriaPacienteComponent implements OnInit{
       }; */
   }
   AbrirRecetas(idHistoriaClinica:number){
-    this.modalRef = this.modalReceta.show(RecetaPacienteComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.modalRef = this.modalReceta.show(RecetaComponent, { backdrop: 'static', class: 'modal-xl' })
     this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
 
