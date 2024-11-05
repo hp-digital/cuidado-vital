@@ -250,15 +250,15 @@ export default class AtencionesComponent implements OnInit{
   
   }
 
-  AbrirControles(idHistoriaClinica:number){
+  AbrirControles(idHistoriaClinica:number, idEspecialidad:number){
     this.modalControlesRef = this.modalControles.show(CuadroControlesComponent, { backdrop: 'static', class: 'modal-xg' });
-    this.modalControlesRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+    this.modalControlesRef.content.AsignarHistoriaClinica(idHistoriaClinica, idEspecialidad);
     
   }
 
-  AbrirControlesReporte(idHistoriaClinica:number){
+  AbrirControlesReporte(idHistoriaClinica:number, idEspecialidad:number){
     this.modalRef = this.modalControlesReportes.show(CuadroControlesReportesComponent, {backdrop: 'static', class: 'modal-xg'})
-    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica, idEspecialidad);
   }
 
   AbrirControlesReporteEnfermera(idHistoriaClinica:number){

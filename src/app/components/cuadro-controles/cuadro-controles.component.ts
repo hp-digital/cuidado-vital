@@ -48,6 +48,8 @@ import { BalanceHidricoEgresoDTO } from '@models/balance-hidrico-egreso';
 import { BalanceHidricoIngresoDTO } from '@models/balance-hidrico-ingresos';
 import { BalanceHidricoTurnoDTO } from '@models/balance-hidrico-turno';
 import { BalanceHidricoDTO } from '@models/balance-hidrico';
+import { EspecialidadHojaMonitoreoDTO } from '@models/especialidad-hoja-monitoreo';
+import { HojaMonitoreoEnum } from '@enum/hoja-monitoreo';
 
 @Component({
   selector: 'app-cuadro-controles',
@@ -70,6 +72,8 @@ export default class CuadroControlesComponent implements OnInit {
   objExamenRegional = new ExamenRegionalDTO();
   objDiagnostico : DiagnosticoCuidadoDTO[]=[];
   objHistoriaExterna = new HistoriaExternaDTO();
+
+  hojas: EspecialidadHojaMonitoreoDTO[]=[];
 
   IMC:number = 0;
 
@@ -102,19 +106,22 @@ export default class CuadroControlesComponent implements OnInit {
     //this.onGuardar();
   }
 
-  AsignarHistoriaClinica(idHistoriaClinica:number){
+  AsignarHistoriaClinica(idHistoriaClinica:number, idEspecialidad:number){
     this.idHistoria=idHistoriaClinica;
-    this.ObtenerConfiguracion();
+    this.ObtenerConfiguracion(idEspecialidad);
   }
 
-  ObtenerConfiguracion() {
+  ObtenerConfiguracion(idEspecialidad:number) {
     this.verSpinner = true;    
     forkJoin([
-      this.historiaService.ObtenerHistoriaClinica(this.idHistoria)
+      this.historiaService.ObtenerHistoriaClinica(this.idHistoria),
+      this.historiaService.ObtenerHojaMonitoreoEspecialidad(idEspecialidad)
     ])
       .subscribe(
         data => {
           this.AsignarObjetoInicial(data[0]);
+          this.hojas= data[1];
+
           this.verSpinner = false;
         },
         err => {
@@ -122,6 +129,9 @@ export default class CuadroControlesComponent implements OnInit {
           this.verSpinner = false;
         }
       );
+  }
+  ObtenerHojaMonitoreo(hojas:EspecialidadHojaMonitoreoDTO[]){
+    console.log(hojas);
   }
 
   AsignarObjetoInicial(data:any){
@@ -1085,7 +1095,37 @@ export default class CuadroControlesComponent implements OnInit {
     
   }
 
+  AbrirControl(idControl: number){
 
+    if(idControl == HojaMonitoreoEnum.ControDiabetico)
+    {
+      this.BsModalGlucosa = this.modalService.show(ControlGlucosaComponent, { backdrop: 'static', class: 'modal-xl' });
+      this.BsModalGlucosa.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+      this.BsModalGlucosa.content.onCancelar = () => {};
+      this.BsModalGlucosa.content.onGuardar = () => {};
+      this.BsModalGlucosa.content.eventControl.subscribe((data:ControlGlucosaDTO[]) => { 
+        console.log("control llega", data);
+      });
+    }
+    if(idControl == HojaMonitoreoEnum.ControlHipertenso)
+    {
+      this.BsModalPresion = this.modalControlPresion.show(ControlPresionComponent, { backdrop: 'static', class: 'modal-xl' })
+      this.BsModalPresion.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    }
+    if(idControl == HojaMonitoreoEnum.ControlAdultoMayor)
+    {
+      this.BsModalControlGeneral = this.modalControlGeneral.show(ControlGeneralComponent, { backdrop: 'static', class: 'modal-xl' })
+      this.BsModalControlGeneral.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+      this.BsModalControlGeneral.content.onGuardar = () => {
+        //this.obtenerHistoriaClinica(this.objListaPaciente.idHistoriaClinica);
+      };
+    }
+    if(idControl == HojaMonitoreoEnum.ControlEpoc)
+    {
+      this.BsModalEpoc = this.modalControlEpoc.show(ControlEpocComponent, { backdrop: 'static', class: 'modal-xl' })
+      this.BsModalEpoc.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    }
+  }
 
   AbrirNotaEnfermera(){
 

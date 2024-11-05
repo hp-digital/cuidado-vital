@@ -45,6 +45,7 @@ import { BalanceHidricoIngresoDTO } from '@models/balance-hidrico-ingresos';
 import { BalanceHidricoTurnoDTO } from '@models/balance-hidrico-turno';
 import { BalanceHidricoDTO } from '@models/balance-hidrico';
 import { SignoVitalHojaReporteDTO } from '@models/signo-vital-hoja-reporte';
+import { DEtalleHojaReporteDTO } from '@models/detalle-hoja-reporte';
 
 @Component({
   selector: 'app-monitoreo-general',
@@ -93,6 +94,10 @@ export class MonitoreoGeneralComponent implements OnInit{
 
   objSignoVitalHoja: SignoVitalHojaDTO[] = [];
   objSignoVitalHojaReporte: SignoVitalHojaReporteDTO[] = [];
+  listaMostrar: SignoVitalHojaReporteDTO[] = [];
+
+  groupedData: any[] = [];
+  index:number=0;
 
   constructor(
     private modalService: BsModalService,
@@ -1095,7 +1100,7 @@ export class MonitoreoGeneralComponent implements OnInit{
     {
       historia.HojaMonitoreoSignos?.SignoVital?.forEach((element:any) => {
         let sstf = new SignoVitalHojaDTO();
-        sstf.FechaRegistro = moment(element.FechaRegistro).format('MM/DD/yyyy HH:mm');
+        sstf.FechaRegistro = moment(element.FechaRegistro).format('DD/MM/YY HH:mm');
         sstf.PresionSistolica = element.PresionSistolica;
         sstf.PresionDiastolica = element.PresionDiastolica;
         sstf.Pulso = element.Pulso;
@@ -1238,7 +1243,7 @@ export class MonitoreoGeneralComponent implements OnInit{
     this.objSignoVitalHoja.forEach((element:any)=>{
 
       let signoReporte = new SignoVitalHojaReporteDTO();
-      signoReporte.FechaCabecera = moment(element.FechaCabecera).format('MM/DD/yyyy');
+      signoReporte.FechaCabecera = moment(element.FechaRegistro).format('DD/MM/YY');
       signoReporte.FechaRegistro = element.FechaRegistro;
       signoReporte.PresionSistolica = element.PresionSistolica;
       signoReporte.PresionDiastolica = element.PresionDiastolica;
@@ -1256,6 +1261,48 @@ export class MonitoreoGeneralComponent implements OnInit{
 
       this.objSignoVitalHojaReporte.push(signoReporte);
     });
+    if(this.objSignoVitalHojaReporte.length!=0){
+      this.BuscarDetalle();
+    }
+  }
+
+  BuscarDetalle(){
+    const grouped: { [key: string]: any[] } = {};
+
+    this.objSignoVitalHojaReporte.forEach(item => {
+      const tipo = item.FechaCabecera || 'Desconocido'; // Asigna un valor predeterminado si `Tipo` es `undefined`
+      
+      if (!grouped[tipo]) {
+        grouped[tipo] = [];
+      }
+      
+      grouped[tipo].push(item);
+      
+    });
+    // Convertimos el objeto en un array para usarlo en el HTML
+    this.groupedData = Object.keys(grouped).map(key => ({
+      tipo: key,
+      items: grouped[key]
+    }));
+    //console.log(this.groupedData.length)
+    this.index = this.groupedData.length - 1;
+  }
+  
+
+  onTabChange(event: any) {
+    this.listaMostrar=[];
+    console.log(event);
+    const selectedTabTitle = this.objSignoVitalHojaReporte[event.index].FechaCabecera;
+    console.log('Pestaña seleccionada:', selectedTabTitle);
+    this.objSignoVitalHojaReporte.forEach(element => {
+      if(element.FechaCabecera == selectedTabTitle)
+      {
+        
+        this.listaMostrar.push(element);
+      }
+      
+    });
+    console.log(this.listaMostrar);
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

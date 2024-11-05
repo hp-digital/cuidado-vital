@@ -32,64 +32,14 @@
             <div class="row mb-3 bg-green-custom">REPORTE</div>	
             <div class="row">
                 <h5>MONITOREO DE SIGNOS VITALES </h5>
-                <p-tabView>
-                    <p-tabPanel *ngFor="let item of objSignoVitalHojaReporte" [header]="item.FechaCabecera!">
+                <p-tabView [activeIndex]=index>
+                    <p-tabPanel *ngFor="let group of groupedData" [header]="group.tipo">
                         <table class="table table-bordered mb-2">
-                            <tr>
-                                <td>Fecha</td>
-                                <td>{{item.FechaRegistro}}</td>
-                            </tr>
-                            <tr>
-                                <td>PresionSistolica</td>
-                                <td>{{item.PresionSistolica}}</td>
-                            </tr>
-                            <tr>
-                                <td>PresionDiastolica</td>
-                                <td>{{item.PresionDiastolica}}</td>
-                            </tr>
-                            <tr>
-                                <td>Pulso</td>
-                                <td>{{item.Pulso}}</td>
-                            </tr>
-                            <tr>
-                                <td>Temperatura</td>
-                                <td>{{item.Temperatura}}</td>
-                            </tr>
-                            <tr>
-                                <td>FrecuenciaRespiratoria</td>
-                                <td>{{item.FrecuenciaRespiratoria}}</td>
-                            </tr>
-                            <tr>
-                                <td>Saturacion</td>
-                                <td>{{item.Saturacion}}</td>
-                            </tr>
-                            <tr>
-                                <td>Oxigeno</td>
-                                <td>{{item.Oxigeno}}</td>
-                            </tr>
-                            <tr>
-                                <td>Peso</td>
-                                <td>{{item.Peso}}</td>
-                            </tr>
-                            <tr>
-                                <td>Deposiciones</td>
-                                <td>{{item.Deposiciones}}</td>
-                            </tr>
-                            <tr>
-                                <td>Orina</td>
-                                <td>{{item.Orina}}</td>
-                            </tr>
-                            <tr>
-                                <td>Egresos</td>
-                                <td>{{item.Egresos}}</td>
-                            </tr>
-                            <tr>
-                                <td>Ingresos</td>
-                                <td>{{item.Ingresos}}</td>
-                            </tr>
-                            <tr>
-                                <td>TotalBH</td>
-                                <td>{{item.TotalBH}}</td>
+                            <tr *ngFor="let header of headers">
+                              <td>{{ header }}</td>
+                              <td *ngFor="let item of group.items">
+                                {{ item[header] }}
+                              </td>
                             </tr>
                         </table>
                     </p-tabPanel>

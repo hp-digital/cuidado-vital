@@ -1,9 +1,4 @@
-import { DEtalleHojaReporteDTO } from "./detalle-hoja-reporte";
-
-export class SignoVitalHojaReporteDTO
-{
-    FechaCabecera?:string;
-    //DetalleHojaReporte!:DEtalleHojaReporteDTO[];
+export class DEtalleHojaReporteDTO{
     FechaRegistro?:string;
     PresionSistolica!: number;
     PresionDiastolica!: number;

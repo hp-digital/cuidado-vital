@@ -6,6 +6,7 @@ import { ComboDTO } from '../models/ComboDTO';
 import { environment } from '../../environments/environment';
 import { ListadoBusquedaAtencionDTO } from '../models/ListadoBusquedaAtencionDTO';
 import { HistoriaCuidadoDTO } from '../models/historia-cuidado';
+import { EspecialidadHojaMonitoreoDTO } from '@models/especialidad-hoja-monitoreo';
 
 const API_URL = environment.apiUrl;
 
@@ -51,5 +52,10 @@ export class HistoriaService {
 
   ObtenerMedicamento(): Observable<ComboDTO[]>{
     return this.http.get<ComboDTO[]>(`${API_URL}Medicamento/ObtenerComboMedicamento`)
+  }
+
+  ObtenerHojaMonitoreoEspecialidad(idEspecialidad: number) {
+    return this.http.get<EspecialidadHojaMonitoreoDTO[]>(`${API_URL}HistoriaClinica/ObtenerHojaMonitoreoEspecialidad?idEspecialidad=${idEspecialidad}`)
+      .pipe(catchError(this.handleError));
   }
 }

@@ -1116,7 +1116,7 @@ export class ControlGeneralComponent implements OnInit {
       this.esNormalResultado=true;
   }
   ValidarCaida(id:number){
-    if(id==1)
+    if(id==2)
       this.esSiCaida=false;
     else
       this.esSiCaida=true;
