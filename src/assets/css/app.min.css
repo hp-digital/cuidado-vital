@@ -6921,8 +6921,9 @@ fieldset:disabled .btn {
   border-bottom: 1px solid #dae0ec;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  background: rgb(2,0,36);
-  background: linear-gradient(90deg, rgba(2,0,36,1) -25%, rgba(50,224,196,1) 15%, rgba(13,115,119,1) 91%);
+  background: rgb(127,37,88);
+  background: linear-gradient(150deg, rgba(127,37,88,1) 35%, rgba(62,52,125,1) 54%, rgba(30,70,155,1) 72%);
+  color: white;
 }
 .modal-header .btn-close {
   padding: 0.5rem 0.5rem;
@@ -18959,6 +18960,8 @@ fieldset:disabled .btn {
   transition: box-shadow 0.2s linear;
   -webkit-box-shadow: 0 6px 6px rgba(31, 107, 255, 0.1);
   box-shadow: 0 6px 6px rgba(31, 107, 255, 0.1);
+  background: rgb(127,37,88);
+  background: linear-gradient(150deg, rgba(127,37,88,1) 35%, rgba(62,52,125,1) 54%, rgba(30,70,155,1) 72%);
 }
 @media (max-width: 991.98px) {
   .app-header {

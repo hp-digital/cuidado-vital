@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ViewChild, ElementRef } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, ElementRef, Injectable  } from '@angular/core';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { HistoriaService } from '@services/historia.service';
 import { SettingsService } from '@services/settings.service';
@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { UtilitiesService } from '@services/utilities.service';
 
 @Component({
@@ -25,6 +26,7 @@ export class MonitoreoComponent implements AfterViewInit {
   //videoSrc = 'http://192.168.1.37:3000/stream.m3u8'; 
   //videoSrc = 'https://rnpev-200-106-13-121.a.free.pinggy.link/stream.m3u8';
   videoSrc = 'http://200.106.13.121:3000/stream.m3u8';
+  private apiUrl = 'https://7ea4-2001-1388-6660-114b-8c40-abcb-b5e5-e958.ngrok-free.app/';
 
   dataFormGroup: FormGroup;
   idHistoria:number=0;
@@ -38,7 +40,8 @@ export class MonitoreoComponent implements AfterViewInit {
     private bsModalMonitoreo: BsModalRef,
     private historiaService: HistoriaService,
     private settings : SettingsService,
-    private utilities : UtilitiesService
+    private utilities : UtilitiesService,
+    private http: HttpClient
   ) { 
     this.dataFormGroup = new FormGroup({
 
@@ -54,15 +57,32 @@ export class MonitoreoComponent implements AfterViewInit {
         console.error('Error en la solicitud GET:', error);
       }
     ); */
+    const headers = new HttpHeaders({
+      'ngrok-skip-browser-warning': 'any-value'  // Header para omitir la advertencia
+    });
+
+    let rpt = this.http.get(`${this.apiUrl}/your-endpoint`, { headers });
     
-    if (Hls.isSupported()) {
+    /* if (Hls.isSupported()) {
       const hls = new Hls();
-      hls.loadSource(this.videoSrc);
+      hls.loadSource(this.apiUrl);
       hls.attachMedia(this.videoElement.nativeElement);
       hls.on(Hls.Events.MANIFEST_PARSED, () => {
         this.videoElement.nativeElement.play();
       });
-    } else if (this.videoElement.nativeElement.canPlayType('application/vnd.apple.mpegurl')) {
+    } */ 
+   if (Hls.isSupported()) {
+        const hls = new Hls({
+          xhrSetup: (xhr) => {
+            xhr.setRequestHeader('ngrok-skip-browser-warning', 'any-value'); // Agregar el header personalizado
+          }
+        });
+        hls.loadSource(this.apiUrl+'stream.m3u8');
+        hls.attachMedia(this.videoElement.nativeElement);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
+          this.videoElement.nativeElement.play();
+        });
+      }else if (this.videoElement.nativeElement.canPlayType('application/vnd.apple.mpegurl')) {
       // Para Safari
       this.videoElement.nativeElement.src = this.videoSrc;
       this.videoElement.nativeElement.addEventListener('loadedmetadata', () => {

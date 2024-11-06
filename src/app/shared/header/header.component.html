@@ -3,8 +3,9 @@
     <!-- BEGIN mobile-toggler -->
     <div class="mobile-toggler">
         <button type="button" class="menu-toggler" data-toggle="sidebar-mobile">
-            <span class="bar"></span>
-            <span class="bar"></span>
+            <span class="bar" style="background-color: white;"></span>
+            <span class="bar" style="background-color: white;"></span>
+            <span class="bar" style="background-color: white;"></span>
         </button>
     </div>
     <!-- END mobile-toggler -->
@@ -13,19 +14,22 @@
     <div class="brand">
         <div class="desktop-toggler">
             <button type="button" class="menu-toggler" data-toggle="sidebar-minify">
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="bar" style="background-color: white;"></span>
+                <span class="bar" style="background-color: white;"></span>
+                <span class="bar" style="background-color: white;"></span>
             </button>
         </div>
-        
-        <a href="/dashboard" class="brand-logo-hp">
-            <img src="./assets/img/logo-iso.png" alt="Logo cuidado vital" width="175" height="43"/>
-        </a>
+        <!-- <a href="/dashboard" class="brand-logo-hp">
+            <img src="./assets/img/horizontalsinfondo.png" alt="Logo cuidado vital" width="175" height="43"/>
+        </a> -->
     </div>
     <!-- END brand -->
     
     <!-- BEGIN menu -->
     <div class="menu">
+        <a href="/dashboard" class="brand-logo-hp">
+            <img src="./assets/img/horizontalsinfondo.png" alt="Logo cuidado vital" width="200" height="60"/>
+        </a>
         <div class="menu-search">            
         </div>
         <div class="menu-item dropdown">            
@@ -35,7 +39,7 @@
                 <div class="menu-img online">
                     <img src="./assets/img/no-image.jpg" alt="" class="ms-100 mh-100 rounded-circle" />
                 </div>
-                <div class="menu-text">{{nombreUsuario}}</div>
+                <div class="menu-text" style="color: white;">{{nombreUsuario}}</div>
             </a>
             <div class="dropdown-menu dropdown-menu-right me-lg-3">               
                 <a class="dropdown-item d-flex align-items-center" (click)="logOut()">Cerrar sesión <i class="fa fa-toggle-off fa-fw ms-auto text-gray-400"></i></a>

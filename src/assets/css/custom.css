@@ -25,14 +25,14 @@ legend {
 
 .btn-green-custom {
     color: #fff;
-    background-color: #01A39A;
-    border-color: #01A39A;
+    background-color: #1e469b;
+    border-color: #1e469b;
 }
 
 .btn-green-custom:hover {
     color: #fff;
-    background-color: #01A39A;
-    border-color: #01A39A;
+    background-color: #1e469b;
+    border-color: #1e469b;
 }
 .btn-green-light-custom {
     color: #fff;
@@ -120,7 +120,7 @@ textarea.form-control {
 }
 .bg-green-custom {
     font-size: 15px;
-    background: #01A39A;
+    background: #1e469b;
     color: white;
     height: 35px;
     padding: 6px 0px 0px 10px;
@@ -130,13 +130,13 @@ textarea.form-control {
 
 .bg-green-accordion {
     font-size: 15px;
-    background: #01A39A;
+    background: #1e469b;
     color: white;    
     border-radius: 5px 5px 0 0;
 }
 .bg-green-accordion:not(.collapsed) {
     color: white;
-    background-color: #01A39A;    
+    background-color: #1e469b;    
 }
 .accordion-item {
     background-color: white;
