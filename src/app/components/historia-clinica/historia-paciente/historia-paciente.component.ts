@@ -173,9 +173,9 @@ export default class HistoriaPacienteComponent implements OnInit{
     this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
 
-  AbrirControlesReporte(idHistoriaClinica:number){
+  AbrirControlesReporte(idHistoriaClinica:number, idEspecialidad:number){
     this.modalRef = this.modalControlesReportes.show(CuadroControlesReportesComponent, {backdrop: 'static', class: 'modal-xg'})
-    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica, idEspecialidad);
   }
 
   AbrirDatosPulsera(idHistoriaClinica: number){

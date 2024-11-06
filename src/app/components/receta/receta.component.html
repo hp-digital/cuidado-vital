@@ -283,7 +283,7 @@
             <i class="fa fa-lg fa-fw me-2 fa-print"></i>Imprimir</button>&nbsp;&nbsp;		
         <button type="button" class="btn btn-primary" (click)="GenerarPdf()" *ngIf="verImpresion==false">
         <i class="fa fa-lg fa-fw me-2 fa-print"></i>Vista de impresión</button>&nbsp;&nbsp;						
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" data-bs-dismiss="modal" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-file-alt" ></i>Generar receta</button>
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" data-bs-dismiss="modal" *ngIf="idRol==1" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-file-alt" ></i>Generar receta</button>
         <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
         <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
       </div>

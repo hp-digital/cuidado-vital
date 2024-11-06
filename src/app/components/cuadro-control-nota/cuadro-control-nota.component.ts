@@ -1070,21 +1070,25 @@ export class CuadroControlNotaComponent implements OnInit{
   AbrirKardex(){
     this.BsModalKardez = this.modalKardex.show(KardexComponent, {backdrop: 'static', class: 'modal-xl'})
     this.BsModalKardez.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.CerrarModal();
   }
 
   AbrirNotaEvolucion(){
     this.BsModalNota = this.modalNotaEvolucicion.show(NotaEnfermeraComponent, {backdrop: 'static', class: 'modal-xl'})
     this.BsModalNota.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.CerrarModal();
   }
 
   AbrirHojaMonitoreo(){
     this.BsModalHoja = this.modalHojaMonitoreo.show(HojaMonitoreoComponent, {backdrop: 'static', class: 'modal-xl'})
     this.BsModalHoja.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.CerrarModal();
   }
 
   AbrirBalanceHidrico(){
     this.BsModalBalance = this.modalBalanceHidrico.show(BalanceHidricoComponent, {backdrop: 'static', class: 'modal-xl'})
     this.BsModalBalance.content.AsignarHistoriaClinica(this.objHistoria, this.idHistoria);
+    this.CerrarModal();
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

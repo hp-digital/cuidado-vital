@@ -22,8 +22,9 @@ export class MonitoreoComponent implements AfterViewInit {
 
   @ViewChild('videoElement') videoElement!: ElementRef;
 
-  videoSrc = 'http://192.168.1.37:3000/stream.m3u8'; 
+  //videoSrc = 'http://192.168.1.37:3000/stream.m3u8'; 
   //videoSrc = 'https://rnpev-200-106-13-121.a.free.pinggy.link/stream.m3u8';
+  videoSrc = 'http://200.106.13.121:3000/stream.m3u8';
 
   dataFormGroup: FormGroup;
   idHistoria:number=0;

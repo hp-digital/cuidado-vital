@@ -58,7 +58,7 @@
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
                         </div>
                         <div class="col-xl-12">
-                            <p><strong>MEDICO: </strong> {{lista.paciente}}</p>
+                            <p><strong>PACIENTE: </strong> {{lista.paciente}}</p>
                         </div>
                         <div class="col-xl-12">
                             <p><strong>NRO DOCUMENTO: </strong> {{lista.numeroDocumento}}</p>
@@ -77,7 +77,7 @@
                             <div class="d-grid gap-2">
                                 <!-- <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlSeguimiento()">Control de seguimiento</button> -->
                                 <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar(lista.idHistoriaClinica)">Examenes auxiliares</button>
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlesReporte(lista.idHistoriaClinica)">Reportes</button>
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlesReporte(lista.idHistoriaClinica, lista.idEspecialidad)">Reportes</button>
                             </div>
                         </div>
                         <div class="col-xl-6">
