@@ -26,7 +26,7 @@ export class MonitoreoComponent implements AfterViewInit {
   //videoSrc = 'http://192.168.1.37:3000/stream.m3u8'; 
   //videoSrc = 'https://rnpev-200-106-13-121.a.free.pinggy.link/stream.m3u8';
   videoSrc = 'http://200.106.13.121:3000/stream.m3u8';
-  private apiUrl = 'https://7ea4-2001-1388-6660-114b-8c40-abcb-b5e5-e958.ngrok-free.app/';
+  private apiUrl = 'https://170f-2001-1388-6660-114b-8c40-abcb-b5e5-e958.ngrok-free.app/';
 
   dataFormGroup: FormGroup;
   idHistoria:number=0;
