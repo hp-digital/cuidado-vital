@@ -34,6 +34,11 @@ export class NuevoControlComponent implements OnInit{
   objNuevaAtencion = new RegistroNuevaAtencionPacienteDTO();
 
   verSpinner: boolean = false;
+
+
+  verificarBusqueda: boolean = false;
+  verificarBusquedaTipoDocumento: boolean = false;
+
   constructor(
     private modalNuevoControl: BsModalRef,
     private modalService: BsModalService,
@@ -55,6 +60,7 @@ export class NuevoControlComponent implements OnInit{
       inputEdadPaciente: new FormControl(),
       inputSexoPaciente: new FormControl(),
       inputTelefonoPaciente: new FormControl(),
+      inputBuscarPorTipoDocumento: new FormControl(),
     });
   }
 
@@ -93,36 +99,134 @@ export class NuevoControlComponent implements OnInit{
   }
 
   BuscarPacienteDNI(){
+    let idTipoDocumento = this.dataFormGroup.controls['inputBuscarPorTipoDocumento'].value;
     let nroDocumento = this.dataFormGroup.controls['inputDocumentoBusqueda'].value;
-    this.verSpinner = true;
-    this.pacienteService.ObtenerPacientePorNroDocumento(nroDocumento)
+    if(nroDocumento != "" && idTipoDocumento != "" && idTipoDocumento != null)
+    {
+      this.verSpinner = true;
+      this.verificarBusqueda = false;
+      this.verificarBusquedaTipoDocumento = false;
+      this.pacienteService.ObtenerPacientePorNroDocumento(nroDocumento)
+        .subscribe({
+          next: (data) => {
+            //console.log(data) ;
+            if(data == null)
+            {
+              if (idTipoDocumento == 1) {
+                this.ConsultarAPI(nroDocumento);
+              }
+              else {
+                this.MostrarNotificacionWarning('Verificar si el tipo y número documento son correctos.', '¡No se encontró los datos!')
+              }
+            }else{
+              this.Paciente = data;
+              this.MostrarDatos(data);
+              console.log(this.Paciente);
+
+              const n = data.fechaNacimiento;
+              console.log(n)
+              /* var y = n.getFullYear();
+              var m = n.getMonth() + 1;
+              var d = n.getDate();
+              this.dataFormGroup.controls['inputFechaNacimientoPaciente'].setValue(d+"/"+m+"/"+y); */
+            }
+
+          },
+          error: (e) => {
+            console.log(e);
+            this.MostrarNotificacionError('Intente de nuevo.', '¡ERROR EN BUSCAR AL PACIENTE!')
+            this.verSpinner = false;
+          },
+          complete: () => { this.verSpinner = false; }
+        })
+    }
+    else{
+      if (nroDocumento == "" || nroDocumento == null)
+        this.verificarBusqueda = true;
+      else
+        this.verificarBusqueda = false;
+
+      if (idTipoDocumento == "" || idTipoDocumento == null)
+        this.verificarBusquedaTipoDocumento = true;
+      else
+        this.verificarBusquedaTipoDocumento = false;
+    
+    }
+    
+  }
+
+  ConsultarAPI(nroDocumento: string) {
+   /*  this.verSpinner = true;
+    this.pacienteService.ObtenerPacientePorAPIv2(nroDocumento)
       .subscribe({
-        next: (data) => {
-          //console.log(data) ;
-          if(data == null)
-          {
-            this.MostrarNotificacionWarning('Paciente no registrado previamente. Registre los datos manualmente', 'Atención');
-          }else{
-            this.Paciente = data;
-            this.MostrarDatos(data);
-            console.log(this.Paciente);
-
-            const n = data.fechaNacimiento;
-            console.log(n)
-            /* var y = n.getFullYear();
-            var m = n.getMonth() + 1;
-            var d = n.getDate();
-            this.dataFormGroup.controls['inputFechaNacimientoPaciente'].setValue(d+"/"+m+"/"+y); */
+        next: (persona) => {
+          console.log('data endpoint', persona);
+          if (persona.resultadoEncontrado) {
+            this.dataFormGroup.controls['inputNroDocumento'].setValue(persona.numero);
+            this.dataFormGroup.controls['inputApellidoPaterno'].setValue(persona.apellidoPaterno);
+            this.dataFormGroup.controls['inputApellidoMaterno'].setValue(persona.apellidoMaterno);
+            this.dataFormGroup.controls['inputNombres'].setValue(persona.nombres);
+            this.dataFormGroup.controls['selectTipoDocumento'].setValue(TipoDocumentoEnum.DNI);
+            if (persona.fechaNacimiento != null && persona.fechaNacimiento != '') {
+              this.dataFormGroup.controls['inputFechaNacimiento'].setValue(moment(persona.fechaNacimiento, 'DD-MM-YYYY').format('YYYY-MM-DD'));
+            }
+            if (persona.direccion != null && persona.direccion != '') {
+              this.dataFormGroup.controls['inputDireccion'].setValue(persona.direccion);
+            }
+            if (persona.sexo != null && persona.sexo != '') {
+              if (persona.sexo == 'Masculino') {
+                this.dataFormGroup.controls['inputSexo'].setValue(SexoEnum.Masculino);
+              }
+              if (persona.sexo == 'Femenino') {
+                this.dataFormGroup.controls['inputSexo'].setValue(SexoEnum.Femenino);
+              }
+            }
+            if (persona.estadoCivil != null && persona.estadoCivil != '') {
+              if (persona.estadoCivil == 'Soltero' || persona.estadoCivil == 'Soltera') {
+                this.dataFormGroup.controls['selectEstadoCivil'].setValue(1);
+              }
+              if (persona.estadoCivil == 'Casado' || persona.estadoCivil == 'Casada') {
+                this.dataFormGroup.controls['selectEstadoCivil'].setValue(2);
+              }
+              if (persona.estadoCivil == 'Viudo' || persona.estadoCivil == 'Viuda') {
+                this.dataFormGroup.controls['selectEstadoCivil'].setValue(3);
+              }
+              if (persona.estadoCivil == 'Conviviente') {
+                this.dataFormGroup.controls['selectEstadoCivil'].setValue(4);
+              }
+              if (persona.estadoCivil == 'Divorciado' || persona.estadoCivil == 'Divorciada') {
+                this.dataFormGroup.controls['selectEstadoCivil'].setValue(5);
+              }
+            }
+            if (persona.departamento != null && persona.departamento != '') {
+              this.dataFormGroup.controls['selectPaisDireccion'].setValue(1);
+              let departamento = persona.departamento;
+              let nombreDepartamento = this.listaDepartamento.filter(x => this.removerTilde(x.nombre.toUpperCase()) == departamento)[0].id;
+              this.dataFormGroup.controls['selectDepartamentoDireccion'].setValue(nombreDepartamento);
+            }
+            if (persona.provincia != null && persona.provincia != '') {
+              let provincia = persona.provincia;
+              let nombreProvincia = this.listaProvincia.filter(x => this.removerTilde(x.nombre.toUpperCase()) == provincia)[0].id;
+              this.dataFormGroup.controls['selectProvinciaDireccion'].setValue(nombreProvincia);
+            }
+            if (persona.distrito != null && persona.distrito != '') {
+              let distrito = persona.distrito;
+              let nombreDistrito = this.listaDistrito.filter(x => this.removerTilde(x.nombre.toUpperCase()) == distrito)[0].id;
+              this.dataFormGroup.controls['selectDistritoDireccion'].setValue(nombreDistrito);
+            }
+            this.pacienteBuscado = true;
           }
-
+          else {
+            this.MostrarNotificacionWarning('Registrarlo como nuevo.', '¡No se encontró los datos!')
+          }
         },
         error: (e) => {
-          console.log(e);
-          this.MostrarNotificacionError('Intente de nuevo.', '¡ERROR EN BUSCAR AL PACIENTE!')
           this.verSpinner = false;
+          console.log(e);
+          this.MostrarNotificacionError('Por favor intente de nuevo, si el problema persiste, comunicarse con el área de sistemas.', '¡ERROR EN EL PROCESO!');
         },
         complete: () => { this.verSpinner = false; }
-      })
+      }); */
   }
 
   MostrarDatos(paciente:any){

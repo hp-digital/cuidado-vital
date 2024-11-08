@@ -6,15 +6,31 @@
     <div class="modal-body">							
         <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
             <div class="row">
-                <div class="col-xl-5">
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3" for="">Buscar por:</label>
+                        <select class="form-select" name="inputBuscarPorTipoDocumento" id="inputBuscarPorTipoDocumento" formControlName="inputBuscarPorTipoDocumento">
+                            <option *ngFor="let combo of comboTipoDocumento" [value]="combo.id">
+                                {{combo.nombre}}
+                            </option>											
+                        </select>
+                        <div *ngIf="verificarBusquedaTipoDocumento" class="text-error">                                    
+                            <div>Debe elegir un tipo para realizar la búsqueda.</div>
+                        </div> 
+                    </div>
+                </div>
+                <div class="col-xl-4">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3" for="">&nbsp;Nro de documento</label>																						
                         <div class="input-group">
-                            <input type="text" class="form-control" id="" placeholder="Buscar paciente" formControlName="inputDocumentoBusqueda"/>
+                            <input type="text" class="form-control" id="" placeholder="Buscar paciente" (keyup.enter)="BuscarPacienteDNI()" formControlName="inputDocumentoBusqueda"/>
                             <button type="button" class="input-group-text btn-green-custom" (click)="BuscarPacienteDNI()">
                                 <i class="fas fa-lg fa-search"></i>
                             </button>
-                          </div>
+                        </div>
+                        <div *ngIf="verificarBusqueda" class="text-error">                                    
+                            <div>Ingrese Nro. documento para realizar la búsqueda.</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-1">&nbsp;</div>

@@ -1002,72 +1002,90 @@ export class ControlGeneralComponent implements OnInit {
   AsignarFecha(numero:number){
    if(numero==1){
     this.fecha = 'Adecuado';
+    this.dataFormGroup.controls['inputFechaEquivocada'].reset();
    }else{
     this.fecha = 'Equivocada';
+    this.dataFormGroup.controls['inputFechaAdecuada'].reset();
    }
   }
 
   AsignarDia(numero:number){
     if(numero==1){
       this.dia = 'Adecuado';
+      this.dataFormGroup.controls['inputDiaEquivocada'].reset();
      }else{
       this.dia = 'Equivocada';
+      this.dataFormGroup.controls['inputDiaAdecuada'].reset();
      }
   }
 
   AsignarLugar(numero:number){
     if(numero==1){
       this.lugar = 'Adecuado';
+      this.dataFormGroup.controls['inputLugarEquivocada'].reset();
      }else{
       this.lugar = 'Equivocada';
+      this.dataFormGroup.controls['inputLugarAdecuada'].reset();
      }
   }
 
   AsignarNumero(numero:number){
     if(numero==1){
       this.numeroTelefono = 'Adecuado';
+      this.dataFormGroup.controls['inputNumeroEquivocada'].reset();
      }else{
       this.numeroTelefono = 'Equivocada';
+      this.dataFormGroup.controls['inputNumeroAdecuada'].reset();
      }
   }
 
   AsignarDireccion(numero:number){
     if(numero==1){
       this.direccionCompleta = 'Adecuado';
+      this.dataFormGroup.controls['inputDireccionEquivocada'].reset();
      }else{
       this.direccionCompleta = 'Equivocada';
+      this.dataFormGroup.controls['inputDireccionAdecuada'].reset();
      }
   }
 
   AsignarAnios(numero:number){
     if(numero==1){
       this.anios = 'Adecuado';
+      this.dataFormGroup.controls['inputAniosEquivocada'].reset();
      }else{
       this.anios = 'Equivocada';
+      this.dataFormGroup.controls['inputAniosAdecuada'].reset();
      }
   }
 
   AsignarLugarNacio(numero:number){
     if(numero==1){
       this.lugarNacio = 'Adecuado';
+      this.dataFormGroup.controls['inputDondeNacioEquivocada'].reset();
      }else{
       this.lugarNacio = 'Equivocada';
+      this.dataFormGroup.controls['inputDondeNacioAdecuada'].reset();
      }
   }
 
   AsignarPresidente(numero:number){
     if(numero==1){
       this.nombrePresidente = 'Adecuado';
+      this.dataFormGroup.controls['inputNombrePresidenteEquivocada'].reset();
      }else{
       this.nombrePresidente = 'Equivocada';
+      this.dataFormGroup.controls['inputNombrePresidenteAdecuada'].reset();
      }
   }
 
   AsignarPrimerApellido(numero:number){
     if(numero==1){
       this.primerApellidoMadre = 'Adecuado';
+      this.dataFormGroup.controls['inputPrimerApellidoEquivocada'].reset();
      }else{
       this.primerApellidoMadre = 'Equivocada';
+      this.dataFormGroup.controls['inputPrimerApellidoAdecuada'].reset();
      }
   }
 

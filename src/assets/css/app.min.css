@@ -6773,6 +6773,7 @@ fieldset:disabled .btn {
   border: 0;
   border-radius: 6px;
   opacity: 0.5;
+  background-color: white;
 }
 .btn-close:hover {
   color: #000;
