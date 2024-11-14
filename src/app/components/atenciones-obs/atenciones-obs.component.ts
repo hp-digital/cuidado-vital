@@ -16,6 +16,7 @@ import { CriterioBusquedaAtencionesObstetriciaDTO } from '@models/criterio-busqu
 import { ListadoBusquedaAtencionDTO } from '@models/ListadoBusquedaAtencionDTO';
 import { NuevoControlComponent } from '../atenciones/nuevo-control/nuevo-control.component';
 import { HistorialObsteComponent } from './historial-obste/historial-obste.component';
+import { FuncionVitalObsComponent } from './funcion-vital-obs/funcion-vital-obs.component';
 
 @Component({
   selector: 'app-atenciones-obs',
@@ -176,6 +177,12 @@ export default class AtencionesObsComponent implements OnInit{
   AbrirHistorial(idHistoriaClinica:number){
 
     this.modalRef = this.modalHistoria.show(HistorialObsteComponent, { backdrop: 'static', class: 'modal-xl'});
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica)
+  }
+
+  AbrirFuncionPaciente(idHistoriaClinica:number){
+
+    this.modalRef = this.modalHistoria.show(FuncionVitalObsComponent, { backdrop: 'static', class: 'modal-xl'});
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica)
   }
 
