@@ -1,0 +1,356 @@
+<div class="container-spinner" *ngIf="verSpinner">
+    <div class="spinner-border text-primary"></div>
+</div>
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">HISTORIAL CLÍNICO OBSTETRICO</h4>
+        &nbsp;&nbsp;
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dataFormGroup">
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha atención : </label> <span>22/03/2022</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>								
+            <hr/>
+            <div class="row mb-3 bg-green-custom">ANTECEDENTES OBSTETRICOS</div>
+            <div class="no-consulta-externa">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">G</label>
+                            <input type="text" class="form-control"formControlName="inputG"/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">P</label>
+                            <input type="text" class="form-control" formControlName="inputP"/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">G1</label>
+                            <input type="text" class="form-control" formControlName="inputG1"/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">G2</label>
+                            <input type="text" class="form-control" formControlName="inputG2"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">G3</label>
+                            <input type="text" class="form-control" formControlName="inputG3"/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">FUR</label>
+                            <input type="date" class="form-control" formControlName="inputFur"/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">FG x FUR</label>
+                            <input type="text" class="form-control" formControlName="inputFgFur" />
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">EG x ECO</label>
+                            <input type="text" class="form-control" formControlName="inputEgEco" />
+                        </div>
+                    </div>	
+                </div>
+                <div class="row">  
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">FPP x FUR</label>
+                            <input type="date" class="form-control" formControlName="inputFppFur"/>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">FPP x ECO</label>
+                            <input type="text" class="form-control" formControlName="inputFppEco"/>
+                        </div>
+                    </div>
+                </div>
+        
+                <hr class="mt-0"/>
+            </div>
+            <div class="row mb-3 bg-green-custom">RIESGOS PRE EXISTENTES</div>
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Condición Médica Crónica</label>
+                        <input type="text" class="form-control" formControlName="inputCondicionMedicaCronica"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Quirúrgicos</label>
+                        <input type="text" class="form-control" formControlName="inputQuirurgicos"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Enfermedades Congénitas</label>
+                        <input type="text" class="form-control" formControlName="inputEnfermedadesCongenitas" />
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Fuma o consume Alcohol</label>
+                        <input type="text" class="form-control"formControlName="inputFumaAlcohol" />
+                    </div>
+                </div>	
+            </div>
+            <div class="row mb-3 bg-green-custom">RIESGOS ACTUALES </div>
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Placenta Previa</label>
+                        <input type="text" class="form-control" formControlName="inputPlacentaPrevia"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Sobrepeso</label>
+                        <input type="text" class="form-control" formControlName="inputSobrepeso"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">ITU</label>
+                        <input type="text" class="form-control" formControlName="inputItu" />
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Presión Alta</label>
+                        <input type="text" class="form-control" formControlName="inputPresionAlta" />
+                    </div>
+                </div>	
+            </div>
+            <div class="row mb-3 bg-green-custom">FUNCIONES VITALES</div>
+            <div class="row">
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">T(Cº)</label>
+                        <input type="text" class="form-control" formControlName="inputTemperatura"/>
+                    </div>
+                </div>
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">FC(min)</label>
+                        <input type="text" class="form-control" formControlName="inputFrecuenciaCardiaca"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">PA (Sistólica/diastólica) (mmHg)</label>
+                        <div class="btn-group">
+                            <input type="text" class="form-control" formControlName="inputPresionSistolica"/>
+                            <input type="text" class="form-control" id="" readonly placeholder="/" style="width: 33px;"/>
+                            <input type="text" class="form-control" formControlName="inputPresionDiastolica"/>
+                        </div>											
+                    </div>
+                </div>
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Sat. O2(%)</label>
+                        <input type="text" class="form-control" formControlName="inputSaturacion"/>
+                    </div>
+                </div>
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">FR</label>
+                        <input type="text" class="form-control" formControlName="inputFrecuenciaRespiratoria"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Talla (m)</label>
+                        <input type="text" class="form-control" formControlName="inputTalla"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div class="form-group mb-3">
+                                <label class="form-label mb-3">Peso (kg)</label>
+                                <input type="text" class="form-control" formControlName="inputPeso"/>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="form-group mb-3">
+                                <label class="form-label mb-3">IMC</label>
+                                <input type="text" class="form-control" formControlName="inputImc"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Peso habitual (kg)</label>
+                        <input type="text" class="form-control" formControlName="inputPesoHabitual"/>
+                    </div>
+                </div>
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Peso Actual (kg)</label>
+                        <input type="text" class="form-control" formControlName="inputPesoActual"/>
+                    </div>
+                </div>
+                <div class="col-xl-2">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Aumento de Peso</label>
+                        <input type="text" class="form-control" formControlName="inputAumentoPeso"/>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row mb-3 bg-green-custom">EXAMEN PREFERENCIAL</div>
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Altura Uterina</label>
+                        <input type="text" class="form-control" formControlName="inputAlturaUterina"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">LCF (min)</label>
+                        <input type="text" class="form-control" formControlName="inputLcf"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Mov. Fetal</label>
+                        <input type="text" class="form-control" formControlName="inputMovFetal"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Placenta</label>
+                        <input type="text" class="form-control" formControlName="inputPlacenta"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">ILA</label>
+                        <input type="text" class="form-control" formControlName="inputIla"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Long. Cervix</label>
+                        <input type="text" class="form-control" formControlName="inputLongCervix"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Posición</label>
+                        <input type="text" class="form-control" formControlName="inputPosicion"/>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Peso Fetal</label>
+                        <input type="text" class="form-control" formControlName="inputPesoFetal"/>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xl-3 d-flex mt-3" style="align-items: center;">
+                    <h6>ARO (Alto riesgo obstétrico)</h6>
+                </div>
+                <div class="col-xl-3 d-flex" style="align-items: center;">
+                    <label for="site_state" class="form-check-label mt-2">NO</label>
+                    <div class="form-switch form-check ms-2">
+                        <input type="checkbox" class="form-check-input" id="site_state" formControlName="inputAro" value="site_state">
+                    </div>
+                    <label for="site_state" class="form-check-label mt-2">&nbsp; SI</label>
+                </div>									
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xl-3 d-flex mt-3" style="align-items: center;">
+                    <h6>DATOS DEL NIÑO</h6>
+                </div>
+                <div class="col-xl-3 d-flex" style="align-items: center;">
+                    <label for="site_state" class="form-check-label mt-2">Niña</label>
+                    <div class="form-switch form-check ms-2">
+                        <input type="checkbox" class="form-check-input" id="site_state" formControlName="inputDatoNino" value="site_state">
+                    </div>
+                    <label for="site_state" class="form-check-label mt-2">&nbsp; Niño</label>
+                </div>									
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">SIGNOS DE ALARMA</label>
+                        <textarea name="" class="form-control" rows="3" formControlName="inputSignoAlarma"></textarea>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Recomendaciones Generales</label>
+                        <textarea name="" class="form-control" rows="3" formControlName="inputRecomendacionGeneral"></textarea>
+                    </div>
+
+                </div>
+                <div class="col-xl-6">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Recomendaciones Específicas</label>
+                        <textarea name="" class="form-control" rows="3" formControlName="inputRecomendacionEspecifica"></textarea>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <button type="button" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+        </div>
+</div>

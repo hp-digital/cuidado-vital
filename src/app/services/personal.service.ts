@@ -6,6 +6,7 @@ import { MedicoDTO } from '@models/MedicoDTO';
 import { ListadoMedicoDTO } from '../models/ListadoMedicoDTO';
 import { catchError, retry,timeout } from 'rxjs/operators';
 import { ListadoBusquedaMedicoDTO } from '@models/ListadoBusquedaMedicoDTO';
+import { ListadoEspecialidadPersonalDTO } from '@models/listado-especialidad-personal';
 
 const API_URL = environment.apiUrl;
 
@@ -62,5 +63,7 @@ export class PersonalService {
     return this.http.get<ListadoBusquedaMedicoDTO[]>(`${API_URL}Personal/ObtenerListadoMedicoBusqueda?${criterioBusqueda}`);
   }
 
-
+  ObtenerEspecialidadPersonalId(id: number) {
+    return this.http.get<ListadoEspecialidadPersonalDTO[]>(`${API_URL}Personal/ObtenerEspecialidadPersonalId?idPersonal=${id}`);
+  }
 }
