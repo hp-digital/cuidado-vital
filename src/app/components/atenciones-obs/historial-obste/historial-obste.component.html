@@ -355,9 +355,6 @@
                                 <div *ngIf="Controls['inputImc'].invalid && (Controls['inputImc'].dirty || Controls['inputImc'].touched)" class="text-error">
                                     <div>Campo obligatorio.</div>
                                 </div>
-                                <div *ngIf="Controls['inputImc'].invalid && (Controls['inputImc'].dirty || Controls['inputImc'].touched)" class="text-error">
-                                    <div>Campo obligatorio.</div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -486,10 +483,14 @@
                 <div class="col-xl-3 d-flex" style="align-items: center;">
                     <label for="site_state" class="form-check-label mt-2">NO</label>
                     <div class="form-switch form-check ms-2">
-                        <input type="checkbox" class="form-check-input" id="site_state" formControlName="inputAro" value="site_state">
+                        <input type="checkbox" class="form-check-input" id="site_state" formControlName="inputAro" value="site_state" (change)="arocalot()">
                     </div>
                     <label for="site_state" class="form-check-label mt-2">&nbsp; SI</label>
-                </div>									
+                </div>	
+                <div class="col-xl-3 d-flex" style="align-items: center;" *ngIf="verMotivoAro">
+                    <label for="site_state" class="form-check-label mt-2">MOTIVO</label>
+                    <input type="text" class="form-control" formControlName="inputMotivoAro">
+                </div>								
             </div>
             <hr/>
             <div class="row">
@@ -514,25 +515,53 @@
                             <div>Campo obligatorio.</div>
                         </div>
                     </div>
-
                 </div>
             </div>
+            <h6>RECOMENDACIONES</h6>
             <div class="row">
                 <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Recomendaciones Generales</label>
-                        <textarea name="" class="form-control" rows="3" formControlName="inputRecomendacionGeneral"></textarea>
+                    <div class="row">
+                        <div class="col-xl-10">
+                            <div class="form-group mb-3">
+                                <label class="cform-label">Recomendaciones Generales</label>
+                                <textarea type="text" class="form-control" formControlName="inputRecomendacionGeneral" rows="2"> </textarea>
+                            </div>
+                        </div>
+                        <div class="col-xl-1">
+                            <div class="form-group mb-3 mt-4 pt-1">													
+                                <button type="button" class="btn btn-green-custom" (click)="AgregarGeneral()"><i class="fas fa-lg fa-plus"></i></button>
+                            </div>
+                        </div>
                     </div>
-
+                    <br>
+                    <div class="row box-shadow" *ngFor="let lista of listadoGeneral; let i = index">
+                        <div class="col-xl-11 fw-bold">{{lista}}</div>
+                    </div>
+                    <br>
                 </div>
                 <div class="col-xl-6">
-                    <div class="form-group mb-3">
-                        <label class="form-label mb-3">Recomendaciones Específicas</label>
-                        <textarea name="" class="form-control" rows="3" formControlName="inputRecomendacionEspecifica"></textarea>
+                    <div class="row">
+                        <div class="col-xl-10">
+                            <div class="form-group mb-3">
+                                <label class="cform-label">Recomendaciones Específicas</label>
+                                <textarea type="text" class="form-control" formControlName="inputRecomendacionEspecifica" rows="2"> </textarea>
+                            </div>
+                        </div>
+                        <div class="col-xl-1">
+                            <div class="form-group mb-3 mt-4 pt-1">													
+                                <button type="button" class="btn btn-green-custom" (click)="AgregarEspecificos()"><i class="fas fa-lg fa-plus"></i></button>
+                            </div>
+                        </div>
                     </div>
-
+                    <br>
+                    <div class="row box-shadow" *ngFor="let lista of listadoEspecificos; let i = index">
+                        <div class="col-xl-11 fw-bold">{{lista}}</div>
+                        <br>
+                    </div>
                 </div>
             </div>
+            
+           
         </form>
     </div>
     <div class="modal-footer">							
