@@ -18,6 +18,7 @@ import { NuevoControlComponent } from '../atenciones/nuevo-control/nuevo-control
 import { HistorialObsteComponent } from './historial-obste/historial-obste.component';
 import { FuncionVitalObsComponent } from './funcion-vital-obs/funcion-vital-obs.component';
 import { ControlPrenatalComponent } from './control-prenatal/control-prenatal.component';
+import { SeguimientoAnalisisComponent } from './seguimiento-analisis/seguimiento-analisis.component';
 
 @Component({
   selector: 'app-atenciones-obs',
@@ -190,6 +191,12 @@ export default class AtencionesObsComponent implements OnInit{
   AbrirControlPreNatal(idHistoriaClinica:number){
 
     this.modalRef = this.modalHistoria.show(ControlPrenatalComponent, { backdrop: 'static', class: 'modal-xl'});
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica)
+  }
+
+  AbrirSeguimiento(idHistoriaClinica:number){
+
+    this.modalRef = this.modalHistoria.show(SeguimientoAnalisisComponent, { backdrop: 'static', class: 'modal-xl'});
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica)
   }
 
