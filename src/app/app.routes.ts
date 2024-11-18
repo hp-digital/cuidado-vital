@@ -43,6 +43,11 @@ export const routes: Routes = [
                 canActivate: [AuthGuard]
             },
             {
+                path:'atenciones-obstetricia',
+                loadComponent:() =>import('./components/atenciones-obs/atenciones-obs.component'),
+                canActivate: [AuthGuard]
+            },
+            {
                 path:'',
                 redirectTo:'dashboard',
                 pathMatch:'full',

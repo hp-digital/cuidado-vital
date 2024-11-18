@@ -5,6 +5,7 @@ import { ControlGeneralDTO } from "./control-general";
 import { ControlGlucosaDTO } from "./control-glucosa";
 import { ControlPresionDTO } from "./control-presion";
 import { HistoriaExternaDTO } from "./historia-externa";
+import { HistorialObstetricoDTO } from "./historial-obstetrico";
 import { HojaMonitoreoSignosDTO } from "./hoja-monitoreo";
 import { MedicoAtencionDTO } from "./medico-atiente";
 import { NotaEnfermeraDTO } from "./nota-enfermera";
@@ -38,4 +39,5 @@ export class HistoriaCuidadoDTO{
     HojaMonitoreoSignos?:HojaMonitoreoSignosDTO;
     NotaEnfermera?: NotaEnfermeraDTO;
     BalanceHidrico?: BalanceHidricoDTO;
+    HistorialObstetrico?: HistorialObstetricoDTO[];
 }
