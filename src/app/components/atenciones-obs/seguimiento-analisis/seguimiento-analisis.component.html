@@ -2,558 +2,753 @@
     <div class="modal-header">
         
         <h4 class="modal-title">SEGUIMIENTO DE ANÁLISIS</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
-
-        <div class="row">
-            <div class="col-md-12">
-<br>
-                <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane active" id="tabla">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table class="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 200px;">TIPO DE EXAMEN</th>
-                                                <th class="text-center column_1">
-                                                    <label class="">FECHA</label>
-                                                    
-
-                                                </th>
-                                                <th class="text-center column_2">
-                                                    <label class="">RESULTADO / OTRAS REFERENCIAS</label>
-                                                    
-
-                                                </th>
-                                                <th class="text-center column_3">
-                                                    <label class="">CHECKLIST</label>
-                                                    
-
-                                                </th>
-                                                <th class="text-center column_4">
-                                                    <label class=""> </label>
-                                                    
-
-                                                </th>
-                                                <th class="text-center"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">FSH / LH0</label>
-                                                </td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">TSH</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">T4L / T3L</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">ESTRADIOL</label>
-                                                </td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">AMH</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">GLUCOSA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">INSULINA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label
-                                                        class="font-weight-bold">PROLACTINA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">HEMOGRAMA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">TS / TC</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">HEPATITIS A/B/C</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">CLAMIDIA IGM</label>
-                                                </td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">EXAMEN COMPLETO DE ORINA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">UREA / CREATININA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">UROCULTIVO</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">RPR CUALITATIVO/CUANTITATIVO</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">HIV</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">BHCG</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">TIEMPO DE CUAGULACION</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">SANGRIA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">GRUPO RH</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">EXOGRAFIA TRANSVAGINAL</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">SONOHISTEROGRAFIA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">HISTEROSALPINGOGRAFIA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">HISTEROSCOPIA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">MAMOGRAFIA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox" id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">IVAA</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox"  id="fecha_3">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            <tr>
-                                                <td scope="row"><label class="font-weight-bold">PAP</label></td>
-                                                <td>
-                                                    <input type="date" class="form-control">
-                                                </td>
-                                                <td class="column_2">
-                                                    <input type="text" class="form-control">
-                                                    
-                                                </td>
-                                                <td class="column_3">
-                                                    <input type="checkbox">
-                                                </td>
-                                                <td class="column_4">
-                                                    
-                                                </td>
-                                                <td style="width: 50px;"></td>
-                                            </tr>
-                                            
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+        <form [formGroup]="dataFormGroup">
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
                         </div>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="grafico">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <canvas id="ganancia_peso"></canvas>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <canvas id="incremento_altura_uterina"></canvas>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <canvas id="can_peso_fetal"></canvas>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha atención : </label> <span>{{fecha | date : 'dd/MM/YYYY'}}</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>	
+            <div class="row">
+                <div class="col-md-12">
+                    <br>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="tabla">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 200px;">TIPO DE EXAMEN</th>
+                                                    <th class="text-center column_1">
+                                                        <label class="">FECHA</label>
+                                                    </th>
+                                                    <th class="text-center column_2">
+                                                        <label class="">RESULTADO / OTRAS REFERENCIAS</label>
+                                                    </th>
+                                                    <th class="text-center column_3">
+                                                        <label class="">CHECKLIST</label>
+                                                    </th>
+                                                    <th class="text-center column_4" *ngIf="esVisible==true">
+                                                        <label class=""> </label>
+                                                    </th>
+                                                    <th class="text-center" *ngIf="esVisible==true"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">FSH / LH0</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaFsh" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputFsh" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_3" style="align-items: center;">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkFs" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkFsh"
+                                                        [disabled]="esReadOnly"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">TSH</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaTsh" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputTsh" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkTsh" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkTsh"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">T4L / T3L</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaT4l" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputT4l" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkT4l" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkT4l"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">ESTRADIOL</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaEstradiol" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputEstradiol" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkEstradiol" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkEstradiol"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">AMH</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaAmh" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputAmh" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkAmh" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkAmh"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">GLUCOSA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaGlucosa" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputGlucosa" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkGlucosa" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkGlucosa"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">INSULINA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaInsulina" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputInsulina" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkInsulina" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkInsulina"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label
+                                                            class="font-weight-bold">PROLACTINA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaProlactina" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputProlactina" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkProlactina" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkProlactina"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">HEMOGRAMA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaHemograma" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputHemograma" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkHemograma" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkHemograma"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">TS / TC</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaTs" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputTs" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkTs" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkTs"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">HEPATITIS A/B/C</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaHepatitis" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputHepatitis" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkHepatitis" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkHepatitis"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">CLAMIDIA IGM</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaClamidia" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputClamidia" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkClamidia" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkClamidia"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">EXAMEN COMPLETO DE ORINA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaEco" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputEco" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkEco" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkEco"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">UREA / CREATININA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaUrea" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputUrea" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkUrea" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkUrea"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">UROCULTIVO</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaUrocultivo" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputUrocultivo" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkUrocultivo" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkUrocultivo"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">RPR CUALITATIVO/CUANTITATIVO</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaRpr" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputRpr" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkRpr" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkRpr"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">HIV</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaHiv" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputHiv" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkHiv" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkHiv"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">BHCG</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaBhcg" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputBhcg" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkBhcg" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkBhcg"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">TIEMPO DE CUAGULACION</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaCuagulacion" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputCuagulacion" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkTiempoCuagulacion" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkTiempoCuagulacion"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">SANGRIA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaSangria" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputSangria" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkSangria" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkSangria"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">GRUPO RH</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaGrupoRh" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputGrupoRh" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkGrupoRh" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkGrupoRh"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">ECOGRAFIA TRANSVAGINAL</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaEcografia" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputEcografia" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkEcografia" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkEcografia"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">SONOHISTEROGRAFIA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaSono" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputSono" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkSono" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkSono"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">HISTEROSALPINGOGRAFIA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaHisterosal" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputHistero" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkHisterosal" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkHisterosal"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">HISTEROSCOPIA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaHisteroscopia" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputHisteroscopia" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkHisteroscopia" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkHisteroscopia"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">MAMOGRAFIA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaMamografia" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputMamografia" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkMamografia" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkMamografia"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">IVAA</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaIva" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputIva" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkIvaa" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkIvaa"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td scope="row"><label class="font-weight-bold">PAP</label></td>
+                                                    <td>
+                                                        <input type="date" class="form-control" formControlName="inputFechaPap" [readOnly]="esReadOnly">
+                                                    </td>
+                                                    <td class="column_2">
+                                                        <input type="text" class="form-control" formControlName="inputPap" [readOnly]="esReadOnly">
+                                                        
+                                                    </td>
+                                                    <td class="column_3">
+                                                        <p-checkbox 
+                                                        [(ngModel)]="checkPap" 
+                                                        [binary]="true" 
+                                                        inputId="binary"
+                                                        formControlName="checkPap"
+                                                        />
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
+                                                    </td>
+                                                    <td *ngIf="esVisible==true">
+                                                        <button type="button" class="btn btn-green-custom"><i class="fas fa-lg fa-fw me-2 fa-plus"></i></button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+    
             </div>
-
-        </div>
+        </form>
+        
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-danger close-modal">Cancelar</button>
+        <button type="button" *ngIf="esVisible" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-danger close-modal" (click)="CerrarModal()">Cerrar</button>
     </div>
 </div>

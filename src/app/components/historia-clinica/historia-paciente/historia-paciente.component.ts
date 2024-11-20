@@ -20,6 +20,9 @@ import { CuadroControlesReportesComponent } from '../../cuadro-controles-reporte
 import { FuncionesVitalesComponent } from '../../funciones-vitales/funciones-vitales.component';
 import { MonitoreoComponent } from '../../monitoreo/monitoreo.component';
 import { ChatComponent } from '../../chat/chat.component';
+import { SeguimientoAnalisisComponent } from '../../atenciones-obs/seguimiento-analisis/seguimiento-analisis.component';
+import { ControlPrenatalComponent } from '../../atenciones-obs/control-prenatal/control-prenatal.component';
+import { FuncionVitalObsComponent } from '../../atenciones-obs/funcion-vital-obs/funcion-vital-obs.component';
 
 @Component({
   selector: 'app-historia-paciente',
@@ -188,6 +191,28 @@ export default class HistoriaPacienteComponent implements OnInit{
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
   AbrirChat(idHistoriaClinica: number){
+    this.modalRef = this.modalChat.show(ChatComponent, { backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
+  AbrirFichaObstetrica(idHistoriaClinica: number){
+    this.modalRef = this.modalChat.show(ChatComponent, { backdrop: 'static', class: 'modal-xl'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+
+  AbrirControlPreNatal(idHistoriaClinica: number){
+    this.modalRef = this.modalChat.show(ControlPrenatalComponent, { backdrop: 'static', class: 'modal-xl'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+  AbrirSeguimiento(idHistoriaClinica: number){
+    this.modalRef = this.modalChat.show(SeguimientoAnalisisComponent, { backdrop: 'static', class: 'modal-xl'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+  AbrirFunciones(idHistoriaClinica: number){
+    this.modalRef = this.modalChat.show(FuncionVitalObsComponent, { backdrop: 'static', class: 'modal-xg'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+  AbrirBitacora(idHistoriaClinica: number){
     this.modalRef = this.modalChat.show(ChatComponent, { backdrop: 'static', class: 'modal-xg'})
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }

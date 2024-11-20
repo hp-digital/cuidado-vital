@@ -19,6 +19,8 @@ import { HistorialObsteComponent } from './historial-obste/historial-obste.compo
 import { FuncionVitalObsComponent } from './funcion-vital-obs/funcion-vital-obs.component';
 import { ControlPrenatalComponent } from './control-prenatal/control-prenatal.component';
 import { SeguimientoAnalisisComponent } from './seguimiento-analisis/seguimiento-analisis.component';
+import { ExamenAuxiliarComponent } from '../examen-auxiliar/examen-auxiliar.component';
+import { RecetaComponent } from '../receta/receta.component';
 
 @Component({
   selector: 'app-atenciones-obs',
@@ -198,6 +200,16 @@ export default class AtencionesObsComponent implements OnInit{
 
     this.modalRef = this.modalHistoria.show(SeguimientoAnalisisComponent, { backdrop: 'static', class: 'modal-xl'});
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica)
+  }
+
+  AbrirExamenAuxiliar(idHistoriaClinica:number){
+    this.modalRef = this.modalHistoria.show(ExamenAuxiliarComponent, { backdrop: 'static', class: 'modal-xl'});
+    this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica)
+  }
+
+  AbrirReceta(idHistoriaClinica:number){
+    this.modalRef = this.modalHistoria.show(RecetaComponent, { backdrop: 'static', class: 'modal-xl'});
+    this.modalRef.content.AsignarObjetoListaPaciente(idHistoriaClinica)
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

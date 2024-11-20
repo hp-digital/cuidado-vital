@@ -155,6 +155,7 @@ export class HistorialObsteComponent implements OnInit{
       inputRecomendacionGeneral: new FormControl(),
       inputRecomendacionEspecifica: new FormControl(),
       inputMotivoAro: new FormControl(),
+      inputDiagnostico: new FormControl(),
     });
   }
 
@@ -1477,7 +1478,7 @@ export class HistorialObsteComponent implements OnInit{
 
   MostrarRangoSaturacionOxigeno() {    
     let saturacionOxigeno = this.dataFormGroup.controls['inputSaturacion'].value;
-    if (saturacionOxigeno >= 90) {
+    if (saturacionOxigeno <= 87) {
       this.SaturacionOxigenoRango = false
       this.colorEstadosat = '';
     } else {

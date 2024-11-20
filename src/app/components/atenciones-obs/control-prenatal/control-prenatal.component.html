@@ -2,23 +2,38 @@
     <div class="modal-header">
         
         <h4 class="modal-title">CONTROL PRE NATAL</h4>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
 
-        <div class="row">
-            <div class="col-md-2">
-                <div class="form-group">
-                    <label for="">Inicio de controles</label>
-                    <div class="input-group" id="contenedor-inicio-controles">
-                        <input type="date" class="form-control" name="inicio_controles" id="inicio_controles" readonly>
-                        <!-- <span class="input-group-btn">
-                            <button type="button" class="btn btn-info" id="edit_inicio_controles" onclick="editInicioControles(this)"><i class="fa fa-pencil"></i></button>
-                            <button type="button" class="btn btn-primary d-none" id="save_inicio_controles" onclick="saveInicioControles(this)"><i class="fas fa-save"></i></button>
-                        </span> -->
+        <div id="header-component">
+            <div class="row">
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                    </div>
+                </div>				
+            </div>
+            <div class="row">
+                <div class="col-xl-4">
+                    <div class="form-group mb-3">
+                        <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
                     </div>
                 </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="fw-bold">Fecha atención : </label> <span>{{fecha | date : 'dd/MM/YYYY'}}</span>
+                    </div>
+                </div>															
             </div>
+        </div>								
+        <hr/>
+        <div class="row">
             <div class="col-md-12">
                 <ul class="nav nav-tabs" role="tablist">
                     <li role="presentation" class="active"><a href="#tabla" aria-controls="tabla" role="tab"
@@ -37,269 +52,66 @@
                                                 <th style="width: 200px;">N° DE CONTROL</th>
                                                 <th class="text-center column_1">
                                                     <label class="">1</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_1')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(1, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_1', 1)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_1')"><i
-                                                            class="fas fa-times"></i></button>
 
                                                 </th>
-                                                <th class="text-center column_2">
+                                                 <th class="text-center column_2">
                                                     <label class="">2</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_2')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(2, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_2', 2)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_2')"><i
-                                                            class="fas fa-times"></i></button>
-
                                                 </th>
                                                 <th class="text-center column_3">
                                                     <label class="">3</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_3')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(3, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_3', 3)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_3')"><i
-                                                            class="fas fa-times"></i></button>
-
                                                 </th>
                                                 <th class="text-center column_4">
                                                     <label class="">4</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_4')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(4, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_4', 4)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_4')"><i
-                                                            class="fas fa-times"></i></button>
-
                                                 </th>
                                                 <th class="text-center column_5">
                                                     <label class="">5</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_5')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(5, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_5', 5)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_5')"><i
-                                                            class="fas fa-times"></i></button>
-
                                                 </th>
                                                 <th class="text-center column_6">
                                                     <label class="">6</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_6')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(6, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_6', 6)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_6')"><i
-                                                            class="fas fa-times"></i></button>
-
                                                 </th>
                                                 <th class="text-center column_7">
                                                     <label class="">7</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_7')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(7, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_7', 7)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_7')"><i
-                                                            class="fas fa-times"></i></button>
                                                 </th>
                                                 <th class="text-center column_8">
                                                     <label class="">8</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_8')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(8, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_8', 8)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_8')"><i
-                                                            class="fas fa-times"></i></button>
-
                                                 </th>
                                                 <th class="text-center column_9">
                                                     <label class="">9</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_9')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(9, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_9', 9)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_9')"><i
-                                                            class="fas fa-times"></i></button>
                                                 </th>
                                                 <th class="text-center column_10">
                                                     <label class="">10</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_10')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(10, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_10', 10)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_10')"><i
-                                                            class="fas fa-times"></i></button>
-
                                                 </th>
-                                                <th class="text-center column_11">
+                                                <!--<th class="text-center column_11">
                                                     <label class="">11</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_11')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(11, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_11', 11)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_11')"><i
-                                                            class="fas fa-times"></i></button>
-
                                                 </th>
                                                 <th class="text-center column_12">
                                                     <label class="">12</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_12')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(12, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_12', 12)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_12')"><i
-                                                            class="fas fa-times"></i></button>
                                                 </th>
                                                 <th class="text-center column_13">
                                                     <label class="">13</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_13')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(13, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_13', 13)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_13')"><i
-                                                            class="fas fa-times"></i></button>
                                                 </th>
                                                 <th class="text-center column_14">
                                                     <label class="">14</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_14')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(14, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_14', 14)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_14')"><i
-                                                            class="fas fa-times"></i></button>
                                                 </th>
                                                 <th class="text-center column_15">
                                                     <label class="">15</label>
-                                                    <hr>
                                                     <br>
-                                                    <button type="button" class="btn btn-sm btn-info edit"
-                                                        onclick="editColumn('column_15')"><i
-                                                            class="fas fa-pen"></i></button>
-                                                    <button type="button" class="btn btn-sm btn-info sync d-none" onclick="cambioFecha(15, true)"><i class="fas fa-sync-alt"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-primary save d-none"
-                                                        onclick="saveColumn('column_15', 15)"><i
-                                                            class="fas fa-save"></i></button>
-                                                    <button type="button"
-                                                        class="btn btn-sm btn-default cancel d-none"
-                                                        onclick="cancelColumn('column_15')"><i
-                                                            class="fas fa-times"></i></button>
                                                 </th>
-                                                <th class="text-center"></th>
+                                                <th class="text-center"></th> -->
                                             </tr>
                                         </thead>
                                         <tbody id="controles-dinamicos">
@@ -309,9 +121,9 @@
                                                 <td class="column_1">
                                                     <input type="date" class="form-control d-none" id="fecha_1"
                                                         onchange="cambioFecha(1, false)">
-                                                    <label class="" id="text_fecha_1"></label>
+                                                    <label class="" id="text_fecha_1">18/11/2024</label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="date" class="form-control d-none" id="fecha_2"
                                                         onchange="cambioFecha(2, false)">
                                                     <label class="" id="text_fecha_2"></label>
@@ -356,7 +168,7 @@
                                                         onchange="cambioFecha(10, false)">
                                                     <label class="" id="text_fecha_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="date" class="form-control d-none" id="fecha_11"
                                                         onchange="cambioFecha(11, false)">
                                                     <label class="" id="text_fecha_11"></label>
@@ -381,7 +193,7 @@
                                                         onchange="cambioFecha(15, false)">
                                                     <label class="" id="text_fecha_15"></label>
                                                 </td>
-                                                <td style="width: 50px;"></td>
+                                                <td style="width: 50px;"></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">E.G. x
@@ -390,9 +202,9 @@
                                                     <input type="text" class="form-control d-none"
                                                         id="edad_gestacional_ecografia_1">
                                                     <label class=""
-                                                        id="text_edad_gestacional_ecografia_1"></label>
+                                                        id="text_edad_gestacional_ecografia_1">12-05-2025</label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="text" class="form-control d-none"
                                                         id="edad_gestacional_ecografia_2">
                                                     <label class=""
@@ -446,7 +258,7 @@
                                                     <label class=""
                                                         id="text_edad_gestacional_ecografia_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="edad_gestacional_ecografia_11">
                                                     <label class=""
@@ -476,15 +288,15 @@
                                                     <label class=""
                                                         id="text_edad_gestacional_ecografia_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">E.G. x FUR</label></td>
                                                 <td class="column_1">
                                                     <input type="number" class="form-control d-none" id="eg_fur_1">
-                                                    <label class="" id="text_eg_fur_1"></label>
+                                                    <label class="" id="text_eg_fur_1">12</label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="number" class="form-control d-none" id="eg_fur_2">
                                                     <label class="" id="text_eg_fur_2"></label>
                                                 </td>
@@ -520,7 +332,7 @@
                                                     <input type="number" class="form-control d-none" id="eg_fur_10">
                                                     <label class="" id="text_eg_fur_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="number" class="form-control d-none" id="eg_fur_11">
                                                     <label class="" id="text_eg_fur_11"></label>
                                                 </td>
@@ -539,7 +351,7 @@
                                                 <td class="column_15">
                                                     <input type="number" class="form-control d-none" id="eg_fur_15">
                                                     <label class="" id="text_eg_fur_15"></label>
-                                                </td>
+                                                </td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">PESO kg</label>
@@ -547,9 +359,9 @@
                                                 <td class="column_1">
                                                     <input type="number" class="form-control d-none" id="peso_1"
                                                         onkeyup="changePeso(1, this.value)">
-                                                    <label class="" id="text_peso_1"></label>
+                                                    <label class="" id="text_peso_1">45</label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="number" class="form-control d-none" id="peso_2"
                                                         onkeyup="changePeso(2, this.value)">
                                                     <label class="" id="text_peso_2"></label>
@@ -594,7 +406,7 @@
                                                         id="peso_10" onkeyup="changePeso(10, this.value)">
                                                     <label class="" id="text_peso_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="number" class="form-control d-none"
                                                         id="peso_11" onkeyup="changePeso(11, this.value)">
                                                     <label class="" id="text_peso_11"></label>
@@ -619,7 +431,7 @@
                                                         id="peso_15" onkeyup="changePeso(15, this.value)">
                                                     <label class="" id="text_peso_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">PESO FETAL
@@ -627,9 +439,9 @@
                                                 <td class="column_1">
                                                     <input type="text" class="form-control d-none"
                                                         id="peso_fetal_1">
-                                                    <label class="" id="text_peso_fetal_1"></label>
+                                                    <label class="" id="text_peso_fetal_1">2.5</label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="text" class="form-control d-none"
                                                         id="peso_fetal_2">
                                                     <label class="" id="text_peso_fetal_2"></label>
@@ -674,7 +486,7 @@
                                                         id="peso_fetal_10">
                                                     <label class="" id="text_peso_fetal_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="peso_fetal_11">
                                                     <label class="" id="text_peso_fetal_11"></label>
@@ -699,16 +511,16 @@
                                                         id="peso_fetal_15">
                                                     <label class="" id="text_peso_fetal_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">PA MAX/MIN
                                                         (MMHG)</label></td>
                                                 <td class="column_1">
                                                     <input type="text" class="form-control d-none" id="pa_1">
-                                                    <label class="" id="text_pa_1"></label>
+                                                    <label class="" id="text_pa_1">15</label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="text" class="form-control d-none" id="pa_2">
                                                     <label class="" id="text_pa_2"></label>
                                                 </td>
@@ -744,7 +556,7 @@
                                                     <input type="text" class="form-control d-none" id="pa_10">
                                                     <label class="" id="text_pa_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="text" class="form-control d-none" id="pa_11">
                                                     <label class="" id="text_pa_11"></label>
                                                 </td>
@@ -764,7 +576,7 @@
                                                     <input type="text" class="form-control d-none" id="pa_15">
                                                     <label class="" id="text_pa_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">ALT.
@@ -772,9 +584,9 @@
                                                 <td class="column_1">
                                                     <input type="text" class="form-control d-none"
                                                         id="alt_uterina_1">
-                                                    <label class="" id="text_alt_uterina_1"></label>
+                                                    <label class="" id="text_alt_uterina_1">12</label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="text" class="form-control d-none"
                                                         id="alt_uterina_2">
                                                     <label class="" id="text_alt_uterina_2"></label>
@@ -819,7 +631,7 @@
                                                         id="alt_uterina_10">
                                                     <label class="" id="text_alt_uterina_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="alt_uterina_11">
                                                     <label class="" id="text_alt_uterina_11"></label>
@@ -844,7 +656,7 @@
                                                         id="alt_uterina_15">
                                                     <label class="" id="text_alt_uterina_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label
@@ -854,7 +666,7 @@
                                                         id="presentacion_1">
                                                     <label class="" id="text_presentacion_1"></label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="text" class="form-control d-none"
                                                         id="presentacion_2">
                                                     <label class="" id="text_presentacion_2"></label>
@@ -899,7 +711,7 @@
                                                         id="presentacion_10">
                                                     <label class="" id="text_presentacion_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="presentacion_11">
                                                     <label class="" id="text_presentacion_11"></label>
@@ -924,7 +736,7 @@
                                                         id="presentacion_15">
                                                     <label class="" id="text_presentacion_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">F.C.F
@@ -935,7 +747,7 @@
                                                     <label class=""
                                                         id="text_frecuencia_cardiaca_fetal_1"></label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="text" class="form-control d-none"
                                                         id="frecuencia_cardiaca_fetal_2">
                                                     <label class=""
@@ -989,7 +801,7 @@
                                                     <label class=""
                                                         id="text_frecuencia_cardiaca_fetal_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="frecuencia_cardiaca_fetal_11">
                                                     <label class=""
@@ -1019,7 +831,7 @@
                                                     <label class=""
                                                         id="text_frecuencia_cardiaca_fetal_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">MOV.
@@ -1029,7 +841,7 @@
                                                         id="mov_fetal_1">
                                                     <label class="" id="text_mov_fetal_1"></label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="text" class="form-control d-none"
                                                         id="mov_fetal_2">
                                                     <label class="" id="text_mov_fetal_2"></label>
@@ -1074,7 +886,7 @@
                                                         id="mov_fetal_10">
                                                     <label class="" id="text_mov_fetal_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="mov_fetal_11">
                                                     <label class="" id="text_mov_fetal_11"></label>
@@ -1099,7 +911,7 @@
                                                         id="mov_fetal_15">
                                                     <label class="" id="text_mov_fetal_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">AUME. DE PESO
@@ -1109,7 +921,7 @@
                                                         id="aumento_peso_1">
                                                     <label class="" id="text_aumento_peso_1"></label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="text" class="form-control d-none"
                                                         id="aumento_peso_2">
                                                     <label class="" id="text_aumento_peso_2"></label>
@@ -1154,7 +966,7 @@
                                                         id="aumento_peso_10">
                                                     <label class="" id="text_aumento_peso_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="aumento_peso_11">
                                                     <label class="" id="text_aumento_peso_11"></label>
@@ -1179,7 +991,7 @@
                                                         id="aumento_peso_15">
                                                     <label class="" id="text_aumento_peso_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">PLAC</label>
@@ -1188,7 +1000,7 @@
                                                     <input type="text" class="form-control d-none" id="plac_1">
                                                     <label class="" id="text_plac_1"></label>
                                                 </td>
-                                                <td class="column_2">
+                                                 <td class="column_2">
                                                     <input type="text" class="form-control d-none" id="plac_2">
                                                     <label class="" id="text_plac_2"></label>
                                                 </td>
@@ -1224,7 +1036,7 @@
                                                     <input type="text" class="form-control d-none" id="plac_10">
                                                     <label class="" id="text_plac_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!--<td class="column_11">
                                                     <input type="text" class="form-control d-none" id="plac_11">
                                                     <label class="" id="text_plac_11"></label>
                                                 </td>
@@ -1244,7 +1056,7 @@
                                                     <input type="text" class="form-control d-none" id="plac_15">
                                                     <label class="" id="text_plac_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">ILA</label></td>
@@ -1288,7 +1100,7 @@
                                                     <input type="text" class="form-control d-none" id="ila_10">
                                                     <label class="" id="text_ila_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!-- <td class="column_11">
                                                     <input type="text" class="form-control d-none" id="ila_11">
                                                     <label class="" id="text_ila_11"></label>
                                                 </td>
@@ -1308,7 +1120,7 @@
                                                     <input type="text" class="form-control d-none" id="ila_15">
                                                     <label class="" id="text_ila_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">LONG.
@@ -1363,7 +1175,7 @@
                                                         id="long_cervix_10">
                                                     <label class="" id="text_long_cervix_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!-- <td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="long_cervix_11">
                                                     <label class="" id="text_long_cervix_11"></label>
@@ -1388,12 +1200,12 @@
                                                         id="long_cervix_15">
                                                     <label class="" id="text_long_cervix_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
-                                                <td scope="row"><label class="font-weight-bold">CCT</label></td>
+                                                <td scope="row"><label class="font-weight-bold">SST</label></td>
                                                 <td class="column_1">
-                                                    <input type="text" class="form-control d-none"
+                                                    <input type="text" class="form-control"
                                                         id="long_cct_1">
                                                     <label class="" id="text_long_cct_1"></label>
                                                 </td>
@@ -1442,7 +1254,7 @@
                                                         id="long_cervix_10">
                                                     <label class="" id="text_long_cervix_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!-- <td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="long_cervix_11">
                                                     <label class="" id="text_long_cervix_11"></label>
@@ -1467,12 +1279,12 @@
                                                         id="long_cervix_15">
                                                     <label class="" id="text_long_cervix_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
-                                                <td scope="row"><label class="font-weight-bold">NCT</label></td>
+                                                <td scope="row"><label class="font-weight-bold">NST</label></td>
                                                 <td class="column_1">
-                                                    <input type="text" class="form-control d-none"
+                                                    <input type="text" class="form-control"
                                                         id="long_cervix_1">
                                                     <label class="" id="text_long_cervix_1"></label>
                                                 </td>
@@ -1521,7 +1333,7 @@
                                                         id="long_cervix_10">
                                                     <label class="" id="text_long_cervix_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!-- <td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="long_cervix_11">
                                                     <label class="" id="text_long_cervix_11"></label>
@@ -1546,12 +1358,12 @@
                                                         id="long_cervix_15">
                                                     <label class="" id="text_long_cervix_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">DOPPLER IP</label></td>
                                                 <td class="column_1">
-                                                    <input type="text" class="form-control d-none"
+                                                    <input type="text" class="form-control"
                                                         id="long_cervix_1">
                                                     <label class="" id="text_long_cervix_1"></label>
                                                 </td>
@@ -1600,7 +1412,7 @@
                                                         id="long_cervix_10">
                                                     <label class="" id="text_long_cervix_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!-- <td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="long_cervix_11">
                                                     <label class="" id="text_long_cervix_11"></label>
@@ -1625,12 +1437,12 @@
                                                         id="long_cervix_15">
                                                     <label class="" id="text_long_cervix_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                             <tr>
                                                 <td scope="row"><label class="font-weight-bold">DOPPLER IR</label></td>
                                                 <td class="column_1">
-                                                    <input type="text" class="form-control d-none"
+                                                    <input type="text" class="form-control"
                                                         id="long_cervix_1">
                                                     <label class="" id="text_long_cervix_1"></label>
                                                 </td>
@@ -1644,7 +1456,7 @@
                                                         id="long_cervix_3">
                                                     <label class="" id="text_long_cervix_3"></label>
                                                 </td>
-                                                <td class="column_4">
+                                               <td class="column_4">
                                                     <input type="text" class="form-control d-none"
                                                         id="long_cervix_4">
                                                     <label class="" id="text_long_cervix_4"></label>
@@ -1674,12 +1486,12 @@
                                                         id="long_cervix_9">
                                                     <label class="" id="text_long_cervix_9"></label>
                                                 </td>
-                                                <td class="column_10">
+                                                 <td class="column_10">
                                                     <input type="text" class="form-control d-none"
                                                         id="long_cervix_10">
                                                     <label class="" id="text_long_cervix_10"></label>
                                                 </td>
-                                                <td class="column_11">
+                                                <!-- <td class="column_11">
                                                     <input type="text" class="form-control d-none"
                                                         id="long_cervix_11">
                                                     <label class="" id="text_long_cervix_11"></label>
@@ -1704,7 +1516,7 @@
                                                         id="long_cervix_15">
                                                     <label class="" id="text_long_cervix_15"></label>
                                                 </td>
-                                                <td></td>
+                                                <td></td> -->
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1735,6 +1547,6 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-danger close-modal">Cancelar</button>
+        <button type="button" class="btn btn-danger close-modal" (click)="CerrarModal()">Cerrar</button>
     </div>
 </div>
