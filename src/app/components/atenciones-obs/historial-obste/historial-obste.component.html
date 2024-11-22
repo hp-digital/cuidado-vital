@@ -127,7 +127,7 @@
                     <div class="col-xl-3">
                         <div class="form-group mb-3">
                             <label class="form-label mb-3">FPP x ECO</label>
-                            <input type="date" class="form-control" formControlName="inputFppEco"/>
+                            <input type="text" class="form-control" formControlName="inputFppEco"/>
                             <div *ngIf="Controls['inputFppEco'].invalid && (Controls['inputFppEco'].dirty || Controls['inputFppEco'].touched)" class="text-error">                                    
                                 <div>Campo obligatorio.</div>
                             </div>
@@ -251,7 +251,7 @@
                 </div>
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
-                        <label class="form-label mb-3">PA (Sistólica/diastólica) (mmHg)</label>
+                        <label class="form-label mb-3">PA Derecha (Sistólica/diastólica) (mmHg)</label>
                         <div class="btn-group">
                             <input type="number" class="form-control" formControlName="inputPresionSistolica" [ngStyle]="{'background':colorEstadoprecio}" (blur)="MostrarPrecionArterial()" onKeypress="if (
                                 (event.keyCode < 48 || event.keyCode > 57) &&
@@ -279,6 +279,36 @@
                     <div *ngIf="PrecionArterialRango" class="d-inline text-error">P.A.: ≥100  ≤ 140 /</div>
                     <div *ngIf="PrecionArterialRangoDis" class="d-inline text-error">P.A.: ≥ 60 ≤90</div>
                 </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">PA Izquierda (Sistólica/diastólica) (mmHg)</label>
+                        <div class="btn-group">
+                            <input type="number" class="form-control" formControlName="inputPresionSistolicaIzquierda" [ngStyle]="{'background':colorEstadoprecio}" (blur)="MostrarPrecionArterial()" onKeypress="if (
+                                (event.keyCode < 48 || event.keyCode > 57) &&
+                                event.keyCode !== 9
+                              ) event.returnValue = false;" maxlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
+                            <input type="text" class="form-control" id="" readonly placeholder="/" style="width: 33px;"/>
+                            <input type="number" class="form-control" formControlName="inputPresionDiastolicaIzquierda" [ngStyle]="{'background':colorEstadopreArtDis}" (blur)="MostrarPrecionDiastolica()" onKeypress="if (
+                                (event.keyCode < 48 || event.keyCode > 57) &&
+                                event.keyCode !== 9
+                              ) event.returnValue = false;" maxlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
+                        </div>											
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <div *ngIf="Controls['inputPresionSistolicaIzquierda'].invalid && (Controls['inputPresionSistolicaIzquierda'].dirty || Controls['inputPresionSistolicaIzquierda'].touched)" class="text-error">
+                                <div>Campo obligatorio.</div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 text-right">
+                            <div *ngIf="Controls['inputPresionDiastolicaIzquierda'].invalid && (Controls['inputPresionDiastolicaIzquierda'].dirty || Controls['inputPresionDiastolicaIzquierda'].touched)" class="text-error">
+                                <div>Campo obligatorio.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="PrecionArterialRango" class="d-inline text-error">P.A.: ≥100  ≤ 140 /</div>
+                    <div *ngIf="PrecionArterialRangoDis" class="d-inline text-error">P.A.: ≥ 60 ≤90</div>
+                </div>
                 <div class="col-xl-2">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">Sat. O2(%)</label>
@@ -294,6 +324,8 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-xl-2">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">FR</label>
@@ -309,8 +341,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 
                 <div class="col-xl-2">
                     <div class="form-group mb-3">

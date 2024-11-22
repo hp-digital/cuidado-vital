@@ -20,6 +20,7 @@ export class HistorialObstetricoDTO
     AroMotivo?: string;
     DatoNino?:string;
     SignosAlarma?: string;
+    Diagnostico?: string;
     RecomendacionesGenerales?:string[];
     RecomendacionesEspecificas?:string[];
 }

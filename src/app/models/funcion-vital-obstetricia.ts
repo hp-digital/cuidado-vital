@@ -4,6 +4,8 @@ export class FuncionVitalObstetriciaDTO
     Fc!:string;
     PresionSistolica!:string;
     PresionDiastolica!:string;
+    PresionSistolicaIzquierda!:string;
+    PresionDiastolicaIzquierda!:string;
     Saturacion!:string;
     Fr!:string;
     Talla!:string;

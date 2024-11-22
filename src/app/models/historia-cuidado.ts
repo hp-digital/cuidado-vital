@@ -3,6 +3,7 @@ import { CabeceraPacienteDTO } from "./cabecera-paciente";
 import { ControlEpocDTO } from "./control-epoc";
 import { ControlGeneralDTO } from "./control-general";
 import { ControlGlucosaDTO } from "./control-glucosa";
+import { ControlPreNatalDTO } from "./control-prenatal";
 import { ControlPresionDTO } from "./control-presion";
 import { HistoriaExternaDTO } from "./historia-externa";
 import { HistorialObstetricoDTO } from "./historial-obstetrico";
@@ -12,6 +13,7 @@ import { NotaEnfermeraDTO } from "./nota-enfermera";
 import { OrdenDTO } from "./OrdenDTO";
 import { HistoriaPrimeraAtencionDTO } from "./primera-atencion";
 import { RecetaDTO } from "./RecetaDTO";
+import { SeguimientoAnalisisDTO } from "./segumiento-analisis";
 
 export class HistoriaCuidadoDTO{
     cabeceraPaciente?:CabeceraPacienteDTO;
@@ -40,4 +42,6 @@ export class HistoriaCuidadoDTO{
     NotaEnfermera?: NotaEnfermeraDTO;
     BalanceHidrico?: BalanceHidricoDTO;
     HistorialObstetrico?: HistorialObstetricoDTO[];
+    ControlPreNatal?: ControlPreNatalDTO[];
+    SeguimientoAnalisis?: SeguimientoAnalisisDTO;
 }

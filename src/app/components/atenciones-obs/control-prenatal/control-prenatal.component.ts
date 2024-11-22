@@ -48,11 +48,13 @@ import { RiesgoObstetricoDTO } from '@models/riesgo-obstetrico';
 import { RiesgoActualDTO } from '@models/riesgo-actual';
 import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
 import { ExamenPreferencialDTO } from '@models/examen-preferencial';
+import { ControlPreNatalDTO } from '@models/control-prenatal';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-control-prenatal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule, TableModule],
   templateUrl: './control-prenatal.component.html',
   styleUrl: './control-prenatal.component.css'
 })
@@ -76,8 +78,13 @@ export class ControlPrenatalComponent implements OnInit {
 
   objHistoria=new HistoriaCuidadoDTO();
   objObstetricia: HistorialObstetricoDTO[]=[];
+  objControl : ControlPreNatalDTO[]=[];
 
   fecha= new Date();
+
+  prueba:string='';
+
+  keys: (keyof ControlPreNatalDTO)[] = [];
 
   constructor(
     private bsModalControl: BsModalRef,
@@ -94,6 +101,7 @@ export class ControlPrenatalComponent implements OnInit {
   ngOnInit(): void {
     this.idRol=this.settings.getUserSetting('idRol');
     this.fechaActual = moment().format('DD/MM/YYYY');
+    
   }
 
   AsignarHistoriaClinica(idHistoriaClinica:number){
@@ -493,9 +501,6 @@ export class ControlPrenatalComponent implements OnInit {
       externo.PlanTrabajo = objHistoria.historiaExterna.planTrabajo;
       externo.UrlPdfHistoriaClinica = objHistoria.historiaExterna.urlPdfHistoriaClinica;
     }
-    
-
-   
 
     let controlGeneral : ControlGeneralDTO[]=[];
     if(objHistoria.controlGeneral != null)
@@ -589,7 +594,6 @@ export class ControlPrenatalComponent implements OnInit {
         recetaListado.push(receta);
       })
     }
-
 
     let ordenListado : OrdenDTO[]=[];
     if(objHistoria.orden != null)
@@ -1108,7 +1112,7 @@ export class ControlPrenatalComponent implements OnInit {
         obs.Aro = element.aro;
         obs.AroMotivo = element.aroMotivo;
         obs.DatoNino = element.datoNino;
-        obs.SignosAlarma = element.signoAlarma;
+        obs.SignosAlarma = element.signosAlarma;
 
         obs.RecomendacionesGenerales = [];
         if(element.recomendacionesGenerales != null)
@@ -1130,8 +1134,12 @@ export class ControlPrenatalComponent implements OnInit {
         }
         obstetricia.push(obs);
       });
+      this.objObstetricia = obstetricia;
+      this.AsignarValores(this.objObstetricia);
+    }else{
+      this.MostrarNotificacionWarning("No se rellenó el historial obstétrico", "Error");
     }
-
+    
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
@@ -1158,8 +1166,47 @@ export class ControlPrenatalComponent implements OnInit {
     historiaCalidad.HistorialObstetrico = obstetricia;
 
     this.objHistoria = historiaCalidad;
+  }
 
-    console.log("nro",historiaCalidad.HistorialObstetrico.length);
+  AsignarValores(obs:HistorialObstetricoDTO[])
+  {
+   
+    obs.forEach((element:any)=>{
+      let control = new ControlPreNatalDTO();
+      control.Fecha = moment(element.FechaRegistro).format('DD/MM/yyyy HH:mm');
+      control.EgEco = element.Antecedentes.EgEco;
+      control.EgFur = element.Antecedentes.FgFur;
+      control.Peso = element.FuncionVital.Peso;
+      control.PesoFetal = element.ExamenPreferencial.PesoFetal;
+      control.PresionArterial = element.FuncionVital.PresionDiastolica +' - '+ element.FuncionVital.PresionSistolica;
+      control.AlturaUterina = element.ExamenPreferencial.AlturaUterina;
+      control.Presentacion = element.ExamenPreferencial.Posicion;
+      control.Fcf = element.ExamenPreferencial.Lcf;
+      control.MovFetal = element.ExamenPreferencial.MovFetal;
+      control.AumentoPeso = element.FuncionVital.AumentoPeso;
+      control.Plac = element.ExamenPreferencial.Placente;
+      control.Ila = element.ExamenPreferencial.Ila;
+      control.Sst = '';
+      control.Nst = '';
+      control.DopplerIp = '';
+      control.DopplerIr = '';
+
+      this.objControl.push(control);
+    });
+    
+    if (this.objControl.length != 0) {
+      this.keys = Object.keys(this.objControl[0]) as (keyof ControlPreNatalDTO)[];
+      console.log('Keys:', this.keys);
+      console.log('Registros:', this.objControl);
+
+    }
+    else {
+      console.error("La lista de registros está vacía.");
+    }
+  }
+
+  Guardar(){
+    console.log('Registros guardados:', this.objControl);
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
@@ -1208,5 +1255,9 @@ export class ControlPrenatalComponent implements OnInit {
   
   get Controls() {
     return this.dataFormGroup.controls;
+  }
+
+  getColumns(): string[] {
+    return this.objControl.length > 0 ? Object.keys(this.objControl[0]) : [];
   }
 }
