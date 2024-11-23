@@ -1,0 +1,131 @@
+<div class="container-spinner" *ngIf="verSpinner">
+    <div class="spinner-border text-primary"></div>
+</div>
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">FICHA OBSTÉTRICA</h4>
+        &nbsp;&nbsp;
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dataFormGroup">
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha atención : </label> <span>{{fecha_atencion | date : 'dd/MM/YYYY'}}</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>								
+            <hr/>
+            <div class="row mb-3 bg-green-custom">ANTECEDENTES OBSTETRICOS</div>
+            <div class="no-consulta-externa">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">G</label>
+                            <span></span>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">FUR</label>
+                         
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">EG x FUR</label>
+                            
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">EG x ECO</label>
+                            
+                        </div>
+                    </div>	
+                </div>
+                <div class="row">  
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">FPP x FUR</label>
+                            
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="form-label mb-3">FPP x ECO</label>
+                            
+                        </div>
+                    </div>
+                </div>
+        
+                <hr class="mt-0"/>
+            </div>
+            <div class="row mb-3 bg-green-custom">DATOS ANTROPOMÉTRICOS</div>
+            
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">SIGNOS DE ALARMA</label>
+                        <textarea name="" class="form-control" rows="3" formControlName="inputSignoAlarma"></textarea>
+                        <div *ngIf="Controls['inputSignoAlarma'].invalid && (Controls['inputSignoAlarma'].dirty || Controls['inputSignoAlarma'].touched)" class="text-error">
+                            <div>Campo obligatorio.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h6>RECOMENDACIONES</h6>
+            <div class="row">
+                <div class="col-xl-6">
+                    <div class="row">
+                        <label class="cform-label">Recomendaciones Generales</label>
+                    </div>
+                    <br>
+                    <div class="row box-shadow" *ngFor="let lista of listadoGeneral; let i = index">
+                        <div class="col-xl-11 fw-bold">{{lista}}</div>
+                    </div>
+                    <br>
+                </div>
+                <div class="col-xl-6">
+                    <div class="row">
+                        <label class="cform-label">Recomendaciones Específicas</label>
+                    </div>
+                    <br>
+                    <div class="row box-shadow" *ngFor="let lista of listadoEspecificos; let i = index">
+                        <div class="col-xl-11 fw-bold">{{lista}}</div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <button type="button" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+        </div>
+</div>

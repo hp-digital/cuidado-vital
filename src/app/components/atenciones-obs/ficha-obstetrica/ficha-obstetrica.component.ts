@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { elementAt, forkJoin } from 'rxjs';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { HistorialObstetricoDTO } from '@models/historial-obstetrico';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HistoriaService } from '@services/historia.service';
 import { ServicioServiceService } from '@services/servicio.service.service';
 import { SettingsService } from '@services/settings.service';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
 import { MedicoAtencionDTO } from '@models/medico-atiente';
 import { HistoriaPrimeraAtencionDTO } from '@models/primera-atencion';
@@ -48,17 +48,15 @@ import { RiesgoObstetricoDTO } from '@models/riesgo-obstetrico';
 import { RiesgoActualDTO } from '@models/riesgo-actual';
 import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
 import { ExamenPreferencialDTO } from '@models/examen-preferencial';
-import { ControlPreNatalDTO } from '@models/control-prenatal';
-import { TableModule } from 'primeng/table';
 
 @Component({
-  selector: 'app-control-prenatal',
+  selector: 'app-ficha-obstetrica',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule, TableModule],
-  templateUrl: './control-prenatal.component.html',
-  styleUrl: './control-prenatal.component.css'
+  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  templateUrl: './ficha-obstetrica.component.html',
+  styleUrl: './ficha-obstetrica.component.css'
 })
-export class ControlPrenatalComponent implements OnInit {
+export class FichaObstetricaComponent implements OnInit{
 
   dataFormGroup: FormGroup;
   verSpinner:boolean = false;
@@ -78,30 +76,26 @@ export class ControlPrenatalComponent implements OnInit {
 
   objHistoria=new HistoriaCuidadoDTO();
   objObstetricia: HistorialObstetricoDTO[]=[];
-  objControl : ControlPreNatalDTO[]=[];
 
-  fecha= new Date();
-
-  prueba:string='';
-
-  keys: (keyof ControlPreNatalDTO)[] = [];
+  fecha_atencion= new Date();
+  listadoGeneral: string[]=[];
+  listadoEspecificos: string[]=[];
 
   constructor(
-    private bsModalControl: BsModalRef,
+    private bsModalFicha: BsModalRef,
     private modalService: BsModalService,
     private historiaService: HistoriaService,
     private servicioService: ServicioServiceService,
     private settings : SettingsService,
   ){
     this.dataFormGroup = new FormGroup({
-
+     inputSignoAlarma: new FormControl(''),
     });
   }
 
   ngOnInit(): void {
     this.idRol=this.settings.getUserSetting('idRol');
     this.fechaActual = moment().format('DD/MM/YYYY');
-    
   }
 
   AsignarHistoriaClinica(idHistoriaClinica:number){
@@ -1090,6 +1084,8 @@ export class ControlPrenatalComponent implements OnInit {
         obs.FuncionVital.Fc = element.funcionVital.fc;
         obs.FuncionVital.PresionSistolica = element.funcionVital.presionSistolica;
         obs.FuncionVital.PresionDiastolica = element.funcionVital.presionDiastolica;
+        obs.FuncionVital.PresionSistolicaIzquierda = element.funcionVital.presionSistolicaIzquierda;
+        obs.FuncionVital.PresionDiastolicaIzquierda = element.funcionVital.presionDiastolicaIzquierda;
         obs.FuncionVital.Saturacion = element.funcionVital.saturacion;
         obs.FuncionVital.Fr = element.funcionVital.fr;
         obs.FuncionVital.Talla = element.funcionVital.talla;
@@ -1112,7 +1108,8 @@ export class ControlPrenatalComponent implements OnInit {
         obs.Aro = element.aro;
         obs.AroMotivo = element.aroMotivo;
         obs.DatoNino = element.datoNino;
-        obs.SignosAlarma = element.signosAlarma;
+        obs.SignosAlarma = element.signoAlarma;
+        obs.Diagnostico = element.diagnostico;
 
         obs.RecomendacionesGenerales = [];
         if(element.recomendacionesGenerales != null)
@@ -1135,11 +1132,9 @@ export class ControlPrenatalComponent implements OnInit {
         obstetricia.push(obs);
       });
       this.objObstetricia = obstetricia;
-      this.AsignarValores(this.objObstetricia);
-    }else{
-      this.MostrarNotificacionWarning("No se rellenó el historial obstétrico", "Error");
+      this.MostrarDatos(obstetricia);
     }
-    
+
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
@@ -1168,58 +1163,48 @@ export class ControlPrenatalComponent implements OnInit {
     this.objHistoria = historiaCalidad;
   }
 
-  AsignarValores(obs:HistorialObstetricoDTO[])
-  {
-   
-    obs.forEach((element:any)=>{
-      let control = new ControlPreNatalDTO();
-      control.Fecha = moment(element.FechaRegistro).format('DD/MM/yyyy HH:mm');
-      control.EgEco = element.Antecedentes.EgEco;
-      control.EgFur = element.Antecedentes.FgFur;
-      control.Peso = element.FuncionVital.Peso;
-      control.PesoFetal = element.ExamenPreferencial.PesoFetal;
-      control.PresionArterial = element.FuncionVital.PresionDiastolica +' - '+ element.FuncionVital.PresionSistolica;
-      control.AlturaUterina = element.ExamenPreferencial.AlturaUterina;
-      control.Presentacion = element.ExamenPreferencial.Posicion;
-      control.Fcf = element.ExamenPreferencial.Lcf;
-      control.MovFetal = element.ExamenPreferencial.MovFetal;
-      control.AumentoPeso = element.FuncionVital.AumentoPeso;
-      control.Plac = element.ExamenPreferencial.Placente;
-      control.Ila = element.ExamenPreferencial.Ila;
-      control.Sst = '';
-      control.Nst = '';
-      control.DopplerIp = '';
-      control.DopplerIr = '';
+  MostrarDatos(obstetricia:HistorialObstetricoDTO[]){
+    console.log("objObste", obstetricia)
 
-      this.objControl.push(control);
-    });
-    
-    if (this.objControl.length != 0) {
-      this.keys = Object.keys(this.objControl[0]) as (keyof ControlPreNatalDTO)[];
-      console.log('Keys:', this.keys);
-      console.log('Registros:', this.objControl);
+    this.dataFormGroup.controls['inputG'].setValue(obstetricia[0].Antecedentes?.G);
+    this.dataFormGroup.controls['inputP'].setValue(obstetricia[0].Antecedentes?.P);
+    this.dataFormGroup.controls['inputG1'].setValue(obstetricia[0].Antecedentes?.G1);
+    this.dataFormGroup.controls['inputG2'].setValue(obstetricia[0].Antecedentes?.G2);
+    this.dataFormGroup.controls['inputG3'].setValue(obstetricia[0].Antecedentes?.G3);
+    this.dataFormGroup.controls['inputFur'].setValue(obstetricia[0].Antecedentes?.Fur);
+    this.dataFormGroup.controls['inputFgFur'].setValue(obstetricia[0].Antecedentes?.FgFur);
+    this.dataFormGroup.controls['inputEgEco'].setValue(obstetricia[0].Antecedentes?.EgEco);
+    this.dataFormGroup.controls['inputFppFur'].setValue(moment(obstetricia[0].Antecedentes?.FppFur).format('DD/MM/yyyy'));
+    this.dataFormGroup.controls['inputFppEco'].setValue(moment(obstetricia[0].Antecedentes?.FppEco).format('DD/MM/yyyy'));
 
-    }
-    else {
-      console.error("La lista de registros está vacía.");
-    }
+    this.dataFormGroup.controls['inputCondicionMedicaCronica'].setValue(obstetricia[0].RiesgosPreExistente?.CondicionMedica);
+    this.dataFormGroup.controls['inputQuirurgicos'].setValue(obstetricia[0].RiesgosPreExistente?.Quirurgico);
+    this.dataFormGroup.controls['inputEnfermedadesCongenitas'].setValue(obstetricia[0].RiesgosPreExistente?.EnfermedadCongenita);
+    this.dataFormGroup.controls['inputFumaAlcohol'].setValue(obstetricia[0].RiesgosPreExistente?.Fuma);
+
+    this.dataFormGroup.controls['inputPlacentaPrevia'].setValue(obstetricia[0].RiesgoActual?.PlacentaPrevia);
+    this.dataFormGroup.controls['inputSobrepeso'].setValue(obstetricia[0].RiesgoActual?.SobrePeso);
+    this.dataFormGroup.controls['inputItu'].setValue(obstetricia[0].RiesgoActual?.Itu);
+    this.dataFormGroup.controls['inputPresionAlta'].setValue(obstetricia[0].RiesgoActual?.PresionAlta);
+
+    this.dataFormGroup.controls['inputTemperatura'].setValue(obstetricia[0].FuncionVital?.Temperatura);
+    this.dataFormGroup.controls['inputFrecuenciaCardiaca'].setValue(obstetricia[0].FuncionVital?.Fc);
+    this.dataFormGroup.controls['inputPresionSistolica'].setValue(obstetricia[0].FuncionVital?.PresionSistolica);
+    this.dataFormGroup.controls['inputPresionDiastolica'].setValue(obstetricia[0].FuncionVital?.PresionDiastolica);
+    this.dataFormGroup.controls['inputSaturacion'].setValue(obstetricia[0].FuncionVital?.Saturacion);
+    this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].setValue(obstetricia[0].FuncionVital?.Fr);
+    this.dataFormGroup.controls['inputTalla'].setValue(obstetricia[0].FuncionVital?.Talla);
+    this.dataFormGroup.controls['inputPeso'].setValue(obstetricia[0].FuncionVital?.Peso);
+    this.dataFormGroup.controls['inputImc'].setValue(obstetricia[0].FuncionVital?.Imc);
+    this.dataFormGroup.controls['inputPesoHabitual'].setValue(obstetricia[0].FuncionVital?.PesoHabitual);
+    this.dataFormGroup.controls['inputPesoActual'].setValue(obstetricia[0].FuncionVital?.PesoActual);
+    this.dataFormGroup.controls['inputAumentoPeso'].setValue(obstetricia[0].FuncionVital?.AumentoPeso);
+    this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionSistolicaIzquierda);
+    this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionDiastolicaIzquierda);
   }
 
   Guardar(){
-    
-    this.objHistoria.ControlPreNatal = this.objControl;
-    console.log('Registros guardados:', this.objHistoria);
-    this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
-      next: (data) => {
-        this.MostrarNotificacionSuccessModal('El registro se guardó con éxito.', '');
-        this.CerrarModal();
-      },
-      error: (e) => {
-        console.log('Error: ', e);
-        this.verSpinner = false;
-      },
-      complete: () => { this.verSpinner = false; }
-    });
+
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
@@ -1262,15 +1247,10 @@ export class ControlPrenatalComponent implements OnInit {
   }
 
   CerrarModal() {
-    this.bsModalControl.hide();
+    this.bsModalFicha.hide();
     //this.onGuardar();
   }
-  
   get Controls() {
     return this.dataFormGroup.controls;
-  }
-
-  getColumns(): string[] {
-    return this.objControl.length > 0 ? Object.keys(this.objControl[0]) : [];
   }
 }

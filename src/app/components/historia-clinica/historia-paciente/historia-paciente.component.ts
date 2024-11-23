@@ -23,6 +23,7 @@ import { ChatComponent } from '../../chat/chat.component';
 import { SeguimientoAnalisisComponent } from '../../atenciones-obs/seguimiento-analisis/seguimiento-analisis.component';
 import { ControlPrenatalComponent } from '../../atenciones-obs/control-prenatal/control-prenatal.component';
 import { FuncionVitalObsComponent } from '../../atenciones-obs/funcion-vital-obs/funcion-vital-obs.component';
+import { FichaObstetricaComponent } from '../../atenciones-obs/ficha-obstetrica/ficha-obstetrica.component';
 
 @Component({
   selector: 'app-historia-paciente',
@@ -196,7 +197,7 @@ export default class HistoriaPacienteComponent implements OnInit{
   }
 
   AbrirFichaObstetrica(idHistoriaClinica: number){
-    this.modalRef = this.modalChat.show(ChatComponent, { backdrop: 'static', class: 'modal-xl'})
+    this.modalRef = this.modalChat.show(FichaObstetricaComponent, { backdrop: 'static', class: 'modal-xl'})
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 
