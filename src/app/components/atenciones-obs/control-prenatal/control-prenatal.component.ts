@@ -50,11 +50,13 @@ import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
 import { ExamenPreferencialDTO } from '@models/examen-preferencial';
 import { ControlPreNatalDTO } from '@models/control-prenatal';
 import { TableModule } from 'primeng/table';
+import { TabViewModule } from 'primeng/tabview';
+import { ChartModule } from 'primeng/chart';
 
 @Component({
   selector: 'app-control-prenatal',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule, TableModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule, TableModule, TabViewModule, ChartModule],
   templateUrl: './control-prenatal.component.html',
   styleUrl: './control-prenatal.component.css'
 })
@@ -86,6 +88,9 @@ export class ControlPrenatalComponent implements OnInit {
 
   keys: (keyof ControlPreNatalDTO)[] = [];
 
+  chartData: any;
+  chartOptions: any;
+
   constructor(
     private bsModalControl: BsModalRef,
     private modalService: BsModalService,
@@ -101,7 +106,7 @@ export class ControlPrenatalComponent implements OnInit {
   ngOnInit(): void {
     this.idRol=this.settings.getUserSetting('idRol');
     this.fechaActual = moment().format('DD/MM/YYYY');
-    
+    this.CalularGraficos();
   }
 
   AsignarHistoriaClinica(idHistoriaClinica:number){
@@ -1220,6 +1225,57 @@ export class ControlPrenatalComponent implements OnInit {
       },
       complete: () => { this.verSpinner = false; }
     });
+  }
+
+  CalularGraficos(){
+
+    const X = [12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40];
+    const dataP25 = [1.57, 1.97, 2.54, 3.24, 4.04, 4.88, 5.69, 6.43, 7.08, 7.63, 8.09, 8.46, 8.76, 9.00, 9.20];
+    const dataP90 = [3.77, 4.29, 5.02, 5.98, 7.12, 8.38, 9.67, 10.91, 12.04, 13.04, 13.89, 14.61, 15.21, 15.69, 16.09];
+
+    this.chartData = {
+      labels: X, // Valores del eje X (Semanas)
+      datasets: [
+        {
+          label: 'P 25',
+          data: dataP25, // Valores de P25
+          borderColor: '#42A5F5', // Color de la línea
+          fill: false, // Sin relleno
+        },
+        {
+          label: 'P 90',
+          data: dataP90, // Valores de P90
+          borderColor: '#42A5F5', // Color de la línea
+          fill: false, // Sin relleno
+        },
+      ],
+    };
+
+    this.chartOptions = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Semanas', // Título del eje X
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Incremento', // Título del eje Y
+          },
+          min: 0, // Valor mínimo en el eje Y
+          max: 18, // Valor máximo en el eje Y
+        },
+      },
+    };
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
