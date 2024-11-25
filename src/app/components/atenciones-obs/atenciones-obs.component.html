@@ -33,7 +33,7 @@
               </div>
               <div class="col-xl-2">
                   <div class="form-group mb-3">
-                      <label class="form-label mb-3" for="">Fecha inicio</label>
+                      <label class="form-label mb-3" for="">Monitoreo</label>
                       <select class="form-select" formControlName="selectMonitoreo">
                         <option value="1">Gestante I trimestre</option>
                         <option value="2">Gestantes II trimestre</option>
@@ -65,16 +65,15 @@
                             <td style="text-align: center;"  rowspan="2">ÚLTIMO CONTROL</td>
                             <td style="text-align: center;"  rowspan="2">ACCIONES</td>
                         </tr>
-                        
                     </thead>
                     <tbody id="table-body">
                         <tr *ngFor="let lista of listadoAtencionBusqueda; index as s">
                             <td>{{s + 1 }}</td>
                             <td>{{lista.paciente}}</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{lista.numeroCelular}}</td>
+                            <td>{{ChangeFur(lista.fur)}}</td>
+                            <td>{{lista.egEco}}</td>
+                            <td>{{lista.fechaUltimoControl | date : 'dd/MM/yyyy'}}</td>
                             <td>
                                 <button type="button" class="btn btn-secondary btn-sm" tooltip="Control PreNatal" (click)="AbrirControlPreNatal(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-plus"></i></button> &nbsp;&nbsp;                
                                 <button type="button" class="btn btn-secondary btn-sm" tooltip="Historial Clínico" (click)="AbrirHistorial(lista.idHistoriaClinica)"><i class="fas fa-lg fa-tasks"></i></button>&nbsp;&nbsp;                                

@@ -88,8 +88,18 @@ export class ControlPrenatalComponent implements OnInit {
 
   keys: (keyof ControlPreNatalDTO)[] = [];
 
-  chartData: any;
-  chartOptions: any;
+  chartDataPeso: any;
+  chartOptionsPeso: any;
+
+  chartDataAltura: any;
+  chartOptionsAltura: any;
+
+  chartDataPesoFetal: any;
+  chartOptionsPesoFetal: any;
+
+  pesoMaterno:number[]=[];
+  alturaUterina:number[]=[];
+  pesoFetal:number[]=[];
 
   constructor(
     private bsModalControl: BsModalRef,
@@ -106,21 +116,22 @@ export class ControlPrenatalComponent implements OnInit {
   ngOnInit(): void {
     this.idRol=this.settings.getUserSetting('idRol');
     this.fechaActual = moment().format('DD/MM/YYYY');
-    this.CalularGraficos();
+   
   }
 
   AsignarHistoriaClinica(idHistoriaClinica:number){
     console.log("nro his", idHistoriaClinica)
     this.idHistoria=idHistoriaClinica;
     this.ObtenerConfiguracion();
+    this.CalularGraficosPeso();
+    this.CalcularGraficosAltura();
+    this.CalcularGraficosPesoFetal();
   }
 
   ObtenerConfiguracion() {
     this.verSpinner = true;    
     forkJoin([
       this.historiaService.ObtenerHistoriaClinica(this.idHistoria),
-      this.historiaService.ObtenerMedicamento(),
-      this.servicioService.ObtenerListadoCatalogoOrden()
     ])
       .subscribe(
         data => {
@@ -1141,6 +1152,7 @@ export class ControlPrenatalComponent implements OnInit {
       });
       this.objObstetricia = obstetricia;
       this.AsignarValores(this.objObstetricia);
+      this.DatosG(this.objObstetricia);
     }else{
       this.MostrarNotificacionWarning("No se rellenó el historial obstétrico", "Error");
     }
@@ -1153,6 +1165,7 @@ export class ControlPrenatalComponent implements OnInit {
     historiaCalidad.IdHistoriaClinica = objHistoria.idHistoriaClinica;
     historiaCalidad.IdPersonal = objHistoria.idPersonal;
     historiaCalidad.IdMedico = objHistoria.idMedico;
+    historiaCalidad.IdEspecialidad = objHistoria.idEspecialidad;
     historiaCalidad.FechaInicioAtencion = objHistoria.fechaInicioAtencion;
     historiaCalidad.FechaFinAtencion = objHistoria.fechaFinAtencion;
     historiaCalidad.Estado = objHistoria.estado;
@@ -1199,15 +1212,34 @@ export class ControlPrenatalComponent implements OnInit {
       this.objControl.push(control);
     });
     
+    
     if (this.objControl.length != 0) {
       this.keys = Object.keys(this.objControl[0]) as (keyof ControlPreNatalDTO)[];
-      console.log('Keys:', this.keys);
-      console.log('Registros:', this.objControl);
 
     }
     else {
       console.error("La lista de registros está vacía.");
     }
+  }
+
+  DatosG(obs:HistorialObstetricoDTO[])
+  {
+    console.log(obs)
+    obs.forEach((element:any)=>{
+      var pesoM:number;
+      pesoM = element.ExamenPreferencial.MovFetal;
+      this.pesoMaterno.push(pesoM);
+    });
+    obs.forEach((element:any)=>{
+      var ute:number;
+      ute = element.ExamenPreferencial.AlturaUterina;
+      this.alturaUterina.push(ute);
+    });
+    obs.forEach((element:any)=>{
+      var pesoF:number;
+      pesoF = element.ExamenPreferencial.PesoFetal;
+      this.pesoFetal.push(pesoF);
+    });
   }
 
   Guardar(){
@@ -1227,31 +1259,169 @@ export class ControlPrenatalComponent implements OnInit {
     });
   }
 
-  CalularGraficos(){
+  CalularGraficosPeso(){
 
     const X = [12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40];
     const dataP25 = [1.57, 1.97, 2.54, 3.24, 4.04, 4.88, 5.69, 6.43, 7.08, 7.63, 8.09, 8.46, 8.76, 9.00, 9.20];
     const dataP90 = [3.77, 4.29, 5.02, 5.98, 7.12, 8.38, 9.67, 10.91, 12.04, 13.04, 13.89, 14.61, 15.21, 15.69, 16.09];
 
-    this.chartData = {
-      labels: X, // Valores del eje X (Semanas)
+    this.chartDataPeso = {
+      labels: X,
       datasets: [
         {
           label: 'P 25',
-          data: dataP25, // Valores de P25
-          borderColor: '#42A5F5', // Color de la línea
-          fill: false, // Sin relleno
+          data: dataP25,
+          borderColor: '#42A5F5',
+          backgroundColor:'#42A5F5',
+          fill: false,
         },
         {
           label: 'P 90',
-          data: dataP90, // Valores de P90
-          borderColor: '#42A5F5', // Color de la línea
-          fill: false, // Sin relleno
+          data: dataP90,
+          borderColor: '#42A5F5',
+          backgroundColor:'#42A5F5',
+          fill: false,
         },
+        {
+          label: 'Peso Materno',
+          data: this.pesoMaterno,
+          borderColor: '#ff6384',
+          backgroundColor:'#ff6384',
+          fill: false,
+        }
       ],
     };
 
-    this.chartOptions = {
+    this.chartOptionsPeso = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Semanas de Amenorrea',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Incremento de Peso Materno',
+          },
+          min: 0,
+          max: 18,
+        },
+      },
+    };
+  }
+
+  CalcularGraficosAltura(){
+
+    const X = [12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40];
+    const dataP10 = [7.11, 9.42, 11.74, 14.00, 16.15, 18.16, 20.01, 21.71, 23.25, 24.64, 25.90, 27.03, 28.04, 28.95, 29.78];
+    const dataP90 = [11.86, 14.46, 16.89, 19.13, 21.21, 23.12, 24.88, 26.50, 27.99, 29.36, 30.62, 31.79, 32.87, 33.87, 34.79];
+
+    this.chartDataAltura = {
+      labels: X,
+      datasets: [
+        {
+          label: 'P 10',
+          data: dataP10,
+          borderColor: '#42A5F5',
+          backgroundColor:'#42A5F5',
+          fill: false,
+        },
+        {
+          label: 'P 90',
+          data: dataP90,
+          borderColor: '#42A5F5',
+          backgroundColor:'#42A5F5',
+          fill: false,
+        },
+        {
+          label: 'Incremento de Alt. Uterina',
+          data: this.alturaUterina,
+          borderColor: '#ff6384',
+          backgroundColor:'#ff6384',
+          fill: false,
+        }
+      ],
+    };
+
+    this.chartOptionsAltura = {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true,
+          position: 'top',
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Semanas de Amenorrea',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Altura Uterina',
+          },
+          min: 0,
+          max: 35,
+        },
+      },
+    };
+  }
+
+  CalcularGraficosPesoFetal(){
+
+    const X = [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40];
+
+    var dataP10 = [275, 331, 398, 471, 556, 652, 758, 876, 1004, 1145, 1294, 1453, 1621, 1794, 1973, 2154, 2335, 2513, 2686, 2851, 3004];
+    var dataP50 = [331, 399, 478, 555, 670, 785, 913, 1055, 1210, 1379, 1559, 1751, 1953, 2162, 2377, 2595, 2813, 3028, 3236, 3435, 3619];
+    var dataP90 = [387, 467, 559, 665, 784, 918, 1068, 1240, 1416, 1613, 1824, 2049, 2285, 2530, 2781, 3036, 3291, 3543, 3786, 4019, 4234];
+
+    this.chartDataPesoFetal = {
+      labels: X, // Valores del eje X (Semanas)
+      datasets: [
+        {
+          label: 'P 10',
+          data: dataP10,
+          borderColor: '#42A5F5', 
+          backgroundColor:'#42A5F5',
+          fill: false, 
+        },
+        {
+          label: 'P 50',
+          data: dataP50, 
+          borderColor: '#42A5F5', 
+          backgroundColor:'#42A5F5',
+          fill: false, 
+        },
+        {
+          label: 'P 90',
+          data: dataP90, 
+          borderColor: '#42A5F5', 
+          backgroundColor:'#42A5F5',
+          fill: false, 
+        },
+        {
+          label: 'Peso Fetal',
+          data: this.pesoFetal,
+          borderColor: '#ff6384',
+          backgroundColor:'#ff6384',
+          fill: false,
+        }
+      ],
+    };
+
+    this.chartOptionsPesoFetal = {
       responsive: true,
       plugins: {
         legend: {
@@ -1269,10 +1439,10 @@ export class ControlPrenatalComponent implements OnInit {
         y: {
           title: {
             display: true,
-            text: 'Incremento', // Título del eje Y
+            text: 'Incremento de Peso Fetal', // Título del eje Y
           },
           min: 0, // Valor mínimo en el eje Y
-          max: 18, // Valor máximo en el eje Y
+          max: 4500, // Valor máximo en el eje Y
         },
       },
     };

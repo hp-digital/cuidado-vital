@@ -14,4 +14,9 @@ export class ListadoBusquedaAtencionDTO{
     motivoAtencion!:string;
     indicaciones!:string;
     idTipoOrigenAtencion!:number;
+    numeroCelular !: string;
+    idMonitoreo ?: number;
+    fur ?: Date;
+    egEco ?: number;
+    fechaUltimoControl ?: Date;
 }

@@ -22,6 +22,7 @@ export class HistoriaCuidadoDTO{
     IdHistoriaClinica?: number;
     IdPersonal?: number;
     IdMedico!: number;
+    IdEspecialidad?:number;
     FechaInicioAtencion!:Date;
     FechaFinAtencion?:Date;
     IdHistoriaEstado?: number;

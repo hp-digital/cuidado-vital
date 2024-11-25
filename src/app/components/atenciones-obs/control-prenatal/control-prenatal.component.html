@@ -71,27 +71,36 @@
                   </table>
             </p-tabPanel>
             <p-tabPanel  header=Gráficos>
-                <p-chart
-                    type="line"
-                    [data]="chartData"
-                    [options]="chartOptions"
-                    style="width: 100%; height: 400px;"
-                ></p-chart>
+                <div class="row">
+                    <div class="col-xl-6">
+                        <p-chart
+                            type="line"
+                            [data]="chartDataPeso"
+                            [options]="chartOptionsPeso"
+                            style="width: 100%; height: 400px;"
+                        ></p-chart>
+                    </div>
+                    <div class="col-xl-6">
+                        <p-chart
+                            type="line"
+                            [data]="chartDataAltura"
+                            [options]="chartOptionsAltura"
+                            style="width: 100%; height: 400px;"
+                        ></p-chart>
+                    </div>
+                    <br>
+                    <div class="col-xl-12">
+                        <p-chart
+                            type="line"
+                            [data]="chartDataPesoFetal"
+                            [options]="chartOptionsPesoFetal"
+                            style="width: 100%; height: 400px;"
+                        ></p-chart>
+                    </div>
+                </div>
+                
             </p-tabPanel>
         </p-tabView>
-        <!-- <div class="row">
-            <div class="col-md-12">
-                <ul class="nav nav-tabs" role="tablist">
-                    <li role="presentation" class="active"><a href="#tabla" aria-controls="tabla" role="tab"
-                            data-toggle="tab"><i class="fas fa-table"></i> TABLA</a></li>
-                    <li role="presentation"><a href="#grafico" aria-controls="grafico" role="tab"
-                            data-toggle="tab"><i class="fas fa-chart-line"></i> GRAFICOS</a></li>
-                </ul>
-                
-            </div>
-        </div>
-        <br>
-        <br> -->
 
         
     </div>

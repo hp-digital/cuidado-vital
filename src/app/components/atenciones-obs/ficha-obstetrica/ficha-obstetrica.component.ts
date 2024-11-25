@@ -1143,6 +1143,7 @@ export class FichaObstetricaComponent implements OnInit{
     historiaCalidad.IdHistoriaClinica = objHistoria.idHistoriaClinica;
     historiaCalidad.IdPersonal = objHistoria.idPersonal;
     historiaCalidad.IdMedico = objHistoria.idMedico;
+    historiaCalidad.IdEspecialidad = objHistoria.idEspecialidad;
     historiaCalidad.FechaInicioAtencion = objHistoria.fechaInicioAtencion;
     historiaCalidad.FechaFinAtencion = objHistoria.fechaFinAtencion;
     historiaCalidad.Estado = objHistoria.estado;

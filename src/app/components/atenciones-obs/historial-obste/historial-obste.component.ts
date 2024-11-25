@@ -1209,6 +1209,7 @@ export class HistorialObsteComponent implements OnInit{
     historiaCalidad.IdHistoriaClinica = objHistoria.idHistoriaClinica;
     historiaCalidad.IdPersonal = objHistoria.idPersonal;
     historiaCalidad.IdMedico = objHistoria.idMedico;
+    historiaCalidad.IdEspecialidad = objHistoria.idEspecialidad;
     historiaCalidad.FechaInicioAtencion = objHistoria.fechaInicioAtencion;
     historiaCalidad.FechaFinAtencion = objHistoria.fechaFinAtencion;
     historiaCalidad.Estado = objHistoria.estado;
@@ -1364,14 +1365,14 @@ export class HistorialObsteComponent implements OnInit{
     funcionVital.AumentoPeso = this.dataFormGroup.controls['inputAumentoPeso'].value.toString();
 
     let examenPreferencial = new ExamenPreferencialDTO();
-    examenPreferencial.AlturaUterina = this.dataFormGroup.controls['inputAlturaUterina'].value;
-    examenPreferencial.Lcf = this.dataFormGroup.controls['inputLcf'].value;
-    examenPreferencial.MovFetal = this.dataFormGroup.controls['inputMovFetal'].value;
-    examenPreferencial.Placente = this.dataFormGroup.controls['inputPlacenta'].value;
-    examenPreferencial.Ila = this.dataFormGroup.controls['inputIla'].value;
-    examenPreferencial.LogCervix = this.dataFormGroup.controls['inputLongCervix'].value;
-    examenPreferencial.Posicion = this.dataFormGroup.controls['inputPosicion'].value;
-    examenPreferencial.PesoFetal = this.dataFormGroup.controls['inputPesoFetal'].value;
+    examenPreferencial.AlturaUterina = this.dataFormGroup.controls['inputAlturaUterina'].value.toString();
+    examenPreferencial.Lcf = this.dataFormGroup.controls['inputLcf'].value.toString();
+    examenPreferencial.MovFetal = this.dataFormGroup.controls['inputMovFetal'].value.toString();
+    examenPreferencial.Placente = this.dataFormGroup.controls['inputPlacenta'].value.toString();
+    examenPreferencial.Ila = this.dataFormGroup.controls['inputIla'].value.toString();
+    examenPreferencial.LogCervix = this.dataFormGroup.controls['inputLongCervix'].value.toString();
+    examenPreferencial.Posicion = this.dataFormGroup.controls['inputPosicion'].value.toString();
+    examenPreferencial.PesoFetal = this.dataFormGroup.controls['inputPesoFetal'].value.toString();
 
     obstetricia.Antecedentes = antecedente;
     obstetricia.RiesgosPreExistente = riesgo;

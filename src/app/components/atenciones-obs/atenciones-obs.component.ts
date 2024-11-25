@@ -49,6 +49,8 @@ export default class AtencionesObsComponent implements OnInit{
 
   modalControlesRef!: BsModalRef;
 
+  fecha_atencion: Date = new Date();
+
   constructor(
     private modalRef: BsModalRef,
     private modalService: BsModalService,
@@ -104,6 +106,34 @@ export default class AtencionesObsComponent implements OnInit{
   nuevoControl(event: any){
     this.modalRef = this.modalService.show(NuevoControlComponent, {backdrop: 'static', class: 'modal-xl'});
     //this.modalRef.content.
+  }
+
+  ChangeFur(fecha?:Date) {
+    var result = 0;
+
+    var dias = moment(this.fecha_atencion).diff(fecha, 'days');
+    if (dias >= 0) {
+      var x = dias / 7;
+      var ex = Math.trunc(x);
+      var dx = dias % 7;
+      var ey = 0;
+      var dy = 0;
+      var d = dx + dy;
+      var e = ex + ey;
+      if (d > 6) {
+        var nx = d / 7;
+        var enx = Math.trunc(nx);
+        var dnx = d % 7;
+        e = e + enx;
+        result = parseFloat(`${e}.${dnx}`);
+      } else {
+        result = parseFloat(`${e}.${d}`);
+      }
+      
+    }
+
+    return result + ' Semanas';
+    
   }
 
   BuscarAtenciones() {
