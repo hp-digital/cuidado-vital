@@ -1,1 +1,76 @@
-<p>bitacora works!</p>
+<div class="container-spinner" *ngIf="verSpinner">
+    <div class="spinner-border text-primary"></div>
+</div>
+<div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">BITÁCORA</h4>
+        &nbsp;&nbsp;
+        <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button> 
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="dataFormGroup">
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha : </label> <span>{{fecha_atencion | date : 'dd/MM/YYYY'}}</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>
+            <br>								
+            <hr/>
+            <div class="row">
+                <div class="box-shadow mt-3">
+
+                    <p-timeline [value]="events" layout="vertical" [style]="{marginTop: '20px'}">
+                        <ng-template pTemplate="marker" let-event>
+                          <i class="pi pi-calendar"></i>
+                        </ng-template>
+                      
+                        <ng-template pTemplate="content" let-event>
+                          <div class="timeline-content">
+                            <h3
+                              class="timeline-title"
+                              (click)="toggleContent(event)"
+                              style="cursor: pointer; color: #007ad9;"
+                            >
+                              {{ event.title }}
+                            </h3>
+                            <div *ngIf="event.expanded" style="margin-top: 10px; border-left: 4px solid #007ad9; padding-left: 10px;">
+                              <p>{{ event.details }}</p>
+                            </div>
+                          </div>
+                        </ng-template>	
+                    </p-timeline>									
+                </div>
+                    
+                        
+                
+            </div>
+
+            
+        </form>
+    </div>
+    <div class="modal-footer">							
+        <!-- <button type="button" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button> -->
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+        </div>
+</div>

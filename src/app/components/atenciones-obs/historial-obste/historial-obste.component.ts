@@ -1238,11 +1238,11 @@ export class HistorialObsteComponent implements OnInit{
     this.dataFormGroup.controls['inputG1'].setValue(obstetricia[0].Antecedentes?.G1);
     this.dataFormGroup.controls['inputG2'].setValue(obstetricia[0].Antecedentes?.G2);
     this.dataFormGroup.controls['inputG3'].setValue(obstetricia[0].Antecedentes?.G3);
-    this.dataFormGroup.controls['inputFur'].setValue(obstetricia[0].Antecedentes?.Fur);
+    this.dataFormGroup.controls['inputFur'].setValue(moment(obstetricia[0].Antecedentes?.Fur).format('yyyy-MM-DD'));
     this.dataFormGroup.controls['inputFgFur'].setValue(obstetricia[0].Antecedentes?.FgFur);
     this.dataFormGroup.controls['inputEgEco'].setValue(obstetricia[0].Antecedentes?.EgEco);
     this.dataFormGroup.controls['inputFppFur'].setValue(moment(obstetricia[0].Antecedentes?.FppFur).format('DD/MM/yyyy'));
-    this.dataFormGroup.controls['inputFppEco'].setValue(moment(obstetricia[0].Antecedentes?.FppEco).format('DD/MM/yyyy'));
+    this.dataFormGroup.controls['inputFppEco'].setValue(moment(obstetricia[0].Antecedentes?.FppEco).format('yyyy-MM-DD'));
 
     this.dataFormGroup.controls['inputCondicionMedicaCronica'].setValue(obstetricia[0].RiesgosPreExistente?.CondicionMedica);
     this.dataFormGroup.controls['inputQuirurgicos'].setValue(obstetricia[0].RiesgosPreExistente?.Quirurgico);

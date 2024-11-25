@@ -1108,7 +1108,7 @@ export class FichaObstetricaComponent implements OnInit{
         obs.Aro = element.aro;
         obs.AroMotivo = element.aroMotivo;
         obs.DatoNino = element.datoNino;
-        obs.SignosAlarma = element.signoAlarma;
+        obs.SignosAlarma = element.signosAlarma;
         obs.Diagnostico = element.diagnostico;
 
         obs.RecomendacionesGenerales = [];
@@ -1117,7 +1117,8 @@ export class FichaObstetricaComponent implements OnInit{
           element.recomendacionesGenerales.forEach((element:any)=>{
             let gen :string='';
             gen=element
-            obs.RecomendacionesGenerales?.push(gen)
+            obs.RecomendacionesGenerales?.push(gen);
+            this.listadoGeneral.push(gen);
           });
         }
         obs.RecomendacionesEspecificas = [];
@@ -1127,6 +1128,7 @@ export class FichaObstetricaComponent implements OnInit{
             let espe :string='';
             espe=element
             obs.RecomendacionesEspecificas?.push(espe)
+            this.listadoEspecificos.push(espe);
           });
         }
         obstetricia.push(obs);
@@ -1167,8 +1169,10 @@ export class FichaObstetricaComponent implements OnInit{
   MostrarDatos(obstetricia:HistorialObstetricoDTO[]){
     console.log("objObste", obstetricia)
 
-    this.dataFormGroup.controls['inputG'].setValue(obstetricia[0].Antecedentes?.G);
-    this.dataFormGroup.controls['inputP'].setValue(obstetricia[0].Antecedentes?.P);
+    let antecedente = new AntecedenteObstetricoDTO()
+    
+     this.dataFormGroup.controls['inputSignoAlarma'].setValue(obstetricia[0].SignosAlarma);
+    /*this.dataFormGroup.controls['inputP'].setValue(obstetricia[0].Antecedentes?.P);
     this.dataFormGroup.controls['inputG1'].setValue(obstetricia[0].Antecedentes?.G1);
     this.dataFormGroup.controls['inputG2'].setValue(obstetricia[0].Antecedentes?.G2);
     this.dataFormGroup.controls['inputG3'].setValue(obstetricia[0].Antecedentes?.G3);
@@ -1201,7 +1205,7 @@ export class FichaObstetricaComponent implements OnInit{
     this.dataFormGroup.controls['inputPesoActual'].setValue(obstetricia[0].FuncionVital?.PesoActual);
     this.dataFormGroup.controls['inputAumentoPeso'].setValue(obstetricia[0].FuncionVital?.AumentoPeso);
     this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionSistolicaIzquierda);
-    this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionDiastolicaIzquierda);
+    this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionDiastolicaIzquierda); */
   }
 
   Guardar(){

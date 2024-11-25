@@ -1066,6 +1066,35 @@ export class ControlPrenatalComponent implements OnInit {
       
     }
 
+    
+    let prenatal : ControlPreNatalDTO[]=[];
+    if(objHistoria.controlPreNatal != 0)
+    {
+      objHistoria.controlPreNatal.forEach((element:any)=>{
+        let ctrol = new ControlPreNatalDTO();
+        ctrol.Fecha  = element.fecha;
+        ctrol.EgEco  = element.egEco;
+        ctrol.EgFur  = element.egFur;
+        ctrol.Peso  = element.peso;
+        ctrol.PesoFetal  = element.pesoFetal;
+        ctrol.PresionArterial  = element.presionArterial;
+        ctrol.AlturaUterina  = element.alturaUterina;
+        ctrol.Presentacion  = element.presentacion;
+        ctrol.Fcf  = element.fcf;
+        ctrol.MovFetal  = element.movFetal;
+        ctrol.AumentoPeso  = element.aumentoPeso;
+        ctrol.Plac  = element.plac;
+        ctrol.Ila  = element.ila;
+        ctrol.Sst  = element.sst;
+        ctrol.Nst  = element.nst;
+        ctrol.DopplerIp  = element.dopplerIp;
+        ctrol.DopplerIr  = element.dopplerIr;
+
+        prenatal.push(ctrol);
+        this.objControl.push(ctrol);
+      });
+    }
+
     let obstetricia : HistorialObstetricoDTO[] = [];
     if(objHistoria.historialObstetrico != null)
     {
@@ -1155,7 +1184,9 @@ export class ControlPrenatalComponent implements OnInit {
       this.DatosG(this.objObstetricia);
     }else{
       this.MostrarNotificacionWarning("No se rellenó el historial obstétrico", "Error");
+      this.CerrarModal();
     }
+
     
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -1182,35 +1213,40 @@ export class ControlPrenatalComponent implements OnInit {
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
     historiaCalidad.PrimeraAtencion = objHistoria.primeraAtencion;
     historiaCalidad.HistorialObstetrico = obstetricia;
+    historiaCalidad.ControlPreNatal = prenatal;
 
     this.objHistoria = historiaCalidad;
   }
 
   AsignarValores(obs:HistorialObstetricoDTO[])
   {
-   
-    obs.forEach((element:any)=>{
-      let control = new ControlPreNatalDTO();
-      control.Fecha = moment(element.FechaRegistro).format('DD/MM/yyyy HH:mm');
-      control.EgEco = element.Antecedentes.EgEco;
-      control.EgFur = element.Antecedentes.FgFur;
-      control.Peso = element.FuncionVital.Peso;
-      control.PesoFetal = element.ExamenPreferencial.PesoFetal;
-      control.PresionArterial = element.FuncionVital.PresionDiastolica +' - '+ element.FuncionVital.PresionSistolica;
-      control.AlturaUterina = element.ExamenPreferencial.AlturaUterina;
-      control.Presentacion = element.ExamenPreferencial.Posicion;
-      control.Fcf = element.ExamenPreferencial.Lcf;
-      control.MovFetal = element.ExamenPreferencial.MovFetal;
-      control.AumentoPeso = element.FuncionVital.AumentoPeso;
-      control.Plac = element.ExamenPreferencial.Placente;
-      control.Ila = element.ExamenPreferencial.Ila;
-      control.Sst = '';
-      control.Nst = '';
-      control.DopplerIp = '';
-      control.DopplerIr = '';
+    if(this.objControl.length==0){
 
-      this.objControl.push(control);
-    });
+      obs.forEach((element:any)=>{
+        let control = new ControlPreNatalDTO();
+        control.Fecha = element.FechaRegistro;
+        control.EgEco = element.Antecedentes.EgEco;
+        control.EgFur = element.Antecedentes.FgFur;
+        control.Peso = element.FuncionVital.Peso;
+        control.PesoFetal = element.ExamenPreferencial.PesoFetal;
+        control.PresionArterial = element.FuncionVital.PresionDiastolica +' - '+ element.FuncionVital.PresionSistolica;
+        control.AlturaUterina = element.ExamenPreferencial.AlturaUterina;
+        control.Presentacion = element.ExamenPreferencial.Posicion;
+        control.Fcf = element.ExamenPreferencial.Lcf;
+        control.MovFetal = element.ExamenPreferencial.MovFetal;
+        control.AumentoPeso = element.FuncionVital.AumentoPeso;
+        control.Plac = element.ExamenPreferencial.Placente;
+        control.Ila = element.ExamenPreferencial.Ila;
+        control.Sst = '';
+        control.Nst = '';
+        control.DopplerIp = '';
+        control.DopplerIr = '';
+  
+        this.objControl.push(control);
+      });
+    }
+   
+    
     
     
     if (this.objControl.length != 0) {

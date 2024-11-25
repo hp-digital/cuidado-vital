@@ -39,54 +39,70 @@
             <div class="row mb-3 bg-green-custom">ANTECEDENTES OBSTETRICOS</div>
             <div class="no-consulta-externa">
                 <div class="row">
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">G</label>
-                            <span></span>
-                           
+                    <div class="box-shadow mt-3" *ngFor="let lista of objObstetricia">
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <h6>FUR</h6>
+                                <p>{{lista.Antecedentes?.Fur | date : 'dd/MM/yyyy'}}</p>
+                            </div>									
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">FUR</label>
-                         
+                        <div class="row">
+                            <div class="col-xl-3">
+                                <h6>EG x FUR</h6>
+                                <p>{{lista.Antecedentes?.FgFur}}</p>
+                            </div>
+                            <div class="col-xl-3">
+                                <h6>EG x ECO</h6>
+                                <p>{{lista.Antecedentes?.EgEco}}</p>
+                            </div>
+                            <div class="col-xl-3">
+                                <h6>FPP x FUR</h6>
+                                <p>{{lista.Antecedentes?.FppFur | date : 'dd/MM/yyyy'}}</p>
+                            </div>	
+                            <div class="col-xl-3">
+                                <h6>FPP x ECO</h6>
+                                <p>{{lista.Antecedentes?.FppEco | date : 'dd/MM/yyyy'}}</p>
+                            </div>											
                         </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">EG x FUR</label>
+                        
                             
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">EG x ECO</label>
-                            
-                        </div>
-                    </div>	
-                </div>
-                <div class="row">  
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">FPP x FUR</label>
-                            
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">FPP x ECO</label>
-                            
-                        </div>
                     </div>
                 </div>
         
                 <hr class="mt-0"/>
             </div>
             <div class="row mb-3 bg-green-custom">DATOS ANTROPOMÉTRICOS</div>
-            
+            <div class="row">
+                <div class="box-shadow mt-3" *ngFor="let lista of objObstetricia">
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <h6>Talla (m) </h6>
+                            <p>{{lista.FuncionVital?.Talla}}</p>
+                        </div>									
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-3">
+                            <h6>Peso Habitual (kg)</h6>
+                            <p>{{lista.FuncionVital?.PesoHabitual}}</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>Peso Actual (kg)</h6>
+                            <p>{{lista.FuncionVital?.PesoActual}}</p>
+                        </div>
+                        <div class="col-xl-3">
+                            <h6>IMC</h6>
+                            <p>{{lista.FuncionVital?.Imc}}</p>
+                        </div>	
+                        <div class="col-xl-3">
+                            <h6>Aumento de Peso</h6>
+                            <p>{{lista.FuncionVital?.AumentoPeso}}</p>
+                        </div>											
+                    </div>
+                    
+                        
+                </div>
+            </div>
+            <hr class="mt-0"/>
             <div class="row">
                 <div class="col-xl-12">
                     <div class="form-group mb-3">
@@ -125,7 +141,7 @@
         </form>
     </div>
     <div class="modal-footer">							
-        <button type="button" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <!-- <button type="button" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button> -->
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
         </div>
 </div>

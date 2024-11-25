@@ -238,6 +238,8 @@ export class NuevoControlComponent implements OnInit{
     
     this.dataFormGroup.controls['inputSexoPaciente'].setValue(paciente['idSexo']);
     this.dataFormGroup.controls['inputTelefonoPaciente'].setValue(paciente['numeroCelular']);
+    this.dataFormGroup.controls['inputFechaNacimientoPaciente'].setValue(moment(paciente['fechaNacimiento']).format('yyyy-MM-DD'));
+    
     this.idPaciente=paciente['id'];
     this.CalcularEdad(paciente['fechaNacimiento']);
   }

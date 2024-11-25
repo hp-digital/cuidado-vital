@@ -48,11 +48,12 @@ import { RiesgoObstetricoDTO } from '@models/riesgo-obstetrico';
 import { RiesgoActualDTO } from '@models/riesgo-actual';
 import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
 import { ExamenPreferencialDTO } from '@models/examen-preferencial';
+import { TimelineModule } from 'primeng/timeline';
 
 @Component({
   selector: 'app-bitacora',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule,TimelineModule],
   templateUrl: './bitacora.component.html',
   styleUrl: './bitacora.component.css'
 })
@@ -74,7 +75,12 @@ export class BitacoraComponent implements OnInit{
   tituloError: string = "";
   mensajeError: string = "";
 
+  fecha_atencion = new Date();
+
   objHistoria=new HistoriaCuidadoDTO();
+  objObstetricia: HistorialObstetricoDTO[]=[];
+
+  events: any[]=[];
 
   constructor(
     private bsModalBitacora: BsModalRef,
@@ -82,6 +88,9 @@ export class BitacoraComponent implements OnInit{
     private historiaService: HistoriaService,
     private servicioService: ServicioServiceService,
     private settings : SettingsService,
+    
+ 
+
   ){
     this.dataFormGroup = new FormGroup({
       
@@ -115,7 +124,13 @@ export class BitacoraComponent implements OnInit{
         }
       );
   }
+  toggleContent(event: any): void {
+    // Toggle the expanded property
+    event.expanded = !event.expanded;
+  }
+
   AsignarObjetoInicial(data:any){
+  
     this.verSpinner = true;
     let objHistoria: any = data;
     console.log("historia", objHistoria);
@@ -1119,6 +1134,8 @@ export class BitacoraComponent implements OnInit{
         }
         obstetricia.push(obs);
       });
+      this.objObstetricia = obstetricia;
+      this.MostrarDatos();
     }
 
 
@@ -1147,6 +1164,30 @@ export class BitacoraComponent implements OnInit{
     historiaCalidad.HistorialObstetrico = obstetricia;
 
     this.objHistoria = historiaCalidad;
+  }
+
+  MostrarDatos(){
+
+    this.events = [
+      {
+        title: 'I Trimestre',
+        details: 'EG x ECO: '+this.objObstetricia[0].Antecedentes?.EgEco,
+        dates:'',
+        expanded: false,
+      },
+      {
+        title: 'II Trimestre',
+        details: 'EG x ECO',
+        dates:'',
+        expanded: false,
+      },
+      {
+        title: 'III Trimestre',
+        details: 'EG x ECO',
+        dates:'',
+        expanded: false,
+      },
+    ];
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
