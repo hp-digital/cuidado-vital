@@ -75,12 +75,12 @@
                             <td>{{lista.egEco}}</td>
                             <td>{{lista.fechaUltimoControl | date : 'dd/MM/yyyy'}}</td>
                             <td>
-                                <button type="button" class="btn btn-secondary btn-sm" tooltip="Control PreNatal" (click)="AbrirControlPreNatal(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-plus"></i></button> &nbsp;&nbsp;                
-                                <button type="button" class="btn btn-secondary btn-sm" tooltip="Historial Clínico" (click)="AbrirHistorial(lista.idHistoriaClinica)"><i class="fas fa-lg fa-tasks"></i></button>&nbsp;&nbsp;                                
+                                <button type="button" class="btn btn-green-light-custom btn-sm" tooltip="Control PreNatal" (click)="AbrirControlPreNatal(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-plus"></i></button> &nbsp;&nbsp;                
+                                <button type="button" class="btn btn-info btn-sm" tooltip="Historial Clínico" (click)="AbrirHistorial(lista.idHistoriaClinica)"><i class="fas fa-lg fa-tasks"></i></button>&nbsp;&nbsp;                                
                                 <button type="button" class="btn btn-secondary btn-sm" tooltip="Funciones Vitales" (click)="AbrirFuncionPaciente(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-shield"></i></button>&nbsp;&nbsp;                
-                                <button type="button" class="btn btn-secondary btn-sm" tooltip="Seguimiento de Análisis" (click)="AbrirSeguimiento(lista.idHistoriaClinica)"><i class="fas fa-lg fa-pills"></i></button>&nbsp;&nbsp;    
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar(lista.idHistoriaClinica)" tooltip="Examen Auxiliar"><i class="fas fa-lg fa-fas fa-lg fa-stethoscope"></i></button>&nbsp;
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirReceta(lista.idHistoriaClinica)"><i class="fas fa-lg fa-fas fa-lg fa-hospital"></i></button> &nbsp;
+                                <button type="button" class="btn btn-warning-custom btn-sm" tooltip="Seguimiento de Análisis" (click)="AbrirSeguimiento(lista.idHistoriaClinica)"><i class="fas fa-lg fa-pills"></i></button>&nbsp;&nbsp;    
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar(lista.idHistoriaClinica)" tooltip="Examen Auxiliar"><i class="fas fa-lg fa-fas fa-lg fa-stethoscope"></i></button>&nbsp;&nbsp;
+                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirReceta(lista.idHistoriaClinica)"><i class="fas fa-lg fa-fas fa-lg fa-hospital"></i></button> &nbsp;&nbsp;
                             </td>
                         </tr>
                     </tbody>

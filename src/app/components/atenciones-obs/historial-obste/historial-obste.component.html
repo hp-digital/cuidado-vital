@@ -39,98 +39,95 @@
             <div class="row mb-3 bg-green-custom">ANTECEDENTES OBSTETRICOS</div>
             <div class="no-consulta-externa">
                 <div class="row">
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">G</label>
-                            <input type="text" class="form-control"formControlName="inputG"/>
-                            <div *ngIf="Controls['inputG'].invalid && (Controls['inputG'].dirty || Controls['inputG'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
+                    <div class="col-xl-5">
+                        <div class="btn-group">
+                            <div class="form-group mb-4">
+                                <label class="form-label mb-3">G</label>
+                                <input type="text" class="form-control"formControlName="inputG"/>
+                                <div *ngIf="Controls['inputG'].invalid && (Controls['inputG'].dirty || Controls['inputG'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp;  
+                            <div class="form-group mb-4">
+                                <label class="form-label mb-3">P</label>
+                                <input type="text" class="form-control" formControlName="inputP"/>
+                                <div *ngIf="Controls['inputP'].invalid && (Controls['inputP'].dirty || Controls['inputP'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp;  
+                             
                         </div>
                     </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">P</label>
-                            <input type="text" class="form-control" formControlName="inputP"/>
-                            <div *ngIf="Controls['inputP'].invalid && (Controls['inputP'].dirty || Controls['inputP'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
+                    <div class="col-xl-7">
+                        <div class="btn-group">
+                            <div class="form-group mb-4">
+                                <label class="form-label mb-3">G1</label>
+                                <input type="text" class="form-control" formControlName="inputG1"/>
+                                <div *ngIf="Controls['inputG1'].invalid && (Controls['inputG1'].dirty || Controls['inputG1'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp;  
+                            <div class="form-group mb-4">
+                                <label class="form-label mb-3">G2</label>
+                                <input type="text" class="form-control" formControlName="inputG2"/>
+                                <div *ngIf="Controls['inputG2'].invalid && (Controls['inputG2'].dirty || Controls['inputG2'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp;  
+                            <div class="form-group mb-4">
+                                <label class="form-label mb-3">G3</label>
+                                <input type="text" class="form-control" formControlName="inputG3"/>
+                                <div *ngIf="Controls['inputG3'].invalid && (Controls['inputG3'].dirty || Controls['inputG3'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp; 
                         </div>
+                        
                     </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">G1</label>
-                            <input type="text" class="form-control" formControlName="inputG1"/>
-                            <div *ngIf="Controls['inputG1'].invalid && (Controls['inputG1'].dirty || Controls['inputG1'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">G2</label>
-                            <input type="text" class="form-control" formControlName="inputG2"/>
-                            <div *ngIf="Controls['inputG2'].invalid && (Controls['inputG2'].dirty || Controls['inputG2'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <div class="row">
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">G3</label>
-                            <input type="text" class="form-control" formControlName="inputG3"/>
-                            <div *ngIf="Controls['inputG3'].invalid && (Controls['inputG3'].dirty || Controls['inputG3'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
+                    <div class="col-xl-4">
+                        <div class="btn-group">
+                            <div class="form-group mb-4">
+                                <label class="form-label mb-3">FUR</label>
+                                <input type="date" class="form-control" formControlName="inputFur" (onclick)="ChangeFur()" (change)="ChangeFur()"/>
+                                <div *ngIf="Controls['inputFur'].invalid && (Controls['inputFur'].dirty || Controls['inputFur'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp;  
+                            <div class="form-group mb-4">
+                                <label class="form-label mb-3">EG x FUR</label>
+                                <input type="text" class="form-control" formControlName="inputFgFur"  />
+                                <div *ngIf="Controls['inputFgFur'].invalid && (Controls['inputFgFur'].dirty || Controls['inputFgFur'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp;  
                         </div>
                     </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">FUR</label>
-                            <input type="date" class="form-control" formControlName="inputFur" (onclick)="ChangeFur()" (change)="ChangeFur()"/>
-                            <div *ngIf="Controls['inputFur'].invalid && (Controls['inputFur'].dirty || Controls['inputFur'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">EG x FUR</label>
-                            <input type="text" class="form-control" formControlName="inputFgFur"  />
-                            <div *ngIf="Controls['inputFgFur'].invalid && (Controls['inputFgFur'].dirty || Controls['inputFgFur'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">EG x ECO</label>
-                            <input type="text" class="form-control" formControlName="inputEgEco" />
-                            <div *ngIf="Controls['inputEgEco'].invalid && (Controls['inputEgEco'].dirty || Controls['inputEgEco'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
-                        </div>
-                    </div>	
-                </div>
-                <div class="row">  
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">FPP x FUR</label>
-                            <input type="text" class="form-control" formControlName="inputFppFur" placeholder="dd/mm/aaaa"/>
-                            <div *ngIf="Controls['inputFppFur'].invalid && (Controls['inputFppFur'].dirty || Controls['inputFppFur'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3">
-                        <div class="form-group mb-3">
-                            <label class="form-label mb-3">FPP x ECO</label>
-                            <input type="date" class="form-control" formControlName="inputFppEco"/>
-                            <div *ngIf="Controls['inputFppEco'].invalid && (Controls['inputFppEco'].dirty || Controls['inputFppEco'].touched)" class="text-error">                                    
-                                <div>Campo obligatorio.</div>
-                            </div>
+                    <div class="col-xl-7">
+                        <div class="btn-group">
+                            <div class="form-group mb-4">
+                                <label class="form-label mb-3">EG x ECO</label>
+                                <input type="text" class="form-control" formControlName="inputEgEco" />
+                                <div *ngIf="Controls['inputEgEco'].invalid && (Controls['inputEgEco'].dirty || Controls['inputEgEco'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp;  
+                            <div class="form-group mb-3">
+                                <label class="form-label mb-3">FPP x FUR</label>
+                                <input type="text" class="form-control" formControlName="inputFppFur" placeholder="dd/mm/aaaa"/>
+                                <div *ngIf="Controls['inputFppFur'].invalid && (Controls['inputFppFur'].dirty || Controls['inputFppFur'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp;  
+                            <div class="form-group mb-3">
+                                <label class="form-label mb-3">FPP x ECO</label>
+                                <input type="date" class="form-control" formControlName="inputFppEco"/>
+                                <div *ngIf="Controls['inputFppEco'].invalid && (Controls['inputFppEco'].dirty || Controls['inputFppEco'].touched)" class="text-error">                                    
+                                    <div>Campo obligatorio.</div>
+                                </div>
+                            </div>&nbsp;&nbsp; 
                         </div>
                     </div>
                 </div>
