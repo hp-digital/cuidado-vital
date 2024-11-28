@@ -86,6 +86,8 @@ export class HistorialObsteComponent implements OnInit{
   FrecuenciaCardicaRango: boolean = false;
   PrecionArterialRango: boolean = false;
   PrecionArterialRangoDis: boolean = false;
+  PrecionArterialRangoIz: boolean = false;
+  PrecionArterialRangoDisIz: boolean = false;
 
   colorEstadoTemp: string = '';
   colorEstadofrecar: string = '';
@@ -93,6 +95,8 @@ export class HistorialObsteComponent implements OnInit{
   colorEstadores: string = '';
   colorEstadoprecio: string = '';
   colorEstadopreArtDis: string = '';
+  colorEstadopreArtDisIz: string = '';
+  colorEstadoprecioIz: string = '';
 
   contadorControles: number = 0;
   fecha_atencion: Date = new Date();
@@ -1241,7 +1245,7 @@ export class HistorialObsteComponent implements OnInit{
     this.dataFormGroup.controls['inputFur'].setValue(moment(obstetricia[0].Antecedentes?.Fur).format('yyyy-MM-DD'));
     this.dataFormGroup.controls['inputFgFur'].setValue(obstetricia[0].Antecedentes?.FgFur);
     this.dataFormGroup.controls['inputEgEco'].setValue(obstetricia[0].Antecedentes?.EgEco);
-    this.dataFormGroup.controls['inputFppFur'].setValue(moment(obstetricia[0].Antecedentes?.FppFur).format('DD/MM/yyyy'));
+    this.dataFormGroup.controls['inputFppFur'].setValue(moment(obstetricia[0].Antecedentes?.FppFur).format('yyyy-MM-DD'));
     this.dataFormGroup.controls['inputFppEco'].setValue(moment(obstetricia[0].Antecedentes?.FppEco).format('yyyy-MM-DD'));
 
     this.dataFormGroup.controls['inputCondicionMedicaCronica'].setValue(obstetricia[0].RiesgosPreExistente?.CondicionMedica);
@@ -1258,6 +1262,8 @@ export class HistorialObsteComponent implements OnInit{
     this.dataFormGroup.controls['inputFrecuenciaCardiaca'].setValue(obstetricia[0].FuncionVital?.Fc);
     this.dataFormGroup.controls['inputPresionSistolica'].setValue(obstetricia[0].FuncionVital?.PresionSistolica);
     this.dataFormGroup.controls['inputPresionDiastolica'].setValue(obstetricia[0].FuncionVital?.PresionDiastolica);
+    this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionSistolicaIzquierda);
+    this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionDiastolicaIzquierda);
     this.dataFormGroup.controls['inputSaturacion'].setValue(obstetricia[0].FuncionVital?.Saturacion);
     this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].setValue(obstetricia[0].FuncionVital?.Fr);
     this.dataFormGroup.controls['inputTalla'].setValue(obstetricia[0].FuncionVital?.Talla);
@@ -1295,7 +1301,7 @@ export class HistorialObsteComponent implements OnInit{
 
               this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
                 next: (data) => {
-                  this.MostrarNotificacionSuccessModal('El registro de la primera atención se guardó con éxito.', '');
+                  this.MostrarNotificacionSuccessModal('El registro se guardó con éxito.', '');
                   this.CerrarModal();
                 },
                 error: (e) => {
@@ -1385,13 +1391,14 @@ export class HistorialObsteComponent implements OnInit{
     } else{
       obstetricia.Aro = 'NO';
     }
-    obstetricia.AroMotivo = 'inputMotivoAro';
-    let dn = this.dataFormGroup.controls['inputDatoNino'].value;
+    obstetricia.AroMotivo = this.dataFormGroup.controls['inputMotivoAro'].value;
+    /* let dn = this.dataFormGroup.controls['inputDatoNino'].value;
     if(dn == true){
       obstetricia.DatoNino = 'Niño';
     } else{
       obstetricia.Aro = 'Niña';
-    }
+    } */
+   obstetricia.DatoNino = '-';
     obstetricia.SignosAlarma = this.dataFormGroup.controls['inputSignoAlarma'].value;
     obstetricia.Diagnostico = this.dataFormGroup.controls['inputDiagnostico'].value;
     obstetricia.RecomendacionesGenerales = this.listadoGeneral;
@@ -1415,7 +1422,7 @@ export class HistorialObsteComponent implements OnInit{
       fur = fur.add(7, 'days');
       fur = fur.subtract(3, 'months');
       fur = fur.add(1, 'years');
-      this.dataFormGroup.controls['inputFppFur'].setValue(fur.format('YYYY-MM-DD'));
+      this.dataFormGroup.controls['inputFppFur'].setValue(fur.format('yyyy-MM-DD'));
       this.CalcularEgFur();
     }
   }
@@ -1539,12 +1546,43 @@ export class HistorialObsteComponent implements OnInit{
     }
   }
 
+  MostrarPrecionArterialIz() {    
+    let sistolica = this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].value;
+    if (sistolica >= 100 && sistolica <= 140) {
+      this.PrecionArterialRangoIz = false
+      this.colorEstadoprecioIz = '';
+    } else {
+      this.PrecionArterialRangoIz = true
+      this.colorEstadoprecio = '#ff000047';
+    }
+  }
+
+  MostrarPrecionDiastolicaIz() {    
+    let diastolica = this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].value;
+    if (diastolica >= 60 && diastolica <= 90) {
+      this.PrecionArterialRangoDisIz = false
+      this.colorEstadopreArtDisIz = '';
+    } else {
+      this.PrecionArterialRangoDisIz = true
+      this.colorEstadopreArtDisIz = '#ff000047';
+    }
+  }
+
   CalcularIndiceMasaCorporal() {
     let peso = this.dataFormGroup.controls['inputPeso'].value;
     let talla = this.dataFormGroup.controls['inputTalla'].value;
     if (peso != null && talla != null) {
       this.IMC = peso / (talla * talla);
       this.dataFormGroup.controls['inputImc'].setValue((this.IMC).toFixed(1));
+    }
+  }
+
+  CalcularAumentoPeso(){
+    let actual = this.dataFormGroup.controls['inputPesoActual'].value;
+    let habitual = this.dataFormGroup.controls['inputPesoHabitual'].value;
+    if (habitual != null && actual != null) {
+      let aumento = actual - habitual;
+      this.dataFormGroup.controls['inputAumentoPeso'].setValue(aumento.toFixed(1));
     }
   }
 

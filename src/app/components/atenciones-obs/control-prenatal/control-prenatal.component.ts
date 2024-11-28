@@ -1068,7 +1068,7 @@ export class ControlPrenatalComponent implements OnInit {
 
     
     let prenatal : ControlPreNatalDTO[]=[];
-    if(objHistoria.controlPreNatal != 0)
+    if(objHistoria.controlPreNatal != null)
     {
       objHistoria.controlPreNatal.forEach((element:any)=>{
         let ctrol = new ControlPreNatalDTO();

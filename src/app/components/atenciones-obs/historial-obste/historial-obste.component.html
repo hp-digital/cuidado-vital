@@ -50,7 +50,7 @@
                             </div>&nbsp;&nbsp;  
                             <div class="form-group mb-4">
                                 <label class="form-label mb-3">P</label>
-                                <input type="text" class="form-control" formControlName="inputP"/>
+                                <input type="number" class="form-control" formControlName="inputP"/>
                                 <div *ngIf="Controls['inputP'].invalid && (Controls['inputP'].dirty || Controls['inputP'].touched)" class="text-error">                                    
                                     <div>Campo obligatorio.</div>
                                 </div>
@@ -109,14 +109,14 @@
                         <div class="btn-group">
                             <div class="form-group mb-4">
                                 <label class="form-label mb-3">EG x ECO</label>
-                                <input type="text" class="form-control" formControlName="inputEgEco" />
+                                <input type="number" class="form-control" formControlName="inputEgEco" />
                                 <div *ngIf="Controls['inputEgEco'].invalid && (Controls['inputEgEco'].dirty || Controls['inputEgEco'].touched)" class="text-error">                                    
                                     <div>Campo obligatorio.</div>
                                 </div>
                             </div>&nbsp;&nbsp;  
                             <div class="form-group mb-3">
                                 <label class="form-label mb-3">FPP x FUR</label>
-                                <input type="text" class="form-control" formControlName="inputFppFur" placeholder="dd/mm/aaaa"/>
+                                <input type="date" class="form-control" formControlName="inputFppFur" placeholder="dd/mm/aaaa"/>
                                 <div *ngIf="Controls['inputFppFur'].invalid && (Controls['inputFppFur'].dirty || Controls['inputFppFur'].touched)" class="text-error">                                    
                                     <div>Campo obligatorio.</div>
                                 </div>
@@ -280,12 +280,12 @@
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">PA Izquierda (Sistólica/diastólica) (mmHg)</label>
                         <div class="btn-group">
-                            <input type="number" class="form-control" formControlName="inputPresionSistolicaIzquierda" [ngStyle]="{'background':colorEstadoprecio}" (blur)="MostrarPrecionArterial()" onKeypress="if (
+                            <input type="number" class="form-control" formControlName="inputPresionSistolicaIzquierda" [ngStyle]="{'background':colorEstadoprecioIz}" (blur)="MostrarPrecionArterialIz()" onKeypress="if (
                                 (event.keyCode < 48 || event.keyCode > 57) &&
                                 event.keyCode !== 9
                               ) event.returnValue = false;" maxlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
                             <input type="text" class="form-control" id="" readonly placeholder="/" style="width: 33px;"/>
-                            <input type="number" class="form-control" formControlName="inputPresionDiastolicaIzquierda" [ngStyle]="{'background':colorEstadopreArtDis}" (blur)="MostrarPrecionDiastolica()" onKeypress="if (
+                            <input type="number" class="form-control" formControlName="inputPresionDiastolicaIzquierda" [ngStyle]="{'background':colorEstadopreArtDisIz}" (blur)="MostrarPrecionDiastolicaIz()" onKeypress="if (
                                 (event.keyCode < 48 || event.keyCode > 57) &&
                                 event.keyCode !== 9
                               ) event.returnValue = false;" maxlength="3" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"/>
@@ -303,8 +303,8 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="PrecionArterialRango" class="d-inline text-error">P.A.: ≥100  ≤ 140 /</div>
-                    <div *ngIf="PrecionArterialRangoDis" class="d-inline text-error">P.A.: ≥ 60 ≤90</div>
+                    <div *ngIf="PrecionArterialRangoIz" class="d-inline text-error">P.A.: ≥100  ≤ 140 /</div>
+                    <div *ngIf="PrecionArterialRangoDisIz" class="d-inline text-error">P.A.: ≥ 60 ≤90</div>
                 </div>
                 <div class="col-xl-2">
                     <div class="form-group mb-3">
@@ -408,7 +408,7 @@
                 <div class="col-xl-2">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">Peso Actual (kg)</label>
-                        <input type="text" class="form-control" formControlName="inputPesoActual"/>
+                        <input type="text" class="form-control" formControlName="inputPesoActual" (blur)="CalcularAumentoPeso()"/>
                         <div *ngIf="Controls['inputPesoActual'].invalid && (Controls['inputPesoActual'].dirty || Controls['inputPesoActual'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div>
@@ -417,7 +417,7 @@
                 <div class="col-xl-2">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">Aumento de Peso</label>
-                        <input type="text" class="form-control" formControlName="inputAumentoPeso"/>
+                        <input type="number" class="form-control" formControlName="inputAumentoPeso" (click)="CalcularAumentoPeso()" readonly/>
                         <div *ngIf="Controls['inputAumentoPeso'].invalid && (Controls['inputAumentoPeso'].dirty || Controls['inputAumentoPeso'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div>
@@ -439,7 +439,7 @@
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">LCF (min)</label>
-                        <input type="number" class="form-control" formControlName="inputLcf"/>
+                        <input type="text" class="form-control" formControlName="inputLcf"/>
                         <div *ngIf="Controls['inputLcf'].invalid && (Controls['inputLcf'].dirty || Controls['inputLcf'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div>
@@ -448,7 +448,7 @@
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">Mov. Fetal</label>
-                        <input type="number" class="form-control" formControlName="inputMovFetal"/>
+                        <input type="text" class="form-control" formControlName="inputMovFetal"/>
                         <div *ngIf="Controls['inputMovFetal'].invalid && (Controls['inputMovFetal'].dirty || Controls['inputMovFetal'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div>
@@ -457,7 +457,7 @@
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">Placenta</label>
-                        <input type="number" class="form-control" formControlName="inputPlacenta"/>
+                        <input type="text" class="form-control" formControlName="inputPlacenta"/>
                         <div *ngIf="Controls['inputPlacenta'].invalid && (Controls['inputPlacenta'].dirty || Controls['inputPlacenta'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div>
@@ -468,7 +468,7 @@
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">ILA</label>
-                        <input type="number" class="form-control" formControlName="inputIla"/>
+                        <input type="text" class="form-control" formControlName="inputIla"/>
                         <div *ngIf="Controls['inputIla'].invalid && (Controls['inputIla'].dirty || Controls['inputIla'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div>
@@ -477,7 +477,7 @@
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">Long. Cervix</label>
-                        <input type="number" class="form-control" formControlName="inputLongCervix"/>
+                        <input type="text" class="form-control" formControlName="inputLongCervix"/>
                         <div *ngIf="Controls['inputLongCervix'].invalid && (Controls['inputLongCervix'].dirty || Controls['inputLongCervix'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div>
@@ -486,7 +486,7 @@
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">Posición</label>
-                        <input type="number" class="form-control" formControlName="inputPosicion"/>
+                        <input type="text" class="form-control" formControlName="inputPosicion"/>
                         <div *ngIf="Controls['inputPosicion'].invalid && (Controls['inputPosicion'].dirty || Controls['inputPosicion'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div>
@@ -520,7 +520,7 @@
                 </div>								
             </div>
             <hr/>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-xl-3 d-flex mt-3" style="align-items: center;">
                     <h6>DATOS DEL NIÑO</h6>
                 </div>
@@ -531,8 +531,8 @@
                     </div>
                     <label for="site_deeds" class="form-check-label mt-2">&nbsp; Niño</label>
                 </div>									
-            </div>
-            <hr/>
+            </div> 
+            <hr/>-->
             <div class="row">
                 <div class="col-xl-12">
                     <div class="form-group mb-3">
