@@ -47,6 +47,12 @@ import { BalanceHidricoTurnoDTO } from '@models/balance-hidrico-turno';
 import { BalanceHidricoDTO } from '@models/balance-hidrico';
 import html2canvas from 'html2canvas';
 import jspdf, { jsPDF } from 'jspdf';
+import { HistorialObstetricoDTO } from '@models/historial-obstetrico';
+import { AntecedenteObstetricoDTO } from '@models/antecedente-obstetrico';
+import { RiesgoObstetricoDTO } from '@models/riesgo-obstetrico';
+import { RiesgoActualDTO } from '@models/riesgo-actual';
+import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
+import { ExamenPreferencialDTO } from '@models/examen-preferencial';
 
 @Component({
   selector: 'app-examen-auxiliar',
@@ -1140,6 +1146,107 @@ if(objHistoria.primeraAtencion != null)
       
     }
 
+    let obstetricia : HistorialObstetricoDTO[] = [];
+    if(objHistoria.historialObstetrico != null)
+    {
+      objHistoria.historialObstetrico.forEach((element:any)=>{
+        let obs = new HistorialObstetricoDTO();
+        obs.Paciente = element.paciente;
+        obs.NroHcl = element.nroHcl;
+        obs.Personal = element.personal;
+        obs.IdPersonal = element.idPersonal;
+        obs.FechaRegistro = element.fechaRegistro;
+
+        obs.Antecedentes = new AntecedenteObstetricoDTO();
+        obs.Antecedentes.G = element.antecedentes.g;
+        obs.Antecedentes.P = element.antecedentes.p;
+        obs.Antecedentes.G1 = element.antecedentes.g1;
+        obs.Antecedentes.G2 = element.antecedentes.g2;
+        obs.Antecedentes.G3 = element.antecedentes.g3;
+        obs.Antecedentes.Fur = element.antecedentes.fur;
+        obs.Antecedentes.FgFur = element.antecedentes.fgFur;
+        obs.Antecedentes.EgEco = element.antecedentes.egEco;
+        obs.Antecedentes.FppFur = element.antecedentes.fppFur;
+        obs.Antecedentes.FppEco = element.antecedentes.fppEco;
+
+        obs.RiesgosPreExistente = new RiesgoObstetricoDTO();
+        obs.RiesgosPreExistente.CondicionMedica = element.riesgosPreExistente.condicionMedica;
+        obs.RiesgosPreExistente.Quirurgico = element.riesgosPreExistente.quirurgico;
+        obs.RiesgosPreExistente.EnfermedadCongenita = element.riesgosPreExistente.enfermedadCongenita;
+        obs.RiesgosPreExistente.Fuma = element.riesgosPreExistente.fuma;
+
+        obs.RiesgoActual = new RiesgoActualDTO();
+        obs.RiesgoActual.PlacentaPrevia = element.riesgoActual.placentaPrevia;
+        obs.RiesgoActual.SobrePeso = element.riesgoActual.sobrePeso;
+        obs.RiesgoActual.Itu = element.riesgoActual.itu;
+        obs.RiesgoActual.PresionAlta = element.riesgoActual.presionAlta;
+
+        obs.FuncionVital = new FuncionVitalObstetriciaDTO();
+        obs.FuncionVital.Temperatura = element.funcionVital.temperatura;
+        obs.FuncionVital.Fc = element.funcionVital.fc;
+        obs.FuncionVital.PresionSistolica = element.funcionVital.presionSistolica;
+        obs.FuncionVital.PresionDiastolica = element.funcionVital.presionDiastolica;
+        obs.FuncionVital.PresionSistolicaIzquierda = element.funcionVital.presionSistolicaIzquierda;
+        obs.FuncionVital.PresionDiastolicaIzquierda = element.funcionVital.presionDiastolicaIzquierda;
+        obs.FuncionVital.Saturacion = element.funcionVital.saturacion;
+        obs.FuncionVital.Fr = element.funcionVital.fr;
+        obs.FuncionVital.Talla = element.funcionVital.talla;
+        obs.FuncionVital.Peso = element.funcionVital.peso;
+        obs.FuncionVital.Imc = element.funcionVital.imc;
+        obs.FuncionVital.PesoHabitual = element.funcionVital.pesoHabitual;
+        obs.FuncionVital.PesoActual = element.funcionVital.pesoActual;
+        obs.FuncionVital.AumentoPeso = element.funcionVital.aumentoPeso;
+
+        obs.ExamenPreferencial = new ExamenPreferencialDTO();
+        obs.ExamenPreferencial.AlturaUterina = element.examenPreferencial.alturaUterina;
+        obs.ExamenPreferencial.Lcf = element.examenPreferencial.lcf;
+        obs.ExamenPreferencial.MovFetal = element.examenPreferencial.movFetal;
+        obs.ExamenPreferencial.Placente = element.examenPreferencial.placente;
+        obs.ExamenPreferencial.Ila = element.examenPreferencial.ila;
+        obs.ExamenPreferencial.LogCervix = element.examenPreferencial.logCervix;
+        obs.ExamenPreferencial.Posicion = element.examenPreferencial.posicion;
+        obs.ExamenPreferencial.PesoFetal = element.examenPreferencial.pesoFetal;
+
+        obs.Aro = element.aro;
+        obs.AroMotivo = element.aroMotivo;
+        obs.DatoNino = element.datoNino;
+        
+        let signo : DesplegableDTO[]=[];
+        if(element.signosAlarma != null){
+          element.signosAlarma.forEach((element:any)=>{
+            let s = new DesplegableDTO();
+            s.Id = element.id;
+            s.Nombre = element.nombre;
+
+            signo.push(s);
+          });
+        }
+
+
+        obs.Diagnostico = element.diagnostico;
+        obs.SignosAlarma = signo;
+        obs.RecomendacionesGenerales = [];
+        if(element.recomendacionesGenerales != null)
+        {
+          element.recomendacionesGenerales.forEach((element:any)=>{
+            let gen :string='';
+            gen=element
+            obs.RecomendacionesGenerales?.push(gen)
+          });
+        }
+        obs.RecomendacionesEspecificas = [];
+        if(element.recomendacionesEspecificas != null)
+        {
+          element.recomendacionesEspecificas.forEach((element:any)=>{
+            let espe :string='';
+            espe=element
+            obs.RecomendacionesEspecificas?.push(espe)
+          });
+        }
+        obstetricia.push(obs);
+      });
+    }
+
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
@@ -1167,6 +1274,7 @@ if(objHistoria.primeraAtencion != null)
     historiaCalidad.HojaMonitoreoSignos = hojaMonitoreo;
     historiaCalidad.NotaEnfermera = notaEnfermera;
     historiaCalidad.BalanceHidrico = balance;
+    historiaCalidad.HistorialObstetrico = obstetricia;
 
     this.objHistoria = historiaCalidad;
     

@@ -1090,6 +1090,8 @@ export class BitacoraComponent implements OnInit{
         obs.FuncionVital.Fc = element.funcionVital.fc;
         obs.FuncionVital.PresionSistolica = element.funcionVital.presionSistolica;
         obs.FuncionVital.PresionDiastolica = element.funcionVital.presionDiastolica;
+        obs.FuncionVital.PresionSistolicaIzquierda = element.funcionVital.presionSistolicaIzquierda;
+        obs.FuncionVital.PresionDiastolicaIzquierda = element.funcionVital.presionDiastolicaIzquierda;
         obs.FuncionVital.Saturacion = element.funcionVital.saturacion;
         obs.FuncionVital.Fr = element.funcionVital.fr;
         obs.FuncionVital.Talla = element.funcionVital.talla;
@@ -1112,8 +1114,21 @@ export class BitacoraComponent implements OnInit{
         obs.Aro = element.aro;
         obs.AroMotivo = element.aroMotivo;
         obs.DatoNino = element.datoNino;
-        obs.SignosAlarma = element.signoAlarma;
+        
+        let signo : DesplegableDTO[]=[];
+        if(element.signosAlarma != null){
+          element.signosAlarma.forEach((element:any)=>{
+            let s = new DesplegableDTO();
+            s.Id = element.id;
+            s.Nombre = element.nombre;
 
+            signo.push(s);
+          });
+        }
+
+
+        obs.Diagnostico = element.diagnostico;
+        obs.SignosAlarma = signo;
         obs.RecomendacionesGenerales = [];
         if(element.recomendacionesGenerales != null)
         {

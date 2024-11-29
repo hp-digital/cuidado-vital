@@ -48,7 +48,7 @@
                     <tbody>
                       <tr *ngFor="let key of keys">
                         <!-- Nombre del campo -->
-                        <td>{{ key }}</td>
+                        <td>{{ CambiarTexto(key) }}</td>
                 
                         <!-- Valores o inputs para cada registro -->
                         <td *ngFor="let registro of objControl">
@@ -68,7 +68,7 @@
                         </td>
                       </tr>
                     </tbody>
-                  </table>
+                </table>
             </p-tabPanel>
             <p-tabPanel  header=Gráficos>
                 <div class="row">

@@ -50,11 +50,13 @@ import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
 import { ExamenPreferencialDTO } from '@models/examen-preferencial';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ComboDTO } from '@models/ComboDTO';
 
 @Component({
   selector: 'app-historial-obste',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule,ToastModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule,ToastModule, MultiSelectModule],
   providers: [MessageService],
   templateUrl: './historial-obste.component.html',
   styleUrl: './historial-obste.component.css'
@@ -106,14 +108,25 @@ export class HistorialObsteComponent implements OnInit{
   listadoGeneral: string[]=[];
   listadoEspecificos: string[]=[];
 
+  signos!: ComboDTO[];
+  selectedSignos!: ComboDTO[];
+
   constructor(
     private bsModalHistorialClinico: BsModalRef,
     private modalService: BsModalService,
     private historiaService: HistoriaService,
     private servicioService: ServicioServiceService,
     private settings : SettingsService,
-    private messageService: MessageService
+    private messageService: MessageService,
   ){
+    this.signos = [
+      {id: 1, nombre: 'Naúseas o vómitos exagerados'},
+      {id: 2, nombre: 'Fiebre, escalofríos'},
+      {id: 3, nombre: 'Hinchazón de manos y cara'},
+      {id: 4, nombre: 'dolor de cabeza, zunmbido de oído, visón borrosa o dolor abdominal'},
+      {id: 5, nombre: 'Pérdida de líquido o sangre por vagina o genitales'},
+      {id: 6, nombre: 'Disminución o ausencia de movimientos del bebé durante el día'}
+  ];
     this.dataFormGroup = new FormGroup({
       inputG: new FormControl('', [Validators.required]),
       inputP: new FormControl('', [Validators.required]),
@@ -168,6 +181,7 @@ export class HistorialObsteComponent implements OnInit{
   ngOnInit(): void {
     this.idRol=this.settings.getUserSetting('idRol');
     this.fechaActual = moment().format('DD/MM/YYYY');
+    this.idMedico = this.settings.getUserSetting('idPersonal');
   }
   AsignarHistoriaClinica(idHistoriaClinica:number){
     console.log("nro his", idHistoriaClinica)
@@ -1178,9 +1192,21 @@ export class HistorialObsteComponent implements OnInit{
         obs.Aro = element.aro;
         obs.AroMotivo = element.aroMotivo;
         obs.DatoNino = element.datoNino;
-        obs.SignosAlarma = element.signoAlarma;
-        obs.Diagnostico = element.diagnostico;
+        
+        let signo : DesplegableDTO[]=[];
+        if(element.signosAlarma != null){
+          element.signosAlarma.forEach((element:any)=>{
+            let s = new DesplegableDTO();
+            s.Id = element.id;
+            s.Nombre = element.nombre;
 
+            signo.push(s);
+          });
+        }
+
+
+        obs.Diagnostico = element.diagnostico;
+        obs.SignosAlarma = signo;
         obs.RecomendacionesGenerales = [];
         if(element.recomendacionesGenerales != null)
         {
@@ -1235,7 +1261,6 @@ export class HistorialObsteComponent implements OnInit{
   }
 
   MostrarDatos(obstetricia:HistorialObstetricoDTO[]){
-    console.log("objObste", obstetricia)
 
     this.dataFormGroup.controls['inputG'].setValue(obstetricia[0].Antecedentes?.G);
     this.dataFormGroup.controls['inputP'].setValue(obstetricia[0].Antecedentes?.P);
@@ -1291,28 +1316,28 @@ export class HistorialObsteComponent implements OnInit{
       /* console.log("guardar?")
       if (this.dataFormGroup.valid && this.contadorControles == 0) {
             */
-          this.AgregarObjeto();
+      this.AgregarObjeto();
 
-          this.objHistoria.HistorialObstetrico = this.objObstetricia;
-          this.objHistoria.IdHistoriaClinica = this.idHistoria;
-          console.log("historia guardar", this.objHistoria);
-          
-          if(this.objHistoria.HistorialObstetrico != null){
+      this.objHistoria.HistorialObstetrico = this.objObstetricia;
+      this.objHistoria.IdHistoriaClinica = this.idHistoria;
+      console.log("historia guardar", this.objHistoria);
+      
+      if(this.objHistoria.HistorialObstetrico != null){
 
-              this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
-                next: (data) => {
-                  this.MostrarNotificacionSuccessModal('El registro se guardó con éxito.', '');
-                  this.CerrarModal();
-                },
-                error: (e) => {
-                  console.log('Error: ', e);
-                  this.verSpinner = false;
-                },
-                complete: () => { this.verSpinner = false; }
-              });
-          }else{
-            this.MostrarNotificacionWarning("Ningún servicio seleccionado", "Error");
-          }
+          this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
+            next: (data) => {
+              this.MostrarNotificacionSuccessModal('El registro se guardó con éxito.', '');
+              this.CerrarModal();
+            },
+            error: (e) => {
+              console.log('Error: ', e);
+              this.verSpinner = false;
+            },
+            complete: () => { this.verSpinner = false; }
+          });
+      }else{
+        this.MostrarNotificacionWarning("Ningún servicio seleccionado", "Error");
+      }
      
             
       /* }
@@ -1332,13 +1357,13 @@ export class HistorialObsteComponent implements OnInit{
     obstetricia.FechaRegistro = new Date();
     let antecedente = new AntecedenteObstetricoDTO();
     antecedente.G = this.dataFormGroup.controls['inputG'].value;
-    antecedente.P = this.dataFormGroup.controls['inputP'].value;
+    antecedente.P = this.dataFormGroup.controls['inputP'].value.toString();
     antecedente.G1 = this.dataFormGroup.controls['inputG1'].value;
     antecedente.G2 = this.dataFormGroup.controls['inputG2'].value;
     antecedente.G3 = this.dataFormGroup.controls['inputG3'].value;
     antecedente.Fur = this.dataFormGroup.controls['inputFur'].value;
     antecedente.FgFur = this.dataFormGroup.controls['inputFgFur'].value;
-    antecedente.EgEco = this.dataFormGroup.controls['inputEgEco'].value;
+    antecedente.EgEco = this.dataFormGroup.controls['inputEgEco'].value.toString();
     antecedente.FppFur = this.dataFormGroup.controls['inputFppFur'].value;
     antecedente.FppEco = this.dataFormGroup.controls['inputFppEco'].value;
 
@@ -1398,8 +1423,19 @@ export class HistorialObsteComponent implements OnInit{
     } else{
       obstetricia.Aro = 'Niña';
     } */
-   obstetricia.DatoNino = '-';
-    obstetricia.SignosAlarma = this.dataFormGroup.controls['inputSignoAlarma'].value;
+    obstetricia.DatoNino = '-';
+    let signo = this.dataFormGroup.controls['inputSignoAlarma'].value;
+    let sstf : DesplegableDTO[]=[];
+    if(signo != null)
+    {
+      signo.forEach((element:any)=>{
+        let s = new DesplegableDTO();
+        s.Id = element.id;
+        s.Nombre = element.nombre;
+        sstf.push(s);
+      });
+    }
+    obstetricia.SignosAlarma = sstf;
     obstetricia.Diagnostico = this.dataFormGroup.controls['inputDiagnostico'].value;
     obstetricia.RecomendacionesGenerales = this.listadoGeneral;
     obstetricia.RecomendacionesEspecificas = this.listadoEspecificos;

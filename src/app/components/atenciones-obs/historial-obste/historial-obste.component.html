@@ -537,9 +537,19 @@
                 <div class="col-xl-12">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">SIGNOS DE ALARMA</label>
-                        <textarea name="" class="form-control" rows="3" formControlName="inputSignoAlarma"></textarea>
+                        <!-- <textarea name="" class="form-control" rows="3" formControlName="inputSignoAlarma"></textarea>
                         <div *ngIf="Controls['inputSignoAlarma'].invalid && (Controls['inputSignoAlarma'].dirty || Controls['inputSignoAlarma'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
+                        </div> -->
+                        <div >
+                            <p-multiSelect 
+                                [options]="signos" 
+                                [(ngModel)]="selectedSignos" 
+                                placeholder="Seleccione las opciones" 
+                                optionLabel="nombre" 
+                                display="chip" 
+                                formControlName="inputSignoAlarma"
+                                [showClear]="true" />
                         </div>
                     </div>
                 </div>
