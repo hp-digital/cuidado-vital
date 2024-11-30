@@ -8,4 +8,5 @@ export class ExamenPreferencialDTO
     LogCervix ?:string;
     Posicion ?:string;
     PesoFetal ?:string;
+    Edema ?: string;
 }

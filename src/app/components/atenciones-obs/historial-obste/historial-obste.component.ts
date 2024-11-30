@@ -175,6 +175,7 @@ export class HistorialObsteComponent implements OnInit{
       inputDiagnostico: new FormControl(),
       inputPresionSistolicaIzquierda: new FormControl(),
       inputPresionDiastolicaIzquierda: new FormControl(),
+      inputEdema: new FormControl(),
     });
   }
 
@@ -1188,6 +1189,7 @@ export class HistorialObsteComponent implements OnInit{
         obs.ExamenPreferencial.LogCervix = element.examenPreferencial.logCervix;
         obs.ExamenPreferencial.Posicion = element.examenPreferencial.posicion;
         obs.ExamenPreferencial.PesoFetal = element.examenPreferencial.pesoFetal;
+        obs.ExamenPreferencial.Edema = element.examenPreferencial.edema;
 
         obs.Aro = element.aro;
         obs.AroMotivo = element.aroMotivo;
@@ -1404,6 +1406,7 @@ export class HistorialObsteComponent implements OnInit{
     examenPreferencial.LogCervix = this.dataFormGroup.controls['inputLongCervix'].value.toString();
     examenPreferencial.Posicion = this.dataFormGroup.controls['inputPosicion'].value.toString();
     examenPreferencial.PesoFetal = this.dataFormGroup.controls['inputPesoFetal'].value.toString();
+    examenPreferencial.Edema = this.dataFormGroup.controls['inputEdema'].value.toString()
 
     obstetricia.Antecedentes = antecedente;
     obstetricia.RiesgosPreExistente = riesgo;

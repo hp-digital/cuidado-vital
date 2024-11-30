@@ -48,11 +48,13 @@ import { RiesgoObstetricoDTO } from '@models/riesgo-obstetrico';
 import { RiesgoActualDTO } from '@models/riesgo-actual';
 import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
 import { ExamenPreferencialDTO } from '@models/examen-preferencial';
+import { ComboDTO } from '@models/ComboDTO';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-ficha-obstetrica',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule, MultiSelectModule],
   templateUrl: './ficha-obstetrica.component.html',
   styleUrl: './ficha-obstetrica.component.css'
 })
@@ -81,6 +83,9 @@ export class FichaObstetricaComponent implements OnInit{
   listadoGeneral: string[]=[];
   listadoEspecificos: string[]=[];
 
+  signos!: ComboDTO[];
+  selectedSignos!: ComboDTO[];
+
   constructor(
     private bsModalFicha: BsModalRef,
     private modalService: BsModalService,
@@ -88,6 +93,14 @@ export class FichaObstetricaComponent implements OnInit{
     private servicioService: ServicioServiceService,
     private settings : SettingsService,
   ){
+    this.signos = [
+        {id: 1, nombre: 'Naúseas o vómitos exagerados'},
+        {id: 2, nombre: 'Fiebre, escalofríos'},
+        {id: 3, nombre: 'Hinchazón de manos y cara'},
+        {id: 4, nombre: 'dolor de cabeza, zunmbido de oído, visón borrosa o dolor abdominal'},
+        {id: 5, nombre: 'Pérdida de líquido o sangre por vagina o genitales'},
+        {id: 6, nombre: 'Disminución o ausencia de movimientos del bebé durante el día'}
+    ];
     this.dataFormGroup = new FormGroup({
      inputSignoAlarma: new FormControl(''),
     });
@@ -1104,6 +1117,7 @@ export class FichaObstetricaComponent implements OnInit{
         obs.ExamenPreferencial.LogCervix = element.examenPreferencial.logCervix;
         obs.ExamenPreferencial.Posicion = element.examenPreferencial.posicion;
         obs.ExamenPreferencial.PesoFetal = element.examenPreferencial.pesoFetal;
+        obs.ExamenPreferencial.Edema = element.examenPreferencial.edema;
 
         obs.Aro = element.aro;
         obs.AroMotivo = element.aroMotivo;
