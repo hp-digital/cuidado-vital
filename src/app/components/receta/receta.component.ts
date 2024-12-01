@@ -77,7 +77,7 @@ export class RecetaComponent implements OnInit {
   objDiagnostico : DiagnosticoCuidadoDTO[]=[];
   objHistoriaExterna = new HistoriaExternaDTO();
   objDiagnosticoPrimer : DiagnosticoPrimeraAtencionDTO[]=[];
-
+  objObstetrico: HistorialObstetricoDTO[]=[];
   idMedicamento:number=0;
   nombreMedicamento:string='';
 
@@ -1280,6 +1280,7 @@ export class RecetaComponent implements OnInit {
           });
         }
         obstetricia.push(obs);
+        this.objObstetrico.push(obs);
       });
     }
     

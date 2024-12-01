@@ -79,6 +79,7 @@ export class ExamenAuxiliarComponent implements OnInit {
   objDiagnostico : DiagnosticoCuidadoDTO[]=[];
   objHistoriaExterna = new HistoriaExternaDTO();
   objDiagnosticoPrimer : DiagnosticoPrimeraAtencionDTO[]=[];
+  objObstetrico: HistorialObstetricoDTO[]=[];
 
   paciente:string ='';
   medico:string='';
@@ -1244,6 +1245,7 @@ if(objHistoria.primeraAtencion != null)
           });
         }
         obstetricia.push(obs);
+        this.objObstetrico.push(obs);
       });
     }
 

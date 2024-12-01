@@ -50,9 +50,9 @@
                                                     <th class="text-center column_2">
                                                         <label class="">RESULTADO / OTRAS REFERENCIAS</label>
                                                     </th>
-                                                    <th class="text-center column_3">
+                                                    <!-- <th class="text-center column_3">
                                                         <label class="">CHECKLIST</label>
-                                                    </th>
+                                                    </th> -->
                                                     <th class="text-center column_4" *ngIf="esVisible==true">
                                                         <label class=""> </label>
                                                     </th>
@@ -69,7 +69,7 @@
                                                     <td class="column_2">
                                                         <input type="text" class="form-control" formControlName="inputFsh" [readOnly]="esReadOnly">
                                                     </td>
-                                                    <td class="column_3" style="align-items: center;">
+                                                    <!-- <td class="column_3" style="align-items: center;">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkFs" 
                                                         [binary]="true" 
@@ -77,7 +77,7 @@
                                                         formControlName="checkFsh"
                                                         [disabled]="esReadOnly"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -93,14 +93,14 @@
                                                     <td class="column_2">
                                                         <input type="text" class="form-control" formControlName="inputTsh" [readOnly]="esReadOnly">
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkTsh" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkTsh"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -116,14 +116,14 @@
                                                     <td class="column_2">
                                                         <input type="text" class="form-control" formControlName="inputT4l" [readOnly]="esReadOnly">
                                                     </td>
-                                                    <td class="column_3">
+                                                   <!--  <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkT4l" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkT4l"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -141,14 +141,14 @@
                                                         <input type="text" class="form-control" formControlName="inputEstradiol" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkEstradiol" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkEstradiol"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -165,14 +165,14 @@
                                                         <input type="text" class="form-control" formControlName="inputAmh" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkAmh" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkAmh"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -189,14 +189,14 @@
                                                         <input type="text" class="form-control" formControlName="inputGlucosa" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkGlucosa" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkGlucosa"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -213,14 +213,14 @@
                                                         <input type="text" class="form-control" formControlName="inputInsulina" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkInsulina" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkInsulina"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -238,14 +238,14 @@
                                                         <input type="text" class="form-control" formControlName="inputProlactina" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkProlactina" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkProlactina"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -262,14 +262,14 @@
                                                         <input type="text" class="form-control" formControlName="inputHemograma" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkHemograma" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkHemograma"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -286,14 +286,14 @@
                                                         <input type="text" class="form-control" formControlName="inputTs" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkTs" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkTs"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -310,14 +310,14 @@
                                                         <input type="text" class="form-control" formControlName="inputHepatitis" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkHepatitis" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkHepatitis"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -335,14 +335,14 @@
                                                         <input type="text" class="form-control" formControlName="inputClamidia" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkClamidia" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkClamidia"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -359,14 +359,14 @@
                                                         <input type="text" class="form-control" formControlName="inputEco" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkEco" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkEco"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -383,14 +383,14 @@
                                                         <input type="text" class="form-control" formControlName="inputUrea" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkUrea" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkUrea"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -407,14 +407,14 @@
                                                         <input type="text" class="form-control" formControlName="inputUrocultivo" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkUrocultivo" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkUrocultivo"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -431,14 +431,14 @@
                                                         <input type="text" class="form-control" formControlName="inputRpr" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkRpr" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkRpr"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -455,14 +455,14 @@
                                                         <input type="text" class="form-control" formControlName="inputHiv" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkHiv" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkHiv"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -479,14 +479,14 @@
                                                         <input type="text" class="form-control" formControlName="inputBhcg" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkBhcg" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkBhcg"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -503,14 +503,14 @@
                                                         <input type="text" class="form-control" formControlName="inputCuagulacion" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkTiempoCuagulacion" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkTiempoCuagulacion"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -527,14 +527,14 @@
                                                         <input type="text" class="form-control" formControlName="inputSangria" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkSangria" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkSangria"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -551,14 +551,14 @@
                                                         <input type="text" class="form-control" formControlName="inputGrupoRh" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkGrupoRh" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkGrupoRh"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -575,14 +575,14 @@
                                                         <input type="text" class="form-control" formControlName="inputEcografia" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkEcografia" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkEcografia"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -599,14 +599,14 @@
                                                         <input type="text" class="form-control" formControlName="inputSono" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkSono" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkSono"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -623,14 +623,14 @@
                                                         <input type="text" class="form-control" formControlName="inputHistero" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkHisterosal" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkHisterosal"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -647,14 +647,14 @@
                                                         <input type="text" class="form-control" formControlName="inputHisteroscopia" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkHisteroscopia" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkHisteroscopia"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -671,14 +671,14 @@
                                                         <input type="text" class="form-control" formControlName="inputMamografia" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkMamografia" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkMamografia"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -695,14 +695,14 @@
                                                         <input type="text" class="form-control" formControlName="inputIva" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkIvaa" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkIvaa"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
@@ -719,14 +719,14 @@
                                                         <input type="text" class="form-control" formControlName="inputPap" [readOnly]="esReadOnly">
                                                         
                                                     </td>
-                                                    <td class="column_3">
+                                                    <!-- <td class="column_3">
                                                         <p-checkbox 
                                                         [(ngModel)]="checkPap" 
                                                         [binary]="true" 
                                                         inputId="binary"
                                                         formControlName="checkPap"
                                                         />
-                                                    </td>
+                                                    </td> -->
                                                     <td *ngIf="esVisible==true">
                                                         <button type="button" class="btn btn-danger btn-sm" ><i class="fas fa-lg fa-trash"></i></button>
                                                     </td>
