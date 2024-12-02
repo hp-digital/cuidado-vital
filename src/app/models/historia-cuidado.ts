@@ -44,5 +44,5 @@ export class HistoriaCuidadoDTO{
     BalanceHidrico?: BalanceHidricoDTO;
     HistorialObstetrico?: HistorialObstetricoDTO[];
     ControlPreNatal?: ControlPreNatalDTO[];
-    SeguimientoAnalisis?: SeguimientoAnalisisDTO;
+    SeguimientoAnalisis?: SeguimientoAnalisisDTO[];
 }

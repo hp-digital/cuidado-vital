@@ -1263,7 +1263,7 @@ export class ControlPrenatalComponent implements OnInit {
     console.log(obs)
     obs.forEach((element:any)=>{
       var pesoM:number;
-      pesoM = element.ExamenPreferencial.MovFetal;
+      pesoM = element.FuncionVital.AumentoPeso;
       this.pesoMaterno.push(pesoM);
     });
     obs.forEach((element:any)=>{
@@ -1378,7 +1378,7 @@ export class ControlPrenatalComponent implements OnInit {
           fill: false,
         },
         {
-          label: 'Peso Materno',
+          label: 'Aumento de Peso',
           data: this.pesoMaterno,
           borderColor: '#ff6384',
           backgroundColor:'#ff6384',

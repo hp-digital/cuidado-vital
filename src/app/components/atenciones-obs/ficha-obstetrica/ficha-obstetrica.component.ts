@@ -97,7 +97,7 @@ export class FichaObstetricaComponent implements OnInit{
         {id: 1, nombre: 'Naúseas o vómitos exagerados'},
         {id: 2, nombre: 'Fiebre, escalofríos'},
         {id: 3, nombre: 'Hinchazón de manos y cara'},
-        {id: 4, nombre: 'dolor de cabeza, zunmbido de oído, visón borrosa o dolor abdominal'},
+        {id: 4, nombre: 'Dolor de cabeza, zunmbido de oído, visón borrosa o dolor abdominal'},
         {id: 5, nombre: 'Pérdida de líquido o sangre por vagina o genitales'},
         {id: 6, nombre: 'Disminución o ausencia de movimientos del bebé durante el día'}
     ];
@@ -1122,8 +1122,18 @@ export class FichaObstetricaComponent implements OnInit{
         obs.Aro = element.aro;
         obs.AroMotivo = element.aroMotivo;
         obs.DatoNino = element.datoNino;
-        obs.SignosAlarma = element.signosAlarma;
+        
         obs.Diagnostico = element.diagnostico;
+
+        obs.SignosAlarma = [];
+        if(element.signosAlarma != null){
+          element.signosAlarma.forEach((element:any)=>{
+            let s = new DesplegableDTO();
+            s.Id = element.id;
+            s.Nombre = element.nombre;
+            obs.SignosAlarma?.push(s);
+          });
+        }
 
         obs.RecomendacionesGenerales = [];
         if(element.recomendacionesGenerales != null)
@@ -1185,45 +1195,40 @@ export class FichaObstetricaComponent implements OnInit{
 
     let antecedente = new AntecedenteObstetricoDTO()
     
-     this.dataFormGroup.controls['inputSignoAlarma'].setValue(obstetricia[0].SignosAlarma);
-    /*this.dataFormGroup.controls['inputP'].setValue(obstetricia[0].Antecedentes?.P);
-    this.dataFormGroup.controls['inputG1'].setValue(obstetricia[0].Antecedentes?.G1);
-    this.dataFormGroup.controls['inputG2'].setValue(obstetricia[0].Antecedentes?.G2);
-    this.dataFormGroup.controls['inputG3'].setValue(obstetricia[0].Antecedentes?.G3);
-    this.dataFormGroup.controls['inputFur'].setValue(obstetricia[0].Antecedentes?.Fur);
-    this.dataFormGroup.controls['inputFgFur'].setValue(obstetricia[0].Antecedentes?.FgFur);
-    this.dataFormGroup.controls['inputEgEco'].setValue(obstetricia[0].Antecedentes?.EgEco);
-    this.dataFormGroup.controls['inputFppFur'].setValue(moment(obstetricia[0].Antecedentes?.FppFur).format('DD/MM/yyyy'));
-    this.dataFormGroup.controls['inputFppEco'].setValue(moment(obstetricia[0].Antecedentes?.FppEco).format('DD/MM/yyyy'));
-
-    this.dataFormGroup.controls['inputCondicionMedicaCronica'].setValue(obstetricia[0].RiesgosPreExistente?.CondicionMedica);
-    this.dataFormGroup.controls['inputQuirurgicos'].setValue(obstetricia[0].RiesgosPreExistente?.Quirurgico);
-    this.dataFormGroup.controls['inputEnfermedadesCongenitas'].setValue(obstetricia[0].RiesgosPreExistente?.EnfermedadCongenita);
-    this.dataFormGroup.controls['inputFumaAlcohol'].setValue(obstetricia[0].RiesgosPreExistente?.Fuma);
-
-    this.dataFormGroup.controls['inputPlacentaPrevia'].setValue(obstetricia[0].RiesgoActual?.PlacentaPrevia);
-    this.dataFormGroup.controls['inputSobrepeso'].setValue(obstetricia[0].RiesgoActual?.SobrePeso);
-    this.dataFormGroup.controls['inputItu'].setValue(obstetricia[0].RiesgoActual?.Itu);
-    this.dataFormGroup.controls['inputPresionAlta'].setValue(obstetricia[0].RiesgoActual?.PresionAlta);
-
-    this.dataFormGroup.controls['inputTemperatura'].setValue(obstetricia[0].FuncionVital?.Temperatura);
-    this.dataFormGroup.controls['inputFrecuenciaCardiaca'].setValue(obstetricia[0].FuncionVital?.Fc);
-    this.dataFormGroup.controls['inputPresionSistolica'].setValue(obstetricia[0].FuncionVital?.PresionSistolica);
-    this.dataFormGroup.controls['inputPresionDiastolica'].setValue(obstetricia[0].FuncionVital?.PresionDiastolica);
-    this.dataFormGroup.controls['inputSaturacion'].setValue(obstetricia[0].FuncionVital?.Saturacion);
-    this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].setValue(obstetricia[0].FuncionVital?.Fr);
-    this.dataFormGroup.controls['inputTalla'].setValue(obstetricia[0].FuncionVital?.Talla);
-    this.dataFormGroup.controls['inputPeso'].setValue(obstetricia[0].FuncionVital?.Peso);
-    this.dataFormGroup.controls['inputImc'].setValue(obstetricia[0].FuncionVital?.Imc);
-    this.dataFormGroup.controls['inputPesoHabitual'].setValue(obstetricia[0].FuncionVital?.PesoHabitual);
-    this.dataFormGroup.controls['inputPesoActual'].setValue(obstetricia[0].FuncionVital?.PesoActual);
-    this.dataFormGroup.controls['inputAumentoPeso'].setValue(obstetricia[0].FuncionVital?.AumentoPeso);
-    this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionSistolicaIzquierda);
-    this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionDiastolicaIzquierda); */
   }
 
   Guardar(){
+    let signo = this.dataFormGroup.controls['inputSignoAlarma'].value;
+    let sstf : DesplegableDTO[]=[];
+    if(signo != null)
+    {
+      signo.forEach((element:any)=>{
+        let s = new DesplegableDTO();
+        s.Id = element.id;
+        s.Nombre = element.nombre;
+        sstf.push(s);
+      });
+    }
+    this.objObstetricia[0].SignosAlarma = sstf;
 
+    if(this.objObstetricia[0].SignosAlarma != null){
+
+      console.log("hcl", this.objHistoria)
+
+      this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
+        next: (data) => {
+          this.MostrarNotificacionSuccessModal('El registro se guardó con éxito.', '');
+          this.CerrarModal();
+        },
+        error: (e) => {
+          console.log('Error: ', e);
+          this.verSpinner = false;
+        },
+        complete: () => { this.verSpinner = false; }
+      });
+  }else{
+    this.MostrarNotificacionWarning("Ningún servicio seleccionado", "Error");
+  }
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

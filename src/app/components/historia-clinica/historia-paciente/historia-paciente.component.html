@@ -79,9 +79,9 @@
                                  <br>
                                 <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar(lista.idHistoriaClinica)">Examenes auxiliares</button>
                                 <button *ngIf="lista.idEspecialidad!=1" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlesReporte(lista.idHistoriaClinica, lista.idEspecialidad)">Reportes</button>
-                                <button *ngIf="lista.idEspecialidad==1" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirFichaObstetrica(lista.idHistoriaClinica)">Ficha Obstetrica</button>
-                                <button *ngIf="lista.idEspecialidad==1" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlPreNatal(lista.idHistoriaClinica)">Control Pre Natal</button>
-                                <button *ngIf="lista.idEspecialidad==1" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirSeguimiento(lista.idHistoriaClinica)">Seguimiento Análisis</button>
+                                <button *ngIf="lista.idEspecialidad==1 || lista.idEspecialidad==11" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirFichaObstetrica(lista.idHistoriaClinica)">Ficha Obstetrica</button>
+                                <button *ngIf="lista.idEspecialidad==1 || lista.idEspecialidad==11" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlPreNatal(lista.idHistoriaClinica)">Control Pre Natal</button>
+                                <button *ngIf="lista.idEspecialidad==1 || lista.idEspecialidad==11" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirSeguimiento(lista.idHistoriaClinica)">Seguimiento Análisis</button>
                             </div>
                         </div>
                         <div class="col-xl-6">
@@ -89,8 +89,8 @@
                                 <br>
                                 <button type="button" class="btn btn-green-custom btn-sm" *ngIf="lista.idTipoOrigenAtencion==2 || lista.idEspecialidad!=1" (click)="AbrirHistoria(lista.idHistoriaClinica)">Historial de atención</button>
                                 <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirRecetas(lista.idHistoriaClinica)">Recetas</button>
-                                <button *ngIf="lista.idEspecialidad==1" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirFunciones(lista.idHistoriaClinica)">Funciones Vitales</button>
-                                <button *ngIf="lista.idEspecialidad==1" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirBitacora(lista.idHistoriaClinica)">Bitácora</button>
+                                <button *ngIf="lista.idEspecialidad==1 || lista.idEspecialidad==11" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirFunciones(lista.idHistoriaClinica)">Funciones Vitales</button>
+                                <button *ngIf="lista.idEspecialidad==1 || lista.idEspecialidad==11" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirBitacora(lista.idHistoriaClinica)">Bitácora</button>
                             </div>
                         </div>
                     </div>

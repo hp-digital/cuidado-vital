@@ -504,7 +504,7 @@
                 <div class="col-xl-3">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">Edema</label>
-                        <input type="number" class="form-control" formControlName="inputEdema"/>
+                        <input type="text" class="form-control" formControlName="inputEdema"/>
                         <div *ngIf="Controls['inputEdema'].invalid && (Controls['inputEdema'].dirty || Controls['inputEdema'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div>
@@ -545,20 +545,13 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="form-group mb-3">
-                        <label class="form-label mb-3">SIGNOS DE ALARMA</label>
+                        <h6>SIGNOS DE ALARMA</h6>
                         <!-- <textarea name="" class="form-control" rows="3" formControlName="inputSignoAlarma"></textarea>
                         <div *ngIf="Controls['inputSignoAlarma'].invalid && (Controls['inputSignoAlarma'].dirty || Controls['inputSignoAlarma'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
                         </div> -->
-                        <div >
-                            <p-multiSelect 
-                                [options]="signos" 
-                                [(ngModel)]="selectedSignos" 
-                                placeholder="Seleccione las opciones" 
-                                optionLabel="nombre" 
-                                display="chip" 
-                                formControlName="inputSignoAlarma"
-                                [showClear]="true" />
+                        <div class="row box-shadow" *ngFor="let s of listadoSignos; let i = index">
+                            <div class="col-xl-11">{{s.Nombre}}</div>
                         </div>
                     </div>
                 </div>
