@@ -5,104 +5,108 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="CerrarModal()"></button>
     </div>
     <div class="modal-body">
-
-        <div id="header-component">
-            <div class="row">
-                <div class="col-xl-3">
-                    <div class="form-group mb-3">
-                        <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
-                    </div>
-                </div>				
-            </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <div class="form-group mb-3">
-                        <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
-                    </div>
-                </div>
-                <div class="col-xl-3">
-                    <div class="form-group mb-3">
-                        <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
-                    </div>
-                </div>
-                <div class="col-xl-3">
-                    <div class="form-group mb-3">
-                        <label class="fw-bold">Fecha atención : </label> <span>{{fecha | date : 'dd/MM/YYYY'}}</span>
-                    </div>
-                </div>															
-            </div>
-        </div>								
-        <hr/>
-        <p-tabView>
-            <p-tabPanel header=Tabla >
-                <table class="table table-bordered">
-                    <!-- Cabecera -->
-                    <thead>
-                      <tr>
-                        <th> </th>
-                        <th *ngFor="let registro of objControl; let index = index"> {{ index + 1 }}</th>
-                      </tr>
-                    </thead>
-                
-                    <!-- Cuerpo -->
-                    <tbody>
-                      <tr *ngFor="let key of keys">
-                        <!-- Nombre del campo -->
-                        <td>{{ CambiarTexto(key)  }}</td>
-                
-                        <!-- Valores o inputs para cada registro -->
-                        <td *ngFor="let registro of objControl">
-                          <!-- Si el valor es vacío, se muestra un input -->
-                          <input
-                            *ngIf="registro[key] === '' || registro[key] === null || registro[key] === undefined"
-                            type="text"
-                            class="form-control"
-                            [(ngModel)]="registro[key]"
-                            placeholder="Ingrese valor"
-                          />
-                
-                          <!-- Si el valor no es vacío, se muestra el valor directamente -->
-                          <span *ngIf="registro[key] !== '' && registro[key] !== null && registro[key] !== undefined">
-                            {{ registro[key] }}
-                          </span>
-                        </td>
-                      </tr>
-                    </tbody>
-                </table>
-            </p-tabPanel>
-            <p-tabPanel  header=Gráficos>
-                <div class="row">
-                    <div class="col-xl-6">
-                        <p-chart
-                            type="line"
-                            [data]="chartDataPeso"
-                            [options]="chartOptionsPeso"
-                            style="width: 100%; height: 400px;"
-                        ></p-chart>
-                    </div>
-                    <div class="col-xl-6">
-                        <p-chart
-                            type="line"
-                            [data]="chartDataAltura"
-                            [options]="chartOptionsAltura"
-                            style="width: 100%; height: 400px;"
-                        ></p-chart>
-                    </div>
-                    <br>
-                    <div class="col-xl-12">
-                        <p-chart
-                            type="line"
-                            [data]="chartDataPesoFetal"
-                            [options]="chartOptionsPesoFetal"
-                            style="width: 100%; height: 400px;"
-                        ></p-chart>
-                    </div>
-                </div>
-                
-            </p-tabPanel>
-        </p-tabView>
+        <form [formGroup]="dataFormGroup">
 
         
+            <div id="header-component">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Médico : </label> <span>{{medico}}</span>
+                        </div>
+                    </div>				
+                </div>
+                <div class="row">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Paciente : </label> <span>{{paciente}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Nro. HCL : </label> <span>{{nroHcl}}</span>
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="form-group mb-3">
+                            <label class="fw-bold">Fecha atención : </label> <span>{{fecha | date : 'dd/MM/YYYY'}}</span>
+                        </div>
+                    </div>															
+                </div>
+            </div>								
+            <hr/>
+            <p-tabView>
+                <p-tabPanel header=Tabla >
+                    <table class="table table-bordered">
+                        <!-- Cabecera -->
+                        <thead>
+                        <tr>
+                            <th> </th>
+                            <th *ngFor="let registro of objControl; let index = index"> {{ index + 1 }}</th>
+                        </tr>
+                        </thead>
+                    
+                        <!-- Cuerpo -->
+                        <tbody>
+                        <tr *ngFor="let key of keys">
+                            <!-- Nombre del campo -->
+                            <td>{{ CambiarTexto(key)  }}</td>
+                    
+                            <!-- Valores o inputs para cada registro -->
+                            <td *ngFor="let registro of objControl">
+                                <!-- Si el valor es vacío, se muestra un input -->
+                                <input
+                                    *ngIf="registro[key] === '' || registro[key] === null || registro[key] === undefined"
+                                    type="text"
+                                    class="form-control"
+                                    [(ngModel)]="registro[key]"
+                                    placeholder="Ingrese valor"
+                                    [name]="'input_' + 0 + '_' + key"
+                                    formControlName="inputValor"
+                                />
+                        
+                                <!-- Si el valor no es vacío, se muestra el valor directamente -->
+                                <span *ngIf="registro[key] !== '' && registro[key] !== null && registro[key] !== undefined">
+                                    {{ registro[key] }}
+                                </span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </p-tabPanel>
+                <p-tabPanel  header=Gráficos>
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <p-chart
+                                type="line"
+                                [data]="chartDataPeso"
+                                [options]="chartOptionsPeso"
+                                style="width: 100%; height: 400px;"
+                            ></p-chart>
+                        </div>
+                        <div class="col-xl-6">
+                            <p-chart
+                                type="line"
+                                [data]="chartDataAltura"
+                                [options]="chartOptionsAltura"
+                                style="width: 100%; height: 400px;"
+                            ></p-chart>
+                        </div>
+                        <br>
+                        <div class="col-xl-12">
+                            <p-chart
+                                type="line"
+                                [data]="chartDataPesoFetal"
+                                [options]="chartOptionsPesoFetal"
+                                style="width: 100%; height: 400px;"
+                            ></p-chart>
+                        </div>
+                    </div>
+                    
+                </p-tabPanel>
+            </p-tabView>
+
+        </form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>

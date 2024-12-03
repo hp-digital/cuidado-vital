@@ -51,6 +51,8 @@ import { RiesgoObstetricoDTO } from '@models/riesgo-obstetrico';
 import { RiesgoActualDTO } from '@models/riesgo-actual';
 import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
 import { ExamenPreferencialDTO } from '@models/examen-preferencial';
+import { SeguimientoAnalisisDTO } from '@models/segumiento-analisis';
+import { DetalleSeguimientoDTO } from '@models/detalle-seguimiento';
 
 @Component({
   selector: 'app-receta',
@@ -1284,7 +1286,29 @@ export class RecetaComponent implements OnInit {
       });
     }
     
-
+    let seguimiento :  SeguimientoAnalisisDTO[]=[];
+    if(objHistoria.seguimientoAnalisis != null)
+    {
+      objHistoria.seguimientoAnalisis.forEach((element:any)=>{
+        let sstf = new SeguimientoAnalisisDTO();
+        sstf.FechaRegistro = element.fechaRegistro;
+        sstf.Medico = element.medico;
+        sstf.Detalle = [];
+        
+        if(element.detalle != null)
+        {
+          element.detalle.forEach((data:any)=>{
+            let det = new DetalleSeguimientoDTO();
+            det.TipoExamen = data.tipoExamen;
+            det.Fecha = data.fecha;
+            det.Resultado = data.resultado;
+            sstf.Detalle?.push(det);
+          });
+          
+        }
+        seguimiento.push(sstf);
+      });
+    }
     
 
 
@@ -1315,6 +1339,7 @@ export class RecetaComponent implements OnInit {
     historiaCalidad.NotaEnfermera = notaEnfermera;
     historiaCalidad.BalanceHidrico = balance;
     historiaCalidad.HistorialObstetrico = obstetricia;
+    historiaCalidad.SeguimientoAnalisis = seguimiento;
 
     this.objHistoria = historiaCalidad;
   }

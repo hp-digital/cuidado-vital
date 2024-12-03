@@ -109,7 +109,7 @@ export class ControlPrenatalComponent implements OnInit {
     private settings : SettingsService,
   ){
     this.dataFormGroup = new FormGroup({
-
+      inputValor: new FormControl()
     });
   }
 
@@ -1268,7 +1268,7 @@ export class ControlPrenatalComponent implements OnInit {
     });
     obs.forEach((element:any)=>{
       var ute:number;
-      ute = element.ExamenPreferencial.AlturaUterina;
+      ute = Number(element.ExamenPreferencial.AlturaUterina);
       this.alturaUterina.push(ute);
     });
     obs.forEach((element:any)=>{
@@ -1276,6 +1276,8 @@ export class ControlPrenatalComponent implements OnInit {
       pesoF = element.ExamenPreferencial.PesoFetal;
       this.pesoFetal.push(pesoF);
     });
+
+    console.log(this.alturaUterina)
   }
 
   Guardar(){

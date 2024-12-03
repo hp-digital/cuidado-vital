@@ -52,11 +52,18 @@ import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ComboDTO } from '@models/ComboDTO';
+import { ListboxModule } from 'primeng/listbox';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { SeguimientoAnalisisDTO } from '@models/segumiento-analisis';
+import { DetalleSeguimientoDTO } from '@models/detalle-seguimiento';
 
 @Component({
   selector: 'app-historial-obste',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule,ToastModule, MultiSelectModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule,ToastModule, MultiSelectModule,ListboxModule,
+    ButtonModule,
+    InputTextModule],
   providers: [MessageService],
   templateUrl: './historial-obste.component.html',
   styleUrl: './historial-obste.component.css'
@@ -112,6 +119,10 @@ export class HistorialObsteComponent implements OnInit{
   selectedSignos!: ComboDTO[];
 
   listadoSignos:DesplegableDTO[]=[];
+
+  recomendaciones: string[] = ['Mantener una dieta adecuada', 'Mantenerse hidratada', 'No alzar peso', 'No automedicarse', 'Hacer ejercicios recomendados por el médico'];
+  selectedRecomendaciones: string[] = [];
+  newRecomendacion: string = '';
 
   constructor(
     private bsModalHistorialClinico: BsModalRef,
@@ -178,6 +189,7 @@ export class HistorialObsteComponent implements OnInit{
       inputPresionSistolicaIzquierda: new FormControl(),
       inputPresionDiastolicaIzquierda: new FormControl(),
       inputEdema: new FormControl(),
+      inputNuevaRecomendacion: new FormControl(),
     });
   }
 
@@ -209,6 +221,19 @@ export class HistorialObsteComponent implements OnInit{
           this.verSpinner = false;
         }
       );
+  }
+ 
+  addRecomendacion() {
+    if (this.newRecomendacion) {
+      this.recomendaciones = [...this.recomendaciones, this.newRecomendacion];
+      this.newRecomendacion = ''; 
+    }
+  }
+  
+
+  removeRecomendacion() {
+    this.recomendaciones = this.recomendaciones.filter(item => !this.selectedRecomendaciones.includes(item));
+    this.selectedRecomendaciones = []; 
   }
 
   AsignarObjetoInicial(data:any){
@@ -1235,6 +1260,30 @@ export class HistorialObsteComponent implements OnInit{
       this.objObstetricia = obstetricia;
       this.MostrarDatos(obstetricia);
     }
+    
+    let seguimiento :  SeguimientoAnalisisDTO[]=[];
+    if(objHistoria.seguimientoAnalisis != null)
+    {
+      objHistoria.seguimientoAnalisis.forEach((element:any)=>{
+        let sstf = new SeguimientoAnalisisDTO();
+        sstf.FechaRegistro = element.fechaRegistro;
+        sstf.Medico = element.medico;
+        sstf.Detalle = [];
+        
+        if(element.detalle != null)
+        {
+          element.detalle.forEach((data:any)=>{
+            let det = new DetalleSeguimientoDTO();
+            det.TipoExamen = data.tipoExamen;
+            det.Fecha = data.fecha;
+            det.Resultado = data.resultado;
+            sstf.Detalle?.push(det);
+          });
+          
+        }
+        seguimiento.push(sstf);
+      });
+    }
 
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -1261,6 +1310,7 @@ export class HistorialObsteComponent implements OnInit{
     historiaCalidad.HistoriaExterna = objHistoria.historiaExterna;
     historiaCalidad.PrimeraAtencion = objHistoria.primeraAtencion;
     historiaCalidad.HistorialObstetrico = obstetricia;
+    historiaCalidad.SeguimientoAnalisis = seguimiento;
 
     this.objHistoria = historiaCalidad;
   }
@@ -1441,7 +1491,7 @@ export class HistorialObsteComponent implements OnInit{
 
     obstetricia.SignosAlarma = this.listadoSignos;
     obstetricia.Diagnostico = this.dataFormGroup.controls['inputDiagnostico'].value;
-    obstetricia.RecomendacionesGenerales = this.listadoGeneral;
+    obstetricia.RecomendacionesGenerales = this.recomendaciones;
     obstetricia.RecomendacionesEspecificas = this.listadoEspecificos;
 
     this.objObstetricia.push(obstetricia);
