@@ -1263,8 +1263,9 @@ export class SeguimientoAnalisisComponent implements OnInit {
       });
     }
     let seguimiento :  SeguimientoAnalisisDTO[]=[];
-    if(objHistoria.seguimientoAnalisis.length != 0)
+    if(objHistoria.seguimientoAnalisis != null)
     {
+      
       objHistoria.seguimientoAnalisis.forEach((element:any)=>{
         let sstf = new SeguimientoAnalisisDTO();
         sstf.FechaRegistro = element.fechaRegistro;
@@ -1273,6 +1274,7 @@ export class SeguimientoAnalisisComponent implements OnInit {
         
         if(element.detalle != null)
         {
+          console.log("aaa")
           element.detalle.forEach((data:any)=>{
             let det = new DetalleSeguimientoDTO();
             det.TipoExamen = data.tipoExamen;
@@ -1383,6 +1385,7 @@ export class SeguimientoAnalisisComponent implements OnInit {
 
   MostrarDatosInicial()
   {
+    console.log("asdasd")
     this.rows = [
       {  tipoExamen: 'FSH / LH0', fecha: null, resultado: '' },
       {  tipoExamen: 'TSH', fecha: null, resultado: '' },
