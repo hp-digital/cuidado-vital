@@ -1,4 +1,5 @@
 import { AntecedenteObstetricoDTO } from "./antecedente-obstetrico";
+import { DesplegableDTO } from "./depleglable";
 import { ExamenPreferencialDTO } from "./examen-preferencial";
 import { FuncionVitalObstetriciaDTO } from "./funcion-vital-obstetricia";
 import { RiesgoActualDTO } from "./riesgo-actual";
@@ -19,7 +20,7 @@ export class HistorialObstetricoDTO
     Aro?: string;
     AroMotivo?: string;
     DatoNino?:string;
-    SignosAlarma?: string;
+    SignosAlarma?: DesplegableDTO[];
     Diagnostico?: string;
     RecomendacionesGenerales?:string[];
     RecomendacionesEspecificas?:string[];

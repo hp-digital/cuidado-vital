@@ -107,9 +107,15 @@
                 <div class="col-xl-12">
                     <div class="form-group mb-3">
                         <label class="form-label mb-3">SIGNOS DE ALARMA</label>
-                        <textarea name="" class="form-control" rows="3" formControlName="inputSignoAlarma"></textarea>
-                        <div *ngIf="Controls['inputSignoAlarma'].invalid && (Controls['inputSignoAlarma'].dirty || Controls['inputSignoAlarma'].touched)" class="text-error">
-                            <div>Campo obligatorio.</div>
+                        <div >
+                            <p-multiSelect 
+                                [options]="signos" 
+                                [(ngModel)]="selectedSignos" 
+                                placeholder="Seleccione las opciones" 
+                                optionLabel="nombre" 
+                                display="chip" 
+                                formControlName="inputSignoAlarma"
+                                [showClear]="true" />
                         </div>
                     </div>
                 </div>
@@ -141,7 +147,7 @@
         </form>
     </div>
     <div class="modal-footer">							
-        <!-- <button type="button" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button> -->
+        <button type="button" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
-        </div>
+    </div>
 </div>

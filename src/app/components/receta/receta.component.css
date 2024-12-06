@@ -1,0 +1,5 @@
+.cabecera {
+    box-shadow: 0 6px 6px rgba(31, 107, 255, 0.1);
+    background: rgb(127,37,88);
+    background: linear-gradient(150deg, rgba(127,37,88,1) 35%, rgba(62,52,125,1) 54%, rgba(30,70,155,1) 72%);
+  }

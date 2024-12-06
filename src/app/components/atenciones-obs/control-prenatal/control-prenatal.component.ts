@@ -109,7 +109,7 @@ export class ControlPrenatalComponent implements OnInit {
     private settings : SettingsService,
   ){
     this.dataFormGroup = new FormGroup({
-
+      inputValor: new FormControl()
     });
   }
 
@@ -1263,12 +1263,12 @@ export class ControlPrenatalComponent implements OnInit {
     console.log(obs)
     obs.forEach((element:any)=>{
       var pesoM:number;
-      pesoM = element.ExamenPreferencial.MovFetal;
+      pesoM = element.FuncionVital.AumentoPeso;
       this.pesoMaterno.push(pesoM);
     });
     obs.forEach((element:any)=>{
       var ute:number;
-      ute = element.ExamenPreferencial.AlturaUterina;
+      ute = Number(element.ExamenPreferencial.AlturaUterina);
       this.alturaUterina.push(ute);
     });
     obs.forEach((element:any)=>{
@@ -1276,6 +1276,8 @@ export class ControlPrenatalComponent implements OnInit {
       pesoF = element.ExamenPreferencial.PesoFetal;
       this.pesoFetal.push(pesoF);
     });
+
+    console.log(this.alturaUterina)
   }
 
   Guardar(){
@@ -1293,6 +1295,65 @@ export class ControlPrenatalComponent implements OnInit {
       },
       complete: () => { this.verSpinner = false; }
     });
+  }
+
+  CambiarTexto(sstf:string){
+
+    if(sstf=='Fecha'){
+      return "FECHA"
+    }
+    else if(sstf=='EgEco'){
+      return "EG x ECO"
+    }
+    else if(sstf=='EgFur'){
+      return "EG x FUR"
+    }
+    else if(sstf=='Peso'){
+      return "PESO"
+    }
+    else if(sstf=='PesoFetal'){
+      return "PESO FETAL"
+    }
+    else if(sstf=='PresionArterial'){
+      return "PRESIÓN ARTERIAL"
+    }
+    else if(sstf=='AlturaUterina'){
+      return "ALTURA UTERINA"
+    }
+    else if(sstf=='Presentacion'){
+      return "PRESENTACION"
+    }
+    else if(sstf=='Fcf'){
+      return "F.C.F.(Lat/min)"
+    }
+    else if(sstf=='MovFetal'){
+      return "MOV. FETAL"
+    }
+    else if(sstf=='AumentoPeso'){
+      return "AUMENTO DE PESO"
+    }
+    else if(sstf=='Plac'){
+      return "PLACENTA"
+    }
+    else if(sstf=='Ila'){
+      return "ILA"
+    }
+    else if(sstf=='Sst'){
+      return "S.S.T."
+    }
+    else if(sstf=='Nst'){
+      return "N.S.T."
+    }
+    else if(sstf=='DopplerIp'){
+      return "DOPPLER IP"
+    }
+    else{
+      return "DOPPLER IR"
+    }
+  /*   else{
+      return sstf.toUpperCase;
+    } */
+   return sstf
   }
 
   CalularGraficosPeso(){
@@ -1319,7 +1380,7 @@ export class ControlPrenatalComponent implements OnInit {
           fill: false,
         },
         {
-          label: 'Peso Materno',
+          label: 'Aumento de Peso',
           data: this.pesoMaterno,
           borderColor: '#ff6384',
           backgroundColor:'#ff6384',

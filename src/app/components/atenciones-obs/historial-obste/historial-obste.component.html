@@ -501,6 +501,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-xl-3">
+                    <div class="form-group mb-3">
+                        <label class="form-label mb-3">Edema</label>
+                        <input type="text" class="form-control" formControlName="inputEdema"/>
+                        <div *ngIf="Controls['inputEdema'].invalid && (Controls['inputEdema'].dirty || Controls['inputEdema'].touched)" class="text-error">
+                            <div>Campo obligatorio.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <hr/>
             <div class="row">
@@ -536,10 +545,13 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="form-group mb-3">
-                        <label class="form-label mb-3">SIGNOS DE ALARMA</label>
-                        <textarea name="" class="form-control" rows="3" formControlName="inputSignoAlarma"></textarea>
+                        <h6>SIGNOS DE ALARMA</h6>
+                        <!-- <textarea name="" class="form-control" rows="3" formControlName="inputSignoAlarma"></textarea>
                         <div *ngIf="Controls['inputSignoAlarma'].invalid && (Controls['inputSignoAlarma'].dirty || Controls['inputSignoAlarma'].touched)" class="text-error">
                             <div>Campo obligatorio.</div>
+                        </div> -->
+                        <div class="row box-shadow" *ngFor="let s of listadoSignos; let i = index">
+                            <div class="col-xl-11">{{s.Nombre}}</div>
                         </div>
                     </div>
                 </div>
@@ -562,7 +574,8 @@
             <div class="row">
                 <div class="col-xl-6">
                     <div class="row">
-                        <div class="col-xl-10">
+                        <label class="cform-label">Recomendaciones Generales</label>
+                        <!-- <div class="col-xl-10">
                             <div class="form-group mb-3">
                                 <label class="cform-label">Recomendaciones Generales</label>
                                 <textarea type="text" class="form-control" formControlName="inputRecomendacionGeneral" rows="2"> </textarea>
@@ -572,7 +585,45 @@
                             <div class="form-group mb-3 mt-4 pt-1">													
                                 <button type="button" class="btn btn-green-custom" (click)="AgregarGeneral()"><i class="fas fa-lg fa-plus"></i></button>
                             </div>
+                        </div> -->
+                        <p-listbox 
+                            [options]="recomendaciones" 
+                            [(ngModel)]="selectedRecomendaciones" 
+                            [style]="{'width':'340px'}"
+                            [filter]="true" 
+                            [multiple]="true"
+                            formControlName="inputRecomendacionGeneral"
+                        >
+                        </p-listbox>
+
+                        <div class="mt-3">
+                            <input 
+                              type="text" 
+                              pInputText 
+                              [(ngModel)]="newRecomendacion" 
+                              placeholder="Escriba uno nuevo" 
+                              class="mr-2"
+                              formControlName="inputNuevaRecomendacion"
+                            />
+                            <button 
+                              pButton 
+                              label="Agregar" 
+                              icon="pi pi-plus" 
+                              class="p-button-sm p-button-success" 
+                              (click)="addRecomendacion()" 
+                              [disabled]="!newRecomendacion"
+                            ></button>
                         </div>
+                        <div class="mt-3">
+                            <button 
+                              pButton 
+                              label="Eliminar Seleccionados" 
+                              icon="pi pi-trash" 
+                              class="p-button-sm p-button-danger" 
+                              (click)="removeRecomendacion()" 
+                              [disabled]="!selectedRecomendaciones || selectedRecomendaciones.length === 0"
+                            ></button>
+                          </div>
                     </div>
                     <br>
                     <div class="row box-shadow" *ngFor="let lista of listadoGeneral; let i = index">

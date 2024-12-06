@@ -50,16 +50,21 @@ import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
 import { ExamenPreferencialDTO } from '@models/examen-preferencial';
 import { CheckboxModule } from 'primeng/checkbox';
 import { SeguimientoAnalisisDTO } from '@models/segumiento-analisis';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { DetalleSeguimientoDTO } from '@models/detalle-seguimiento';
 
 @Component({
   selector: 'app-seguimiento-analisis',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule, CheckboxModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule, CheckboxModule, TableModule, ButtonModule, InputTextModule],
   templateUrl: './seguimiento-analisis.component.html',
   styleUrl: './seguimiento-analisis.component.css'
 })
 export class SeguimientoAnalisisComponent implements OnInit {
 
+  
   dataFormGroup: FormGroup;
   verSpinner:boolean = false;
   idRol: number=0;
@@ -78,8 +83,10 @@ export class SeguimientoAnalisisComponent implements OnInit {
 
   objHistoria=new HistoriaCuidadoDTO();
   objObstetricia: HistorialObstetricoDTO[]=[];
-  objSeguimiento= new SeguimientoAnalisisDTO();
+  objSeguimiento : SeguimientoAnalisisDTO[]=[];
+  detalleSeguimiento: DetalleSeguimientoDTO[]=[];
 
+  rows:any[]=[]
   fecha=new Date();
 
   checkFs:boolean= false;
@@ -207,6 +214,9 @@ export class SeguimientoAnalisisComponent implements OnInit {
       checkMamografia: new FormControl(),
       checkIvaa: new FormControl(),
       checkPap: new FormControl(),
+      inputTipoExamen: new FormControl(),
+      inputFecha: new FormControl(),
+      inputResultado: new FormControl(),
     });
   }
 
@@ -1252,100 +1262,37 @@ export class SeguimientoAnalisisComponent implements OnInit {
         obstetricia.push(obs);
       });
     }
-
-    let seguimiento = new SeguimientoAnalisisDTO();
+    let seguimiento :  SeguimientoAnalisisDTO[]=[];
     if(objHistoria.seguimientoAnalisis != null)
     {
-      seguimiento.Fsh = objHistoria.seguimientoAnalisis.fsh;
-      seguimiento.FshFecha = objHistoria.seguimientoAnalisis.fshFecha;
-      seguimiento.FshResultado = objHistoria.seguimientoAnalisis.fshResultado;
-      seguimiento.Tsh = objHistoria.seguimientoAnalisis.tsh;
-      seguimiento.TshFecha = objHistoria.seguimientoAnalisis.tshFecha;
-      seguimiento.TshResultado = objHistoria.seguimientoAnalisis.tshResultado;
-      seguimiento.T4l = objHistoria.seguimientoAnalisis.t4l;
-      seguimiento.T4lFecha = objHistoria.seguimientoAnalisis.t4lFecha;
-      seguimiento.T4lResultado = objHistoria.seguimientoAnalisis.t4lResultado;
-      seguimiento.Estradiol = objHistoria.seguimientoAnalisis.estradiol;
-      seguimiento.EstradiolFecha = objHistoria.seguimientoAnalisis.estradiolFecha;
-      seguimiento.EstradiolResultado = objHistoria.seguimientoAnalisis.estradiolResultado;
-      seguimiento.Amh = objHistoria.seguimientoAnalisis.amh;
-      seguimiento.AmhFecha = objHistoria.seguimientoAnalisis.amhFecha;
-      seguimiento.AmhResultado = objHistoria.seguimientoAnalisis.amhResultado;
-      seguimiento.Glucosa = objHistoria.seguimientoAnalisis.glucosa;
-      seguimiento.GlucosaFecha = objHistoria.seguimientoAnalisis.glucosaFecha;
-      seguimiento.GlucosaResultado = objHistoria.seguimientoAnalisis.glucosaResultado;
-      seguimiento.Insulina = objHistoria.seguimientoAnalisis.insulina;
-      seguimiento.InsulinaFecha = objHistoria.seguimientoAnalisis.insulinaFecha;
-      seguimiento.InsulinaResultado = objHistoria.seguimientoAnalisis.insulinaResultado;
-      seguimiento.Prolactina = objHistoria.seguimientoAnalisis.prolactina;
-      seguimiento.ProlactinaFecha = objHistoria.seguimientoAnalisis.prolactinaFecha;
-      seguimiento.ProlactinaResultado = objHistoria.seguimientoAnalisis.prolactinaResultado;
-      seguimiento.Hemograma = objHistoria.seguimientoAnalisis.hemograma;
-      seguimiento.HemogramaFecha = objHistoria.seguimientoAnalisis.hemogramaFecha;
-      seguimiento.HemogramaResultado = objHistoria.seguimientoAnalisis.hemogramaResultado;
-      seguimiento.Ts = objHistoria.seguimientoAnalisis.ts;
-      seguimiento.TsFecha = objHistoria.seguimientoAnalisis.tsFecha;
-      seguimiento.TsResultado = objHistoria.seguimientoAnalisis.tsResultado;
-      seguimiento.Hepatitis = objHistoria.seguimientoAnalisis.hepatitis;
-      seguimiento.HepatitisFecha = objHistoria.seguimientoAnalisis.hepatitisFecha;
-      seguimiento.HepatitisResultado = objHistoria.seguimientoAnalisis.hepatitisResultado;
-      seguimiento.Clamidia = objHistoria.seguimientoAnalisis.clamidia;
-      seguimiento.ClamidiaFecha = objHistoria.seguimientoAnalisis.clamidiaFecha;
-      seguimiento.ClamidiaResultado = objHistoria.seguimientoAnalisis.clamidiaResultado;
-      seguimiento.Eco = objHistoria.seguimientoAnalisis.eco;
-      seguimiento.EcoFecha = objHistoria.seguimientoAnalisis.ecoFecha;
-      seguimiento.EcoResultado = objHistoria.seguimientoAnalisis.ecoResultado;
-      seguimiento.Urea = objHistoria.seguimientoAnalisis.urea;
-      seguimiento.UreaFecha = objHistoria.seguimientoAnalisis.ureaFecha;
-      seguimiento.UreaResultado = objHistoria.seguimientoAnalisis.ureaResultado;
-      seguimiento.Urocultivo = objHistoria.seguimientoAnalisis.urocultivo;
-      seguimiento.UrocultivoFecha = objHistoria.seguimientoAnalisis.urocultivoFecha;
-      seguimiento.UrocultivoResultado = objHistoria.seguimientoAnalisis.urocultivoResultado;
-      seguimiento.Rpr = objHistoria.seguimientoAnalisis.rpr;
-      seguimiento.RprFecha = objHistoria.seguimientoAnalisis.rprFecha;
-      seguimiento.RprResultado = objHistoria.seguimientoAnalisis.rprResultado;
-      seguimiento.Hiv = objHistoria.seguimientoAnalisis.hiv;
-      seguimiento.HivFecha = objHistoria.seguimientoAnalisis.hivFecha;
-      seguimiento.HivResultado = objHistoria.seguimientoAnalisis.hivResultado;
-      seguimiento.Bhcg = objHistoria.seguimientoAnalisis.bhcg;
-      seguimiento.BhcgFecha = objHistoria.seguimientoAnalisis.bhcgFecha;
-      seguimiento.BhcgResultado = objHistoria.seguimientoAnalisis.bhcgResultado;
-      seguimiento.TiempoCuagulacion = objHistoria.seguimientoAnalisis.tiempoCuagulacion;
-      seguimiento.TiempoCuagulacionFecha = objHistoria.seguimientoAnalisis.tiempoCuagulacionFecha;
-      seguimiento.TiempoCuagulacionResultado = objHistoria.seguimientoAnalisis.tiempoCuagulacionResultado;
-      seguimiento.Sangria = objHistoria.seguimientoAnalisis.sangria;
-      seguimiento.SangriaFecha = objHistoria.seguimientoAnalisis.sangriaFecha;
-      seguimiento.SangriaResultado = objHistoria.seguimientoAnalisis.sangriaResultado;
-      seguimiento.GrupoRh = objHistoria.seguimientoAnalisis.grupoRh;
-      seguimiento.GrupoRhFecha = objHistoria.seguimientoAnalisis.grupoRhFecha;
-      seguimiento.GrupoRhResultado = objHistoria.seguimientoAnalisis.grupoRhResultado;
-      seguimiento.Ecografia = objHistoria.seguimientoAnalisis.ecografia;
-      seguimiento.EcografiaFecha = objHistoria.seguimientoAnalisis.ecografiaFecha;
-      seguimiento.EcografiaResultado = objHistoria.seguimientoAnalisis.ecografiaResultado;
-      seguimiento.Sono = objHistoria.seguimientoAnalisis.sono;
-      seguimiento.SonoFecha = objHistoria.seguimientoAnalisis.sonoFecha;
-      seguimiento.SonoResultado = objHistoria.seguimientoAnalisis.sonoResultado;
-      seguimiento.Histerosal = objHistoria.seguimientoAnalisis.histerosal;
-      seguimiento.HisterosalFecha = objHistoria.seguimientoAnalisis.histerosalFecha;
-      seguimiento.HisterosalResultado = objHistoria.seguimientoAnalisis.histerosalResultado;
-      seguimiento.Histeroscopia = objHistoria.seguimientoAnalisis.histeroscopia;
-      seguimiento.HisteroscopiaFecha = objHistoria.seguimientoAnalisis.histeroscopiaFecha;
-      seguimiento.HisteroscopiaResultado = objHistoria.seguimientoAnalisis.histeroscopiaResultado;
-      seguimiento.Mamografia = objHistoria.seguimientoAnalisis.mamografia;
-      seguimiento.MamografiaFecha = objHistoria.seguimientoAnalisis.mamografiaFecha;
-      seguimiento.MamografiaResultado = objHistoria.seguimientoAnalisis.mamografiaResultado;
-      seguimiento.Ivaa = objHistoria.seguimientoAnalisis.ivaa;
-      seguimiento.IvaaFecha = objHistoria.seguimientoAnalisis.ivaaFecha;
-      seguimiento.IvaaResultado = objHistoria.seguimientoAnalisis.ivaaResultado;
-      seguimiento.Pap = objHistoria.seguimientoAnalisis.pap;
-      seguimiento.PapFecha = objHistoria.seguimientoAnalisis.papFecha;
-      seguimiento.PapResultado = objHistoria.seguimientoAnalisis.papResultado;
-
-      this.objSeguimiento = seguimiento;
-      this.MostrarDatos(seguimiento)
+      
+      objHistoria.seguimientoAnalisis.forEach((element:any)=>{
+        let sstf = new SeguimientoAnalisisDTO();
+        sstf.FechaRegistro = element.fechaRegistro;
+        sstf.Medico = element.medico;
+        sstf.Detalle = [];
+        
+        if(element.detalle != null)
+        {
+          console.log("aaa")
+          element.detalle.forEach((data:any)=>{
+            let det = new DetalleSeguimientoDTO();
+            det.TipoExamen = data.tipoExamen;
+            det.Fecha = data.fecha;
+            det.Resultado = data.resultado;
+            sstf.Detalle?.push(det);
+          });
+          
+        }
+        seguimiento.push(sstf);
+        this.objSeguimiento.push(sstf);
+        this.rows = objHistoria.seguimientoAnalisis[0].detalle;
+      });
+    }
+    else{
+      this.MostrarDatosInicial();
     }
     
-
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
@@ -1373,9 +1320,13 @@ export class SeguimientoAnalisisComponent implements OnInit {
     historiaCalidad.SeguimientoAnalisis = seguimiento;
 
     this.objHistoria = historiaCalidad;
+    console.log("h", this.objHistoria);
   }
 
   Guardar(){
+
+    console.log('Filas guardadas:', this.rows);
+    
     this.AgregarControles();
     
     this.objHistoria.SeguimientoAnalisis = this.objSeguimiento;
@@ -1386,7 +1337,7 @@ export class SeguimientoAnalisisComponent implements OnInit {
 
         this.historiaService.ActualizarHistoria(this.objHistoria).subscribe({
           next: (data) => {
-            this.MostrarNotificacionSuccessModal('El registro de la primera atención se guardó con éxito.', '');
+            this.MostrarNotificacionSuccessModal('El registro se guardó con éxito.', '');
             this.CerrarModal();
           },
           error: (e) => {
@@ -1402,180 +1353,69 @@ export class SeguimientoAnalisisComponent implements OnInit {
 
   AgregarControles(){
     let segui = new SeguimientoAnalisisDTO();
-    segui.Fsh = this.dataFormGroup.controls['checkFsh'].value;
-    segui.FshFecha = this.dataFormGroup.controls['inputFechaFsh'].value;
-    segui.FshResultado = this.dataFormGroup.controls['inputFsh'].value;
-    segui.Tsh = this.dataFormGroup.controls['checkTsh'].value;
-    segui.TshFecha = this.dataFormGroup.controls['inputFechaTsh'].value;
-    segui.TshResultado = this.dataFormGroup.controls['inputTsh'].value;
-    segui.T4l = this.dataFormGroup.controls['checkT4l'].value;
-    segui.T4lFecha = this.dataFormGroup.controls['inputFechaT4l'].value;
-    segui.T4lResultado = this.dataFormGroup.controls['inputT4l'].value;
-    segui.Estradiol = this.dataFormGroup.controls['checkEstradiol'].value;
-    segui.EstradiolFecha = this.dataFormGroup.controls['inputFechaEstradiol'].value;
-    segui.EstradiolResultado = this.dataFormGroup.controls['inputEstradiol'].value;
-    segui.Amh = this.dataFormGroup.controls['checkAmh'].value;
-    segui.AmhFecha = this.dataFormGroup.controls['inputFechaAmh'].value;
-    segui.AmhResultado = this.dataFormGroup.controls['inputAmh'].value;
-    segui.Glucosa = this.dataFormGroup.controls['checkGlucosa'].value;
-    segui.GlucosaFecha = this.dataFormGroup.controls['inputFechaGlucosa'].value;
-    segui.GlucosaResultado = this.dataFormGroup.controls['inputGlucosa'].value;
-    segui.Insulina = this.dataFormGroup.controls['checkInsulina'].value;
-    segui.InsulinaFecha = this.dataFormGroup.controls['inputFechaInsulina'].value;
-    segui.InsulinaResultado = this.dataFormGroup.controls['inputInsulina'].value;
-    segui.Prolactina = this.dataFormGroup.controls['checkProlactina'].value;
-    segui.ProlactinaFecha = this.dataFormGroup.controls['inputFechaProlactina'].value;
-    segui.ProlactinaResultado = this.dataFormGroup.controls['inputProlactina'].value;
-    segui.Hemograma = this.dataFormGroup.controls['checkHemograma'].value;
-    segui.HemogramaFecha = this.dataFormGroup.controls['inputFechaHemograma'].value;
-    segui.HemogramaResultado = this.dataFormGroup.controls['inputHemograma'].value;
-    segui.Ts = this.dataFormGroup.controls['checkTs'].value;
-    segui.TsFecha = this.dataFormGroup.controls['inputFechaTs'].value;
-    segui.TsResultado = this.dataFormGroup.controls['inputTs'].value;
-    segui.Hepatitis = this.dataFormGroup.controls['checkHepatitis'].value;
-    segui.HepatitisFecha = this.dataFormGroup.controls['inputFechaHepatitis'].value;
-    segui.HepatitisResultado = this.dataFormGroup.controls['inputHepatitis'].value;
-    segui.Clamidia = this.dataFormGroup.controls['checkClamidia'].value;
-    segui.ClamidiaFecha = this.dataFormGroup.controls['inputFechaClamidia'].value;
-    segui.ClamidiaResultado = this.dataFormGroup.controls['inputClamidia'].value;
-    segui.Eco = this.dataFormGroup.controls['checkEco'].value;
-    segui.EcoFecha = this.dataFormGroup.controls['inputFechaEco'].value;
-    segui.EcoResultado = this.dataFormGroup.controls['inputEco'].value;
-    segui.Urea = this.dataFormGroup.controls['checkUrea'].value;
-    segui.UreaFecha = this.dataFormGroup.controls['inputFechaUrea'].value;
-    segui.UreaResultado = this.dataFormGroup.controls['inputUrea'].value;
-    segui.Urocultivo = this.dataFormGroup.controls['checkUrocultivo'].value;
-    segui.UrocultivoFecha = this.dataFormGroup.controls['inputFechaUrocultivo'].value;
-    segui.UrocultivoResultado = this.dataFormGroup.controls['inputUrocultivo'].value;
-    segui.Rpr = this.dataFormGroup.controls['checkRpr'].value;
-    segui.RprFecha = this.dataFormGroup.controls['inputFechaRpr'].value;
-    segui.RprResultado = this.dataFormGroup.controls['inputRpr'].value;
-    segui.Hiv = this.dataFormGroup.controls['checkHiv'].value;
-    segui.HivFecha = this.dataFormGroup.controls['inputFechaHiv'].value;
-    segui.HivResultado = this.dataFormGroup.controls['inputHiv'].value;
-    segui.Bhcg = this.dataFormGroup.controls['checkBhcg'].value;
-    segui.BhcgFecha = this.dataFormGroup.controls['inputFechaBhcg'].value;
-    segui.BhcgResultado = this.dataFormGroup.controls['inputBhcg'].value;
-    segui.TiempoCuagulacion = this.dataFormGroup.controls['checkTiempoCuagulacion'].value;
-    segui.TiempoCuagulacionFecha = this.dataFormGroup.controls['inputFechaCuagulacion'].value;
-    segui.TiempoCuagulacionResultado = this.dataFormGroup.controls['inputCuagulacion'].value;
-    segui.Sangria = this.dataFormGroup.controls['checkSangria'].value;
-    segui.SangriaFecha = this.dataFormGroup.controls['inputFechaSangria'].value;
-    segui.SangriaResultado = this.dataFormGroup.controls['inputSangria'].value;
-    segui.GrupoRh = this.dataFormGroup.controls['checkGrupoRh'].value;
-    segui.GrupoRhFecha = this.dataFormGroup.controls['inputFechaGrupoRh'].value;
-    segui.GrupoRhResultado = this.dataFormGroup.controls['inputGrupoRh'].value;
-    segui.Ecografia = this.dataFormGroup.controls['checkEcografia'].value;
-    segui.EcografiaFecha = this.dataFormGroup.controls['inputFechaEcografia'].value;
-    segui.EcografiaResultado = this.dataFormGroup.controls['inputEcografia'].value;
-    segui.Sono = this.dataFormGroup.controls['checkSono'].value;
-    segui.SonoFecha = this.dataFormGroup.controls['inputFechaSono'].value;
-    segui.SonoResultado = this.dataFormGroup.controls['inputSono'].value;
-    segui.Histerosal = this.dataFormGroup.controls['checkHisterosal'].value;
-    segui.HisterosalFecha = this.dataFormGroup.controls['inputFechaHisterosal'].value;
-    segui.HisterosalResultado = this.dataFormGroup.controls['inputHistero'].value;
-    segui.Histeroscopia = this.dataFormGroup.controls['checkHisteroscopia'].value;
-    segui.HisteroscopiaFecha = this.dataFormGroup.controls['inputFechaHisteroscopia'].value;
-    segui.HisteroscopiaResultado = this.dataFormGroup.controls['inputHisteroscopia'].value;
-    segui.Mamografia = this.dataFormGroup.controls['checkMamografia'].value;
-    segui.MamografiaFecha = this.dataFormGroup.controls['inputFechaMamografia'].value;
-    segui.MamografiaResultado = this.dataFormGroup.controls['inputMamografia'].value;
-    segui.Ivaa = this.dataFormGroup.controls['checkIvaa'].value;
-    segui.IvaaFecha = this.dataFormGroup.controls['inputFechaIva'].value;
-    segui.IvaaResultado = this.dataFormGroup.controls['inputIva'].value;
-    segui.Pap = this.dataFormGroup.controls['checkPap'].value;
-    segui.PapFecha = this.dataFormGroup.controls['inputFechaPap'].value;
-    segui.PapResultado = this.dataFormGroup.controls['inputPap'].value;
+    segui.FechaRegistro = new Date();
+    segui.Medico=this.medico;
 
-    this.objSeguimiento = segui;
+    let d : DetalleSeguimientoDTO[]=[]
+    this.rows.forEach((element:any)=>{
+
+      let detalle = new DetalleSeguimientoDTO();
+      detalle.TipoExamen = element.tipoExamen;
+      detalle.Fecha = element.fecha;
+      detalle.Resultado = element.resultado;
+      d.push(detalle);
+    });   
+    segui.Detalle = d;
+
+    this.objSeguimiento.unshift(segui)
   }
 
-  MostrarDatos(seguimiento:SeguimientoAnalisisDTO)
+  agregarFila(index: number): void {
+    const nuevaFila = { tipoExamen: '', fecha: null, resultado: '' };
+    this.rows.splice(index + 1, 0, nuevaFila); // Agregar fila debajo
+  }
+
+  eliminarFila(index: number): void {
+    this.rows.splice(index, 1); // Eliminar fila
+  }
+  
+  MostrarDatosGuardados(){
+    
+  }
+
+  MostrarDatosInicial()
   {
-    this.dataFormGroup.controls['checkFsh'].setValue(seguimiento.Fsh);
-    this.dataFormGroup.controls['inputFechaFsh'].setValue(moment(seguimiento.FshFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputFsh'].setValue(seguimiento.FshResultado);
-    this.dataFormGroup.controls['checkTsh'].setValue(seguimiento.Tsh);
-    this.dataFormGroup.controls['inputFechaTsh'].setValue(moment(seguimiento.TshFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputTsh'].setValue(seguimiento.TshResultado);
-    this.dataFormGroup.controls['checkT4l'].setValue(seguimiento.T4l);
-    this.dataFormGroup.controls['inputFechaT4l'].setValue(moment(seguimiento.T4lFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputT4l'].setValue(seguimiento.T4lResultado);
-    this.dataFormGroup.controls['checkEstradiol'].setValue(seguimiento.Estradiol);
-    this.dataFormGroup.controls['inputFechaEstradiol'].setValue(moment(seguimiento.EstradiolFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputEstradiol'].setValue(seguimiento.EstradiolResultado);
-    this.dataFormGroup.controls['checkAmh'].setValue(seguimiento.Amh);
-    this.dataFormGroup.controls['inputFechaAmh'].setValue(moment(seguimiento.AmhFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputAmh'].setValue(seguimiento.AmhResultado);
-    this.dataFormGroup.controls['checkGlucosa'].setValue(seguimiento.Glucosa);
-    this.dataFormGroup.controls['inputFechaGlucosa'].setValue(moment(seguimiento.GlucosaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputGlucosa'].setValue(seguimiento.GlucosaResultado);
-    this.dataFormGroup.controls['checkInsulina'].setValue(seguimiento.Insulina);
-    this.dataFormGroup.controls['inputFechaInsulina'].setValue(moment(seguimiento.InsulinaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputInsulina'].setValue(seguimiento.InsulinaResultado);
-    this.dataFormGroup.controls['checkProlactina'].setValue(seguimiento.Prolactina);
-    this.dataFormGroup.controls['inputFechaProlactina'].setValue(moment(seguimiento.ProlactinaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputProlactina'].setValue(seguimiento.ProlactinaResultado);
-    this.dataFormGroup.controls['checkHemograma'].setValue(seguimiento.Hemograma);
-    this.dataFormGroup.controls['inputFechaHemograma'].setValue(moment(seguimiento.HemogramaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputHemograma'].setValue(seguimiento.HemogramaResultado);
-    this.dataFormGroup.controls['checkTs'].setValue(seguimiento.Ts);
-    this.dataFormGroup.controls['inputFechaTs'].setValue(moment(seguimiento.TsFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputTs'].setValue(seguimiento.TsResultado);
-    this.dataFormGroup.controls['checkHepatitis'].setValue(seguimiento.Hepatitis);
-    this.dataFormGroup.controls['inputFechaHepatitis'].setValue(moment(seguimiento.HepatitisFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputHepatitis'].setValue(seguimiento.HepatitisResultado);
-    this.dataFormGroup.controls['checkClamidia'].setValue(seguimiento.Clamidia);
-    this.dataFormGroup.controls['inputFechaClamidia'].setValue(moment(seguimiento.ClamidiaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputClamidia'].setValue(seguimiento.ClamidiaResultado);
-    this.dataFormGroup.controls['checkEco'].setValue(seguimiento.Eco);
-    this.dataFormGroup.controls['inputFechaEco'].setValue(moment(seguimiento.EcoFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputEco'].setValue(seguimiento.EcoResultado);
-    this.dataFormGroup.controls['checkUrea'].setValue(seguimiento.Urea);
-    this.dataFormGroup.controls['inputFechaUrea'].setValue(moment(seguimiento.UreaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputUrea'].setValue(seguimiento.UreaResultado);
-    this.dataFormGroup.controls['checkUrocultivo'].setValue(seguimiento.Urocultivo);
-    this.dataFormGroup.controls['inputFechaUrocultivo'].setValue(moment(seguimiento.UrocultivoFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputUrocultivo'].setValue(seguimiento.UrocultivoResultado);
-    this.dataFormGroup.controls['checkRpr'].setValue(seguimiento.Rpr);
-    this.dataFormGroup.controls['inputFechaRpr'].setValue(moment(seguimiento.RprFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputRpr'].setValue(seguimiento.RprResultado);
-    this.dataFormGroup.controls['checkHiv'].setValue(seguimiento.Hiv);
-    this.dataFormGroup.controls['inputFechaHiv'].setValue(moment(seguimiento.HivFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputHiv'].setValue(seguimiento.HivResultado);
-    this.dataFormGroup.controls['checkBhcg'].setValue(seguimiento.Bhcg);
-    this.dataFormGroup.controls['inputFechaBhcg'].setValue(moment(seguimiento.BhcgFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputBhcg'].setValue(seguimiento.BhcgResultado);
-    this.dataFormGroup.controls['checkTiempoCuagulacion'].setValue(seguimiento.TiempoCuagulacion);
-    this.dataFormGroup.controls['inputFechaCuagulacion'].setValue(moment(seguimiento.TiempoCuagulacionFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputCuagulacion'].setValue(seguimiento.TiempoCuagulacionResultado);
-    this.dataFormGroup.controls['checkSangria'].setValue(seguimiento.Sangria);
-    this.dataFormGroup.controls['inputFechaSangria'].setValue(moment(seguimiento.SangriaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputSangria'].setValue(seguimiento.SangriaResultado);
-    this.dataFormGroup.controls['checkGrupoRh'].setValue(seguimiento.GrupoRh);
-    this.dataFormGroup.controls['inputFechaGrupoRh'].setValue(moment(seguimiento.GrupoRhFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputGrupoRh'].setValue(seguimiento.GrupoRhResultado);
-    this.dataFormGroup.controls['checkEcografia'].setValue(seguimiento.Ecografia);
-    this.dataFormGroup.controls['inputFechaEcografia'].setValue(moment(seguimiento.EcografiaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputEcografia'].setValue(seguimiento.EcografiaResultado);
-    this.dataFormGroup.controls['checkSono'].setValue(seguimiento.Sono);
-    this.dataFormGroup.controls['inputFechaSono'].setValue(moment(seguimiento.SonoFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputSono'].setValue(seguimiento.SonoResultado);
-    this.dataFormGroup.controls['checkHisterosal'].setValue(seguimiento.Histerosal);
-    this.dataFormGroup.controls['inputFechaHisterosal'].setValue(moment(seguimiento.HisterosalFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputHistero'].setValue(seguimiento.HisterosalResultado);
-    this.dataFormGroup.controls['checkHisteroscopia'].setValue(seguimiento.Histeroscopia);
-    this.dataFormGroup.controls['inputFechaHisteroscopia'].setValue(moment(seguimiento.HisteroscopiaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputHisteroscopia'].setValue(seguimiento.HisteroscopiaResultado);
-    this.dataFormGroup.controls['checkMamografia'].setValue(seguimiento.Mamografia);
-    this.dataFormGroup.controls['inputFechaMamografia'].setValue(moment(seguimiento.MamografiaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputMamografia'].setValue(seguimiento.MamografiaResultado);
-    this.dataFormGroup.controls['checkIvaa'].setValue(seguimiento.Ivaa);
-    this.dataFormGroup.controls['inputFechaIva'].setValue(moment(seguimiento.IvaaFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputIva'].setValue(seguimiento.IvaaResultado);
-    this.dataFormGroup.controls['checkPap'].setValue(seguimiento.Pap);
-    this.dataFormGroup.controls['inputFechaPap'].setValue(moment(seguimiento.PapFecha).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputPap'].setValue(seguimiento.PapResultado);
+    console.log("asdasd")
+    this.rows = [
+      {  tipoExamen: 'FSH / LH0', fecha: null, resultado: '' },
+      {  tipoExamen: 'TSH', fecha: null, resultado: '' },
+      {  tipoExamen: 'T4L / T3L', fecha: null, resultado: '' },
+      {  tipoExamen: 'ESTRADIOL', fecha: null, resultado: '' },
+      {  tipoExamen: 'AMH', fecha: null, resultado: '' },
+      {  tipoExamen: 'GLUCOSA', fecha: null, resultado: '' },
+      {  tipoExamen: 'INSULINA', fecha: null, resultado: '' },
+      {  tipoExamen: 'PROLACTINA', fecha: null, resultado: '' },
+      {  tipoExamen: 'HEMOGRAMA', fecha: null, resultado: '' },
+      {  tipoExamen: 'TS / TC', fecha: null, resultado: '' },
+      {  tipoExamen: 'HEPATITIS A/B/C', fecha: null, resultado: '' },
+      {  tipoExamen: 'CLAMIDIA IGM', fecha: null, resultado: '' },
+      {  tipoExamen: 'EXAMEN COMPLETO DE ORINA', fecha: null, resultado: '' },
+      {  tipoExamen: 'UREA / CREATININA', fecha: null, resultado: '' },
+      {  tipoExamen: 'UROCULTIVO', fecha: null, resultado: '' },
+      {  tipoExamen: 'RPR CUALITATIVO/CUANTITATIVO', fecha: null, resultado: '' },
+      {  tipoExamen: 'HIV', fecha: null, resultado: '' },
+      {  tipoExamen: 'BHCG', fecha: null, resultado: '' },
+      {  tipoExamen: 'TIEMPO DE CUAGULACION', fecha: null, resultado: '' },
+      {  tipoExamen: 'SANGRIA', fecha: null, resultado: '' },
+      {  tipoExamen: 'GRUPO RH', fecha: null, resultado: '' },
+      {  tipoExamen: 'ECOGRAFIA TRANSVAGINAL', fecha: null, resultado: '' },
+      {  tipoExamen: 'SONOHISTEROGRAFIA', fecha: null, resultado: '' },
+      {  tipoExamen: 'HISTEROSALPINGOGRAFIA', fecha: null, resultado: '' },
+      {  tipoExamen: 'HISTEROSCOPIA', fecha: null, resultado: '' },
+      {  tipoExamen: 'MAMOGRAFIA', fecha: null, resultado: '' },
+      {  tipoExamen: 'IVAA', fecha: null, resultado: '' },
+      {  tipoExamen: 'PAP', fecha: null, resultado: '' },
+    ];
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)
