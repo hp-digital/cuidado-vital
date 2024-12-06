@@ -1285,6 +1285,8 @@ export class HistorialObsteComponent implements OnInit{
       });
     }
 
+    let externoObs : HistoriaExternaDTO
+
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;

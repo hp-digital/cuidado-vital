@@ -6,6 +6,7 @@ import { ControlGlucosaDTO } from "./control-glucosa";
 import { ControlPreNatalDTO } from "./control-prenatal";
 import { ControlPresionDTO } from "./control-presion";
 import { HistoriaExternaDTO } from "./historia-externa";
+import { HistoriaExternaObstetriciaDTO } from "./historia-externa-obst";
 import { HistorialObstetricoDTO } from "./historial-obstetrico";
 import { HojaMonitoreoSignosDTO } from "./hoja-monitoreo";
 import { MedicoAtencionDTO } from "./medico-atiente";
@@ -38,6 +39,7 @@ export class HistoriaCuidadoDTO{
     Receta?:RecetaDTO[];
     Orden?:OrdenDTO[];
     HistoriaExterna?:HistoriaExternaDTO;
+    HistoriaExternaObstetricia?:HistoriaExternaObstetriciaDTO;
     PrimeraAtencion?:HistoriaPrimeraAtencionDTO;
     HojaMonitoreoSignos?:HojaMonitoreoSignosDTO;
     NotaEnfermera?: NotaEnfermeraDTO;
