@@ -1,6 +1,9 @@
+import { AntecedentesObsDTO } from "./antecedentes-obs";
 import { DiagnosticoCuidadoDTO } from "./diagnostico-cuidado";
+import { ExamenPreferencialObsDTO } from "./examen-preferencial-obs";
 import { MedicoAtiendeDTO } from "./medico-atiende";
 import { PacienteExternoDTO } from "./paciente-externo";
+import { SignoVitalObsDTO } from "./signo-vital-obs";
 
 export class HistoriaExternaObstetriciaDTO
 {
@@ -22,7 +25,7 @@ export class HistoriaExternaObstetriciaDTO
     Drogas?:string;
     SignoVital?:SignoVitalObsDTO;
     Diagnostico?:DiagnosticoCuidadoDTO[];
-    
-    PlanTrabajo!:string;
+    Preferencial?:ExamenPreferencialObsDTO;
+    PlanTrabajo?:string;
     UrlPdfHistoriaClinica?:string;
 }

@@ -57,6 +57,10 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { SeguimientoAnalisisDTO } from '@models/segumiento-analisis';
 import { DetalleSeguimientoDTO } from '@models/detalle-seguimiento';
+import { HistoriaExternaObstetriciaDTO } from '@models/historia-externa-obst';
+import { AntecedentesObsDTO } from '@models/antecedentes-obs';
+import { SignoVitalObsDTO } from '@models/signo-vital-obs';
+import { ExamenPreferencialObsDTO } from '@models/examen-preferencial-obs';
 
 @Component({
   selector: 'app-historial-obste',
@@ -1258,7 +1262,7 @@ export class HistorialObsteComponent implements OnInit{
         obstetricia.push(obs);
       });
       this.objObstetricia = obstetricia;
-      this.MostrarDatos(obstetricia);
+      
     }
     
     let seguimiento :  SeguimientoAnalisisDTO[]=[];
@@ -1285,7 +1289,136 @@ export class HistorialObsteComponent implements OnInit{
       });
     }
 
-    let externoObs : HistoriaExternaDTO
+    let externoObs = new  HistoriaExternaObstetriciaDTO();
+    if(objHistoria.historiaExternaObstetricia != null)
+    {
+      externoObs.CodigoIpress = objHistoria.historiaExternaObstetricia.codigoIpress;
+      externoObs.NumeroRuc = objHistoria.historiaExternaObstetricia.numeroRuc;
+      externoObs.RazonSocial = objHistoria.historiaExternaObstetricia.razonSocial;
+      externoObs.NumeroHistoriaClinica = objHistoria.historiaExternaObstetricia.numeroHistoriaClinica;
+      externoObs.FechaInicioAtencion = objHistoria.historiaExternaObstetricia.fechaInicioAtencion;
+      externoObs.FechaCierreAtencion = objHistoria.historiaExternaObstetricia.fechaCierreAtencion;
+      externoObs.Especialidad = objHistoria.historiaExternaObstetricia.especialidad;
+      externoObs.Fumar = objHistoria.historiaExternaObstetricia.fumar;
+      externoObs.Alcohol = objHistoria.historiaExternaObstetricia.alcohol;
+      externoObs.Drogas = objHistoria.historiaExternaObstetricia.drogas;
+      externoObs.PlanTrabajo = objHistoria.historiaExternaObstetricia.planTrabajo;
+      externoObs.UrlPdfHistoriaClinica = objHistoria.historiaExternaObstetricia.urlPdfHistoriaClinica;
+
+      let medicoAtiende = new MedicoAtiendeDTO();
+      medicoAtiende.TipoDocumento = objHistoria.historiaExternaObstetricia.medico.tipoDocumento;
+      medicoAtiende.NumeroDocumento = objHistoria.historiaExternaObstetricia.medico.numeroDocumento;
+      medicoAtiende.ApellidoPaterno = objHistoria.historiaExternaObstetricia.medico.apellidoPaterno;
+      medicoAtiende.ApellidoMaterno = objHistoria.historiaExternaObstetricia.medico.apellidoMaterno;
+      medicoAtiende.Nombres = objHistoria.historiaExternaObstetricia.medico.nombres;
+      medicoAtiende.FechaNacimiento = objHistoria.historiaExternaObstetricia.medico.fechaNacimiento;
+      medicoAtiende.Email = objHistoria.historiaExternaObstetricia.medico.email;
+      medicoAtiende.Direccion = objHistoria.historiaExternaObstetricia.medico.direccion;
+      medicoAtiende.Celular = objHistoria.historiaExternaObstetricia.medico.celular;
+      medicoAtiende.Sexo = objHistoria.historiaExternaObstetricia.medico.sexo;
+      medicoAtiende.NumeroColegiatura = objHistoria.historiaExternaObstetricia.medico.numeroColegiatura;
+      medicoAtiende.Rne = objHistoria.historiaExternaObstetricia.medico.rne;
+      externoObs.Medico = medicoAtiende;
+  
+      let pacienteExterno = new PacienteExternoDTO();
+      pacienteExterno.TipoDocumento = objHistoria.historiaExternaObstetricia.paciente.tipoDocumento;
+      pacienteExterno.NumeroDocumento = objHistoria.historiaExternaObstetricia.paciente.numeroDocumento;
+      pacienteExterno.ApellidoPaterno = objHistoria.historiaExternaObstetricia.paciente.apellidoPaterno;
+      pacienteExterno.ApellidoMaterno = objHistoria.historiaExternaObstetricia.paciente.apellidoMaterno;
+      pacienteExterno.Nombres = objHistoria.historiaExternaObstetricia.paciente.nombres;
+      pacienteExterno.FechaNacimiento = objHistoria.historiaExternaObstetricia.paciente.fechaNacimiento;
+      pacienteExterno.Email = objHistoria.historiaExternaObstetricia.paciente.email;
+      pacienteExterno.Direccion = objHistoria.historiaExternaObstetricia.paciente.direccion;
+      pacienteExterno.Celular = objHistoria.historiaExternaObstetricia.paciente.celular;
+      pacienteExterno.Sexo = objHistoria.historiaExternaObstetricia.paciente.sexo;
+      pacienteExterno.EstadoCivil =  objHistoria.historiaExternaObstetricia.paciente.estadoCivil;
+      externoObs.Paciente = pacienteExterno;
+
+      let antecedentes = new AntecedentesObsDTO();
+      antecedentes.G = objHistoria.historiaExternaObstetricia.antecedentes.g;
+      antecedentes.P = objHistoria.historiaExternaObstetricia.antecedentes.p;
+      antecedentes.G1 = objHistoria.historiaExternaObstetricia.antecedentes.g1;
+      antecedentes.G2 = objHistoria.historiaExternaObstetricia.antecedentes.g2;
+      antecedentes.G3 = objHistoria.historiaExternaObstetricia.antecedentes.g3;
+      antecedentes.Fur = objHistoria.historiaExternaObstetricia.antecedentes.fur;
+      antecedentes.FppFur = objHistoria.historiaExternaObstetricia.antecedentes.fppFur;
+      antecedentes.FppEco = objHistoria.historiaExternaObstetricia.antecedentes.fppEco;
+      antecedentes.EgFur = objHistoria.historiaExternaObstetricia.antecedentes.egFur;
+      antecedentes.EgEco = objHistoria.historiaExternaObstetricia.antecedentes.egEco;
+      externoObs.Antecedentes = antecedentes;
+
+      externoObs.Quirurgico = [];
+      if(objHistoria.historiaExternaObstetricia.quirurgico != null)
+      {
+        objHistoria.historiaExternaObstetricia.quirurgico.forEach((element:any)=>{
+          let q : string;
+          q = element;
+          externoObs.Quirurgico?.push(q);
+        });
+      }
+      externoObs.Medicos = [];
+      if(objHistoria.historiaExternaObstetricia.medicos != null)
+      {
+        objHistoria.historiaExternaObstetricia.medicos.forEach((element:any)=>{
+          let m : string;
+          m = element;
+          externoObs.Medicos?.push(m);
+        });
+      }
+      externoObs.Patologicos = [];
+      if(objHistoria.historiaExternaObstetricia.patologicos != null)
+      {
+        objHistoria.historiaExternaObstetricia.patologicos.forEach((element:any)=>{
+          let p : string;
+          p = element;
+          externoObs.Patologicos?.push(p);
+        });
+      }
+      
+      let signo = new SignoVitalObsDTO();
+      signo.Temperatura = objHistoria.historiaExternaObstetricia.signoVital.temperatura;
+      signo.FrecuenciaCardiaca = objHistoria.historiaExternaObstetricia.signoVital.frecuenciaCardiaca;
+      signo.PresionArterialSistolicaDerecha = objHistoria.historiaExternaObstetricia.signoVital.presionArterialSistolicaDerecha;
+      signo.PresionArterialDistolicaDerecha = objHistoria.historiaExternaObstetricia.signoVital.presionArterialDistolicaDerecha;
+      signo.PresionArterialSistolicaIzquierda = objHistoria.historiaExternaObstetricia.signoVital.presionArterialSistolicaIzquierda;
+      signo.PresionArterialDistolicaIzquierda = objHistoria.historiaExternaObstetricia.signoVital.presionArterialDistolicaIzquierda;
+      signo.FrecuenciaRespiratoria = objHistoria.historiaExternaObstetricia.signoVital.frecuenciaRespiratoria;
+      signo.SaturacionOxigeno = objHistoria.historiaExternaObstetricia.signoVital.saturacionOxigeno;
+      signo.Talla = objHistoria.historiaExternaObstetricia.signoVital.talla;
+      signo.Peso = objHistoria.historiaExternaObstetricia.signoVital.peso;
+      signo.IMC = objHistoria.historiaExternaObstetricia.signoVital.imc;
+      signo.PesoHabitual = objHistoria.historiaExternaObstetricia.signoVital.pesoHabitual;
+      signo.AumentoPeso = objHistoria.historiaExternaObstetricia.signoVital.aumentoPeso;
+      externoObs.SignoVital = signo;
+
+      let diagnosticoDTO :  DiagnosticoCuidadoDTO[]=[];
+      if(objHistoria.historiaExternaObstetricia.diagnostico != null)
+      {
+        objHistoria.historiaExternaObstetricia.diagnostico.forEach((element:any)=>{
+          let diagnostico = new DiagnosticoCuidadoDTO();
+          diagnostico.CodigoCie10 = element.codigoCie10;
+          diagnostico.NombreDiagnostico = element.nombreDiagnostico;
+          diagnostico.TipoDiagnostico = element.tipoDiagnostico;
+          diagnosticoDTO.push(diagnostico);
+        });
+        
+      }
+      externoObs.Diagnostico = diagnosticoDTO;
+
+      let preferencial = new ExamenPreferencialObsDTO();
+      preferencial.Au = objHistoria.historiaExternaObstetricia.preferencial.au;
+      preferencial.Lcf = objHistoria.historiaExternaObstetricia.preferencial.lcf;
+      preferencial.Ila = objHistoria.historiaExternaObstetricia.preferencial.ila;
+      preferencial.Posicion = objHistoria.historiaExternaObstetricia.preferencial.posicion;
+      preferencial.PesoFetal = objHistoria.historiaExternaObstetricia.preferencial.pesoFetal;
+      preferencial.MovimientoFetal = objHistoria.historiaExternaObstetricia.preferencial.movimientoFetal;
+      preferencial.Cervicometria = objHistoria.historiaExternaObstetricia.preferencial.cervicometria;
+      preferencial.Edema = objHistoria.historiaExternaObstetricia.preferencial.edema;
+      preferencial.Aro = objHistoria.historiaExternaObstetricia.preferencial.aro;
+      preferencial.AroMotivo = objHistoria.historiaExternaObstetricia.preferencial.aroMotivo;
+
+      externoObs.Preferencial = preferencial;
+    }
 
 
     let historiaCalidad = new HistoriaCuidadoDTO();
@@ -1313,57 +1446,96 @@ export class HistorialObsteComponent implements OnInit{
     historiaCalidad.PrimeraAtencion = objHistoria.primeraAtencion;
     historiaCalidad.HistorialObstetrico = obstetricia;
     historiaCalidad.SeguimientoAnalisis = seguimiento;
+    historiaCalidad.HistoriaExternaObstetricia = externoObs;
 
     this.objHistoria = historiaCalidad;
+
+    console.log(this.objHistoria);
+    this.MostrarDatos(this.objHistoria);
   }
 
-  MostrarDatos(obstetricia:HistorialObstetricoDTO[]){
+  MostrarDatos(obstetricia:HistoriaCuidadoDTO){
 
-    console.log("nro", obstetricia.length)
-    var s:number =0 ;
-    if(obstetricia.length != 0)
+    if(obstetricia.HistorialObstetrico?.length != 0)
     {
-      let n = obstetricia.length;
-      s = n-1;
+      console.log("nro", obstetricia.HistorialObstetrico?.length)
+      let n = obstetricia.HistorialObstetrico?.length ?? 1;
+      let index = n -1;
+
+      this.dataFormGroup.controls['inputG'].setValue(this.objObstetricia[index].Antecedentes?.G);
+      this.dataFormGroup.controls['inputP'].setValue(this.objObstetricia[index].Antecedentes?.P);
+      this.dataFormGroup.controls['inputG1'].setValue(this.objObstetricia[index].Antecedentes?.G1);
+      this.dataFormGroup.controls['inputG2'].setValue(this.objObstetricia[index].Antecedentes?.G2);
+      this.dataFormGroup.controls['inputG3'].setValue(this.objObstetricia[index].Antecedentes?.G3);
+      this.dataFormGroup.controls['inputFur'].setValue(moment(this.objObstetricia[index].Antecedentes?.Fur).format('yyyy-MM-DD'));
+      this.dataFormGroup.controls['inputFgFur'].setValue(this.objObstetricia[index].Antecedentes?.FgFur);
+      this.dataFormGroup.controls['inputEgEco'].setValue(this.objObstetricia[index].Antecedentes?.EgEco);
+      this.dataFormGroup.controls['inputFppFur'].setValue(moment(this.objObstetricia[index].Antecedentes?.FppFur).format('yyyy-MM-DD'));
+      this.dataFormGroup.controls['inputFppEco'].setValue(moment(this.objObstetricia[index].Antecedentes?.FppEco).format('yyyy-MM-DD'));
+
+      this.dataFormGroup.controls['inputCondicionMedicaCronica'].setValue(this.objObstetricia[index].RiesgosPreExistente?.CondicionMedica);
+      this.dataFormGroup.controls['inputQuirurgicos'].setValue(this.objObstetricia[index].RiesgosPreExistente?.Quirurgico);
+      this.dataFormGroup.controls['inputEnfermedadesCongenitas'].setValue(this.objObstetricia[index].RiesgosPreExistente?.EnfermedadCongenita);
+      this.dataFormGroup.controls['inputFumaAlcohol'].setValue(this.objObstetricia[index].RiesgosPreExistente?.Fuma);
+
+      this.dataFormGroup.controls['inputPlacentaPrevia'].setValue(this.objObstetricia[index].RiesgoActual?.PlacentaPrevia);
+      this.dataFormGroup.controls['inputSobrepeso'].setValue(this.objObstetricia[index].RiesgoActual?.SobrePeso);
+      this.dataFormGroup.controls['inputItu'].setValue(this.objObstetricia[index].RiesgoActual?.Itu);
+      this.dataFormGroup.controls['inputPresionAlta'].setValue(this.objObstetricia[index].RiesgoActual?.PresionAlta);
+
+      this.dataFormGroup.controls['inputTemperatura'].setValue(this.objObstetricia[index].FuncionVital?.Temperatura);
+      this.dataFormGroup.controls['inputFrecuenciaCardiaca'].setValue(this.objObstetricia[index].FuncionVital?.Fc);
+      this.dataFormGroup.controls['inputPresionSistolica'].setValue(this.objObstetricia[index].FuncionVital?.PresionSistolica);
+      this.dataFormGroup.controls['inputPresionDiastolica'].setValue(this.objObstetricia[index].FuncionVital?.PresionDiastolica);
+      this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(this.objObstetricia[index].FuncionVital?.PresionSistolicaIzquierda);
+      this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(this.objObstetricia[index].FuncionVital?.PresionDiastolicaIzquierda);
+      this.dataFormGroup.controls['inputSaturacion'].setValue(this.objObstetricia[index].FuncionVital?.Saturacion);
+      this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].setValue(this.objObstetricia[index].FuncionVital?.Fr);
+      this.dataFormGroup.controls['inputTalla'].setValue(this.objObstetricia[index].FuncionVital?.Talla);
+      this.dataFormGroup.controls['inputPeso'].setValue(this.objObstetricia[index].FuncionVital?.Peso);
+      this.dataFormGroup.controls['inputImc'].setValue(this.objObstetricia[index].FuncionVital?.Imc);
+      this.dataFormGroup.controls['inputPesoHabitual'].setValue(this.objObstetricia[index].FuncionVital?.PesoHabitual);
+      this.dataFormGroup.controls['inputPesoActual'].setValue(this.objObstetricia[index].FuncionVital?.PesoActual);
+      this.dataFormGroup.controls['inputAumentoPeso'].setValue(this.objObstetricia[index].FuncionVital?.AumentoPeso);
+      this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(this.objObstetricia[index].FuncionVital?.PresionSistolicaIzquierda);
+      this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(this.objObstetricia[index].FuncionVital?.PresionDiastolicaIzquierda);
     }
+    else{
+      this.dataFormGroup.controls['inputG'].setValue(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.G);
+      this.dataFormGroup.controls['inputP'].setValue(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.P);
+      this.dataFormGroup.controls['inputG1'].setValue(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.G1);
+      this.dataFormGroup.controls['inputG2'].setValue(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.G2);
+      this.dataFormGroup.controls['inputG3'].setValue(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.G3);
+      this.dataFormGroup.controls['inputFur'].setValue(moment(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.Fur).format('yyyy-MM-DD'));
+      this.dataFormGroup.controls['inputEgEco'].setValue(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.EgEco);
+      this.dataFormGroup.controls['inputFgFur'].setValue(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.EgFur);
+      this.dataFormGroup.controls['inputFppFur'].setValue(moment(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.FppFur).format('yyyy-MM-DD'));
+      this.dataFormGroup.controls['inputFppEco'].setValue(moment(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.FppEco).format('yyyy-MM-DD'));
 
-    this.dataFormGroup.controls['inputG'].setValue(obstetricia[s].Antecedentes?.G);
-    this.dataFormGroup.controls['inputP'].setValue(obstetricia[s].Antecedentes?.P);
-    this.dataFormGroup.controls['inputG1'].setValue(obstetricia[s].Antecedentes?.G1);
-    this.dataFormGroup.controls['inputG2'].setValue(obstetricia[s].Antecedentes?.G2);
-    this.dataFormGroup.controls['inputG3'].setValue(obstetricia[s].Antecedentes?.G3);
-    this.dataFormGroup.controls['inputFur'].setValue(moment(obstetricia[s].Antecedentes?.Fur).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputFgFur'].setValue(obstetricia[s].Antecedentes?.FgFur);
-    this.dataFormGroup.controls['inputEgEco'].setValue(obstetricia[s].Antecedentes?.EgEco);
-    this.dataFormGroup.controls['inputFppFur'].setValue(moment(obstetricia[s].Antecedentes?.FppFur).format('yyyy-MM-DD'));
-    this.dataFormGroup.controls['inputFppEco'].setValue(moment(obstetricia[s].Antecedentes?.FppEco).format('yyyy-MM-DD'));
-
-    this.dataFormGroup.controls['inputCondicionMedicaCronica'].setValue(obstetricia[s].RiesgosPreExistente?.CondicionMedica);
-    this.dataFormGroup.controls['inputQuirurgicos'].setValue(obstetricia[s].RiesgosPreExistente?.Quirurgico);
-    this.dataFormGroup.controls['inputEnfermedadesCongenitas'].setValue(obstetricia[s].RiesgosPreExistente?.EnfermedadCongenita);
-    this.dataFormGroup.controls['inputFumaAlcohol'].setValue(obstetricia[s].RiesgosPreExistente?.Fuma);
-
-    this.dataFormGroup.controls['inputPlacentaPrevia'].setValue(obstetricia[s].RiesgoActual?.PlacentaPrevia);
-    this.dataFormGroup.controls['inputSobrepeso'].setValue(obstetricia[s].RiesgoActual?.SobrePeso);
-    this.dataFormGroup.controls['inputItu'].setValue(obstetricia[s].RiesgoActual?.Itu);
-    this.dataFormGroup.controls['inputPresionAlta'].setValue(obstetricia[s].RiesgoActual?.PresionAlta);
-
-    this.dataFormGroup.controls['inputTemperatura'].setValue(obstetricia[s].FuncionVital?.Temperatura);
-    this.dataFormGroup.controls['inputFrecuenciaCardiaca'].setValue(obstetricia[s].FuncionVital?.Fc);
-    this.dataFormGroup.controls['inputPresionSistolica'].setValue(obstetricia[s].FuncionVital?.PresionSistolica);
-    this.dataFormGroup.controls['inputPresionDiastolica'].setValue(obstetricia[s].FuncionVital?.PresionDiastolica);
-    this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(obstetricia[s].FuncionVital?.PresionSistolicaIzquierda);
-    this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(obstetricia[s].FuncionVital?.PresionDiastolicaIzquierda);
-    this.dataFormGroup.controls['inputSaturacion'].setValue(obstetricia[s].FuncionVital?.Saturacion);
-    this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].setValue(obstetricia[s].FuncionVital?.Fr);
-    this.dataFormGroup.controls['inputTalla'].setValue(obstetricia[s].FuncionVital?.Talla);
-    this.dataFormGroup.controls['inputPeso'].setValue(obstetricia[s].FuncionVital?.Peso);
-    this.dataFormGroup.controls['inputImc'].setValue(obstetricia[s].FuncionVital?.Imc);
-    this.dataFormGroup.controls['inputPesoHabitual'].setValue(obstetricia[s].FuncionVital?.PesoHabitual);
-    this.dataFormGroup.controls['inputPesoActual'].setValue(obstetricia[s].FuncionVital?.PesoActual);
-    this.dataFormGroup.controls['inputAumentoPeso'].setValue(obstetricia[s].FuncionVital?.AumentoPeso);
-    this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(obstetricia[s].FuncionVital?.PresionSistolicaIzquierda);
-    this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(obstetricia[s].FuncionVital?.PresionDiastolicaIzquierda);
+      this.dataFormGroup.controls['inputAlturaUterina'].setValue(obstetricia.HistoriaExternaObstetricia?.Preferencial?.Au);
+      this.dataFormGroup.controls['inputLcf'].setValue(obstetricia.HistoriaExternaObstetricia?.Preferencial?.Lcf);
+      this.dataFormGroup.controls['inputIla'].setValue(obstetricia.HistoriaExternaObstetricia?.Preferencial?.Ila);
+      this.dataFormGroup.controls['inputPosicion'].setValue(obstetricia.HistoriaExternaObstetricia?.Preferencial?.Posicion);
+      this.dataFormGroup.controls['inputPesoFetal'].setValue(obstetricia.HistoriaExternaObstetricia?.Preferencial?.PesoFetal);
+      this.dataFormGroup.controls['inputMovFetal'].setValue(obstetricia.HistoriaExternaObstetricia?.Preferencial?.MovimientoFetal);
+      this.dataFormGroup.controls['inputLongCervix'].setValue(obstetricia.HistoriaExternaObstetricia?.Preferencial?.Cervicometria);
+      this.dataFormGroup.controls['inputEdema'].setValue(obstetricia.HistoriaExternaObstetricia?.Preferencial?.Edema);
+      
+      this.dataFormGroup.controls['inputTemperatura'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.Temperatura);
+      this.dataFormGroup.controls['inputFrecuenciaCardiaca'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.FrecuenciaCardiaca);
+      this.dataFormGroup.controls['inputPresionSistolica'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.PresionArterialSistolicaDerecha);
+      this.dataFormGroup.controls['inputPresionDiastolica'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.PresionArterialDistolicaDerecha);
+      this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.PresionArterialSistolicaIzquierda);
+      this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.PresionArterialDistolicaIzquierda);
+      this.dataFormGroup.controls['inputSaturacion'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.SaturacionOxigeno);
+      this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.FrecuenciaRespiratoria);
+      this.dataFormGroup.controls['inputTalla'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.Talla);
+      this.dataFormGroup.controls['inputPeso'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.Peso);
+      this.dataFormGroup.controls['inputImc'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.IMC);
+      this.dataFormGroup.controls['inputPesoHabitual'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.PesoHabitual);
+      this.dataFormGroup.controls['inputPesoActual'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.Peso);
+      this.dataFormGroup.controls['inputAumentoPeso'].setValue(obstetricia.HistoriaExternaObstetricia?.SignoVital?.AumentoPeso);
+    }
   }
 
   Guardar(){
