@@ -1,12 +1,48 @@
 <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
     <div class="row" *ngIf="idRol==3">    <!--DASHBOARD PACIENTE-->
-        <h2>{{nombreUsuario}} Bienvenido(a) a CuidadoVital</h2>
-        <span>Una aplicación segura y práctica para el cuidado de tu salud</span>
-        <h2></h2>
-        <div class="col-xl-3">
-                <!-- BEGIN card -->
+        
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+            <div class="carousel-indicators">
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="./assets/img/Portada1.jpg" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="./assets/img/Portada2.png" class="d-block w-100" alt="...">
+              </div>
+              <div class="carousel-item">
+                <img src="./assets/img/portada3.png" class="d-block w-100" alt="...">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        <br>
+        <div class="row">
+            <div class="col-xl-4">
+
+            </div>
+            <div class="col-xl-4" style="text-align: center;">
+                <h2>FUNCIONES VITALES</h2>
+            </div>
+            <div class="col-xl-4">
+
+            </div>
+        </div>
+        <br>
+        <div class="row" style="text-align: center;">
+            <div class="col-xl-4">
                 <div class="card mb-3">
-                    <!-- BEGIN card-body -->
                     <div class="card-body">
                         <div class="d-flex mb-3">
                             <div class="flex-grow-1">
@@ -22,9 +58,6 @@
                             <div class="col-xl-12 text-center">
                                 <div>
                                     <img src="./assets/img/Saturacion-de-Oxigeno.png" class="img-fit"/>
-                                  <!--   <button (click)="login()">Iniciar sesión con Google</button>
-                                    <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button> -->
-                                    
                                     <div *ngIf="oxygenSaturation">
                                         <h1> {{ oxygenSaturation }}</h1>
                                     </div>
@@ -32,14 +65,10 @@
                             </div>
                         </div>
                     </div>
-                    <!-- END card-body -->
                 </div>
-                <!-- END card --> 
         </div> 
-        <div class="col-xl-3">
-            <!-- BEGIN card -->
+        <div class="col-xl-4">
             <div class="card mb-3">
-                <!-- BEGIN card-body -->
                 <div class="card-body">
                     <div class="d-flex mb-3">
                         <div class="flex-grow-1">
@@ -55,8 +84,6 @@
                         <div class="col-xl-12 text-center">
                             <div>
                                 <img src="./assets/img/Frecuencia-Cardiaca.png" class="img-fit"/>
-                                <button (click)="login()">Iniciar sesión con Google</button>
-                                <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button>
                                 
                                 <div *ngIf="heartRate">
                                     <h1> {{ heartRate }} bpm</h1>
@@ -65,14 +92,10 @@
                         </div>
                     </div>
                 </div>
-                <!-- END card-body -->
             </div>
-            <!-- END card --> 
         </div>   
-        <div class="col-xl-3">
-            <!-- BEGIN card -->
+        <div class="col-xl-4">
             <div class="card mb-3">
-                <!-- BEGIN card-body -->
                 <div class="card-body">
                     <div class="d-flex mb-3">
                         <div class="flex-grow-1">
@@ -88,9 +111,6 @@
                         <div class="col-xl-12 text-center">
                             <div>
                                 <img src="./assets/img/Presion-Arterial.png" class="img-fit"/>
-                                <!-- <button (click)="login()">Iniciar sesión con Google</button>
-                                <button (click)="fetchHeartRateData()">Obtener datos de Google Fit</button> -->
-                                
                                 <div *ngIf="systolic">
                                     <h1> Sistólica {{ systolic }} </h1>
                                     <h1> Diastólica {{diastolic}} </h1>
@@ -99,10 +119,87 @@
                         </div>
                     </div>
                 </div>
-                <!-- END card-body -->
             </div>
-            <!-- END card --> 
         </div> 
+        </div>
+        <button (click)="login()" class="form-control">Iniciar sesión con Google</button>
+        <button (click)="fetchHeartRateData()" class="form-control">Obtener datos de Google Fit</button>
+
+        <br/>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-xl-4">
+
+            </div>
+            <div class="col-xl-4" style="text-align: center;">
+                <h2>NUESTROS MÉDICOS</h2>
+            </div>
+            <div class="col-xl-4">
+
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="./assets/img/Doc-Hermogenes.png" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Hermógenes Palacios</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Fertilidad y Reproducción Humana</li>
+                                    <li class="list-group-item">Medicina funcional</li>
+                                    <li class="list-group-item">Ginecología y Obstetricia</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="./assets/img/Doc-Ricaldi.png" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dr. Orlando Ricaldi</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Medicina reproductiva</li>
+                                    <li class="list-group-item">Medicina fetal y cirugía ginecológica laparoscópica</li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                        <img src="./assets/img/Doc-Kriss.png" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">Dra. Kriss Rivera</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Medicina reproductiva</li>
+                                    <li class="list-group-item">Medicina fetal y cirugía ginecológica laparoscópica</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div class="row" *ngIf="idRol==1">    <!--DASHBOARD MEDICO-->
             <h3>Bienvenido a CuidadoVital</h3>
