@@ -1266,6 +1266,7 @@ export class HistorialObsteComponent implements OnInit{
             obs.RecomendacionesEspecificas?.push(espe)
           });
         }
+        obs.EvolucionPaciente = element.evolucionPaciente;
         obstetricia.push(obs);
       });
       this.objObstetricia = obstetricia;
@@ -1674,6 +1675,7 @@ export class HistorialObsteComponent implements OnInit{
     obstetricia.Diagnostico = this.dataFormGroup.controls['inputDiagnostico'].value;
     obstetricia.RecomendacionesGenerales = this.recomendaciones;
     obstetricia.RecomendacionesEspecificas = this.listadoEspecificos;
+    obstetricia.EvolucionPaciente = this.dataFormGroup.controls['inputEvolucionPaciente'].value;
 
     this.objObstetricia.push(obstetricia);
   }

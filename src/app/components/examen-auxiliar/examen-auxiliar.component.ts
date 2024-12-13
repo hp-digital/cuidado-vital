@@ -55,6 +55,10 @@ import { FuncionVitalObstetriciaDTO } from '@models/funcion-vital-obstetricia';
 import { ExamenPreferencialDTO } from '@models/examen-preferencial';
 import { SeguimientoAnalisisDTO } from '@models/segumiento-analisis';
 import { DetalleSeguimientoDTO } from '@models/detalle-seguimiento';
+import { ExamenPreferencialObsDTO } from '@models/examen-preferencial-obs';
+import { SignoVitalObsDTO } from '@models/signo-vital-obs';
+import { AntecedentesObsDTO } from '@models/antecedentes-obs';
+import { HistoriaExternaObstetriciaDTO } from '@models/historia-externa-obst';
 
 @Component({
   selector: 'app-examen-auxiliar',
@@ -1246,6 +1250,7 @@ if(objHistoria.primeraAtencion != null)
             obs.RecomendacionesEspecificas?.push(espe)
           });
         }
+        obs.EvolucionPaciente = element.evolucionPaciente;
         obstetricia.push(obs);
         this.objObstetrico.push(obs);
       });
@@ -1275,6 +1280,137 @@ if(objHistoria.primeraAtencion != null)
       });
     }
 
+    let externoObs = new  HistoriaExternaObstetriciaDTO();
+    if(objHistoria.historiaExternaObstetricia != null)
+    {
+      externoObs.CodigoIpress = objHistoria.historiaExternaObstetricia.codigoIpress;
+      externoObs.NumeroRuc = objHistoria.historiaExternaObstetricia.numeroRuc;
+      externoObs.RazonSocial = objHistoria.historiaExternaObstetricia.razonSocial;
+      externoObs.NumeroHistoriaClinica = objHistoria.historiaExternaObstetricia.numeroHistoriaClinica;
+      externoObs.FechaInicioAtencion = objHistoria.historiaExternaObstetricia.fechaInicioAtencion;
+      externoObs.FechaCierreAtencion = objHistoria.historiaExternaObstetricia.fechaCierreAtencion;
+      externoObs.Especialidad = objHistoria.historiaExternaObstetricia.especialidad;
+      externoObs.Fumar = objHistoria.historiaExternaObstetricia.fumar;
+      externoObs.Alcohol = objHistoria.historiaExternaObstetricia.alcohol;
+      externoObs.Drogas = objHistoria.historiaExternaObstetricia.drogas;
+      externoObs.PlanTrabajo = objHistoria.historiaExternaObstetricia.planTrabajo;
+      externoObs.UrlPdfHistoriaClinica = objHistoria.historiaExternaObstetricia.urlPdfHistoriaClinica;
+      externoObs.IdPacienteExterno = objHistoria.historiaExternaObstetricia.idPacienteExterno;
+
+      let medicoAtiende = new MedicoAtiendeDTO();
+      medicoAtiende.TipoDocumento = objHistoria.historiaExternaObstetricia.medico.tipoDocumento;
+      medicoAtiende.NumeroDocumento = objHistoria.historiaExternaObstetricia.medico.numeroDocumento;
+      medicoAtiende.ApellidoPaterno = objHistoria.historiaExternaObstetricia.medico.apellidoPaterno;
+      medicoAtiende.ApellidoMaterno = objHistoria.historiaExternaObstetricia.medico.apellidoMaterno;
+      medicoAtiende.Nombres = objHistoria.historiaExternaObstetricia.medico.nombres;
+      medicoAtiende.FechaNacimiento = objHistoria.historiaExternaObstetricia.medico.fechaNacimiento;
+      medicoAtiende.Email = objHistoria.historiaExternaObstetricia.medico.email;
+      medicoAtiende.Direccion = objHistoria.historiaExternaObstetricia.medico.direccion;
+      medicoAtiende.Celular = objHistoria.historiaExternaObstetricia.medico.celular;
+      medicoAtiende.Sexo = objHistoria.historiaExternaObstetricia.medico.sexo;
+      medicoAtiende.NumeroColegiatura = objHistoria.historiaExternaObstetricia.medico.numeroColegiatura;
+      medicoAtiende.Rne = objHistoria.historiaExternaObstetricia.medico.rne;
+      externoObs.Medico = medicoAtiende;
+  
+      let pacienteExterno = new PacienteExternoDTO();
+      pacienteExterno.TipoDocumento = objHistoria.historiaExternaObstetricia.paciente.tipoDocumento;
+      pacienteExterno.NumeroDocumento = objHistoria.historiaExternaObstetricia.paciente.numeroDocumento;
+      pacienteExterno.ApellidoPaterno = objHistoria.historiaExternaObstetricia.paciente.apellidoPaterno;
+      pacienteExterno.ApellidoMaterno = objHistoria.historiaExternaObstetricia.paciente.apellidoMaterno;
+      pacienteExterno.Nombres = objHistoria.historiaExternaObstetricia.paciente.nombres;
+      pacienteExterno.FechaNacimiento = objHistoria.historiaExternaObstetricia.paciente.fechaNacimiento;
+      pacienteExterno.Email = objHistoria.historiaExternaObstetricia.paciente.email;
+      pacienteExterno.Direccion = objHistoria.historiaExternaObstetricia.paciente.direccion;
+      pacienteExterno.Celular = objHistoria.historiaExternaObstetricia.paciente.celular;
+      pacienteExterno.Sexo = objHistoria.historiaExternaObstetricia.paciente.sexo;
+      pacienteExterno.EstadoCivil =  objHistoria.historiaExternaObstetricia.paciente.estadoCivil;
+      externoObs.Paciente = pacienteExterno;
+
+      let antecedentes = new AntecedentesObsDTO();
+      antecedentes.G = objHistoria.historiaExternaObstetricia.antecedentes.g;
+      antecedentes.P = objHistoria.historiaExternaObstetricia.antecedentes.p;
+      antecedentes.G1 = objHistoria.historiaExternaObstetricia.antecedentes.g1;
+      antecedentes.G2 = objHistoria.historiaExternaObstetricia.antecedentes.g2;
+      antecedentes.G3 = objHistoria.historiaExternaObstetricia.antecedentes.g3;
+      antecedentes.Fur = objHistoria.historiaExternaObstetricia.antecedentes.fur;
+      antecedentes.FppFur = objHistoria.historiaExternaObstetricia.antecedentes.fppFur;
+      antecedentes.FppEco = objHistoria.historiaExternaObstetricia.antecedentes.fppEco;
+      antecedentes.EgFur = objHistoria.historiaExternaObstetricia.antecedentes.egFur;
+      antecedentes.EgEco = objHistoria.historiaExternaObstetricia.antecedentes.egEco;
+      externoObs.Antecedentes = antecedentes;
+
+      externoObs.Quirurgico = [];
+      if(objHistoria.historiaExternaObstetricia.quirurgico != null)
+      {
+        objHistoria.historiaExternaObstetricia.quirurgico.forEach((element:any)=>{
+          let q : string;
+          q = element;
+          externoObs.Quirurgico?.push(q);
+        });
+      }
+      externoObs.Medicos = [];
+      if(objHistoria.historiaExternaObstetricia.medicos != null)
+      {
+        objHistoria.historiaExternaObstetricia.medicos.forEach((element:any)=>{
+          let m : string;
+          m = element;
+          externoObs.Medicos?.push(m);
+        });
+      }
+      externoObs.Patologicos = [];
+      if(objHistoria.historiaExternaObstetricia.patologicos != null)
+      {
+        objHistoria.historiaExternaObstetricia.patologicos.forEach((element:any)=>{
+          let p : string;
+          p = element;
+          externoObs.Patologicos?.push(p);
+        });
+      }
+      
+      let signo = new SignoVitalObsDTO();
+      signo.Temperatura = objHistoria.historiaExternaObstetricia.signoVital.temperatura;
+      signo.FrecuenciaCardiaca = objHistoria.historiaExternaObstetricia.signoVital.frecuenciaCardiaca;
+      signo.PresionArterialSistolicaDerecha = objHistoria.historiaExternaObstetricia.signoVital.presionArterialSistolicaDerecha;
+      signo.PresionArterialDistolicaDerecha = objHistoria.historiaExternaObstetricia.signoVital.presionArterialDistolicaDerecha;
+      signo.PresionArterialSistolicaIzquierda = objHistoria.historiaExternaObstetricia.signoVital.presionArterialSistolicaIzquierda;
+      signo.PresionArterialDistolicaIzquierda = objHistoria.historiaExternaObstetricia.signoVital.presionArterialDistolicaIzquierda;
+      signo.FrecuenciaRespiratoria = objHistoria.historiaExternaObstetricia.signoVital.frecuenciaRespiratoria;
+      signo.SaturacionOxigeno = objHistoria.historiaExternaObstetricia.signoVital.saturacionOxigeno;
+      signo.Talla = objHistoria.historiaExternaObstetricia.signoVital.talla;
+      signo.Peso = objHistoria.historiaExternaObstetricia.signoVital.peso;
+      signo.IMC = objHistoria.historiaExternaObstetricia.signoVital.imc;
+      signo.PesoHabitual = objHistoria.historiaExternaObstetricia.signoVital.pesoHabitual;
+      signo.AumentoPeso = objHistoria.historiaExternaObstetricia.signoVital.aumentoPeso;
+      externoObs.SignoVital = signo;
+
+      let diagnosticoDTO :  DiagnosticoCuidadoDTO[]=[];
+      if(objHistoria.historiaExternaObstetricia.diagnostico != null)
+      {
+        objHistoria.historiaExternaObstetricia.diagnostico.forEach((element:any)=>{
+          let diagnostico = new DiagnosticoCuidadoDTO();
+          diagnostico.CodigoCie10 = element.codigoCie10;
+          diagnostico.NombreDiagnostico = element.nombreDiagnostico;
+          diagnostico.TipoDiagnostico = element.tipoDiagnostico;
+          diagnosticoDTO.push(diagnostico);
+        });
+        
+      }
+      externoObs.Diagnostico = diagnosticoDTO;
+
+      let preferencial = new ExamenPreferencialObsDTO();
+      preferencial.Au = objHistoria.historiaExternaObstetricia.preferencial.au;
+      preferencial.Lcf = objHistoria.historiaExternaObstetricia.preferencial.lcf;
+      preferencial.Ila = objHistoria.historiaExternaObstetricia.preferencial.ila;
+      preferencial.Posicion = objHistoria.historiaExternaObstetricia.preferencial.posicion;
+      preferencial.PesoFetal = objHistoria.historiaExternaObstetricia.preferencial.pesoFetal;
+      preferencial.MovimientoFetal = objHistoria.historiaExternaObstetricia.preferencial.movimientoFetal;
+      preferencial.Cervicometria = objHistoria.historiaExternaObstetricia.preferencial.cervicometria;
+      preferencial.Edema = objHistoria.historiaExternaObstetricia.preferencial.edema;
+      preferencial.Aro = objHistoria.historiaExternaObstetricia.preferencial.aro;
+      preferencial.AroMotivo = objHistoria.historiaExternaObstetricia.preferencial.aroMotivo;
+
+      externoObs.Preferencial = preferencial;
+    }
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
@@ -1304,6 +1440,7 @@ if(objHistoria.primeraAtencion != null)
     historiaCalidad.BalanceHidrico = balance;
     historiaCalidad.HistorialObstetrico = obstetricia;
     historiaCalidad.SeguimientoAnalisis = seguimiento;
+    historiaCalidad.HistoriaExternaObstetricia = externoObs;
 
     this.objHistoria = historiaCalidad;
     

@@ -11,6 +11,7 @@ import { ControlPrenatalComponent } from '../control-prenatal/control-prenatal.c
 import { FuncionVitalObsComponent } from '../funcion-vital-obs/funcion-vital-obs.component';
 import { FichaObstetricaComponent } from '../ficha-obstetrica/ficha-obstetrica.component';
 import { SignosAlarmasComponent } from '../signos-alarmas/signos-alarmas.component';
+import { RecetaComponent } from '../../receta/receta.component';
 
 @Component({
   selector: 'app-cuadro-control-obs',
@@ -31,6 +32,7 @@ export class CuadroControlObsComponent implements OnInit{
   BsModalControlPre!:BsModalRef;
   BsModalFunciones!:BsModalRef;
   BsModalSignos!:BsModalRef;
+  BsModalReceta!:BsModalRef;
 
   constructor(
     private modalCuadroControl: BsModalRef,
@@ -95,6 +97,10 @@ export class CuadroControlObsComponent implements OnInit{
   AbrirExamenAuxiliar(idHistoriaClinica: number){
     this.BsModalExamenAux = this.modalExamen.show(ExamenAuxiliarComponent, { backdrop: 'static', class: 'modal-xl' })
     this.BsModalExamenAux.content.AsignarObjetoListaPaciente(idHistoriaClinica);
+  }
+  AbrirReceta(idHistoriaClinica: number){
+    this.BsModalReceta = this.modalReceta.show(RecetaComponent, { backdrop: 'static', class: 'modal-xl' })
+    this.BsModalReceta.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
   AbrirSignosAlarmas(idHistoriaClinica: number){
     this.BsModalSignos = this.modalSignos.show(SignosAlarmasComponent, { backdrop: 'static', class: 'modal-xl' })

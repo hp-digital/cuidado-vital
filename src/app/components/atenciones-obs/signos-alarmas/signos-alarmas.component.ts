@@ -57,11 +57,14 @@ import { MedicoAtencionDTO } from '@models/medico-atiente';
 import { CabeceraPacienteDTO } from '@models/cabecera-paciente';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SignosAlarmasDTO } from '@models/signos-alarmas';
+import { AccordionModule } from 'primeng/accordion';
+import { InputTextModule } from 'primeng/inputtext';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-signos-alarmas',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule,MultiSelectModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule,MultiSelectModule, AccordionModule, InputTextModule],
   templateUrl: './signos-alarmas.component.html',
   styleUrl: './signos-alarmas.component.css'
 })
@@ -102,19 +105,23 @@ export class SignosAlarmasComponent implements OnInit{
       private servicioService: ServicioServiceService,
       private settings : SettingsService,
   ){
-    this.signos = [
-      {id: 1, nombre: 'Naúseas o vómitos exagerados'},
-      {id: 2, nombre: 'Fiebre, escalofríos'},
-      {id: 3, nombre: 'Hinchazón de manos y cara'},
-      {id: 4, nombre: 'Dolor de cabeza, zunmbido de oído, visón borrosa o dolor abdominal'},
-      {id: 5, nombre: 'Pérdida de líquido o sangre por vagina o genitales'},
-      {id: 6, nombre: 'Disminución o ausencia de movimientos del bebé durante el día'}
-  ];
-  this.dataFormGroup = new FormGroup({
-        
-    inputSignoAlarma: new FormControl(),
-    inputComentario: new FormControl(),
-      });
+      this.signos = [
+        {id: 1, nombre: 'Naúseas o vómitos exagerados'},
+        {id: 2, nombre: 'Fiebre, escalofríos'},
+        {id: 3, nombre: 'Hinchazón de manos y cara'},
+        {id: 4, nombre: 'Dolor de cabeza, zunmbido de oído, visón borrosa o dolor abdominal'},
+        {id: 5, nombre: 'Pérdida de líquido o sangre por vagina o genitales'},
+        {id: 6, nombre: 'Disminución o ausencia de movimientos del bebé durante el día'}
+    ];
+    
+    this.dataFormGroup = new FormGroup({ 
+
+      inputSignoAlarma: new FormControl(),
+      inputComentario: new FormControl(),
+      inputComentarioPaciente: new FormControl(),
+      inputComentarioMedico: new FormControl(),
+      inputSignos: new FormControl(),
+    });
   }
 
   ngOnInit(): void {
@@ -1411,6 +1418,7 @@ export class SignosAlarmasComponent implements OnInit{
       ss.Signos = sstf;
     }
     this.objSignosAlarmas.unshift(ss);
+    console.log(this.objSignosAlarmas);
   }
 
   Guardar(){

@@ -72,8 +72,64 @@
                 </div>
             </div>
 
+            <hr/>
+            	
             
-            		
+            <p-accordion>
+                <p-accordionTab
+                  *ngFor="let item of objSignosAlarmas"
+                  [header]="'Fecha: ' + (item.FechaRegistroPaciente | date: 'medium')"
+                >
+                  <div class="p-fluid grid">
+                    <!-- Médico -->
+                    <div class="field col-12">
+                      <label for="medico">Médico</label>
+                      <input type="text"
+                       pInputText
+                        [(ngModel)]="item.Medico"
+                        [ngModelOptions]="{standalone: true}" />
+                    </div>
+              
+                    <!-- Comentario del Paciente -->
+                    <div class="field col-12">
+                      <label for="comentarioPaciente">Comentario del Paciente</label>
+                      <input
+                        type="text"
+                        pInputText
+                        [(ngModel)]="item.ComentarioPaciente"
+                        formControlName="inputComentarioPaciente"
+                      />
+                    </div>
+              
+                    <!-- Comentario del Médico -->
+                    <div class="field col-12">
+                      <label for="comentarioMedico">Comentario del Médico</label>
+                      <input
+                        type="text"
+                        pInputText
+                        [(ngModel)]="item.ComentarioMedico"
+                        formControlName="inputComentarioMedico"
+                      />
+                    </div>
+              
+                    <!-- Signos -->
+                    <div class="field col-12">
+                      <label>Signos</label>
+                      <ul>
+                        <li *ngFor="let signo of item.Signos">
+                          <input
+                            type="text"
+                            pInputText
+                            [(ngModel)]="signo.Nombre"
+                            style="width: 100%"
+                            formControlName="inputSignos"
+                          />
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </p-accordionTab>
+              </p-accordion>
         </form>
         <br>
         <br>
@@ -81,7 +137,7 @@
     
     <div class="modal-footer">
      				
-        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" data-bs-dismiss="modal" *ngIf="idRol==1" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-file-alt" ></i>Generar receta</button>
+        <button type="button" class="btn btn-green-custom" data-bs-toggle="modal" data-bs-target="#modalXl" data-bs-dismiss="modal" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-file-alt" ></i>Guardar</button>
         <!-- <button type="button" class="btn btn-green-light-custom"><i class="fas fa-lg fa-fw me-2 fa-file-pdf"></i>Imprimir</button> -->
         <button type="button" class="btn btn-danger" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
       </div>
