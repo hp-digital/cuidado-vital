@@ -71,11 +71,12 @@
                                     placeholder="Ingrese valor"
                                     [name]="'input_' + 0 + '_' + key"
                                     formControlName="inputValor"
+                                    [readOnly]="esEditar"
                                 />
                         
                                 <!-- Si el valor no es vacío, se muestra el valor directamente -->
                                 <span *ngIf="registro[key] !== '' && registro[key] !== null && registro[key] !== undefined">
-                                    {{ registro[key] }}
+                                    {{registro[key]}}
                                 </span>
                             </td>
                         </tr>
@@ -115,9 +116,7 @@
             </p-tabView>
 
 
-            <div class="container">
-               <!--  <h2>Controles Prenatales</h2> -->
-              
+            <!-- <div class="container">
                 <table border="1" cellspacing="0" cellpadding="10">
                   <thead>
                     <tr>
@@ -132,7 +131,6 @@
                       <th>Mov Fetal</th>
                       <th>ILA</th>
                       <th>Peso Fetal</th>
-                      <!-- Agrega más columnas según los datos que deseas mostrar -->
                     </tr>
                   </thead>
                   <tbody>
@@ -155,11 +153,11 @@
                 <div *ngIf="controlesFiltrados.length === 0">
                   <p>No hay datos disponibles.</p>
                 </div>
-            </div>
+            </div> -->
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-green-custom" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
+        <button type="button" class="btn btn-green-custom" [disabled]="esEdicioTabla" (click)="Guardar()"><i class="fas fa-lg fa-fw me-2 fa-save"></i>Guardar</button>
         <button type="button" class="btn btn-danger close-modal" (click)="CerrarModal()">Cerrar</button>
     </div>
 </div>

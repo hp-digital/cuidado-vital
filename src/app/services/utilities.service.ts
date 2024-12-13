@@ -20,6 +20,9 @@ export class UtilitiesService {
   private apiUrlElDoctor = 'https://eldoctor.pe/api/controles-pre-natales';
   private apiUrlElControles = 'https://eldoctor.pe/api/controles-pre-natales-controles';
 
+  private apiUrlWsp = 'https://api-crm.eldoctor.pe/v1/api/external/b13f1466-704d-4b0d-9d7f-67ba3d7ea42a';
+  private tokenWsp = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5hbnRJZCI6MSwicHJvZmlsZSI6ImFkbWluIiwic2Vzc2lvbklkIjo5LCJpYXQiOjE3MzQxMjk1MjgsImV4cCI6MTc5NzIwMTUyOH0.3GrizDa-KaKP7MjaU3r5qVd7g_qi9ucXV3PuSorbn1A';
+
   private handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){
       console.error('Error : ', error.error.message);
@@ -91,6 +94,15 @@ export class UtilitiesService {
     };
 
     return this.http.get<any>(this.apiUrlElDoctor, { params });
+  }
+
+  sendMensajeWsp(requestBody: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.tokenWsp}`
+    });
+
+    return this.http.post(this.apiUrlWsp, requestBody, { headers });
   }
 
   getControles(idcontrol:number): Observable<any> {

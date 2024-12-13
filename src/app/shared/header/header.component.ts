@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { SettingsService } from '../../services/settings.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -29,6 +31,7 @@ export class HeaderComponent implements OnInit{
     this.idRol = this.settings.getUserSetting('idRol');
 
     console.log("nombre usuario", this.nombreUsuario);
+    console.log("rol", this.idRol);
   }
 
   logOut(){

@@ -1330,6 +1330,7 @@ export class RecetaComponent implements OnInit {
       externoObs.Drogas = objHistoria.historiaExternaObstetricia.drogas;
       externoObs.PlanTrabajo = objHistoria.historiaExternaObstetricia.planTrabajo;
       externoObs.UrlPdfHistoriaClinica = objHistoria.historiaExternaObstetricia.urlPdfHistoriaClinica;
+      externoObs.ResumenMonitoreo = objHistoria.historiaExternaObstetricia.resumenMonitoreo;
       externoObs.IdPacienteExterno = objHistoria.historiaExternaObstetricia.idPacienteExterno;
 
       let medicoAtiende = new MedicoAtiendeDTO();
@@ -1447,7 +1448,6 @@ export class RecetaComponent implements OnInit {
       externoObs.Preferencial = preferencial;
     }
     
-
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;

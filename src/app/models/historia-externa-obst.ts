@@ -29,4 +29,5 @@ export class HistoriaExternaObstetriciaDTO
     Preferencial?:ExamenPreferencialObsDTO;
     PlanTrabajo?:string;
     UrlPdfHistoriaClinica?:string;
+    ResumenMonitoreo?:string;
 }

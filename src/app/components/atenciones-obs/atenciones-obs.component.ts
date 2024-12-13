@@ -22,6 +22,7 @@ import { SeguimientoAnalisisComponent } from './seguimiento-analisis/seguimiento
 import { ExamenAuxiliarComponent } from '../examen-auxiliar/examen-auxiliar.component';
 import { RecetaComponent } from '../receta/receta.component';
 import { CuadroMedicoObsComponent } from './cuadro-medico-obs/cuadro-medico-obs.component';
+import { SignosAlarmasComponent } from './signos-alarmas/signos-alarmas.component';
 
 @Component({
   selector: 'app-atenciones-obs',
@@ -133,8 +134,16 @@ export default class AtencionesObsComponent implements OnInit{
       
     }
 
-    return result + ' Semanas';
+    return result + ' Ss';
     
+  }
+
+  ChangeEgEco(data:any){
+    if(data)
+    {
+      return data + ' Ss'
+    }
+    return ' '
   }
 
   BuscarAtenciones() {
@@ -244,7 +253,8 @@ export default class AtencionesObsComponent implements OnInit{
   }
 
   CancelarServicio(idHistoriaClinica:number){
-    
+    this.modalRef = this.modalHistoria.show(SignosAlarmasComponent, { backdrop: 'static', class: 'modal-xl'});
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica)
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

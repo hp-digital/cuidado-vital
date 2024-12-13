@@ -92,7 +92,7 @@
                 <button type="button" class="btn btn-warning-custom btn-sm" tooltip="Seguimiento de Análisis"><i class="fas fa-lg fa-pills"></i></button> Seguimiento de Análisis. &nbsp;&nbsp;                
             </div>
             <div class="col-xl-4">
-                <button type="button" class="btn btn-danger btn-sm" tooltip="Finalizar Monitoreo"><i class="fas fa-lg fa-times"></i></button> Finalizar Monitoreo &nbsp;&nbsp;                
+                <button type="button" class="btn btn-danger btn-sm" tooltip="Signos y Alarmas"><i class="fas fa-lg fa-clock"></i></button> Signos y Alarmas &nbsp;&nbsp;                
             </div>
         </div>
         <div class="table-responsive" id="ver-tabla">
@@ -113,14 +113,14 @@
                         <td>{{lista.paciente}}</td>
                         <td>{{lista.numeroCelular}}</td>
                         <td>{{ChangeFur(lista.fur)}}</td>
-                        <td>{{lista.egEco}}</td>
+                        <td>{{ChangeEgEco(lista.egEco)}}</td>
                         <td>{{lista.fechaUltimoControl | date : 'dd/MM/yyyy'}}</td>
                         <td>
                             <button type="button" class="btn btn-green-light-custom btn-sm" tooltip="Control PreNatal" (click)="AbrirControlPreNatal(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-plus"></i></button> &nbsp;&nbsp;                
                             <button type="button" class="btn btn-info btn-sm" tooltip="Historial Clínico" (click)="AbrirHistorial(lista.idHistoriaClinica)"><i class="fas fa-lg fa-tasks"></i></button>&nbsp;&nbsp;                                
                             <button type="button" class="btn btn-secondary btn-sm" tooltip="Funciones Vitales" (click)="AbrirFuncionPaciente(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-shield"></i></button>&nbsp;&nbsp;                
                             <button type="button" class="btn btn-warning-custom btn-sm" tooltip="Seguimiento de Análisis" (click)="AbrirSeguimiento(lista.idHistoriaClinica)"><i class="fas fa-lg fa-pills"></i></button>&nbsp;&nbsp;    
-                            <button type="button" class="btn btn-danger btn-sm" tooltip="Cancelar cita." (click)="CancelarServicio(lista.idHistoriaClinica)"><i class="fas fa-lg fa-times"></i></button>&nbsp;&nbsp;  
+                            <button type="button" class="btn btn-danger btn-sm" tooltip="Cancelar cita." (click)="CancelarServicio(lista.idHistoriaClinica)"><i class="fas fa-lg fa-clock"></i></button>&nbsp;&nbsp;  
                         </td>
                     </tr>
                 </tbody>

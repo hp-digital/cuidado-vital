@@ -56,10 +56,28 @@ export class CuadroMedicoObsComponent implements OnInit{
   }
   AbrirRecetas(idHistoriaClinica: number){
     this.BsModalReceta = this.modalReceta.show(RecetaComponent, { backdrop: 'static', class: 'modal-xl'})
-    this.BsModalReceta.content.AsignarHistoriaClinica(idHistoriaClinica);
+    this.BsModalReceta.content.AsignarObjetoListaPaciente(idHistoriaClinica);
   }
   AbrirExamenes(idHistoriaClinica: number){
     this.BsModalExamenAux = this.modalExamen.show(ExamenAuxiliarComponent, { backdrop: 'static', class: 'modal-xl' })
     this.BsModalExamenAux.content.AsignarObjetoListaPaciente(idHistoriaClinica);
+  }
+
+  CerrarHistoria(idHistoria:number){
+    Swal.fire({
+      icon: 'info',
+      title: '¿Está seguro de Finalizar la Atención?',
+      showDenyButton: true,
+      confirmButtonText: 'SI',
+      denyButtonText: `NO`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        
+
+
+      } else if (result.isDenied) {
+        this.CerrarModal()
+      }
+    })
   }
 }

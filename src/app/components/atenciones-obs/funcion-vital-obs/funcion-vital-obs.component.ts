@@ -48,6 +48,7 @@ export class FuncionVitalObsComponent implements OnInit {
       inputPresionArterial: new FormControl(),
       inputFrecuenciaCardiaca: new FormControl(),
       inputFrecuenciaRespiratoria: new FormControl(),
+      inputPresionArterialIzquierda: new FormControl(),
     });
   }
   ngOnInit(): void {
@@ -122,6 +123,8 @@ export class FuncionVitalObsComponent implements OnInit {
         obs.FuncionVital.Fc = element.funcionVital.fc;
         obs.FuncionVital.PresionSistolica = element.funcionVital.presionSistolica;
         obs.FuncionVital.PresionDiastolica = element.funcionVital.presionDiastolica;
+        obs.FuncionVital.PresionDiastolicaIzquierda = element.funcionVital.presionDiastolicaIzquierda;
+        obs.FuncionVital.PresionSistolicaIzquierda = element.funcionVital.presionSistolicaIzquierda;
         obs.FuncionVital.Saturacion = element.funcionVital.saturacion;
         obs.FuncionVital.Fr = element.funcionVital.fr;
         obs.FuncionVital.Talla = element.funcionVital.talla;
@@ -178,7 +181,7 @@ export class FuncionVitalObsComponent implements OnInit {
     this.dataFormGroup.controls['inputFrecuenciaCardiaca'].setValue(obstetricia[0].FuncionVital?.Fc);
     this.dataFormGroup.controls['inputPresionArterial'].setValue(obstetricia[0].FuncionVital?.PresionSistolica+' - '+obstetricia[0].FuncionVital?.PresionDiastolica);
     this.dataFormGroup.controls['inputFrecuenciaRespiratoria'].setValue(obstetricia[0].FuncionVital?.Fr);
-
+    this.dataFormGroup.controls['inputPresionArterialIzquierda'].setValue(obstetricia[0].FuncionVital?.PresionDiastolicaIzquierda+' - '+obstetricia[0].FuncionVital?.PresionDiastolicaIzquierda);
   }
 
 

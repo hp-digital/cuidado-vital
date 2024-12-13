@@ -5,11 +5,13 @@ import moment from 'moment';
 import { HistoriaCuidadoDTO } from '@models/historia-cuidado';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { HistoriaService } from '@services/historia.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-resumen-monitoreo',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule],
   templateUrl: './resumen-monitoreo.component.html',
   styleUrl: './resumen-monitoreo.component.css'
 })
@@ -21,7 +23,7 @@ export class ResumenMonitoreoComponent implements OnInit {
   objHistoria=new HistoriaCuidadoDTO();
 
   mensaje:string=''
-
+  fecha=new Date();
   constructor(
     private modalCuadroControl: BsModalRef,
     private modalReceta: BsModalService,
@@ -38,8 +40,9 @@ export class ResumenMonitoreoComponent implements OnInit {
     //this.onGuardar();
   }
   
-  AsignarHistoriaClinica(idHistoriaClinica:number, mensaje:string){
+  AsignarHistoriaClinica(idHistoriaClinica:number, mensaje:string, fecha:Date){
     this.idHistoria=idHistoriaClinica;
     this.mensaje = mensaje;
+    this.fecha = fecha;
   }
 }

@@ -33,12 +33,13 @@
         <div class="menu-search">    
              
         </div>
-        <div class="menu-item">    
-            <a href="tel:+51992058451" data-bs-toggle="dropdown" data-display="static" class="menu-link">
+        <div class="menu-item" *ngIf="idRol!=1">    
+            <a href="tel:+51992058451">
                 <div class="menu-img">
                     <img src="./assets/img/llamada-de-emergencia.png" alt="" class="ms-100 mh-100" />
                 </div>
-                <div class="menu-text" style="color: white;">Llamada de Emergencia</div>
+                
+                
             </a>         
         </div>
         <div class="menu-item dropdown"> 
