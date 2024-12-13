@@ -1,7 +1,7 @@
 <div id="content">
     <div class="card">
       <div class="card-header">
-          <div class="header-card-table">ATENCIONES</div>
+          <div class="header-card-table">¿Cómo desea buscar al paciente?</div>
       </div>
       <div class="card-body">
         <form [formGroup]="dataFormGroup">
@@ -9,39 +9,62 @@
                 <div class="col-xl-12 text-right">
                     <!-- <button *ngIf="sinAperturaCaja" type="button" class=" btn btn-green-custom" (click)="InsertarCaja()"><i class="fas fa-lg fa-fw me-2 fa-box-open"></i>Abrir caja</button>&nbsp;&nbsp;&nbsp; -->
                     
-                    <button type="button" class=" btn btn-green-custom" (click)="nuevoControl($event)"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>Agregar Control</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class=" btn btn-green-custom" (click)="nuevoControl($event)"><i class="fas fa-lg fa-fw me-2 fa-plus"></i>INICIAR NUEVO MONITOREO</button>&nbsp;&nbsp;&nbsp;
                     
                     &nbsp;&nbsp;&nbsp;
                 </div>
             </div>		
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-disabled-tab" data-bs-toggle="tab" data-bs-target="#nav-disabled" type="button" role="tab" aria-controls="nav-disabled" aria-selected="false" disabled>Seleccione -></button>
+                  <button class="nav-link" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Por Nro de Documento</button>
+                  <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Por Nombre</button>
+                  <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Por Monitoreo</button>
+                </div>
+              </nav>
+              <br>
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-disabled" role="tabpanel" aria-labelledby="nav-disabled-tab" tabindex="0">
+
+                </div>
+                <div class="tab-pane fade" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <!-- <label class="form-label mb-3" for="">Nro. documento</label> -->
+                            <input type="text" class="form-control" formControlName="inputNumeroDocumento"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <!-- <label class="form-label mb-3" for="">Paciente</label> -->
+                            <select class="form-select" formControlName="selectPaciente">
+                                  <option *ngFor="let combo of comboPaciente" [value]="combo.id">
+                                      {{combo.nombre}}
+                                  </option>										
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                    <div class="col-xl-4">
+                        <div class="form-group mb-3">
+                            <!-- <label class="form-label mb-3" for="">Monitoreo</label> -->
+                            <select class="form-select" formControlName="selectMonitoreo">
+                              <option value="1">Gestante I trimestre</option>
+                              <option value="2">Gestantes II trimestre</option>
+                              <option value="3">Gestante III trimestre</option>
+                              <option value="4">ARO</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+              </div>
           <div class="row">
-              <div class="col-xl-2">
-                  <div class="form-group mb-3">
-                      <label class="form-label mb-3" for="">Nro. documento</label>
-                      <input type="text" class="form-control" formControlName="inputNumeroDocumento"/>
-                  </div>
-              </div>
-              <div class="col-xl-3">
-                  <div class="form-group mb-3">
-                      <label class="form-label mb-3" for="">Paciente</label>
-                      <select class="form-select" formControlName="selectPaciente">
-                            <option *ngFor="let combo of comboPaciente" [value]="combo.id">
-                                {{combo.nombre}}
-                            </option>										
-                      </select>
-                  </div>
-              </div>
-              <div class="col-xl-2">
-                  <div class="form-group mb-3">
-                      <label class="form-label mb-3" for="">Monitoreo</label>
-                      <select class="form-select" formControlName="selectMonitoreo">
-                        <option value="1">Gestante I trimestre</option>
-                        <option value="2">Gestantes II trimestre</option>
-                        <option value="3">Gestante III trimestre</option>
-                        <option value="4">ARO</option>
-                      </select>
-                  </div>
-              </div>
               <div class="col-xl-3">
                 <div class="mt-4 pt-1">
                     <button type="button" class="btn btn-green-custom me-2" (click)="BuscarAtenciones()">
@@ -53,39 +76,56 @@
                 </div>						
             </div>
           </div>
-
-          <div class="table-responsive" id="ver-tabla">
-              <table class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <td style="text-align: center;"  rowspan="2">NRO</td>
-                            <td style="text-align: center;"  rowspan="2">PACIENTE</td>
-                            <td style="text-align: center;"  rowspan="2">CELULAR</td>
-                            <td colspan="2" style="text-align: center;">EDAD GESTACIONAL</td>
-                            <td style="text-align: center;"  rowspan="2">ÚLTIMO CONTROL</td>
-                            <td style="text-align: center;"  rowspan="2">ACCIONES</td>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        <tr *ngFor="let lista of listadoAtencionBusqueda; index as s">
-                            <td>{{s + 1 }}</td>
-                            <td>{{lista.paciente}}</td>
-                            <td>{{lista.numeroCelular}}</td>
-                            <td>{{ChangeFur(lista.fur)}}</td>
-                            <td>{{lista.egEco}}</td>
-                            <td>{{lista.fechaUltimoControl | date : 'dd/MM/yyyy'}}</td>
-                            <td>
-                                <button type="button" class="btn btn-green-light-custom btn-sm" tooltip="Control PreNatal" (click)="AbrirControlPreNatal(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-plus"></i></button> &nbsp;&nbsp;                
-                                <button type="button" class="btn btn-info btn-sm" tooltip="Historial Clínico" (click)="AbrirHistorial(lista.idHistoriaClinica)"><i class="fas fa-lg fa-tasks"></i></button>&nbsp;&nbsp;                                
-                                <button type="button" class="btn btn-secondary btn-sm" tooltip="Funciones Vitales" (click)="AbrirFuncionPaciente(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-shield"></i></button>&nbsp;&nbsp;                
-                                <button type="button" class="btn btn-warning-custom btn-sm" tooltip="Seguimiento de Análisis" (click)="AbrirSeguimiento(lista.idHistoriaClinica)"><i class="fas fa-lg fa-pills"></i></button>&nbsp;&nbsp;    
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar(lista.idHistoriaClinica)" tooltip="Examen Auxiliar"><i class="fas fa-lg fa-fas fa-lg fa-stethoscope"></i></button>&nbsp;&nbsp;
-                                <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirReceta(lista.idHistoriaClinica)"><i class="fas fa-lg fa-fas fa-lg fa-hospital"></i></button> &nbsp;&nbsp;
-                            </td>
-                        </tr>
-                    </tbody>
-              </table>
-          </div>	
+          <br>
+          <hr />
+          <div class="row mb-3">
+            <div class="col-xl-4 mb-3">
+                <button type="button" class="btn btn-green-light-custom btn-sm" tooltip="Control PreNatal"><i class="fas fa-lg fa-user-plus"></i></button> Control PreNatal. &nbsp;&nbsp;                
+            </div>
+            <div class="col-xl-4 mb-3">                
+                <button type="button" class="btn btn-info btn-sm" tooltip="Notas enfermería"><i class="fas fa-lg fa-tasks"></i></button>Cuadro de Historial Clínico. &nbsp;&nbsp;                
+            </div>
+            <div class="col-xl-4 mb-3">
+                <button type="button" class="btn btn-secondary btn-sm" tooltip="Alergias"><i class="fas fa-lg fa-user-shield"></i></button> Funciones Vitales. &nbsp;&nbsp;                
+            </div>
+            <div class="col-xl-4 mb-3">
+                <button type="button" class="btn btn-warning-custom btn-sm" tooltip="Seguimiento de Análisis"><i class="fas fa-lg fa-pills"></i></button> Seguimiento de Análisis. &nbsp;&nbsp;                
+            </div>
+            <div class="col-xl-4">
+                <button type="button" class="btn btn-danger btn-sm" tooltip="Finalizar Monitoreo"><i class="fas fa-lg fa-times"></i></button> Finalizar Monitoreo &nbsp;&nbsp;                
+            </div>
+        </div>
+        <div class="table-responsive" id="ver-tabla">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <td style="text-align: center;"  rowspan="2">NRO</td>
+                        <td style="text-align: center;"  rowspan="2">PACIENTE</td>
+                        <td style="text-align: center;"  rowspan="2">CELULAR</td>
+                        <td colspan="2" style="text-align: center;">EDAD GESTACIONAL</td>
+                        <td style="text-align: center;"  rowspan="2">ÚLTIMO CONTROL</td>
+                        <td style="text-align: center;"  rowspan="2">ACCIONES</td>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    <tr *ngFor="let lista of listadoAtencionBusqueda; index as s">
+                        <td>{{s + 1 }}</td>
+                        <td>{{lista.paciente}}</td>
+                        <td>{{lista.numeroCelular}}</td>
+                        <td>{{ChangeFur(lista.fur)}}</td>
+                        <td>{{lista.egEco}}</td>
+                        <td>{{lista.fechaUltimoControl | date : 'dd/MM/yyyy'}}</td>
+                        <td>
+                            <button type="button" class="btn btn-green-light-custom btn-sm" tooltip="Control PreNatal" (click)="AbrirControlPreNatal(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-plus"></i></button> &nbsp;&nbsp;                
+                            <button type="button" class="btn btn-info btn-sm" tooltip="Historial Clínico" (click)="AbrirHistorial(lista.idHistoriaClinica)"><i class="fas fa-lg fa-tasks"></i></button>&nbsp;&nbsp;                                
+                            <button type="button" class="btn btn-secondary btn-sm" tooltip="Funciones Vitales" (click)="AbrirFuncionPaciente(lista.idHistoriaClinica)"><i class="fas fa-lg fa-user-shield"></i></button>&nbsp;&nbsp;                
+                            <button type="button" class="btn btn-warning-custom btn-sm" tooltip="Seguimiento de Análisis" (click)="AbrirSeguimiento(lista.idHistoriaClinica)"><i class="fas fa-lg fa-pills"></i></button>&nbsp;&nbsp;    
+                            <button type="button" class="btn btn-danger btn-sm" tooltip="Cancelar cita." (click)="CancelarServicio(lista.idHistoriaClinica)"><i class="fas fa-lg fa-times"></i></button>&nbsp;&nbsp;  
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>	
         </form>
       </div>
     </div>						

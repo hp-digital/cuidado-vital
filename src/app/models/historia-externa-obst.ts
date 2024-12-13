@@ -14,6 +14,7 @@ export class HistoriaExternaObstetriciaDTO
     FechaInicioAtencion!:Date;
     FechaCierreAtencion?:Date;
     Especialidad!:number;
+    IdPacienteExterno?:number;
     Medico!:MedicoAtiendeDTO;
     Paciente!:PacienteExternoDTO;
     Antecedentes?:AntecedentesObsDTO;

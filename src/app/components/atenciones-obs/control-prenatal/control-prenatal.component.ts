@@ -52,6 +52,11 @@ import { ControlPreNatalDTO } from '@models/control-prenatal';
 import { TableModule } from 'primeng/table';
 import { TabViewModule } from 'primeng/tabview';
 import { ChartModule } from 'primeng/chart';
+import { ExamenPreferencialObsDTO } from '@models/examen-preferencial-obs';
+import { SignoVitalObsDTO } from '@models/signo-vital-obs';
+import { AntecedentesObsDTO } from '@models/antecedentes-obs';
+import { HistoriaExternaObstetriciaDTO } from '@models/historia-externa-obst';
+import { UtilitiesService } from '@services/utilities.service';
 
 @Component({
   selector: 'app-control-prenatal',
@@ -101,12 +106,19 @@ export class ControlPrenatalComponent implements OnInit {
   alturaUterina:number[]=[];
   pesoFetal:number[]=[];
 
+  idPacienteExterno:number=0;
+  idControlPreNatalAndromeda:number=0;
+
+  controles: any[] = []; // Datos originales
+  controlesFiltrados: any[] = []; // Datos filtrados
+
   constructor(
     private bsModalControl: BsModalRef,
     private modalService: BsModalService,
     private historiaService: HistoriaService,
     private servicioService: ServicioServiceService,
     private settings : SettingsService,
+    private utilities : UtilitiesService
   ){
     this.dataFormGroup = new FormGroup({
       inputValor: new FormControl()
@@ -1182,12 +1194,143 @@ export class ControlPrenatalComponent implements OnInit {
       this.objObstetricia = obstetricia;
       this.AsignarValores(this.objObstetricia);
       this.DatosG(this.objObstetricia);
-    }else{
+    }/* else{
       this.MostrarNotificacionWarning("No se rellenó el historial obstétrico", "Error");
       this.CerrarModal();
-    }
+    } */
 
-    
+    let externoObs = new  HistoriaExternaObstetriciaDTO();
+    if(objHistoria.historiaExternaObstetricia != null)
+    {
+      externoObs.CodigoIpress = objHistoria.historiaExternaObstetricia.codigoIpress;
+      externoObs.NumeroRuc = objHistoria.historiaExternaObstetricia.numeroRuc;
+      externoObs.RazonSocial = objHistoria.historiaExternaObstetricia.razonSocial;
+      externoObs.NumeroHistoriaClinica = objHistoria.historiaExternaObstetricia.numeroHistoriaClinica;
+      externoObs.FechaInicioAtencion = objHistoria.historiaExternaObstetricia.fechaInicioAtencion;
+      externoObs.FechaCierreAtencion = objHistoria.historiaExternaObstetricia.fechaCierreAtencion;
+      externoObs.Especialidad = objHistoria.historiaExternaObstetricia.especialidad;
+      externoObs.Fumar = objHistoria.historiaExternaObstetricia.fumar;
+      externoObs.Alcohol = objHistoria.historiaExternaObstetricia.alcohol;
+      externoObs.Drogas = objHistoria.historiaExternaObstetricia.drogas;
+      externoObs.PlanTrabajo = objHistoria.historiaExternaObstetricia.planTrabajo;
+      externoObs.UrlPdfHistoriaClinica = objHistoria.historiaExternaObstetricia.urlPdfHistoriaClinica;
+      externoObs.IdPacienteExterno = objHistoria.historiaExternaObstetricia.idPacienteExterno;
+      this.idPacienteExterno= objHistoria.historiaExternaObstetricia.idPacienteExterno;
+
+      let medicoAtiende = new MedicoAtiendeDTO();
+      medicoAtiende.TipoDocumento = objHistoria.historiaExternaObstetricia.medico.tipoDocumento;
+      medicoAtiende.NumeroDocumento = objHistoria.historiaExternaObstetricia.medico.numeroDocumento;
+      medicoAtiende.ApellidoPaterno = objHistoria.historiaExternaObstetricia.medico.apellidoPaterno;
+      medicoAtiende.ApellidoMaterno = objHistoria.historiaExternaObstetricia.medico.apellidoMaterno;
+      medicoAtiende.Nombres = objHistoria.historiaExternaObstetricia.medico.nombres;
+      medicoAtiende.FechaNacimiento = objHistoria.historiaExternaObstetricia.medico.fechaNacimiento;
+      medicoAtiende.Email = objHistoria.historiaExternaObstetricia.medico.email;
+      medicoAtiende.Direccion = objHistoria.historiaExternaObstetricia.medico.direccion;
+      medicoAtiende.Celular = objHistoria.historiaExternaObstetricia.medico.celular;
+      medicoAtiende.Sexo = objHistoria.historiaExternaObstetricia.medico.sexo;
+      medicoAtiende.NumeroColegiatura = objHistoria.historiaExternaObstetricia.medico.numeroColegiatura;
+      medicoAtiende.Rne = objHistoria.historiaExternaObstetricia.medico.rne;
+      externoObs.Medico = medicoAtiende;
+  
+      let pacienteExterno = new PacienteExternoDTO();
+      pacienteExterno.TipoDocumento = objHistoria.historiaExternaObstetricia.paciente.tipoDocumento;
+      pacienteExterno.NumeroDocumento = objHistoria.historiaExternaObstetricia.paciente.numeroDocumento;
+      pacienteExterno.ApellidoPaterno = objHistoria.historiaExternaObstetricia.paciente.apellidoPaterno;
+      pacienteExterno.ApellidoMaterno = objHistoria.historiaExternaObstetricia.paciente.apellidoMaterno;
+      pacienteExterno.Nombres = objHistoria.historiaExternaObstetricia.paciente.nombres;
+      pacienteExterno.FechaNacimiento = objHistoria.historiaExternaObstetricia.paciente.fechaNacimiento;
+      pacienteExterno.Email = objHistoria.historiaExternaObstetricia.paciente.email;
+      pacienteExterno.Direccion = objHistoria.historiaExternaObstetricia.paciente.direccion;
+      pacienteExterno.Celular = objHistoria.historiaExternaObstetricia.paciente.celular;
+      pacienteExterno.Sexo = objHistoria.historiaExternaObstetricia.paciente.sexo;
+      pacienteExterno.EstadoCivil =  objHistoria.historiaExternaObstetricia.paciente.estadoCivil;
+      externoObs.Paciente = pacienteExterno;
+
+      let antecedentes = new AntecedentesObsDTO();
+      antecedentes.G = objHistoria.historiaExternaObstetricia.antecedentes.g;
+      antecedentes.P = objHistoria.historiaExternaObstetricia.antecedentes.p;
+      antecedentes.G1 = objHistoria.historiaExternaObstetricia.antecedentes.g1;
+      antecedentes.G2 = objHistoria.historiaExternaObstetricia.antecedentes.g2;
+      antecedentes.G3 = objHistoria.historiaExternaObstetricia.antecedentes.g3;
+      antecedentes.Fur = objHistoria.historiaExternaObstetricia.antecedentes.fur;
+      antecedentes.FppFur = objHistoria.historiaExternaObstetricia.antecedentes.fppFur;
+      antecedentes.FppEco = objHistoria.historiaExternaObstetricia.antecedentes.fppEco;
+      antecedentes.EgFur = objHistoria.historiaExternaObstetricia.antecedentes.egFur;
+      antecedentes.EgEco = objHistoria.historiaExternaObstetricia.antecedentes.egEco;
+      externoObs.Antecedentes = antecedentes;
+
+      externoObs.Quirurgico = [];
+      if(objHistoria.historiaExternaObstetricia.quirurgico != null)
+      {
+        objHistoria.historiaExternaObstetricia.quirurgico.forEach((element:any)=>{
+          let q : string;
+          q = element;
+          externoObs.Quirurgico?.push(q);
+        });
+      }
+      externoObs.Medicos = [];
+      if(objHistoria.historiaExternaObstetricia.medicos != null)
+      {
+        objHistoria.historiaExternaObstetricia.medicos.forEach((element:any)=>{
+          let m : string;
+          m = element;
+          externoObs.Medicos?.push(m);
+        });
+      }
+      externoObs.Patologicos = [];
+      if(objHistoria.historiaExternaObstetricia.patologicos != null)
+      {
+        objHistoria.historiaExternaObstetricia.patologicos.forEach((element:any)=>{
+          let p : string;
+          p = element;
+          externoObs.Patologicos?.push(p);
+        });
+      }
+      
+      let signo = new SignoVitalObsDTO();
+      signo.Temperatura = objHistoria.historiaExternaObstetricia.signoVital.temperatura;
+      signo.FrecuenciaCardiaca = objHistoria.historiaExternaObstetricia.signoVital.frecuenciaCardiaca;
+      signo.PresionArterialSistolicaDerecha = objHistoria.historiaExternaObstetricia.signoVital.presionArterialSistolicaDerecha;
+      signo.PresionArterialDistolicaDerecha = objHistoria.historiaExternaObstetricia.signoVital.presionArterialDistolicaDerecha;
+      signo.PresionArterialSistolicaIzquierda = objHistoria.historiaExternaObstetricia.signoVital.presionArterialSistolicaIzquierda;
+      signo.PresionArterialDistolicaIzquierda = objHistoria.historiaExternaObstetricia.signoVital.presionArterialDistolicaIzquierda;
+      signo.FrecuenciaRespiratoria = objHistoria.historiaExternaObstetricia.signoVital.frecuenciaRespiratoria;
+      signo.SaturacionOxigeno = objHistoria.historiaExternaObstetricia.signoVital.saturacionOxigeno;
+      signo.Talla = objHistoria.historiaExternaObstetricia.signoVital.talla;
+      signo.Peso = objHistoria.historiaExternaObstetricia.signoVital.peso;
+      signo.IMC = objHistoria.historiaExternaObstetricia.signoVital.imc;
+      signo.PesoHabitual = objHistoria.historiaExternaObstetricia.signoVital.pesoHabitual;
+      signo.AumentoPeso = objHistoria.historiaExternaObstetricia.signoVital.aumentoPeso;
+      externoObs.SignoVital = signo;
+
+      let diagnosticoDTO :  DiagnosticoCuidadoDTO[]=[];
+      if(objHistoria.historiaExternaObstetricia.diagnostico != null)
+      {
+        objHistoria.historiaExternaObstetricia.diagnostico.forEach((element:any)=>{
+          let diagnostico = new DiagnosticoCuidadoDTO();
+          diagnostico.CodigoCie10 = element.codigoCie10;
+          diagnostico.NombreDiagnostico = element.nombreDiagnostico;
+          diagnostico.TipoDiagnostico = element.tipoDiagnostico;
+          diagnosticoDTO.push(diagnostico);
+        });
+        
+      }
+      externoObs.Diagnostico = diagnosticoDTO;
+
+      let preferencial = new ExamenPreferencialObsDTO();
+      preferencial.Au = objHistoria.historiaExternaObstetricia.preferencial.au;
+      preferencial.Lcf = objHistoria.historiaExternaObstetricia.preferencial.lcf;
+      preferencial.Ila = objHistoria.historiaExternaObstetricia.preferencial.ila;
+      preferencial.Posicion = objHistoria.historiaExternaObstetricia.preferencial.posicion;
+      preferencial.PesoFetal = objHistoria.historiaExternaObstetricia.preferencial.pesoFetal;
+      preferencial.MovimientoFetal = objHistoria.historiaExternaObstetricia.preferencial.movimientoFetal;
+      preferencial.Cervicometria = objHistoria.historiaExternaObstetricia.preferencial.cervicometria;
+      preferencial.Edema = objHistoria.historiaExternaObstetricia.preferencial.edema;
+      preferencial.Aro = objHistoria.historiaExternaObstetricia.preferencial.aro;
+      preferencial.AroMotivo = objHistoria.historiaExternaObstetricia.preferencial.aroMotivo;
+
+      externoObs.Preferencial = preferencial;
+    }
 
     let historiaCalidad = new HistoriaCuidadoDTO();
     historiaCalidad.cabeceraPaciente = cabecera;
@@ -1214,6 +1357,7 @@ export class ControlPrenatalComponent implements OnInit {
     historiaCalidad.PrimeraAtencion = objHistoria.primeraAtencion;
     historiaCalidad.HistorialObstetrico = obstetricia;
     historiaCalidad.ControlPreNatal = prenatal;
+    historiaCalidad.HistoriaExternaObstetricia = externoObs;
 
     this.objHistoria = historiaCalidad;
   }
@@ -1256,6 +1400,14 @@ export class ControlPrenatalComponent implements OnInit {
     else {
       console.error("La lista de registros está vacía.");
     }
+  }
+
+  procesarDatos(data:any): void {
+    console.log("proc",data);
+    this.controles = data.data;
+    this.controlesFiltrados = this.controles.filter((control) =>
+      Object.values(control).some((value) => value !== null)
+    );
   }
 
   DatosG(obs:HistorialObstetricoDTO[])
@@ -1354,6 +1506,53 @@ export class ControlPrenatalComponent implements OnInit {
       return sstf.toUpperCase;
     } */
    return sstf
+  }
+
+  BuscarAtenciones(){
+    //idpaciente= 6265
+    this.utilities.getControlesPreNatales(this.idPacienteExterno).subscribe({
+      next: (response) => {
+        if(response.data.length == 0)
+        {
+          this.MostrarNotificacionError("No tiene registros en Andrómeda", "Verifique su Sistema")
+        }
+        else{
+          console.log('Controles:', response.data[0].id);
+          this.idControlPreNatalAndromeda = response.data[0].id;
+          this.BuscarControles(this.idControlPreNatalAndromeda);
+        }
+       
+      },
+      error: (err) => {
+        console.error('Error al obtener los controles:', err);
+      }
+    });
+  }
+
+  BuscarControles(idPreNatal:number){
+    if(idPreNatal!=0)
+    {
+      this.utilities.getControles(idPreNatal).subscribe({
+        next: (response) => {
+          if(response.data.length == 0)
+          {
+            this.MostrarNotificacionError("No tiene registros en Andrómeda", "Verifique en su Sistema")
+          }
+          else{
+            console.log('Controles:', response);
+            this.procesarDatos(response);
+            
+          }
+         
+        },
+        error: (err) => {
+          console.error('Error al obtener los controles:', err);
+        }
+      });
+    }
+    else{
+      this.MostrarNotificacionWarning("No tiene Controles Registrados en Andromeda", "Verifique su sistema");
+    }
   }
 
   CalularGraficosPeso(){

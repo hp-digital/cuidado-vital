@@ -24,4 +24,5 @@ export class HistorialObstetricoDTO
     Diagnostico?: string;
     RecomendacionesGenerales?:string[];
     RecomendacionesEspecificas?:string[];
+    EvolucionPaciente?:string;
 }

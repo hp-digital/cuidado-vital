@@ -1,7 +1,7 @@
 <form autocomplete="off" novalidate="novalidate" [formGroup]="dataFormGroup">
     <div class="row" *ngIf="idRol==3">    <!--DASHBOARD PACIENTE-->
         
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+       <!--  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
               <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -184,7 +184,7 @@
                 <div class="card mb-3" style="max-width: 540px;">
                     <div class="row g-0">
                         <div class="col-md-4">
-                        <img src="./assets/img/Doc-Kriss.png" class="img-fluid rounded-start" alt="...">
+                            <img src="./assets/img/Doc-Kriss.png" class="img-fluid rounded-start" alt="...">
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -198,8 +198,21 @@
                     </div>
                 </div>
             </div>
+        </div> -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{nombreUsuario}}</h5>
+                <h6 class="card-subtitle mb-2 text-body-secondary">Bienvenido(a) a Cuidado Vital</h6>
+                <p class="card-text">Durante esta etapa, estarás bajo el cuidado del <span>Dr. Hermógenes Palacios</span> </p>
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <img src="./assets/img/Doc-Hermogenes.png" class="img-fluid rounded-start" alt="...">
+                    </div>
+                </div>
+                <p class="card-text">Si tienes alguna consulta, no dudes en comunicarte con nosotros al (numero de la obstetra); estamos a tu disposición para apoyarte en este maravilloso camino. 
+                    ¡Gracias por confiar en nosotros!	</p>
+            </div>
         </div>
-
     </div>
     <div class="row" *ngIf="idRol==1">    <!--DASHBOARD MEDICO-->
             <h3>Bienvenido a CuidadoVital</h3>

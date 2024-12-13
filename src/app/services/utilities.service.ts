@@ -17,6 +17,9 @@ export class UtilitiesService {
 
   private apiUrlVideo = 'https://rnckc-200-106-13-121.a.free.pinggy.link/stream.m3u8';
 
+  private apiUrlElDoctor = 'https://eldoctor.pe/api/controles-pre-natales';
+  private apiUrlElControles = 'https://eldoctor.pe/api/controles-pre-natales-controles';
+
   private handleError(error: HttpErrorResponse){
     if(error.error instanceof ErrorEvent){
       console.error('Error : ', error.error.message);
@@ -78,6 +81,24 @@ export class UtilitiesService {
     });
 
     return this.http.get(this.apiUrlVideo, { headers });
+  }
+
+  getControlesPreNatales(pacienteId: number): Observable<any> {
+    const params = {
+      paciente_id: pacienteId.toString(),
+      estado: 'EN ATENCION',
+      size: '1'
+    };
+
+    return this.http.get<any>(this.apiUrlElDoctor, { params });
+  }
+
+  getControles(idcontrol:number): Observable<any> {
+    const params = {
+      control_pre_natal_id: idcontrol.toString(),
+    };
+
+    return this.http.get<any>(this.apiUrlElControles, { params });
   }
 
   ObtenerSINO():ComboDTO[]{

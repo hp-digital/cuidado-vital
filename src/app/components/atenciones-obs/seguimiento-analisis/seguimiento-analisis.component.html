@@ -45,8 +45,8 @@
                         <th>TIPO DE EXAMEN</th>
                         <th>FECHA</th>
                         <th>RESULTADO / OTRAS REFERENCIAS</th>
-                        <th>AÑADIR</th>
-                        <th>ELIMINAR</th>
+                        <th *ngIf="esVisible">AÑADIR</th>
+                        <th *ngIf="esVisible">ELIMINAR</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-row let-rowIndex="rowIndex">
@@ -60,6 +60,7 @@
                                         [(ngModel)]="row.tipoExamen"
                                         class="form-control"
                                         formControlName="inputTipoExamen"
+                                        [readOnly]="esReadOnly"
                                         />
                                     </ng-template>
                                     <ng-template pTemplate="output">
@@ -76,10 +77,11 @@
                                         [(ngModel)]="row.fecha"
                                         class="form-control"
                                         formControlName="inputFecha"
+                                        [readOnly]="esReadOnly"
                                         />
                                     </ng-template>
                                     <ng-template pTemplate="output">
-                                        {{ row.fecha | date: 'yyyy-MM-dd' }}
+                                        {{ row.fecha | date: 'dd-MM-yyyy' }}
                                     </ng-template>
                                 </p-cellEditor>
                             </td>
@@ -92,6 +94,7 @@
                                     [(ngModel)]="row.resultado"
                                     class="form-control"
                                     formControlName="inputResultado"
+                                    [readOnly]="esReadOnly"
                                     />
                                 </ng-template>
                                 <ng-template pTemplate="output">
@@ -100,7 +103,7 @@
                                 </p-cellEditor>
                             </td>
                             <!-- Botón para agregar fila -->
-                            <td>
+                            <td *ngIf="esVisible">
                                 <button
                                 type="button"
                                 class="btn btn-success btn-sm"
@@ -110,7 +113,7 @@
                                 </button>
                             </td>
                             <!-- Botón para eliminar fila -->
-                            <td>
+                            <td *ngIf="esVisible">
                                 <button
                                 type="button"
                                 class="btn btn-danger btn-sm"

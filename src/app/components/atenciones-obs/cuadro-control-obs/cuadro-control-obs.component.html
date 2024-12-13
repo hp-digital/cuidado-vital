@@ -1,0 +1,33 @@
+<div class="modal-content">
+    <!-- <div class="modal-header">
+      <h5 class="modal-title">CONTROLES</h5>
+    </div> -->
+    <div class="modal-body">
+      <p class="lead">
+        ¿Qué desea hacer?
+      </p>
+      <br>
+      <div class="row">
+          <div class="col-xl-6">
+            <div class="col-xl-12 d-grid mb-3">
+              <button type="button" class="btn btn-green-light-custom" (click)="AbrirSignosAlarmas(idHistoria)"><i class="fas fa-eye"></i> Reportar signos y alarmas</button><br>
+              <button type="button" class="btn btn-green-light-custom" (click)="AbrirControlPreNatal(idHistoria)"><i class="fas fa-eye"></i> Revisar mi evolución</button><br>
+              <button type="button" class="btn btn-green-light-custom" (click)="AbrirSeguimiento(idHistoria)"><i class="fas fa-eye"></i> Revisar mis análisis</button><br>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <div class="col-xl-12 d-grid mb-3">
+              <button type="button" class="btn btn-green-light-custom" (click)="AbrirExamenAuxiliar(idHistoria)"><i class="fas fa-eye"></i> Revisar mis Órdenes médicas</button><br>
+              <button type="button" class="btn btn-green-light-custom" (click)="AbrirFunciones(idHistoria)"><i class="fas fa-eye"></i> Revisar mis funciones</button><br>
+            </div>
+          </div>
+          
+            
+            
+      </div>
+    </div>
+    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="CerrarModal()"><i class="fas fa-lg fa-fw me-2 fa-sign-out-alt"></i>Salir</button>
+    </div>
+</div>

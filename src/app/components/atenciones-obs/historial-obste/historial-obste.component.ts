@@ -61,6 +61,7 @@ import { HistoriaExternaObstetriciaDTO } from '@models/historia-externa-obst';
 import { AntecedentesObsDTO } from '@models/antecedentes-obs';
 import { SignoVitalObsDTO } from '@models/signo-vital-obs';
 import { ExamenPreferencialObsDTO } from '@models/examen-preferencial-obs';
+import { ResumenMonitoreoComponent } from '../resumen-monitoreo/resumen-monitoreo.component';
 
 @Component({
   selector: 'app-historial-obste',
@@ -128,6 +129,10 @@ export class HistorialObsteComponent implements OnInit{
   selectedRecomendaciones: string[] = [];
   newRecomendacion: string = '';
 
+  mensajeResumen: string = '';
+
+  modalResumenRef!: BsModalRef;
+
   constructor(
     private bsModalHistorialClinico: BsModalRef,
     private modalService: BsModalService,
@@ -194,6 +199,7 @@ export class HistorialObsteComponent implements OnInit{
       inputPresionDiastolicaIzquierda: new FormControl(),
       inputEdema: new FormControl(),
       inputNuevaRecomendacion: new FormControl(),
+      inputEvolucionPaciente: new FormControl(),
     });
   }
 
@@ -247,6 +253,7 @@ export class HistorialObsteComponent implements OnInit{
     this.paciente = objHistoria.cabeceraPaciente.apellidoPaterno+' '+objHistoria.cabeceraPaciente.apellidoMaterno+', '+objHistoria.cabeceraPaciente.nombre;
     this.nroHcl = objHistoria.cabeceraPaciente.numeroDocumento;
     this.medico = objHistoria.medicoAtiende?.apellidoPaterno+' '+objHistoria.medicoAtiende?.apellidoMaterno+', '+objHistoria.medicoAtiende?.nombre;
+    this.mensajeResumen = objHistoria.historiaExternaObstetricia.resumenMonitoreo;
 
     let cabecera = new CabeceraPacienteDTO();
     if(objHistoria.cabeceraPaciente != null)
@@ -1478,12 +1485,12 @@ export class HistorialObsteComponent implements OnInit{
       this.dataFormGroup.controls['inputEnfermedadesCongenitas'].setValue(this.objObstetricia[index].RiesgosPreExistente?.EnfermedadCongenita);
       this.dataFormGroup.controls['inputFumaAlcohol'].setValue(this.objObstetricia[index].RiesgosPreExistente?.Fuma);
 
-      this.dataFormGroup.controls['inputPlacentaPrevia'].setValue(this.objObstetricia[index].RiesgoActual?.PlacentaPrevia);
+      /* this.dataFormGroup.controls['inputPlacentaPrevia'].setValue(this.objObstetricia[index].RiesgoActual?.PlacentaPrevia);
       this.dataFormGroup.controls['inputSobrepeso'].setValue(this.objObstetricia[index].RiesgoActual?.SobrePeso);
       this.dataFormGroup.controls['inputItu'].setValue(this.objObstetricia[index].RiesgoActual?.Itu);
-      this.dataFormGroup.controls['inputPresionAlta'].setValue(this.objObstetricia[index].RiesgoActual?.PresionAlta);
+      this.dataFormGroup.controls['inputPresionAlta'].setValue(this.objObstetricia[index].RiesgoActual?.PresionAlta); */
 
-      this.dataFormGroup.controls['inputTemperatura'].setValue(this.objObstetricia[index].FuncionVital?.Temperatura);
+      /* this.dataFormGroup.controls['inputTemperatura'].setValue(this.objObstetricia[index].FuncionVital?.Temperatura);
       this.dataFormGroup.controls['inputFrecuenciaCardiaca'].setValue(this.objObstetricia[index].FuncionVital?.Fc);
       this.dataFormGroup.controls['inputPresionSistolica'].setValue(this.objObstetricia[index].FuncionVital?.PresionSistolica);
       this.dataFormGroup.controls['inputPresionDiastolica'].setValue(this.objObstetricia[index].FuncionVital?.PresionDiastolica);
@@ -1498,7 +1505,7 @@ export class HistorialObsteComponent implements OnInit{
       this.dataFormGroup.controls['inputPesoActual'].setValue(this.objObstetricia[index].FuncionVital?.PesoActual);
       this.dataFormGroup.controls['inputAumentoPeso'].setValue(this.objObstetricia[index].FuncionVital?.AumentoPeso);
       this.dataFormGroup.controls['inputPresionSistolicaIzquierda'].setValue(this.objObstetricia[index].FuncionVital?.PresionSistolicaIzquierda);
-      this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(this.objObstetricia[index].FuncionVital?.PresionDiastolicaIzquierda);
+      this.dataFormGroup.controls['inputPresionDiastolicaIzquierda'].setValue(this.objObstetricia[index].FuncionVital?.PresionDiastolicaIzquierda); */
     }
     else{
       this.dataFormGroup.controls['inputG'].setValue(obstetricia.HistoriaExternaObstetricia?.Antecedentes?.G);
@@ -1868,6 +1875,11 @@ export class HistorialObsteComponent implements OnInit{
       this.dataFormGroup.controls['inputRecomendacionEspecifica'].setValue('');
     }
       
+  }
+
+  AbrirResumenMonitoreo(){
+    this.modalResumenRef = this.modalService.show(ResumenMonitoreoComponent, { backdrop: 'static', class: 'modal-xg'});
+    this.modalResumenRef.content.AsignarHistoriaClinica(this.idHistoria, this.mensajeResumen)
   }
 
   MostrarNotificacionSuccessModal(mensaje: string, titulo: string)

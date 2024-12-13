@@ -33,7 +33,15 @@
                         </div>
                     </div>															
                 </div>
-            </div>								
+            </div>	
+            <br>
+            <div class="row">									
+                <div class="col-xl-3 d-grid gap-2">
+                    <button type="button" class="btn btn-green-custom" (click)="BuscarAtenciones()">
+                        <i class="fas fa-lg fa-fw me-2 fa-file-alt"></i>Buscar Atenciones
+                    </button>
+                </div>									
+            </div>							
             <hr/>
             <p-tabView>
                 <p-tabPanel header=Tabla >
@@ -106,6 +114,48 @@
                 </p-tabPanel>
             </p-tabView>
 
+
+            <div class="container">
+               <!--  <h2>Controles Prenatales</h2> -->
+              
+                <table border="1" cellspacing="0" cellpadding="10">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Fecha</th>
+                      <th>Peso</th>
+                      <th>PA</th>
+                      <th>EG FUR</th>
+                      <th>Aumento Peso</th>
+                      <th>Presentación</th>
+                      <th>Frecuencia Cardiaca Fetal</th>
+                      <th>Mov Fetal</th>
+                      <th>ILA</th>
+                      <th>Peso Fetal</th>
+                      <!-- Agrega más columnas según los datos que deseas mostrar -->
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let control of controlesFiltrados">
+                      <td>{{ control.id }}</td>
+                      <td>{{ control.fecha }}</td>
+                      <td>{{ control.peso }}</td>
+                      <td>{{ control.pa }}</td>
+                      <td>{{ control.eg_fur }}</td>
+                      <td>{{ control.aumento_peso }}</td>
+                      <td>{{ control.presentacion }}</td>
+                      <td>{{ control.frecuencia_cardiaca_fetal }}</td>
+                      <td>{{ control.mov_fetal }}</td>
+                      <td>{{ control.ila }}</td>
+                      <td>{{ control.peso_fetal }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              
+                <div *ngIf="controlesFiltrados.length === 0">
+                  <p>No hay datos disponibles.</p>
+                </div>
+            </div>
         </form>
     </div>
     <div class="modal-footer">

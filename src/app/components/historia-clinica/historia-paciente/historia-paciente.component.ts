@@ -25,6 +25,7 @@ import { ControlPrenatalComponent } from '../../atenciones-obs/control-prenatal/
 import { FuncionVitalObsComponent } from '../../atenciones-obs/funcion-vital-obs/funcion-vital-obs.component';
 import { FichaObstetricaComponent } from '../../atenciones-obs/ficha-obstetrica/ficha-obstetrica.component';
 import { BitacoraComponent } from '../../atenciones-obs/bitacora/bitacora.component';
+import { CuadroControlObsComponent } from '../../atenciones-obs/cuadro-control-obs/cuadro-control-obs.component';
 
 @Component({
   selector: 'app-historia-paciente',
@@ -216,6 +217,10 @@ export default class HistoriaPacienteComponent implements OnInit{
   }
   AbrirBitacora(idHistoriaClinica: number){
     this.modalRef = this.modalChat.show(BitacoraComponent, { backdrop: 'static', class: 'modal-xl'})
+    this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
+  }
+  MostrarModalControl(idHistoriaClinica: number){
+    this.modalRef = this.modalChat.show(CuadroControlObsComponent, {backdrop: 'static', class: 'modal-xg'})
     this.modalRef.content.AsignarHistoriaClinica(idHistoriaClinica);
   }
 

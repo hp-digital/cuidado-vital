@@ -54,7 +54,7 @@
                         <div class="col-xl-10">
                             <p><strong>FECHA HISTORIA: </strong>{{lista.fechaInicioAtencion  | date: 'yyyy-MM-dd'}}</p>
                         </div>
-                        <div class="col-xl-2 text-end">
+                        <div class="col-xl-2 text-end" *ngIf="lista.idEspecialidad!=1 && lista.idEspecialidad!=11">
                             <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Imprimir" aria-label="Imprimir"><i class="fas fa-lg fa-print"></i></button>
                         </div>
                         <div class="col-xl-12">
@@ -64,18 +64,14 @@
                             <p><strong>NRO DOCUMENTO: </strong> {{lista.numeroDocumento}}</p>
                         </div>
                         <div class="col-xl-12">
-                            <p><strong>MOTIVO: </strong>{{lista.motivoAtencion}}</p>
-                        </div>
-                        <div class="col-xl-12">
                             <p><strong>ESPECIALIDAD: </strong> {{lista.especialidadMedica}}</p>
                         </div>
                         
                         
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="col-xl-6">
                             <div class="d-grid gap-2">
-                                <!-- <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlSeguimiento()">Control de seguimiento</button> -->
                                  <br>
                                 <button type="button" class="btn btn-green-custom btn-sm" (click)="AbrirExamenAuxiliar(lista.idHistoriaClinica)">Examenes auxiliares</button>
                                 <button *ngIf="lista.idEspecialidad!=1" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirControlesReporte(lista.idHistoriaClinica, lista.idEspecialidad)">Reportes</button>
@@ -93,8 +89,19 @@
                                 <button *ngIf="lista.idEspecialidad==1 || lista.idEspecialidad==11" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirBitacora(lista.idHistoriaClinica)">Bitácora</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
+                        <div class="col-md-4">
+                            
+                        </div>
+                        <div class="col-md-4">
+                            <button class="btn btn-green-custom btn-sm" (click)="MostrarModalControl(lista.idHistoriaClinica)"> <i class="fas fa-lg fa-fw me-2 fa-eye"></i></button>
+                        </div>
+                        <div class="col-md-4">
+                            
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="lista.idEspecialidad!=1 && lista.idEspecialidad!=11">
                         <div class="col-xl-12 text-center mt-3">
                             <button type="button" class="btn btn-success" *ngIf="idRol!=2" (click)="AbrirMonitoreoCamara(lista.idHistoriaClinica)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-video-fill" viewBox="0 0 16 16">

@@ -15,6 +15,7 @@ import { OrdenDTO } from "./OrdenDTO";
 import { HistoriaPrimeraAtencionDTO } from "./primera-atencion";
 import { RecetaDTO } from "./RecetaDTO";
 import { SeguimientoAnalisisDTO } from "./segumiento-analisis";
+import { SignosAlarmasDTO } from "./signos-alarmas";
 
 export class HistoriaCuidadoDTO{
     cabeceraPaciente?:CabeceraPacienteDTO;
@@ -47,4 +48,5 @@ export class HistoriaCuidadoDTO{
     HistorialObstetrico?: HistorialObstetricoDTO[];
     ControlPreNatal?: ControlPreNatalDTO[];
     SeguimientoAnalisis?: SeguimientoAnalisisDTO[];
+    SignosAlarmas?:SignosAlarmasDTO[];
 }
