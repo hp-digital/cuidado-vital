@@ -1505,7 +1505,7 @@ export class SignosAlarmasComponent implements OnInit{
 
   EnviarWsp(){
     const requestBody = {
-      body: 'Estimado Dr. se le comunica que su paciente '+ this.paciente+'registro Signos y Síntomas en el sistema de CuidadoVital',
+      body: 'Estimado Dr. se le comunica que su paciente '+ this.paciente+' registro Signos y Síntomas en el sistema de CuidadoVital',
       number: '51992058451',
       externalKey: 'LDJVuHeU0o5lRDxDbQKxCI4jtVwOz4'
     };

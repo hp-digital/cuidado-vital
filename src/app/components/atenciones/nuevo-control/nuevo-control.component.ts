@@ -35,6 +35,9 @@ export class NuevoControlComponent implements OnInit{
 
   verSpinner: boolean = false;
 
+  idPersonal:number=0;
+  idRol:number=0;
+
 
   verificarBusqueda: boolean = false;
   verificarBusquedaTipoDocumento: boolean = false;
@@ -68,6 +71,9 @@ export class NuevoControlComponent implements OnInit{
     this.CargarDataInicio();
     this.usuario =  this.settingsService.getUserSetting('usuario');
     this.dataFormGroup.controls['inputFechaIngreso'].setValue(moment().format('DD/MM/YYYY'));
+    this.idPersonal = this.settingsService.getUserSetting('idPersonal');
+    this.idRol = this.settingsService.getUserSetting('idRol');
+    console.log("idPersonal", this.idPersonal);
   }
 
   CargarDataInicio(){
@@ -279,7 +285,12 @@ export class NuevoControlComponent implements OnInit{
     this.objNuevaAtencion.fechaNacimiento = this.dataFormGroup.controls['inputFechaNacimientoPaciente'].value;
     this.objNuevaAtencion.sexo = this.dataFormGroup.controls['inputSexoPaciente'].value;
     this.objNuevaAtencion.celular = this.dataFormGroup.controls['inputTelefonoPaciente'].value;
-    this.objNuevaAtencion.idMedico = 13;//this.dataFormGroup.controls[''].value;
+    if(this.idRol==1){
+      this.objNuevaAtencion.idMedico = this.idPersonal;
+    }else{
+      this.objNuevaAtencion.idMedico = 2;
+    }
+    //this.dataFormGroup.controls[''].value;
     this.objNuevaAtencion.fechaInicioAtencion = new Date();
     this.objNuevaAtencion.idEspecialidad = this.dataFormGroup.controls['selectEspecialidad'].value;
     this.objNuevaAtencion.estado = true;
