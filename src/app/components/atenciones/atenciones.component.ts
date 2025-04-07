@@ -171,7 +171,12 @@ export default class AtencionesComponent implements OnInit{
           next: (data) => {
             if (data.length > 0) {
             console.log('data: ',data);
-            this.listadoAtencionBusqueda = data.filter(s => s.idEspecialidad !=1);           
+            if(this.idRol==1){
+              this.listadoAtencionBusqueda = data.filter(s => s.idEspecialidad !=1 && s.idMedico==this.idMedico); 
+            }else {
+              this.listadoAtencionBusqueda = data.filter(s => s.idEspecialidad !=11);
+            }
+                      
             }
             else {
               this.MostrarNotificacionWarning('Intente con otros criterios de búsqueda.', '¡No se encontró información!');
