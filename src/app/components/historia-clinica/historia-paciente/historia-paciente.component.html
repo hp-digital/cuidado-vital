@@ -69,7 +69,7 @@
                         
                         
                     </div>
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col-xl-6">
                             <div class="d-grid gap-2">
                                  <br>
@@ -89,13 +89,13 @@
                                 <button *ngIf="lista.idEspecialidad==1 || lista.idEspecialidad==11" type="button" class="btn btn-green-custom btn-sm" (click)="AbrirBitacora(lista.idHistoriaClinica)">Bitácora</button>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                     <div class="row">
                         <div class="col-md-4">
                             
                         </div>
                         <div class="col-md-4">
-                            <button class="btn btn-green-custom btn-sm" (click)="MostrarModalControl(lista.idHistoriaClinica)"> <i class="fas fa-lg fa-fw me-2 fa-eye"></i></button>
+                            <button *ngIf="lista.idEspecialidad==1 || lista.idEspecialidad==11" class="btn btn-green-custom btn-sm" (click)="MostrarModalControl(lista.idHistoriaClinica)"> <i class="fas fa-lg fa-fw me-2 fa-eye"></i></button>
                         </div>
                         <div class="col-md-4">
                             
